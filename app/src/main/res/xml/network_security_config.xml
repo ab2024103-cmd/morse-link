@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- WebShare serves plain HTTP on the local network only; the app itself
+         never makes a cleartext request to anything beyond loopback/private
+         ranges, but this keeps local HTTP (used for serving and any local
+         connectivity checks) functional on API 28+. -->
+    <base-config cleartextTrafficPermitted="true" />
+</network-security-config>

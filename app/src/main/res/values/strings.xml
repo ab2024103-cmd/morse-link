@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MorseLink</string>
+    <string name="tab_connect">Connect</string>
+    <string name="tab_files">Files</string>
+    <string name="tab_history">History</string>
+    <string name="tab_settings">Settings</string>
+</resources>

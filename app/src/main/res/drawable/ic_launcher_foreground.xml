@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Morse motif inside the adaptive-icon safe zone: three dots and a dash -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M33,54m-3.6,0a3.6,3.6 0 1,1 7.2,0a3.6,3.6 0 1,1 -7.2,0" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M45,54m-3.6,0a3.6,3.6 0 1,1 7.2,0a3.6,3.6 0 1,1 -7.2,0" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M57,54m-3.6,0a3.6,3.6 0 1,1 7.2,0a3.6,3.6 0 1,1 -7.2,0" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M68,50.4h8.4a3.6,3.6 0 0 1 0,7.2h-8.4a3.6,3.6 0 0 1 0,-7.2z" />
+</vector>

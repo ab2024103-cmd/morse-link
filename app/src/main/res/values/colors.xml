@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand accent: single color used across the entire app and WebShare -->
+    <color name="primary">#1FA36B</color>
+    <color name="primary_dark_pressed">#167A50</color>
+
+    <!-- Dark theme -->
+    <color name="bg_dark">#121212</color>
+    <color name="surface_dark">#1E1E1E</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_dark">#A0A0A0</color>
+    <color name="divider_dark">#2A2A2A</color>
+
+    <!-- Light theme -->
+    <color name="bg_light">#FAFAFA</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="text_primary_light">#1A1A1A</color>
+    <color name="text_secondary_light">#6B6B6B</color>
+    <color name="divider_light">#E0E0E0</color>
+
+    <!-- Status colors: always paired with an icon + text label, never color alone -->
+    <color name="status_success">#1FA36B</color>
+    <color name="status_sending">#2D9CDB</color>
+    <color name="status_error">#E5484D</color>
+    <color name="status_warning">#E0A030</color>
+
+    <!-- Category icon accents (flat solid rounded-square icons) -->
+    <color name="cat_photos">#1FA36B</color>
+    <color name="cat_videos">#2D9CDB</color>
+    <color name="cat_music">#E0A030</color>
+    <color name="cat_apps">#8E7CC3</color>
+    <color name="cat_files">#E5484D</color>
+    <color name="cat_documents">#5F8B4B</color>
+    <color name="cat_archives">#B07D2B</color>
+
+    <color name="ic_launcher_background">#1FA36B</color>
+</resources>
