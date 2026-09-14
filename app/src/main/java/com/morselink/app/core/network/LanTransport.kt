@@ -581,7 +581,7 @@ class LanSession(
             try {
                 socket.tcpNoDelay = true
                 socket.soTimeout = 25000
-                val input = DataInputStream(BufferedInputStream(socket.getInputStream(), CHUNK_SIZE + 64))
+                val input = DataInputStream(BufferedInputStream(socket.getInputStream(), LanTransport.CHUNK_SIZE + 64))
                 if (partFile != null && partFile.exists()) {
                     part = FileOutputStream(partFile, true)
                 } else {
@@ -600,7 +600,7 @@ class LanSession(
                         }
                         val seq = input.readInt()
                         val len = input.readInt()
-                        if (len < 0 || len > CHUNK_SIZE * 4) throw IOException("bad chunk length $len")
+                        if (len < 0 || len > LanTransport.CHUNK_SIZE * 4) throw IOException("bad chunk length $len")
                         val payload = ByteArray(len)
                         input.readFully(payload)
                         val crc = input.readInt().toLong() and 0xFFFFFFFFL
@@ -703,7 +703,7 @@ class LanSession(
             dataSocket = Socket()
             dataSocket.tcpNoDelay = true
             dataSocket.connect(InetSocketAddress(peerHost, peerTcpPort), 8000)
-            val out = DataOutputStream(BufferedOutputStream(dataSocket.getOutputStream(), CHUNK_SIZE + 64))
+            val out = DataOutputStream(BufferedOutputStream(dataSocket.getOutputStream(), LanTransport.CHUNK_SIZE + 64))
             val header = JSONObject().put("type", "DATA").put("fileId", meta.fileId).toString() + "\n"
             out.write(header.toByteArray(Charsets.UTF_8))
 
@@ -717,8 +717,8 @@ class LanSession(
                     toSkip -= skipped
                 }
                 var sent = startOffset
-                var seq = (startOffset / CHUNK_SIZE).toInt()
-                val buf = ByteArray(CHUNK_SIZE)
+                var seq = (startOffset / LanTransport.CHUNK_SIZE).toInt()
+                val buf = ByteArray(LanTransport.CHUNK_SIZE)
                 TransferEngine.updateOutgoingProgress(item.id, sent, meta.size)
                 while (sent < meta.size) {
                     if (cancelOutgoingFlags[meta.fileId] == true) {
