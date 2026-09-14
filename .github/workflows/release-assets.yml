@@ -1,0 +1,58 @@
+name: Attach release assets
+
+# Uploads the built APKs from .build/ (committed by the Build APK workflow)
+# to an existing GitHub Release. Run manually with a tag, or automatically
+# when a v* tag is pushed. The sandbox cannot reach uploads.github.com, so
+# asset uploads happen from GitHub's own runners.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to attach assets to (e.g. v1.0.1)"
+        required: true
+        default: "v1.0.1"
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-assets-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify artifacts exist
+        run: |
+          test -f .build/MorseLink-release.apk || { echo "::error::missing .build/MorseLink-release.apk"; exit 1; }
+          test -f .build/MorseLink-debug.apk || { echo "::error::missing .build/MorseLink-debug.apk"; exit 1; }
+          ls -la .build/
+
+      - name: Resolve tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload APKs to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.tag.outputs.tag }}"
+          echo "Attaching assets to release $TAG"
+          gh release view "$TAG" --json url,name
+          gh release upload "$TAG" \
+            .build/MorseLink-release.apk \
+            .build/MorseLink-debug.apk \
+            --clobber
+          gh release view "$TAG" --json assets --jq '.assets[] | "\(.name) \(.size) bytes"'
