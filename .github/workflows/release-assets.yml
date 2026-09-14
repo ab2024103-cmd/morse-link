@@ -44,13 +44,35 @@ jobs:
             echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Upload APKs to the release
+      - name: Create release if missing, then upload APKs
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -x
           TAG="${{ steps.tag.outputs.tag }}"
-          echo "Attaching assets to release $TAG"
-          gh release view "$TAG" --json url,name
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+          else
+            echo "Release $TAG does not exist — creating it"
+            cat > notes.md <<'NOTES'
+            MorseLink — offline P2P file transfer for Android.
+
+            No internet, no cloud, no accounts, no ads. Files move directly between two devices.
+
+            ## Downloads
+            - **MorseLink-release.apk** — signed release build (recommended)
+            - **MorseLink-debug.apk** — debug build with extra logging
+
+            Requires Android 5.0+. To install: enable "install unknown apps" for your browser/file manager when prompted.
+
+            ## Features
+            - Radar pairing with explicit Accept/Reject consent; Nearby Connections + LAN Wi-Fi transports with exact-offset resume
+            - Photos / Videos / Music / Apps / Files picker, queue with per-file pause/resume/cancel/retry, conflict resolution, restart-recovery journal
+            - WebShare: manage files from any browser via QR (token auth, resumable uploads, Range downloads)
+            - History, Settings, Connection Doctor, Help/FAQ, in-app log + crash reports with one-tap .txt export
+            NOTES
+            gh release create "$TAG" --verify-tag --title "MorseLink ${TAG#v}" --notes-file notes.md
+          fi
           gh release upload "$TAG" \
             .build/MorseLink-release.apk \
             .build/MorseLink-debug.apk \
