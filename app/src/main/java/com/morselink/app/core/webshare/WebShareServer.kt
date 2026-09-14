@@ -201,7 +201,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         }
 
         val mediaCategory = MediaCategory.fromKey(category)
-            ?: return newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "unknown category").noStore())
+            ?: return newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "unknown category")).noStore()
         val page = MediaLibrary.page(mediaCategory, cursor, pageSize, com.morselink.app.core.media.SortKey.DATE, true, null)
         for (m in page) {
             items.put(mediaJson(m))
@@ -447,7 +447,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     // ---------------- downloads ----------------
 
     private fun notFound(): Response =
-        newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "not found").noStore())
+        newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "not found")).noStore()
 
     private fun download(session: IHTTPSession): Response {
         val kind = session.parameters["kind"]?.firstOrNull() ?: "photos"
@@ -693,7 +693,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     }
 
     private fun badRequest(msg: String): Response =
-        newJson(Response.Status.BAD_REQUEST, JSONObject().put("error", msg).noStore())
+        newJson(Response.Status.BAD_REQUEST, JSONObject().put("error", msg)).noStore()
 
     // ---------------- range support ----------------
 
