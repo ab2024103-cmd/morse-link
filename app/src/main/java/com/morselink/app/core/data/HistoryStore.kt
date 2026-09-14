@@ -30,7 +30,7 @@ class HistoryStore(context: Context) {
     private val lock = Any()
     private val entries = ArrayList<HistoryEntry>()
     private var nextId = 1L
-    private val listeners = ArrayList<(Unit) -> Unit>()
+    private val listeners = ArrayList<() -> Unit>()
 
     init {
         load()

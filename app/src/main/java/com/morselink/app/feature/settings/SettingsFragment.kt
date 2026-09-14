@@ -21,7 +21,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.morselink.app.BuildConfig
 import com.morselink.app.MainActivity
-import com.morselink.app.OnboardingActivity
+import com.morselink.app.feature.onboarding.OnboardingActivity
 import com.morselink.app.R
 import com.morselink.app.core.data.Prefs
 import com.morselink.app.core.logging.LogStore

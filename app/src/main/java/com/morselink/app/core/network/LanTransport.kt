@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -59,7 +60,7 @@ object LanTransport {
 
     const val TCP_PORT = 33456
     const val UDP_PORT = 33457
-    private const val CHUNK_SIZE = 256 * 1024
+    const val CHUNK_SIZE = 256 * 1024
     private const val DISCOVERY_PERIOD_MS = 1200L
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -805,7 +806,7 @@ class LanSession(
         }
     }
 
-    fun close(reason: String?) {
+    override fun close(reason: String?) {
         if (!isActive) return
         isActive = false
         LogStore.i("LAN: session closed (${reason ?: "no reason"})")

@@ -25,6 +25,7 @@ import com.morselink.app.core.network.NearbyTransport
 import com.morselink.app.core.network.SendOutcome
 import com.morselink.app.core.network.TransportSession
 import com.morselink.app.core.storage.ConflictDecision
+import com.morselink.app.core.storage.FinalResult
 import com.morselink.app.core.storage.Destinations
 import com.morselink.app.core.storage.ZipUtil
 import com.morselink.app.core.util.DeviceTier
@@ -386,10 +387,8 @@ object TransferEngine {
             val bm = context.getSystemService(Context.BATTERY_SERVICE) as? BatteryManager ?: return false
             val level = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
             val charging = bm.isCharging
-            val powerSave = android.os.PowerManager.ACTION_POWER_SAVE_MODE.let {
-                val pm = context.getSystemService(Context.POWER_SERVICE) as? PowerManager
-                pm?.isPowerSaveMode ?: false
-            }
+            val pm = context.getSystemService(Context.POWER_SERVICE) as? PowerManager
+            val powerSave = pm?.isPowerSaveMode ?: false
             totalBytes > 100L * 1024 * 1024 && level in 1..19 && !charging || (powerSave && totalBytes > 100L * 1024 * 1024)
         } catch (_: Exception) {
             false
@@ -658,7 +657,7 @@ object TransferEngine {
             TransferItemState.IN_PROGRESS -> currentSession?.cancel(id, item.direction)
             TransferItemState.PAUSED -> {
                 if (item.direction == TransferDirection.RECEIVING) {
-                    Destinations.tempFileFor(MorselinkServices.appContext, partKey(item)).delete()
+                    Destinations.tempFileFor(MorselinkServices.appContext, partKeyFor(item)).delete()
                 }
                 mutateItem(id) { it.state = TransferItemState.CANCELLED }
             }
@@ -977,7 +976,7 @@ object TransferEngine {
             ConflictDecision.KEEP_BOTH
         }
         return when (result.status) {
-            Destinations.FinalResult.Status.SAVED -> {
+            FinalResult.Status.SAVED -> {
                 recordCompletion(item, TransferItemState.COMPLETED, null, result.finalUri)
                 LogStore.i("Saved ${meta.name} -> ${result.finalPath}")
                 publishItems(force = true)
@@ -985,14 +984,14 @@ object TransferEngine {
                 checkBatchCompletion(item.batchId)
                 true
             }
-            Destinations.FinalResult.Status.SKIPPED -> {
+            FinalResult.Status.SKIPPED -> {
                 recordCompletion(item, TransferItemState.SKIPPED, "skipped (conflict)", null)
                 publishItems(force = true)
                 saveJournal()
                 checkBatchCompletion(item.batchId)
                 true
             }
-            Destinations.FinalResult.Status.FAILED -> {
+            FinalResult.Status.FAILED -> {
                 recordCompletion(item, TransferItemState.FAILED, "could not save file", null)
                 publishItems(force = true)
                 saveJournal()

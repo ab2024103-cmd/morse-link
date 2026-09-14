@@ -61,7 +61,7 @@ class ModernHotspotController(private val context: Context) : HotspotController 
                         } else {
                             @Suppress("DEPRECATION")
                             val cfg: WifiConfiguration? = res.wifiConfiguration
-                            ssid = cfg?.ssid?.removeSurrounding("\"")
+                            ssid = cfg?.SSID?.removeSurrounding("\"")
                             password = cfg?.preSharedKey?.removeSurrounding("\"")
                         }
                     } catch (e: Exception) {

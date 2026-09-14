@@ -6,7 +6,7 @@ import android.os.ParcelFileDescriptor
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.nearby.Nearby
-import com.google.android.gms.nearby.connection.AdvertiseOptions
+import com.google.android.gms.nearby.connection.AdvertisingOptions
 import com.google.android.gms.nearby.connection.ConnectionInfo
 import com.google.android.gms.nearby.connection.ConnectionLifecycleCallback
 import com.google.android.gms.nearby.connection.ConnectionResolution
@@ -29,6 +29,7 @@ import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
 import org.json.JSONObject
@@ -171,7 +172,7 @@ object NearbyTransport {
                     TransferEngine.localDeviceName(),
                     SERVICE_ID,
                     connectionLifecycleCallback,
-                    AdvertiseOptions.Builder().setStrategy(STRATEGY).build()
+                    AdvertisingOptions.Builder().setStrategy(STRATEGY).build()
                 )
             }
             if (!discovering) {
@@ -281,7 +282,7 @@ class NearbySession(
     /** Outgoing: fileId -> payloadId */
     private val outgoingPayloadFor = ConcurrentHashMap<String, Long>()
     /** Outgoing: payloadId -> fileId */
-    private val fileIdForPayload = ConcurrentHashMap<String, Long>()
+    private val fileIdForPayload = ConcurrentHashMap<String, String>()
 
     private val outgoingWaiters = ConcurrentHashMap<String, CompletableDeferred<String>>()
     private val pauseRequested = ConcurrentHashMap<String, Boolean>()
@@ -356,7 +357,7 @@ class NearbySession(
                 }
                 TransferEngine.onPeerPausedOurSend(fileId)
             }
-            "RESUME_REQ" -> TransferEngine.onPeerResumedOurSend(fileId)
+            "RESUME_REQ" -> TransferEngine.onPeerResumedOurSend(json.optString("fileId"))
             "CANCEL" -> {
                 val fileId = json.optString("fileId")
                 cancelRequested[fileId] = true

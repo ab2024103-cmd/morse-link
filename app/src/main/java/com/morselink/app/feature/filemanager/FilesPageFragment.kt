@@ -81,7 +81,7 @@ class FilesPageFragment : Fragment(), PageWithItems {
         super.onViewCreated(view, savedInstanceState)
         binding.addressBar.visibility = View.GONE
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.recycler.adapter = RootAdapter()
+        binding.recycler.adapter = FilesAdapter(emptyList())
 
         binding.buttonNewFolder.setOnClickListener { createFolder() }
 
@@ -423,20 +423,20 @@ class FilesPageFragment : Fragment(), PageWithItems {
         is FileEntry -> Selectable(
             key = row.uri, name = row.name, size = row.size, uri = row.uri, mime = row.mime, kind = "document"
         )
-        is FolderEntry -> if (row.plainDir != null) {
-            Selectable(
-                key = "file://" + row.plainDir.absolutePath,
+        is FolderEntry -> when (val doc = row.docUri) {
+            is File -> Selectable(
+                key = "file://" + doc.absolutePath,
                 name = row.name, size = 0,
-                uri = "file://" + row.plainDir.absolutePath,
+                uri = "file://" + doc.absolutePath,
                 mime = "inode/dir", isDirectory = true, kind = "folder_plain"
             )
-        } else if (row.docUri != null) {
-            Selectable(
-                key = row.docUri.toString(), name = row.name, size = 0,
-                uri = row.docUri.toString(), mime = "inode/dir",
+            is Uri -> Selectable(
+                key = doc.toString(), name = row.name, size = 0,
+                uri = doc.toString(), mime = "inode/dir",
                 isDirectory = true, kind = "folder_saf"
             )
-        } else null
+            else -> null
+        }
         else -> null
     }
 

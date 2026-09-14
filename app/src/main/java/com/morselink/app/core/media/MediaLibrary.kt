@@ -102,7 +102,7 @@ object MediaLibrary {
         else -> MediaStore.Files.getContentUri("external")
     }
 
-    private fun selectionFor(category: MediaCategory): Pair<String, List<String>> {
+    private fun selectionFor(category: MediaCategory): Pair<String?, List<String>> {
         return when (category) {
             MediaCategory.PHOTOS -> Pair(null, emptyList())
             MediaCategory.VIDEOS -> Pair(null, emptyList())

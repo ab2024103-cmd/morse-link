@@ -18,6 +18,7 @@ import com.morselink.app.core.media.MediaCategory
 import com.morselink.app.core.media.MediaLibrary
 import com.morselink.app.core.storage.ConflictDecision
 import com.morselink.app.core.storage.Destinations
+import com.morselink.app.core.storage.FinalResult
 import com.morselink.app.core.storage.ZipUtil
 import com.morselink.app.di.AppServices
 import com.morselink.app.core.util.MorselinkServices
@@ -450,7 +451,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
 
     private fun download(session: IHTTPSession): Response {
         val kind = session.parameters["kind"]?.firstOrNull() ?: "photos"
-        val idRaw = session.parameters["id"] ?: return notFound()
+        val idRaw = session.parameters["id"]?.firstOrNull() ?: return notFound()
         activeOperations++
         try {
             if (kind == "apps") {
@@ -659,7 +660,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
                         Response.Status.OK,
                         JSONObject()
                             .put("done", true)
-                            .put("ok", result.status == Destinations.FinalResult.Status.SAVED)
+                            .put("ok", result.status == FinalResult.Status.SAVED)
                             .put("bytesWritten", written)
                             .put("path", result.finalPath ?: "")
                             .put("status", result.status.name)

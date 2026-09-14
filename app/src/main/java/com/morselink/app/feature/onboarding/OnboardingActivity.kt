@@ -107,7 +107,7 @@ class OnboardingActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: Holder, position: Int) {
             when (pages[position]) {
                 Page.WELCOME -> {
-                    holder.icon.setImageResource(R.drawable.ic_tab_connect)
+                    holder.icon.setImageResource(R.drawable.ic_logo)
                     holder.title.setText(R.string.onboarding_welcome_title)
                     holder.body.setText(R.string.onboarding_welcome_body)
                 }

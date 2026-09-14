@@ -47,7 +47,7 @@ class TransferItemsAdapter(
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        bindRow(holder.itemView, items[position])
+        TransferRowBinder.bindRow(holder.itemView, items[position])
     }
 }
 
