@@ -15,11 +15,16 @@ class MorselinkApp : Application() {
         AppServices.init(this)
         LogStore.init(this)
         LogStore.enabled = AppServices.prefs.loggingEnabled
-        if (AppServices.prefs.crashLogsEnabled) {
-            LogStore.installCrashHandler(this)
-        }
+        LogStore.installCrashHandler(this)
         TransferEngine.start(this)
-        LogStore.i("MorseLink started (version ${BuildConfig.VERSION_NAME})")
+        LogStore.i("MorseLink ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) started")
+        LogStore.i(
+            "Device: ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}, " +
+                "Android ${android.os.Build.VERSION.RELEASE} (SDK ${android.os.Build.VERSION.SDK_INT})"
+        )
+        if (LogStore.hasCrashReports()) {
+            LogStore.w("Previous run ended in a crash — see the crash-reports section in the log viewer")
+        }
     }
 
     companion object {

@@ -2,8 +2,11 @@ package com.morselink.app.core.logging
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
+import com.morselink.app.BuildConfig
 import com.morselink.app.core.util.MorselinkServices
+import com.morselink.app.di.AppServices
 import java.io.File
 import java.io.FileWriter
 import java.text.SimpleDateFormat
@@ -20,6 +23,9 @@ object LogStore {
     private const val TAG = "MorseLink"
     private const val MAX_FILE_BYTES = 2L * 1024 * 1024
     private const val KEEP_ON_ROTATE = 512L * 1024
+    private const val CRASH_FILE = "morselink-crash.log"
+    private const val MAX_CRASH_BYTES = 512L * 1024
+    private const val KEEP_ON_CRASH_ROTATE = 128L * 1024
 
     @Volatile
     var enabled: Boolean = true
@@ -27,6 +33,7 @@ object LogStore {
     private val lock = Any()
     private val fmt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US)
     private var logFile: File? = null
+    private var crashFile: File? = null
 
     /** Timestamp (millis) of the last "clear log" invocation. */
     @Volatile
@@ -35,6 +42,24 @@ object LogStore {
     fun init(context: Context) {
         synchronized(lock) {
             logFile = File(context.filesDir, "morselink.log")
+            crashFile = File(context.filesDir, CRASH_FILE)
+        }
+    }
+
+    /** True when at least one crash trace from an earlier run is on disk. */
+    fun hasCrashReports(): Boolean =
+        crashFile != null && crashFile!!.length() > 0L
+
+    /** Last [maxLines] of recorded crash traces, oldest first. */
+    fun crashTail(maxLines: Int): List<String> {
+        val file = crashFile ?: return emptyList()
+        synchronized(lock) {
+            return try {
+                val lines = file.readLines()
+                if (lines.size > maxLines) lines.subList(lines.size - maxLines, lines.size) else lines
+            } catch (_: Exception) {
+                emptyList()
+            }
         }
     }
 
@@ -96,36 +121,81 @@ object LogStore {
                 logFile?.createNewFile()
                 clearedAt = System.currentTimeMillis()
                 logFile?.appendText("--- cleared at ${fmt.format(Date())} ---\n")
+                crashFile?.delete()
+                crashFile?.createNewFile()
             } catch (_: Exception) {
             }
         }
-        i("Log cleared by user")
+        i("Log and crash reports cleared by user")
     }
 
-    /** Writes a snapshot for sharing; returns the file or null. */
+    /**
+     * Writes a full diagnostic snapshot for sharing: device/app header, the
+     * app log, and any recorded crash traces — one .txt with everything
+     * needed to diagnose a failure (spec Section 15).
+     */
     fun exportFile(context: Context): File? {
         return try {
             val dir = File(context.cacheDir, "shared").apply { mkdirs() }
             val out = File(dir, "morselink-log-${System.currentTimeMillis()}.txt")
-            out.writeText(tail(20000).joinToString("\n"))
+            val sb = StringBuilder()
+            sb.append("MorseLink ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\n")
+            sb.append("Device: ${Build.MANUFACTURER} ${Build.MODEL} " +
+                "(Android ${Build.VERSION.RELEASE}, SDK ${Build.VERSION.SDK_INT})\n")
+            sb.append("Exported: ${fmt.format(Date())}\n")
+            sb.append("\n===== APP LOG =====\n")
+            sb.append(tail(20000).joinToString("\n"))
+            val crashes = crashTail(800)
+            if (crashes.isNotEmpty()) {
+                sb.append("\n\n===== CRASH REPORTS =====\n")
+                sb.append(crashes.joinToString("\n"))
+            }
+            sb.append('\n')
+            out.writeText(sb.toString())
             out
         } catch (_: Exception) {
             null
         }
     }
 
+    /**
+     * Always installed; the crash-report opt-out (Settings / onboarding) is
+     * honoured at crash time so toggling takes effect without a restart.
+     */
     fun installCrashHandler(context: Context) {
         val previous = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
             try {
-                val file = File(context.filesDir, "morselink-crash.log")
-                FileWriter(file, true).use { w ->
-                    w.write("\n==== CRASH ${fmt.format(Date())} ====\n")
-                    w.write(Log.getStackTraceString(throwable))
+                if (AppServices.prefs.crashLogsEnabled) {
+                    synchronized(lock) {
+                        val file = crashFile ?: File(context.filesDir, CRASH_FILE)
+                        if (file.length() > MAX_CRASH_BYTES) rotateCrash(file)
+                        FileWriter(file, true).use { w ->
+                            w.write("\n==== CRASH ${fmt.format(Date())} thread=${thread.name} ====\n")
+                            w.write(Log.getStackTraceString(throwable))
+                        }
+                    }
                 }
             } catch (_: Exception) {
             }
+            try {
+                // Timeline marker in the main log (honours the logging toggle).
+                write("E", "CRASH: ${throwable.javaClass.name}: ${throwable.message} " +
+                    "(full trace in the crash-reports section)")
+            } catch (_: Exception) {
+            }
             previous?.uncaughtException(thread, throwable)
+        }
+    }
+
+    private fun rotateCrash(file: File) {
+        try {
+            val content = file.readText()
+            val keep = content.substring(Math.max(0, content.length - KEEP_ON_CRASH_ROTATE.toInt()))
+            val idx = keep.indexOf("==== CRASH")
+            file.writeText(if (idx > 0) keep.substring(idx) else keep)
+            file.appendText("--- crash log rotated ---\n")
+        } catch (_: Exception) {
         }
     }
 }

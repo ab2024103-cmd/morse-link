@@ -41,7 +41,19 @@ class LogViewerFragment : Fragment() {
     }
 
     private fun render() {
-        binding.logText.text = LogStore.tail(1500).joinToString("\n")
+        val crashes = LogStore.crashTail(500)
+        val text = buildString {
+            append(LogStore.tail(1500).joinToString("\n"))
+            if (crashes.isNotEmpty()) {
+                append("\n\n───── ")
+                append(getString(R.string.log_crash_reports))
+                append(" ─────\n")
+                append(crashes.joinToString("\n"))
+            }
+        }
+        binding.logText.text = text
+        // Newest lines are at the bottom — keep them in view.
+        binding.logScroll.post { binding.logScroll.fullScroll(android.view.View.FOCUS_DOWN) }
     }
 
     private fun export() {

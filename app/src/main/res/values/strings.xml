@@ -341,4 +341,5 @@
     <string name="pref_log_cleared">Log cleared</string>
     <string name="pref_battery_status_restricted">Restricted — transfers may be paused</string>
     <string name="oem_guidance_body">Some phones (Xiaomi, Oppo, Vivo, Huawei and others) force-stop apps to save battery. To make sure transfers keep running when the screen is off:\n\n1. Open system settings for MorseLink.\n2. Find Battery or Power usage.\n3. Choose No restrictions / Allow background activity (wording differs by brand).\n4. If there is an Autostart switch, turn it on.\n\nTransfers always pause safely when the system does stop the app — reopen MorseLink and tap Resume.</string>
+    <string name="log_crash_reports">Crash reports</string>
 </resources>
