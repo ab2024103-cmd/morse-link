@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MorseLink WebShare</title>
+<style>
+  :root {
+    --bg: #121212; --surface: #1e1e1e; --surface2: #2a2a2a;
+    --text: #fff; --muted: #a0a0a0; --accent: #1fa36b; --accent2: #2d9cdb;
+    --danger: #e5484d; --border: #333;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+         background: var(--bg); color: var(--text); }
+  header { display: flex; align-items: center; gap: 10px; padding: 14px 18px;
+           background: var(--surface); border-bottom: 1px solid var(--border);
+           position: sticky; top: 0; z-index: 5; }
+  header h1 { font-size: 16px; margin: 0; flex: 1; }
+  header .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+  header small { color: var(--muted); }
+  nav { display: flex; gap: 6px; padding: 10px 18px 0; flex-wrap: wrap; }
+  nav button { background: var(--surface); color: var(--muted); border: 1px solid var(--border);
+               border-radius: 18px; padding: 8px 14px; font-size: 14px; cursor: pointer; }
+  nav button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  main { padding: 12px 18px 90px; }
+  #dropzone { border: 2px dashed var(--border); border-radius: 12px; padding: 22px;
+              text-align: center; color: var(--muted); margin-bottom: 14px; transition: .15s; }
+  #dropzone.over { border-color: var(--accent2); color: var(--accent2); background: rgba(45,156,219,.08); }
+  #dropzone .btn { display: inline-block; margin-top: 8px; background: var(--accent2); color: #fff;
+                   padding: 10px 18px; border-radius: 8px; border: 0; font-size: 14px; cursor: pointer; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+          overflow: hidden; cursor: pointer; position: relative; }
+  .card.selected { outline: 3px solid var(--accent2); }
+  .card img { width: 100%; height: 110px; object-fit: cover; display: block; background: var(--surface2); }
+  .card .ic { height: 110px; display: flex; align-items: center; justify-content: center;
+              font-size: 34px; }
+  .card .nm { font-size: 12px; padding: 6px 8px; white-space: nowrap; overflow: hidden;
+              text-overflow: ellipsis; }
+  .card .mt { font-size: 11px; color: var(--muted); padding: 0 8px 8px; }
+  .card .ck { position: absolute; top: 6px; right: 6px; width: 22px; height: 22px;
+              border-radius: 50%; background: rgba(0,0,0,.55); border: 2px solid #fff;
+              display: none; align-items: center; justify-content: center; color: #fff; font-size: 13px; }
+  .card .ck.on { display: flex; background: var(--accent2); border-color: var(--accent2); }
+  .row { display: flex; align-items: center; gap: 10px; background: var(--surface);
+         border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px;
+         margin-bottom: 8px; cursor: pointer; }
+  .row.selected { outline: 2px solid var(--accent2); }
+  .row .ic { font-size: 22px; width: 32px; text-align: center; }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .nm { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .sub { font-size: 12px; color: var(--muted); }
+  .row .ck { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--muted);
+             display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff; }
+  .row.selected .ck { background: var(--accent2); border-color: var(--accent2); }
+  #more { display: block; width: 100%; margin-top: 12px; padding: 12px; background: var(--surface);
+          color: var(--text); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; }
+  #bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface);
+         border-top: 1px solid var(--border); padding: 10px 18px; display: none; gap: 10px;
+         align-items: center; flex-wrap: wrap; }
+  #bar.show { display: flex; }
+  #bar .sel { color: var(--muted); font-size: 13px; flex: 1; }
+  #bar button { padding: 10px 16px; border-radius: 8px; border: 0; font-size: 14px; cursor: pointer; }
+  #bar .go { background: var(--accent); color: #fff; }
+  #bar .alt { background: var(--surface2); color: var(--text); }
+  #uploads { position: fixed; right: 14px; bottom: 70px; width: 300px; max-width: 80vw; z-index: 9; }
+  .up { background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+        padding: 10px; margin-top: 8px; font-size: 12px; }
+  .up .track { height: 6px; background: var(--surface2); border-radius: 4px; margin-top: 6px; }
+  .up .fill { height: 6px; background: var(--accent2); border-radius: 4px; width: 0; }
+  .up.err .fill { background: var(--danger); }
+  .crumbs { padding: 4px 0 10px; color: var(--muted); font-size: 13px; }
+  .crumbs a { color: var(--accent2); text-decoration: none; margin-right: 4px; }
+  #err { color: var(--danger); padding: 14px; display: none; }
+  .empty { color: var(--muted); padding: 24px; text-align: center; }
+  input[type=checkbox]{ transform: scale(1.3); }
+</style>
+</head>
+<body>
+<header>
+  <div class="dot"></div>
+  <h1 id="title">MorseLink</h1>
+  <small id="count"></small>
+</header>
+<nav id="tabs"></nav>
+<div id="err"></div>
+<main>
+  <div id="dropzone">
+    Drop files here to send to this phone
+    <br>
+    <button class="btn" id="pick">Choose files</button>
+    <input type="file" id="fileInput" multiple style="display:none">
+  </div>
+  <div class="crumbs" id="crumbs" style="display:none"></div>
+  <div id="list"></div>
+  <button id="more" style="display:none">Load more</button>
+</main>
+<div id="uploads"></div>
+<div id="bar">
+  <span class="sel" id="selInfo"></span>
+  <button class="go" id="download">Download</button>
+  <button class="alt" id="clear">Clear</button>
+</div>
+<script>
+"use strict";
+var TOKEN = "";
+var m = location.hash.match(/t=([0-9a-f]+)/i);
+if (m) { TOKEN = m[1]; } else {
+  m = location.search.match(/[?&]t=([0-9a-f]+)/i);
+  if (m) TOKEN = m[1];
+}
+if (!TOKEN) {
+  document.getElementById("err").style.display = "block";
+  document.getElementById("err").textContent =
+    "Session key missing. Open the address exactly as shown on the phone (it ends with #t=…).";
+}
+
+var TABS = [
+  { key: "photos", label: "Photos", icon: "\u{1F5BC}" },
+  { key: "videos", label: "Videos", icon: "\u{1F3AC}" },
+  { key: "music",  label: "Music",  icon: "\u{1F3B5}" },
+  { key: "apps",   label: "Apps",   icon: "\u{1F4E6}" },
+  { key: "files",  label: "Files",  icon: "\u{1F4C1}" }
+];
+var state = { tab: "photos", cursor: 0, items: [], nextCursor: null, path: "", selected: {} };
+
+function $(id) { return document.getElementById(id); }
+function fmt(b) {
+  if (b < 1024) return b + " B";
+  if (b < 1048576) return (b/1024).toFixed(1) + " KB";
+  if (b < 1073741824) return (b/1048576).toFixed(1) + " MB";
+  return (b/1073741824).toFixed(2) + " GB";
+}
+function api(path) {
+  return fetch(path + (path.indexOf("?") < 0 ? "?" : "&") + "t=" + TOKEN)
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    });
+}
+
+// ---- header info ----
+api("/api/info").then(function (info) {
+  $("title").textContent = info.deviceName || "MorseLink";
+  document.title = (info.deviceName || "MorseLink") + " · WebShare";
+}).catch(function () {});
+
+function refreshCounts() {
+  api("/api/counts").then(function (c) {
+    for (var i = 0; i < TABS.length; i++) {
+      var b = document.getElementById("tab-" + TABS[i].key);
+      if (b) b.textContent = TABS[i].label + " (" + (c[TABS[i].key] || 0) + ")";
+    }
+  }).catch(function () {});
+}
+
+// ---- tabs ----
+function renderTabs() {
+  var nav = $("tabs");
+  nav.innerHTML = "";
+  TABS.forEach(function (t) {
+    var b = document.createElement("button");
+    b.id = "tab-" + t.key;
+    b.textContent = t.label;
+    if (t.key === state.tab) b.className = "active";
+    b.onclick = function () {
+      state.tab = t.key; state.cursor = 0; state.items = []; state.path = ""; state.selected = {};
+      load();
+    };
+    nav.appendChild(b);
+  });
+  refreshCounts();
+}
+
+function load() {
+  renderTabs();
+  document.querySelectorAll("#tabs button").forEach(function (b) {
+    b.className = b.id === "tab-" + state.tab ? "active" : "";
+  });
+  var url = "/api/files?category=" + state.tab + "&cursor=" + state.cursor + "&pageSize=60";
+  if (state.path) url += "&path=" + encodeURIComponent(state.path);
+  api(url).then(function (data) {
+    if (state.cursor === 0) state.items = [];
+    (data.items || []).forEach(function (it) { state.items.push(it); });
+    state.nextCursor = data.nextCursor;
+    if (data.folders) state.folders = data.folders; else state.folders = [];
+    render();
+  }).catch(function (e) { showError(e); });
+}
+
+function showError(e) {
+  var el = $("err");
+  el.style.display = "block";
+  el.textContent = "Connection problem: " + e.message +
+    ". Check you are on the same network and using the current address.";
+}
+
+function renderCrumbs() {
+  var c = $("crumbs");
+  if (state.tab !== "files") { c.style.display = "none"; return; }
+  c.style.display = "block";
+  c.innerHTML = "";
+  var root = document.createElement("a");
+  root.href = "#"; root.textContent = "Downloads";
+  root.onclick = function (e) { e.preventDefault(); state.path = ""; state.cursor = 0; state.items = []; state.selected = {}; load(); };
+  c.appendChild(root);
+  var parts = state.path ? state.path.split("/") : [];
+  var acc = "";
+  parts.forEach(function (p) {
+    if (!p) return;
+    acc = acc ? acc + "/" + p : p;
+    var seg = acc;
+    var a = document.createElement("a");
+    a.href = "#"; a.textContent = p;
+    a.onclick = function (e) { e.preventDefault(); state.path = seg; state.cursor = 0; state.items = []; state.selected = {}; load(); };
+    c.appendChild(document.createTextNode(" / "));
+    c.appendChild(a);
+  });
+}
+
+function iconFor(item) {
+  if (item.mime) {
+    if (item.mime.indexOf("image/") === 0) return "\u{1F5BC}";
+    if (item.mime.indexOf("video/") === 0) return "\u{1F3AC}";
+    if (item.mime.indexOf("audio/") === 0) return "\u{1F3B5}";
+    if (item.mime.indexOf("pdf") >= 0) return "\u{1F4D1}";
+    if (item.mime.indexOf("zip") >= 0 || item.mime.indexOf("compressed") >= 0) return "\u{1F4E6}";
+  }
+  if (state.tab === "apps") return "\u{1F4E6}";
+  return "\u{1F4C4}";
+}
+
+function render() {
+  renderCrumbs();
+  var list = $("list");
+  list.innerHTML = "";
+  var gridMode = (state.tab === "photos" || state.tab === "videos");
+
+  state.folders && state.folders.forEach(function (f) {
+    var row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = '<div class="ic">\u{1F4C1}</div>' +
+      '<div class="meta"><div class="nm">' + esc(f.name) + '</div>' +
+      '<div class="sub">folder</div></div><div></div>';
+    row.onclick = function () {
+      state.path = f.path; state.cursor = 0; state.items = []; state.selected = {};
+      load();
+    };
+    list.appendChild(row);
+  });
+
+  state.items.forEach(function (item) {
+    var key = state.tab + ":" + item.id;
+    var selected = !!state.selected[key];
+    var el = document.createElement("div");
+    if (gridMode) {
+      el.className = "card" + (selected ? " selected" : "");
+      var inner;
+      if (item.hasThumb) {
+        inner = '<img loading="lazy" src="/thumbnail?kind=' + state.tab + "&id=" +
+          encodeURIComponent(item.id) + "&t=" + TOKEN + '" alt="">';
+      } else {
+        inner = '<div class="ic">' + iconFor(item) + "</div>";
+      }
+      el.innerHTML = inner +
+        '<div class="ck' + (selected ? " on" : "") + '">\u2713</div>' +
+        '<div class="nm">' + esc(item.name) + "</div>" +
+        '<div class="mt">' + fmt(item.size) + "</div>";
+    } else {
+      el.className = "row" + (selected ? " selected" : "");
+      var sub = fmt(item.size);
+      if (item.artist) sub += " · " + esc(item.artist);
+      if (item.version) sub += " · v" + esc(item.version);
+      el.innerHTML = '<div class="ic">' + iconFor(item) + "</div>" +
+        '<div class="meta"><div class="nm">' + esc(item.name) + "</div>" +
+        '<div class="sub">' + sub + "</div></div>" +
+        '<div class="ck">' + (selected ? "\u2713" : "") + "</div>";
+    }
+    el.onclick = function (ev) {
+      state.selected[key] = !state.selected[key];
+      if (!state.selected[key]) delete state.selected[key];
+      render();
+    };
+    el.ondblclick = function () { downloadItem(item); };
+    list.appendChild(el);
+  });
+
+  if (!state.items.length && !(state.folders && state.folders.length)) {
+    var e2 = document.createElement("div");
+    e2.className = "empty";
+    e2.textContent = "Nothing here yet";
+    list.appendChild(e2);
+  }
+
+  $("more").style.display = state.nextCursor ? "block" : "none";
+  renderBar();
+}
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+function renderBar() {
+  var n = Object.keys(state.selected).length;
+  var bar = $("bar");
+  if (n > 0) {
+    bar.className = "show";
+    $("selInfo").textContent = n + " selected";
+  } else {
+    bar.className = "";
+  }
+}
+
+$("more").onclick = function () {
+  if (state.nextCursor != null) { state.cursor = state.nextCursor; load(); }
+};
+$("clear").onclick = function () { state.selected = {}; render(); };
+
+function downloadItem(item) {
+  var a = document.createElement("a");
+  a.href = "/download?kind=" + state.tab + "&id=" + encodeURIComponent(item.id) + "&t=" + TOKEN;
+  a.download = item.name || "";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+$("download").onclick = function () {
+  var keys = Object.keys(state.selected);
+  keys.forEach(function (key, i) {
+    var id = key.slice(key.indexOf(":") + 1);
+    setTimeout(function () {
+      var item = state.items.filter(function (it) { return String(it.id) === id; })[0];
+      if (item) downloadItem(item);
+    }, i * 700);
+  });
+};
+
+// ---- uploads (chunked + resumable) ----
+var CHUNK = 1024 * 1024;
+
+function uploadWidget(name) {
+  var d = document.createElement("div");
+  d.className = "up";
+  d.innerHTML = '<div class="nm">' + esc(name) + '</div><div class="track"><div class="fill"></div></div>';
+  $("uploads").appendChild(d);
+  return {
+    setProgress: function (p) { d.querySelector(".fill").style.width = Math.round(p * 100) + "%"; },
+    done: function (ok) {
+      d.querySelector(".fill").style.width = "100%";
+      if (!ok) d.className = "up err";
+      setTimeout(function () { d.remove(); }, 6000);
+    }
+  };
+}
+
+function randId() {
+  var s = "";
+  for (var i = 0; i < 16; i++) s += Math.floor(Math.random() * 16).toString(16);
+  return s;
+}
+
+function uploadFile(file) {
+  var w = uploadWidget(file.name + " · " + fmt(file.size));
+  var id = randId();
+  var offset = 0;
+
+  function fail(msg) {
+    w.done(false);
+    var el = $("err");
+    el.style.display = "block";
+    el.textContent = "Upload failed: " + msg;
+  }
+
+  function next() {
+    if (offset >= file.size) { w.done(true); refreshCounts(); return; }
+    var end = Math.min(offset + CHUNK, file.size);
+    var blob = file.slice(offset, end);
+    fetch("/upload?t=" + TOKEN, {
+      method: "POST",
+      headers: {
+        "x-upload-id": id,
+        "x-file-name": encodeURIComponent(file.name),
+        "x-total-size": String(file.size),
+        "x-chunk-offset": String(offset),
+        "Content-Type": "application/octet-stream"
+      },
+      body: blob
+    }).then(function (r) {
+      if (r.status === 409) {
+        // Server has different offset: resync and continue from there.
+        return api("/api/upload-status?id=" + id).then(function (s) {
+          offset = s.received || 0;
+          next();
+        });
+      }
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json().then(function (j) {
+        offset = j.bytesWritten != null ? j.bytesWritten : end;
+        w.setProgress(offset / file.size);
+        if (j.done) { w.done(j.ok !== false); refreshCounts(); }
+        else next();
+      });
+    }).catch(function (e) { fail(e.message); });
+  }
+
+  // Ask the server first: resumes an interrupted upload of the same id.
+  api("/api/upload-status?id=" + id).then(function () { next(); }).catch(function () { next(); });
+}
+
+function handleFiles(files) {
+  Array.prototype.forEach.call(files, uploadFile);
+}
+
+$("pick").onclick = function () { $("fileInput").click(); };
+$("fileInput").addEventListener("change", function () {
+  handleFiles(this.files);
+  this.value = "";
+});
+var dz = $("dropzone");
+["dragenter", "dragover"].forEach(function (ev) {
+  dz.addEventListener(ev, function (e) { e.preventDefault(); dz.className = "over"; });
+});
+["dragleave", "drop"].forEach(function (ev) {
+  dz.addEventListener(ev, function (e) { e.preventDefault(); dz.className = ""; });
+});
+dz.addEventListener("drop", function (e) {
+  if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files);
+});
+window.addEventListener("dragover", function (e) { e.preventDefault(); });
+window.addEventListener("drop", function (e) { e.preventDefault(); });
+
+load();
+</script>
+</body>
+</html>

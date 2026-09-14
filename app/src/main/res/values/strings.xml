@@ -1,8 +1,344 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MorseLink</string>
+
+    <!-- Bottom navigation -->
     <string name="tab_connect">Connect</string>
     <string name="tab_files">Files</string>
     <string name="tab_history">History</string>
     <string name="tab_settings">Settings</string>
+
+    <!-- Common actions -->
+    <string name="action_cancel">Cancel</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_resume">Resume</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_send">Send</string>
+    <string name="action_share">Share</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_close">Close</string>
+    <string name="action_done">Done</string>
+    <string name="action_next">Next</string>
+    <string name="action_skip">Skip</string>
+    <string name="action_open">Open</string>
+    <string name="action_search">Search</string>
+    <string name="action_retry_failed">Retry failed</string>
+    <string name="action_clear_completed">Clear completed</string>
+    <string name="action_pause_all">Pause all</string>
+    <string name="action_resume_all">Resume all</string>
+    <string name="action_choose_files">Choose files</string>
+    <string name="action_minimize">Minimize</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+    <string name="action_discard">Discard</string>
+    <string name="action_proceed">Proceed anyway</string>
+    <string name="action_install">Install</string>
+    <string name="action_grant">Grant access</string>
+    <string name="action_open_settings">Open App Settings</string>
+    <string name="action_more">More</string>
+    <string name="action_ok">OK</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_searching">Searching for nearby devices</string>
+    <string name="dashboard_send">Send</string>
+    <string name="dashboard_receive">Receive</string>
+    <string name="dashboard_recent">Recent devices</string>
+    <string name="dashboard_pc">Share with PC</string>
+    <string name="dashboard_pc_hint">Open a transfer page in any browser</string>
+    <string name="dashboard_help">Help and diagnostics</string>
+    <string name="dashboard_connected_to">Connected to %1$s</string>
+    <string name="dashboard_not_connected">Not connected</string>
+    <string name="dashboard_no_recent">Devices you pair with appear here</string>
+    <string name="dashboard_change_name">Change name</string>
+
+    <!-- Transfer / pairing screen -->
+    <string name="transfer_title_send">Send to a device</string>
+    <string name="transfer_title_receive">Receive from a device</string>
+    <string name="transfer_scan_connect">Scan to connect</string>
+    <string name="transfer_connected_to">Connected to %1$s</string>
+    <string name="transfer_via_nearby">via Nearby (Wi-Fi / Bluetooth)</string>
+    <string name="transfer_via_lan">via Wi-Fi LAN</string>
+    <string name="transfer_sending_header">Sending</string>
+    <string name="transfer_receiving_header">Receiving</string>
+    <string name="transfer_queue">Queue</string>
+    <string name="transfer_searching_nearby">Searching with Nearby Connections (Wi-Fi and Bluetooth)</string>
+    <string name="transfer_searching_lan">Searching on this Wi-Fi network</string>
+    <string name="transfer_no_devices">No devices found yet. Keep both devices unlocked, near each other, and on the same network.</string>
+    <string name="transfer_switch_lan">Search on Wi-Fi instead</string>
+    <string name="transfer_switch_nearby">Search with Nearby instead</string>
+    <string name="transfer_manual_connect">Connect manually</string>
+    <string name="transfer_manual_hint">On the other device, open Send or Receive and read the address shown under Manual connect.</string>
+    <string name="transfer_manual_hint_hotspot">Tip: one phone can host a hotspot (Share with PC screen) and the other joins it — then use the address shown here.</string>
+    <string name="transfer_empty_queue">Nothing queued yet. Choose files to send.</string>
+    <string name="transfer_restart_note">Resuming this file on Nearby restarts it from the beginning</string>
+    <string name="transfer_stop_session">End session</string>
+    <string name="transfer_waiting_peer">Waiting for the other device to accept…</string>
+    <string name="transfer_summary_title">Transfer summary</string>
+    <string name="transfer_summary_line">%1$d sent · %2$d failed · %3$d skipped</string>
+    <string name="transfer_summary_speed">Average speed %1$s</string>
+    <string name="transfer_tip">Tip: keep both phones unlocked and nearby until connected.</string>
+    <string name="transfer_show_queue">Show queue</string>
+    <string name="transfer_queue_title">Transfer queue</string>
+    <string name="transfer_folder_prompt_title">Send folders</string>
+    <string name="transfer_folder_prompt_message">How should the selected folders be sent?</string>
+    <string name="transfer_send_as_zip">Send as ZIP</string>
+    <string name="transfer_send_as_files">Send as files (keep structure)</string>
+
+    <!-- Item states -->
+    <string name="state_queued">Queued</string>
+    <string name="state_in_progress">Sending</string>
+    <string name="state_paused">Paused</string>
+    <string name="state_completed">Completed</string>
+    <string name="state_failed">Failed</string>
+    <string name="state_skipped">Skipped</string>
+    <string name="state_cancelled">Cancelled</string>
+
+    <!-- Consent -->
+    <string name="consent_title">Connection request</string>
+    <string name="consent_message">%1$s wants to connect and share files with you. Accept?</string>
+    <string name="consent_accept">Accept</string>
+    <string name="consent_reject">Reject</string>
+
+    <!-- Conflict -->
+    <string name="conflict_title">File already exists</string>
+    <string name="conflict_message">A file named %1$s already exists. What should MorseLink do?</string>
+    <string name="conflict_overwrite">Overwrite</string>
+    <string name="conflict_skip">Skip</string>
+    <string name="conflict_keep_both">Keep both</string>
+    <string name="conflict_apply_all">Apply to all remaining conflicts</string>
+
+    <!-- File manager -->
+    <string name="files_photos">Photos</string>
+    <string name="files_videos">Videos</string>
+    <string name="files_music">Music</string>
+    <string name="files_apps">Apps</string>
+    <string name="files_files">Files</string>
+    <string name="files_search_hint">Search files</string>
+    <string name="files_send_count">Send (%1$d) · %2$s</string>
+    <string name="files_clear">Clear</string>
+    <string name="files_select_all">Select all</string>
+    <string name="files_delete_confirm_title">Delete files?</string>
+    <string name="files_delete_confirm_message">The selected items will be permanently deleted from this device.</string>
+    <string name="files_rename">Rename</string>
+    <string name="files_properties">Properties</string>
+    <string name="files_create_folder">New folder</string>
+    <string name="files_empty">Nothing here yet</string>
+    <string name="files_loading">Loading…</string>
+    <string name="files_access_needed">Access needed to view this folder</string>
+    <string name="files_smart_categories">Categories</string>
+    <string name="files_documents">Documents</string>
+    <string name="files_ebooks">Ebooks</string>
+    <string name="files_archives">Archives</string>
+    <string name="files_apks">APKs</string>
+    <string name="files_large_files">Large files</string>
+    <string name="files_folders">Folders</string>
+    <string name="files_add_folder">Add a folder</string>
+    <string name="files_internal_storage">Internal storage</string>
+    <string name="files_download_folder">Download</string>
+    <string name="files_sort_date">Date</string>
+    <string name="files_sort_name">Name</string>
+    <string name="files_sort_size">Size</string>
+    <string name="files_sort_ascending">Ascending</string>
+    <string name="files_sort_descending">Descending</string>
+    <string name="files_view_grid">Grid view</string>
+    <string name="files_view_list">List view</string>
+    <string name="files_unknown_artist">Unknown artist</string>
+    <string name="files_send_apk">Send APK</string>
+    <string name="files_grant_media_access">MorseLink needs access to your photos, videos, and music to show them here. Nothing is sent anywhere without you.</string>
+    <string name="files_rename_prompt">New name</string>
+    <string name="files_new_folder_prompt">Folder name</string>
+    <string name="props_name">Name</string>
+    <string name="props_size">Size</string>
+    <string name="props_path">Location</string>
+    <string name="props_mime">Type</string>
+    <string name="props_modified">Modified</string>
+    <string name="items_selected">%1$d selected</string>
+    <string name="files_media_permission_needed">Storage access needed to list media. Grant it, then come back.</string>
+
+    <!-- History -->
+    <string name="history_received">Received</string>
+    <string name="history_sent">Sent</string>
+    <string name="history_search_hint">Search name or device</string>
+    <string name="history_empty">No transfers yet</string>
+    <string name="history_clear">Clear history</string>
+    <string name="history_clear_confirm">Delete all history records? The files themselves are not touched.</string>
+    <string name="history_today">Today</string>
+    <string name="history_yesterday">Yesterday</string>
+    <string name="history_this_week">This week</string>
+    <string name="history_older">Older</string>
+    <string name="history_delete_record">Remove from history</string>
+    <string name="history_delete_file">Delete file from device</string>
+    <string name="history_file_missing">File no longer available</string>
+    <string name="history_filter_all">All</string>
+    <string name="history_filter_completed">Completed</string>
+    <string name="history_filter_failed">Failed</string>
+    <string name="history_filter_skipped">Skipped</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="pref_profile">Profile</string>
+    <string name="pref_device_name">Device name</string>
+    <string name="pref_avatar_color">Avatar color</string>
+    <string name="pref_transfer">Transfer</string>
+    <string name="pref_download_location">Default download location</string>
+    <string name="pref_download_default">Download folder (system default)</string>
+    <string name="pref_conflict_policy">When a file already exists</string>
+    <string name="pref_appearance">Appearance</string>
+    <string name="pref_theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">Follow system</string>
+    <string name="pref_sounds">Sound effects</string>
+    <string name="pref_sounds_summary">Play a tone when a connection is made and when transfers finish</string>
+    <string name="pref_notifications">Transfer notifications</string>
+    <string name="pref_notifications_summary">Show progress in the notification bar during transfers</string>
+    <string name="pref_battery">Battery and reliability</string>
+    <string name="pref_battery_status_ok">Exempt from battery optimization</string>
+    <string name="pref_battery_status_optimized">Battery optimization may interrupt transfers</string>
+    <string name="pref_battery_request">Request exemption</string>
+    <string name="pref_battery_foreground_note">During an active transfer, MorseLink shows a persistent notification. It keeps the transfer alive when you switch apps, and disappears automatically when nothing is transferring. Removing it interrupts the transfer.</string>
+    <string name="pref_oem_guidance">Manufacturer battery settings</string>
+    <string name="pref_storage_access">Storage access</string>
+    <string name="pref_storage_granted">Granted folders</string>
+    <string name="pref_storage_none">No extra folders granted yet</string>
+    <string name="pref_all_files">Full storage access</string>
+    <string name="pref_all_files_summary">Optional. Lets the file manager browse all of internal storage. MorseLink works without it.</string>
+    <string name="pref_logs">App log</string>
+    <string name="pref_logging_toggle">Enable logging</string>
+    <string name="pref_logging_toggle_summary">Keep a technical log of transfers and connections on this device only</string>
+    <string name="pref_log_open">Open log viewer</string>
+    <string name="pref_log_export">Export log</string>
+    <string name="pref_log_clear">Clear log</string>
+    <string name="pref_help">Help</string>
+    <string name="pref_faq">FAQ and troubleshooting</string>
+    <string name="pref_doctor">Connection Doctor</string>
+    <string name="pref_replay_onboarding">Replay setup guide</string>
+    <string name="pref_crash_reports">Save crash logs</string>
+    <string name="pref_crash_reports_summary">Crash stack traces stay on this device and can be shared manually. No automatic sending, ever.</string>
+    <string name="pref_about">About</string>
+    <string name="about_version">Version %1$s</string>
+    <string name="about_body">MorseLink is a local, offline, peer-to-peer file transfer app. No internet, no accounts, no ads, no tracking. Transfers move directly between paired devices over Wi-Fi, Bluetooth, or your own hotspot.</string>
+
+    <!-- WebShare -->
+    <string name="webshare_title">Share with PC</string>
+    <string name="webshare_start_hotspot">Start with my hotspot</string>
+    <string name="webshare_start_lan">Start on this Wi-Fi</string>
+    <string name="webshare_stop">Stop WebShare</string>
+    <string name="webshare_url">Address</string>
+    <string name="webshare_ssid">Hotspot name</string>
+    <string name="webshare_password">Hotspot password</string>
+    <string name="webshare_qr_hint">Scan the QR code, or type the address in a browser on the other device.</string>
+    <string name="webshare_confirm_title">Wi-Fi will disconnect</string>
+    <string name="webshare_confirm_message">Starting WebShare with your hotspot will disconnect this phone from %1$s. That is normal — the other device joins the hotspot instead. Continue?</string>
+    <string name="webshare_manual_setup">Hotspot needs to be turned on manually. Open settings, enable hotspot or tethering, then come back.</string>
+    <string name="webshare_error_no_wifi">This phone is not on Wi-Fi. Use hotspot mode, or connect both devices to the same network.</string>
+    <string name="webshare_tip">Tip: your phone may briefly disconnect from Wi-Fi when the hotspot starts — that is expected.</string>
+    <string name="webshare_copy">Copy</string>
+    <string name="webshare_copied">Copied</string>
+    <string name="webshare_open_doctor">Connection problems? Open the Connection Doctor</string>
+    <string name="webshare_running">WebShare is running</string>
+    <string name="webshare_this_network">your current network</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Share files, offline</string>
+    <string name="onboarding_welcome_body">MorseLink sends photos, videos, music, apps, and any file directly between two devices — no internet, no cloud, no accounts, no ads. Nothing ever leaves your devices except the files you choose to send.</string>
+    <string name="onboarding_permissions_title">About permissions</string>
+    <string name="onboarding_permissions_body">MorseLink will ask for a few permissions:\n\n• Nearby devices / Bluetooth: only to find phones to share with.\n• Location (on older Androids): the system requires it for Wi-Fi scanning. MorseLink never records or sends your location.\n• Photos, videos, and music: only to list them for sending.\n\nEach request is explained again the first time it is needed.</string>
+    <string name="onboarding_name_title">Your device name</string>
+    <string name="onboarding_name_body">This is the name other devices see when you pair. You can change it later in Settings.</string>
+    <string name="onboarding_modes_title">Two ways to share</string>
+    <string name="onboarding_modes_body">Phone to phone: both devices search and pair, then transfer over Wi-Fi.\n\nPhone to PC: your phone shows a QR code — open it in any browser on the computer and drag files in both directions.</string>
+    <string name="onboarding_crash_title">Crash reports stay local</string>
+    <string name="onboarding_crash_body">If MorseLink crashes, a technical crash log is saved on this device only. It is never sent anywhere automatically — you can view and share it yourself from Settings. You can turn this off entirely.</string>
+    <string name="onboarding_crash_toggle">Save crash logs on this device</string>
+    <string name="onboarding_fgs_note">During transfers, MorseLink keeps a notification so the transfer survives when you switch apps. It disappears when the transfer ends.</string>
+
+    <!-- Connection Doctor -->
+    <string name="doctor_title">Connection Doctor</string>
+    <string name="doctor_subtitle">One tap checks everything transfers depend on</string>
+    <string name="doctor_run">Run checks</string>
+    <string name="doctor_check_wifi">Wi-Fi is enabled</string>
+    <string name="doctor_check_wifi_connected">Connected to a Wi-Fi network</string>
+    <string name="doctor_check_bluetooth">Bluetooth is enabled</string>
+    <string name="doctor_check_location">Location services are enabled (needed for discovery on older Androids)</string>
+    <string name="doctor_check_permissions">Required permissions are granted</string>
+    <string name="doctor_check_battery">Battery optimization will not kill transfers</string>
+    <string name="doctor_check_hotspot">Hotspot state is readable</string>
+    <string name="doctor_check_port">WebShare port 33455 is free</string>
+    <string name="doctor_ok">OK</string>
+    <string name="doctor_fail">Problem</string>
+    <string name="doctor_warn">Warning</string>
+    <string name="doctor_fix_wifi">Open Wi-Fi settings</string>
+    <string name="doctor_fix_bluetooth">Open Bluetooth settings</string>
+    <string name="doctor_fix_location">Open location settings</string>
+    <string name="doctor_fix_permissions">Grant missing permissions</string>
+    <string name="doctor_fix_battery">Open battery optimization</string>
+
+    <!-- Help / FAQ -->
+    <string name="help_title">Help and FAQ</string>
+    <string name="help_search_hint">Search help articles</string>
+    <string name="article_not_found_title">Phone not found during discovery</string>
+    <string name="article_not_found_body">1. Make sure both phones have MorseLink open on the pairing screen.\n2. Keep both phones unlocked and within a few meters.\n3. On newer phones, grant the Nearby devices permission.\n4. Try switching to Wi-Fi searching: both devices must join the same Wi-Fi network, or one phone can start Share with PC to create a hotspot and the other joins it.\n5. Still stuck? Run the Connection Doctor below.</string>
+    <string name="article_stall_title">Transfer stalls partway through</string>
+    <string name="article_stall_body">1. Pause and resume the transfer from the queue — MorseLink resumes from the exact byte where it stopped on the Wi-Fi transport.\n2. Keep the sender screen unlocked for the duration.\n3. If battery saver is on, transfers may be throttled — plug in or disable it.\n4. A very long transfer can also pause if Wi-Fi drops; resume when you are back in range.</string>
+    <string name="article_browser_title">Browser cannot connect to WebShare</string>
+    <string name="article_browser_title_alt">Browser cannot connect to WebShare</string>
+    <string name="article_browser_body">1. Check the other device is on the same network: either the same Wi-Fi, or joined to your phone hotspot.\n2. Type the address exactly as shown, including the number after the colon.\n3. The address contains a session key — if you restarted WebShare, use the new address.\n4. Some public Wi-Fi networks block device-to-device traffic. Use hotspot mode instead.</string>
+    <string name="article_apk_title">Received APK will not install</string>
+    <string name="article_apk_body">1. Android asks to allow this app to install unknown apps — allow it for MorseLink in the dialog.\n2. If the install button does nothing, the APK may be for a different processor type.\n3. MorseLink never modifies received files — the APK is byte-identical to what was sent.</string>
+    <string name="article_hotspot_title">Hotspot will not turn on</string>
+    <string name="article_hotspot_body">1. On Android 8 and newer, hotspot mode is created by the system automatically — if it fails, location services must be on.\n2. On Android 7 and older, MorseLink opens the hotspot settings for you to enable it manually.\n3. If your phone is on Wi-Fi, enabling the hotspot drops the Wi-Fi connection. That is normal.</string>
+    <string name="article_slow_title">Transfer is very slow</string>
+    <string name="article_slow_body">1. The two transports share one radio: transferring in both directions at once halves each direction — this is expected.\n2. Nearby starts over Bluetooth and escalates to Wi-Fi once the transfer begins; the first seconds are slower.\n3. Keep devices close together and away from heavy interference (microwaves, USB 3 hubs).</string>
+    <string name="article_find_title">Files received but I cannot find them</string>
+    <string name="article_find_body">Received files land in the Download folder in a MorseLink subfolder (or the folder you chose in Settings), and appear in the History tab. Gallery files are also indexed into the system gallery. If you changed the default location in Settings, look there.</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_transfer">Transfers</string>
+    <string name="notif_channel_transfer_desc">Progress for active transfers and WebShare</string>
+    <string name="notif_transfer_title">Transferring with %1$s</string>
+    <string name="notif_transfer_items">%1$d files in queue</string>
+    <string name="notif_webshare_title">WebShare is running</string>
+    <string name="notif_idle_text">MorseLink</string>
+
+    <!-- Misc dialogs -->
+    <string name="journal_resume_title">Resume interrupted transfer?</string>
+    <string name="journal_resume_message">A transfer with %1$s was interrupted (%2$d files remaining). Resume it now that the devices can find each other again?</string>
+    <string name="journal_resume">Resume</string>
+    <string name="battery_warning_title">Battery is low</string>
+    <string name="battery_warning_message">The battery is low and the device is not charging. This transfer may be interrupted if the device shuts down or Battery Saver restricts background activity. Consider plugging in first.</string>
+    <string name="permission_denied_title">Permission needed</string>
+    <string name="permission_denied_body">MorseLink needs this permission for the feature you just used. You can grant it in App Settings.</string>
+    <string name="cd_avatar">Device avatar</string>
+    <string name="cd_pause_item">Pause transfer of %1$s</string>
+    <string name="cd_resume_item">Resume transfer of %1$s</string>
+    <string name="cd_cancel_item">Cancel transfer of %1$s</string>
+    <string name="cd_retry_item">Retry transfer of %1$s</string>
+    <string name="cd_item_icon">File icon</string>
+    <string name="cd_selected">Selected</string>
+    <string name="cd_not_selected">Not selected</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_back">Navigate up</string>
+    <string name="cd_more">More options</string>
+    <string name="cd_qr">QR code with the WebShare address</string>
+    <string name="cd_sort">Sort options</string>
+    <string name="cd_view_toggle">Toggle grid or list view</string>
+    <string name="cd_close">Close</string>
+
+    <!-- Missing UI wave-2 strings -->
+    <string name="onboarding_done">Start sharing</string>
+    <string name="doctor_check_gms">Nearby (Google Play services) is available</string>
+    <string name="doctor_check_notifications">Notifications are allowed</string>
+    <string name="doctor_fix_notifications">Open notification settings</string>
+    <string name="doctor_check_media">Media access is granted</string>
+    <string name="color_indigo">Indigo</string>
+    <string name="color_teal">Teal</string>
+    <string name="color_amber">Amber</string>
+    <string name="color_rose">Rose</string>
+    <string name="color_sky">Sky</string>
+    <string name="pref_storage_add">Add a folder…</string>
+    <string name="pref_log_cleared">Log cleared</string>
+    <string name="pref_battery_status_restricted">Restricted — transfers may be paused</string>
+    <string name="oem_guidance_body">Some phones (Xiaomi, Oppo, Vivo, Huawei and others) force-stop apps to save battery. To make sure transfers keep running when the screen is off:\n\n1. Open system settings for MorseLink.\n2. Find Battery or Power usage.\n3. Choose No restrictions / Allow background activity (wording differs by brand).\n4. If there is an Autostart switch, turn it on.\n\nTransfers always pause safely when the system does stop the app — reopen MorseLink and tap Resume.</string>
 </resources>

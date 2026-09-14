@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <cache-path name="shared" path="shared/" />
+    <cache-path name="outgoing" path="outgoing/" />
+    <files-path name="logs" path="." />
+    <external-files-path name="extfiles" path="." />
+    <!-- Pre-Q public Downloads history entries and installed-APK previews. -->
+    <external-path name="external" path="." />
+    <root-path name="root" path="." />
+</paths>

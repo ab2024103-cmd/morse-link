@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pref_profile">
+
+        <EditTextPreference
+            app:key="device_name"
+            app:title="@string/pref_device_name"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:key="avatar_color"
+            app:title="@string/pref_avatar_color" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_transfer">
+
+        <Preference
+            app:key="download_location"
+            app:title="@string/pref_download_location"
+            app:summary="@string/pref_download_default" />
+
+        <ListPreference
+            app:defaultValue="ask"
+            app:entries="@array/conflict_entries"
+            app:entryValues="@array/conflict_values"
+            app:key="conflict_policy"
+            app:title="@string/pref_conflict_policy"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_appearance">
+
+        <ListPreference
+            app:defaultValue="system"
+            app:entries="@array/theme_entries"
+            app:entryValues="@array/theme_values"
+            app:key="theme"
+            app:title="@string/pref_theme"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_sounds">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="sounds"
+            app:summary="@string/pref_sounds_summary"
+            app:title="@string/pref_sounds" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="transfer_notifications"
+            app:summary="@string/pref_notifications_summary"
+            app:title="@string/pref_notifications" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_battery">
+
+        <Preference
+            app:key="battery_status"
+            app:summary="@string/pref_battery_status_optimized"
+            app:title="@string/pref_battery_request" />
+
+        <Preference
+            app:key="oem_guidance"
+            app:title="@string/pref_oem_guidance" />
+
+        <Preference
+            app:key="foreground_note"
+            app:summary="@string/pref_battery_foreground_note"
+            app:title="@string/pref_notifications" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_storage_access">
+
+        <Preference
+            app:key="storage_roots"
+            app:summary="@string/pref_storage_none"
+            app:title="@string/pref_storage_granted" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="all_files"
+            app:summary="@string/pref_all_files_summary"
+            app:title="@string/pref_all_files" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_logs">
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="logging_enabled"
+            app:summary="@string/pref_logging_toggle_summary"
+            app:title="@string/pref_logging_toggle" />
+
+        <Preference
+            app:key="open_log"
+            app:title="@string/pref_log_open" />
+
+        <Preference
+            app:key="export_log"
+            app:title="@string/pref_log_export" />
+
+        <Preference
+            app:key="clear_log"
+            app:title="@string/pref_log_clear" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_help">
+
+        <Preference
+            app:key="faq"
+            app:title="@string/pref_faq" />
+
+        <Preference
+            app:key="doctor"
+            app:title="@string/pref_doctor" />
+
+        <Preference
+            app:key="replay_onboarding"
+            app:title="@string/pref_replay_onboarding" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="true"
+            app:key="crash_reports"
+            app:summary="@string/pref_crash_reports_summary"
+            app:title="@string/pref_crash_reports" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_about">
+
+        <Preference
+            app:key="about"
+            app:summary="@string/about_body"
+            app:title="@string/pref_about" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon_tint">#1A1A1A</color>
+    <dimen name="avatar_size">40dp</dimen>
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="item_padding_v">12dp</dimen>
+    <dimen name="touch_target">48dp</dimen>
+</resources>
