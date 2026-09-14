@@ -49,6 +49,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -x
+          set -o pipefail
           TAG="${{ steps.tag.outputs.tag }}"
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists"
@@ -76,5 +77,24 @@ jobs:
           gh release upload "$TAG" \
             .build/MorseLink-release.apk \
             .build/MorseLink-debug.apk \
-            --clobber
-          gh release view "$TAG" --json assets --jq '.assets[] | "\(.name) \(.size) bytes"'
+            --clobber 2>&1 | tee /tmp/release-log.txt
+          gh release view "$TAG" --json assets --jq '.assets[] | "\(.name) \(.size) bytes"' 2>&1 | tee -a /tmp/release-log.txt
+
+      - name: Publish log to the branch (diagnostics)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "job status: ${{ job.status }}"
+            echo "release upload output follows:"
+            cat /tmp/release-log.txt 2>/dev/null || echo "(no log captured)"
+          } > release-assets-log.txt
+          git config user.name "morselink-builder"
+          git config user.email "builder@users.noreply.github.com"
+          git fetch origin arena/01a09cc4-morse-link
+          git checkout --detach FETCH_HEAD
+          cp release-assets-log.txt .build/release-assets-log.txt
+          git add .build/release-assets-log.txt
+          git commit -m "release-assets log [skip ci]" || echo "nothing to commit"
+          git push origin HEAD:refs/heads/arena/01a09cc4-morse-link
