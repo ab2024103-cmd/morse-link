@@ -1,17 +1,12 @@
 name: Attach release assets
 
 # Uploads the built APKs from .build/ (committed by the Build APK workflow)
-# to an existing GitHub Release. Run manually with a tag, or automatically
-# when a v* tag is pushed. The sandbox cannot reach uploads.github.com, so
-# asset uploads happen from GitHub's own runners.
+# to the GitHub Release matching the app's versionName. Runs on pushes to the
+# working branch and on v* tag pushes. The sandbox cannot reach
+# uploads.github.com, so asset uploads happen from GitHub's own runners.
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: "Release tag to attach assets to (e.g. v1.0.1)"
-        required: true
-        default: "v1.0.1"
   push:
+    branches: ["arena/**"]
     tags: ["v*"]
 
 permissions:
@@ -29,72 +24,61 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify artifacts exist
-        run: |
-          test -f .build/MorseLink-release.apk || { echo "::error::missing .build/MorseLink-release.apk"; exit 1; }
-          test -f .build/MorseLink-debug.apk || { echo "::error::missing .build/MorseLink-debug.apk"; exit 1; }
-          ls -la .build/
-
-      - name: Resolve tag
-        id: tag
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
-          else
-            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Create release if missing, then upload APKs
+      - name: Attach APKs to the versioned release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          set -x
-          set -o pipefail
-          TAG="${{ steps.tag.outputs.tag }}"
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            echo "Release $TAG already exists"
+          set -euo pipefail
+
+          # Resolve the release tag: v* tag pushes use the tag; branch pushes
+          # derive it from the app version.
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF_NAME}"
           else
-            echo "Release $TAG does not exist — creating it"
-            cat > notes.md <<'NOTES'
-            MorseLink — offline P2P file transfer for Android.
-
-            No internet, no cloud, no accounts, no ads. Files move directly between two devices.
-
-            ## Downloads
-            - **MorseLink-release.apk** — signed release build (recommended)
-            - **MorseLink-debug.apk** — debug build with extra logging
-
-            Requires Android 5.0+. To install: enable "install unknown apps" for your browser/file manager when prompted.
-
-            ## Features
-            - Radar pairing with explicit Accept/Reject consent; Nearby Connections + LAN Wi-Fi transports with exact-offset resume
-            - Photos / Videos / Music / Apps / Files picker, queue with per-file pause/resume/cancel/retry, conflict resolution, restart-recovery journal
-            - WebShare: manage files from any browser via QR (token auth, resumable uploads, Range downloads)
-            - History, Settings, Connection Doctor, Help/FAQ, in-app log + crash reports with one-tap .txt export
-            NOTES
-            gh release create "$TAG" --verify-tag --title "MorseLink ${TAG#v}" --notes-file notes.md
+            VER="$(grep -oP 'versionName = "\K[^"]+' app/build.gradle.kts)"
+            TAG="v${VER}"
           fi
-          gh release upload "$TAG" \
-            .build/MorseLink-release.apk \
-            .build/MorseLink-debug.apk \
-            --clobber 2>&1 | tee /tmp/release-log.txt
-          gh release view "$TAG" --json assets --jq '.assets[] | "\(.name) \(.size) bytes"' 2>&1 | tee -a /tmp/release-log.txt
+          echo "Release tag: $TAG"
 
-      - name: Publish log to the branch (diagnostics)
-        if: always()
+          ls -la .build/ || true
+          test -f .build/MorseLink-release.apk
+          test -f .build/MorseLink-debug.apk
+
+          # Find the release (including drafts); publish it if drafted.
+          REL_ID="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq .id 2>/dev/null || true)"
+          if [ -n "$REL_ID" ]; then
+            echo "Release $TAG exists (id $REL_ID)"
+            gh api -X PATCH "repos/${GITHUB_REPOSITORY}/releases/${REL_ID}" -f draft=false >/dev/null
+          else
+            echo "Release $TAG does not exist - creating it"
+            printf '%s\n' \
+              "MorseLink ${TAG#v} - offline P2P file transfer for Android." \
+              "" \
+              "No internet, no cloud, no accounts, no ads. Files move directly between two devices." \
+              "" \
+              "## Downloads" \
+              "- **MorseLink-release.apk** - signed release build (recommended)" \
+              "- **MorseLink-debug.apk** - debug build with extra logging" \
+              "" \
+              "Requires Android 5.0+. To install: enable install unknown apps for your browser or file manager when prompted." \
+              > notes.md
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "MorseLink ${TAG#v}" --notes-file notes.md
+          fi
+
+          gh release upload "$TAG" .build/MorseLink-release.apk .build/MorseLink-debug.apk --clobber
+          gh release view "$TAG" --json assets --jq '.assets[] | "\(.name) \(.size) bytes"'
+
+      - name: Publish failure log to the branch
+        if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          {
-            echo "job status: ${{ job.status }}"
-            echo "release upload output follows:"
-            cat /tmp/release-log.txt 2>/dev/null || echo "(no log captured)"
-          } > release-assets-log.txt
           git config user.name "morselink-builder"
           git config user.email "builder@users.noreply.github.com"
-          git fetch origin arena/01a09cc4-morse-link
-          git checkout --detach FETCH_HEAD
-          cp release-assets-log.txt .build/release-assets-log.txt
+          git fetch origin arena/01a09cc4-morse-link || true
+          git checkout --detach FETCH_HEAD 2>/dev/null || true
+          mkdir -p .build
+          date -u > .build/release-assets-log.txt
           git add .build/release-assets-log.txt
-          git commit -m "release-assets log [skip ci]" || echo "nothing to commit"
-          git push origin HEAD:refs/heads/arena/01a09cc4-morse-link
+          git commit -m "release-assets failed [skip ci]" || echo "nothing to commit"
+          git push origin HEAD:refs/heads/arena/01a09cc4-morse-link || echo "push skipped"
