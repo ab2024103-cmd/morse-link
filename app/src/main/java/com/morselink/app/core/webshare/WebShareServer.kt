@@ -115,14 +115,14 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         return newFixedLengthResponse(Response.Status.OK, "text/html; charset=utf-8", html).noStore()
     }
 
-    private fun noStore(response: Response): Response {
-        response.addHeader("Cache-Control", "no-store")
-        return response
-    }
-
     private fun Response.noStore(): Response {
         this.addHeader("Cache-Control", "no-store")
         return this
+    }
+
+    private fun noStoreJson(response: Response): Response {
+        response.addHeader("Cache-Control", "no-store")
+        return response
     }
 
     private fun newJson(status: Response.Status, json: JSONObject): Response =
@@ -131,7 +131,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     // ---------------- APIs ----------------
 
     private fun apiInfo(): Response {
-        return noStore(
+        return noStoreJson(
             newJson(
                 Response.Status.OK,
                 JSONObject()
@@ -150,7 +150,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             .put("music", MediaLibrary.count(MediaCategory.MUSIC))
             .put("apps", apps.size)
             .put("files", MediaLibrary.count(MediaCategory.DOWNLOADS))
-        return noStore(newJson(Response.Status.OK, json))
+        return newJson(Response.Status.OK, json).noStore()
     }
 
     private fun cachedApps(): List<AppEntry> {
@@ -188,7 +188,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             }
             json.put("items", items)
             if (cursor + page.size < apps.size) json.put("nextCursor", cursor + page.size)
-            return noStore(newJson(Response.Status.OK, json))
+            return newJson(Response.Status.OK, json).noStore()
         }
 
         if (category == "files" || category == "downloads") {
@@ -197,18 +197,18 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             json.put("items", result.first)
             if (result.second != null) json.put("nextCursor", result.second)
             json.put("folders", result.third)
-            return noStore(newJson(Response.Status.OK, json))
+            return newJson(Response.Status.OK, json).noStore()
         }
 
         val mediaCategory = MediaCategory.fromKey(category)
-            ?: return noStore(newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "unknown category")))
+            ?: return newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "unknown category").noStore())
         val page = MediaLibrary.page(mediaCategory, cursor, pageSize, com.morselink.app.core.media.SortKey.DATE, true, null)
         for (m in page) {
             items.put(mediaJson(m))
         }
         json.put("items", items)
         if (page.size == pageSize) json.put("nextCursor", cursor + page.size)
-        return noStore(newJson(Response.Status.OK, json))
+        return newJson(Response.Status.OK, json).noStore()
     }
 
     private fun mediaJson(m: com.morselink.app.core.media.MediaItem): JSONObject {
@@ -447,7 +447,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     // ---------------- downloads ----------------
 
     private fun notFound(): Response =
-        noStore(newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "not found")))
+        newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "not found").noStore())
 
     private fun download(session: IHTTPSession): Response {
         val kind = session.parameters["kind"]?.firstOrNull() ?: "photos"
@@ -587,7 +587,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     private fun apiUploadStatus(session: IHTTPSession): Response {
         val uploadId = session.parameters["id"]?.firstOrNull() ?: return notFound()
         val part = uploadParts[uploadId]
-        return noStore(
+        return noStoreJson(
             newJson(
                 Response.Status.OK,
                 JSONObject().put("received", part?.length() ?: 0L)
@@ -616,7 +616,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
                 // Client and server offsets diverged: report the real offset so the
                 // client resyncs (true offset-based resume, spec Section 10.4/11.4).
                 consumeBody(session, length)
-                return noStore(
+                return noStoreJson(
                     newJson(
                         Response.Status.CONFLICT,
                         JSONObject().put("received", part.length()).put("error", "offset mismatch")
@@ -655,7 +655,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
                     ) { _, _ -> ConflictDecision.KEEP_BOTH }
                 }
                 uploadParts.remove(uploadId)
-                return noStore(
+                return noStoreJson(
                     newJson(
                         Response.Status.OK,
                         JSONObject()
@@ -667,7 +667,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
                     )
                 )
             }
-            return noStore(
+            return noStoreJson(
                 newJson(
                     Response.Status.OK,
                     JSONObject().put("done", false).put("bytesWritten", written)
@@ -693,7 +693,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     }
 
     private fun badRequest(msg: String): Response =
-        noStore(newJson(Response.Status.BAD_REQUEST, JSONObject().put("error", msg)))
+        newJson(Response.Status.BAD_REQUEST, JSONObject().put("error", msg).noStore())
 
     // ---------------- range support ----------------
 
