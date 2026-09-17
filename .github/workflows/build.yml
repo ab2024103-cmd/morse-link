@@ -64,6 +64,43 @@ jobs:
             echo "NO_APK_PRODUCED" >> .build/build-log.txt
           fi
 
+      # Publishes the release from this same runner: the freshly built APKs are
+      # already present, so no separate tag-triggered workflow is needed (tag
+      # pushes do not reliably trigger workflows that are absent from the
+      # default branch).
+      - name: Publish release
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test -f .build/MorseLink-release.apk
+          test -f .build/MorseLink-debug.apk
+          VER="$(grep -oP 'versionName = "\K[^\"]+' app/build.gradle.kts)"
+          TAG="v${VER}"
+          echo "Release tag: $TAG"
+          REL_ID="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq .id 2>/dev/null || true)"
+          if [ -n "$REL_ID" ]; then
+            echo "Release $TAG exists (id $REL_ID)"
+            gh api -X PATCH "repos/${GITHUB_REPOSITORY}/releases/${REL_ID}" -f draft=false >/dev/null
+          else
+            echo "Release $TAG does not exist - creating it"
+            printf '%s\n' \
+              "MorseLink ${TAG#v} - offline P2P file transfer for Android." \
+              "" \
+              "No internet, no cloud, no accounts, no ads. Files move directly between two devices." \
+              "" \
+              "## Downloads" \
+              "- **MorseLink-release.apk** - signed release build (recommended)" \
+              "- **MorseLink-debug.apk** - debug build with extra logging" \
+              "" \
+              "Requires Android 5.0+. To install: enable install unknown apps for your browser or file manager when prompted." \
+              > notes.md
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "MorseLink ${TAG#v}" --notes-file notes.md
+          fi
+          gh release upload "$TAG" .build/MorseLink-release.apk .build/MorseLink-debug.apk --clobber
+          gh release view "$TAG" --json assets --jq '.assets[] | "asset: \(.name) \(.size) bytes"'
+
       - name: Commit results
         if: always()
         run: |
