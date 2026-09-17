@@ -1108,9 +1108,18 @@ object TransferEngine {
     }
 
     fun onPeerCancelled(fileId: String) {
-        mutateItem(fileId) { it.state = TransferItemState.CANCELLED }
-        publishItems(force = true)
-        saveJournal()
+        val item = findItem(fileId) ?: return
+        if (item.direction == TransferDirection.RECEIVING) {
+            // Full cleanup: marks the row cancelled and deletes the .part.
+            markIncoming(fileId, TransferItemState.CANCELLED)
+        } else {
+            mutateItem(fileId) {
+                it.state = TransferItemState.CANCELLED
+                it.lastError = "cancelled by the other device"
+            }
+            publishItems(force = true)
+            saveJournal()
+        }
     }
 
     // ---------------- journal (spec Section 8.10) ----------------

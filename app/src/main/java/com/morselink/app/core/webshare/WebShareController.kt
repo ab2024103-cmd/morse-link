@@ -15,7 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -46,6 +48,36 @@ object WebShareController {
     val isRunning: StateFlow<Boolean> = _isRunning
 
     private var server: WebShareServer? = null
+
+    // ---- browser pairing consent (b1): every new browser must be accepted ----
+    // clientId -> "pending" | "allowed" | "denied"
+    private val clientStates = java.util.concurrent.ConcurrentHashMap<String, String>()
+    private val _approvalRequests = MutableSharedFlow<Pair<String, String>>(extraBuffer = 16)
+
+    /** (clientId, ip) for each browser waiting to be accepted or rejected. */
+    val approvalRequests: SharedFlow<Pair<String, String>> = _approvalRequests
+
+    fun knowsClient(id: String): Boolean = clientStates.containsKey(id)
+    fun isClientAllowed(id: String): Boolean = clientStates[id] == "allowed"
+    fun isClientDenied(id: String): Boolean = clientStates[id] == "denied"
+
+    fun requestApproval(id: String, ip: String): String {
+        val existing = clientStates[id]
+        if (existing == null) {
+            clientStates[id] = "pending"
+            LogStore.i("WebShare: browser $id ($ip) asks for access")
+        }
+        if (clientStates[id] == "pending") {
+            _approvalRequests.tryEmit(id to ip)
+            return "pending"
+        }
+        return clientStates[id] ?: "pending"
+    }
+
+    fun respondApproval(id: String, allow: Boolean) {
+        clientStates[id] = if (allow) "allowed" else "denied"
+        LogStore.i("WebShare: browser $id ${if (allow) "allowed" else "denied"}")
+    }
     private var hotspot: HotspotController? = null
     private var multicastLock: WifiManager.MulticastLock? = null
     private var nsdRegistration: NsdManager.RegistrationListener? = null
@@ -159,10 +191,10 @@ object WebShareController {
     }
 
     private fun newToken(): String {
-        // 4 random bytes → 8 hex chars: short enough to read aloud or type on
-        // a PC (m4/m14) while staying far out of brute-force range for the
-        // token-gated local session.
-        val bytes = ByteArray(4)
+        // 4 hex chars (b1) — short enough to read aloud and type on a PC.
+        // Every browser session must additionally be accepted in a popup on
+        // the phone, and wrong tokens are rate-limited per IP.
+        val bytes = ByteArray(2)
         SecureRandom().nextBytes(bytes)
         return com.morselink.app.core.util.Integrity.toHex(bytes)
     }
@@ -223,6 +255,7 @@ object WebShareController {
     }
 
     fun stop() {
+        clientStates.clear()
         teardownJob?.cancel()
         teardownJob = null
         try {

@@ -103,7 +103,21 @@ class MediaPageFragment : Fragment(), PageWithItems {
                     .setMessage(R.string.files_grant_media_access)
                     .setPositiveButton(R.string.action_ok) { d, _ ->
                         d.dismiss()
-                        requestPermissions(missing.toTypedArray(), RC_MEDIA)
+                        requestPermissions(Permissions.mediaRequestArray(requireContext()), RC_MEDIA)
+                    }
+                    .setNeutralButton(R.string.action_open_settings) { d, _ ->
+                        d.dismiss()
+                        // Fallback path (b2): the system App Info screen, where
+                        // full access can always be granted.
+                        try {
+                            startActivity(
+                                Intent(
+                                    android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.parse("package:" + requireContext().packageName)
+                                )
+                            )
+                        } catch (_: Exception) {
+                        }
                     }
                     .setNegativeButton(R.string.action_cancel, null)
                     .show()
@@ -130,6 +144,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
     fun reload() {
         offset = 0
         reachedEnd = false
+        retriedEmptyLoad = false
         firstLoadDone = false
         mediaItems.clear()
         appItems.clear()
@@ -154,10 +169,14 @@ class MediaPageFragment : Fragment(), PageWithItems {
         loadMore()
     }
 
+    private var retriedEmptyLoad = false
+
     private fun loadMore() {
         if (loading) return
         loading = true
-        val query = parentManager()?.searchQuery
+        val rawQuery = parentManager()?.searchQuery
+        // Whitespace-only search text must not filter the whole library (b5).
+        val query = rawQuery?.trim()?.takeIf { it.isNotEmpty() }
         val sortKey = parentManager()?.sortKey ?: com.morselink.app.core.media.SortKey.DATE
         val descending = parentManager()?.sortDescending ?: true
         val pageSize = DeviceTier.pageSize
@@ -211,6 +230,20 @@ class MediaPageFragment : Fragment(), PageWithItems {
                     binding.empty.setOnClickListener { reload() }
                     return@withContext
                 }
+                if (loaded.isEmpty() && count > 0 && offset == 0 && !retriedEmptyLoad) {
+                    // MediaStore reported items exist but returned none — usually
+                    // a provider still indexing right after a grant (b5). Retry
+                    // once before showing anything.
+                    retriedEmptyLoad = true
+                    com.morselink.app.core.logging.LogStore.w(
+                        "Media page empty but count=$count (${categoryKey}) — retrying"
+                    )
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        kotlinx.coroutines.delay(600)
+                        loadMore()
+                    }
+                    return@withContext
+                }
                 mediaItems.addAll(loaded)
                 offset += loaded.size
                 totalCount = count
@@ -218,13 +251,22 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 binding.empty.visibility =
                     if (mediaItems.isEmpty()) View.VISIBLE else View.GONE
                 if (mediaItems.isEmpty()) {
-                    if (Build.VERSION.SDK_INT >= 33 && Permissions.hasPartialMediaAccess(requireContext())) {
-                        // Android 13/14 "Select photos" grants: only chosen items are visible.
-                        binding.empty.text = getString(R.string.media_partial_access)
-                        binding.empty.setOnClickListener { requestFullMediaAccess() }
-                    } else {
-                        binding.empty.text = getString(R.string.history_empty)
-                        binding.empty.setOnClickListener(null)
+                    when {
+                        count > 0 -> {
+                            // Index inconsistency: offer a retry, never "nothing here".
+                            binding.empty.text = getString(R.string.files_load_failed)
+                            binding.empty.setOnClickListener { reload() }
+                        }
+                        Build.VERSION.SDK_INT >= 33 && Permissions.hasPartialMediaAccess(requireContext()) -> {
+                            // Android 13/14 "Select photos" grants: only chosen items are visible.
+                            binding.empty.text = getString(R.string.media_partial_access)
+                            binding.empty.setOnClickListener { requestFullMediaAccess() }
+                        }
+                        else -> {
+                            binding.empty.text = getString(R.string.history_empty)
+                            // Still tappable: a reload is always allowed (b5).
+                            binding.empty.setOnClickListener { reload() }
+                        }
                     }
                 }
                 rebuildRows()
@@ -236,7 +278,9 @@ class MediaPageFragment : Fragment(), PageWithItems {
     private fun requestFullMediaAccess() {
         val missing = Permissions.mediaReadPermissions(requireContext())
         if (missing.isEmpty()) return
-        requestPermissions(missing.toTypedArray(), RC_MEDIA)
+        // Combined request: makes the "Allow all / Select photos" dialog
+        // reappear on Android 14 after a partial grant (b2/b3).
+        requestPermissions(Permissions.mediaRequestArray(requireContext()), RC_MEDIA)
     }
 
     override fun selectAllVisible() {
@@ -306,22 +350,19 @@ class MediaPageFragment : Fragment(), PageWithItems {
         var lastKey: String? = null
         var count = 0
         var header: DateHeader? = null
-        fun flush() {
-            if (header != null) out.add(DateHeader(header!!.key, header!!.label, count))
-        }
         for (m in mediaItems) {
             val key = dayKey(m)
             if (key != lastKey) {
-                flush()
+                // Header goes at the TOP of its group (b4); the same mutable
+                // instance is updated as the group's count grows.
                 header = DateHeader(key, dayLabel(key), 0)
+                out.add(header!!)
                 count = 0
                 lastKey = key
             }
             count++
             header!!.count = count
-            out.add(m)
         }
-        flush()
         return out
     }
 

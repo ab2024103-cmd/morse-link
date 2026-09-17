@@ -27,6 +27,7 @@ import com.morselink.app.core.util.Fmt
 import com.morselink.app.core.util.Integrity
 import com.morselink.app.core.util.MorselinkServices
 import com.morselink.app.databinding.ActivityMainBinding
+import com.morselink.app.core.logging.LogStore
 import com.morselink.app.di.AppServices
 import com.morselink.app.feature.dashboard.DashboardFragment
 import com.morselink.app.feature.filemanager.FileManagerFragment
@@ -83,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         observeEngineEvents()
+        observeWebShareApprovals()
+        maybeOfferCrashReport()
         handleShareIntent(intent)
 
         if (!journalPromptShown) {
@@ -197,6 +200,54 @@ class MainActivity : AppCompatActivity() {
     }
 
     // ---------------- engine events ----------------
+
+    /**
+     * If the app crashed since the last visit, surface the report from the home
+     * screen (b-settings): Settings itself may be what crashed, so the report
+     * must be reachable without it.
+     */
+    private fun maybeOfferCrashReport() {
+        val size = LogStore.crashFileSize()
+        if (size > AppServices.prefs.lastSeenCrashSize) {
+            AppServices.prefs.lastSeenCrashSize = size
+            AlertDialog.Builder(this)
+                .setTitle(R.string.crash_dialog_title)
+                .setMessage(getString(R.string.crash_dialog_message))
+                .setPositiveButton(R.string.crash_dialog_view) { d, _ ->
+                    d.dismiss()
+                    openOverlay(com.morselink.app.feature.settings.LogViewerFragment())
+                }
+                .setNegativeButton(R.string.action_cancel, null)
+                .show()
+        }
+    }
+
+    /** WebShare pairing consent (b1): each new browser must be accepted on the phone. */
+    private fun observeWebShareApprovals() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    com.morselink.app.core.webshare.WebShareController.approvalRequests.collect { req ->
+                        AlertDialog.Builder(this@MainActivity)
+                            .setTitle(R.string.webshare_request_title)
+                            .setMessage(getString(R.string.webshare_request_message, req.second))
+                            .setPositiveButton(R.string.webshare_request_allow) { d, _ ->
+                                d.dismiss()
+                                com.morselink.app.core.webshare.WebShareController.respondApproval(req.first, true)
+                            }
+                            .setNegativeButton(R.string.webshare_request_deny) { d, _ ->
+                                d.dismiss()
+                                com.morselink.app.core.webshare.WebShareController.respondApproval(req.first, false)
+                            }
+                            .setOnCancelListener {
+                                com.morselink.app.core.webshare.WebShareController.respondApproval(req.first, false)
+                            }
+                            .show()
+                    }
+                }
+            }
+        }
+    }
 
     private fun observeEngineEvents() {
         lifecycleScope.launch {

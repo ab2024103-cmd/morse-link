@@ -350,6 +350,13 @@
     <string name="files_all_files_message">To browse all of internal storage, Android requires you to allow \"All files access\" for MorseLink once. Nothing else changes — MorseLink never uploads or modifies anything on its own.</string>
     <string name="connecting_to">Connecting to %1$s…</string>
     <string name="connecting_hint">Waiting for the other device to accept…</string>
+    <string name="crash_dialog_title">The app closed unexpectedly</string>
+    <string name="crash_dialog_message">A crash report was saved on this phone. You can view it now and share it as text to help fix the problem.</string>
+    <string name="crash_dialog_view">View report</string>
+    <string name="webshare_request_title">WebShare access request</string>
+    <string name="webshare_request_message">A browser at %1$s wants to open your files over WebShare. Allow this device?</string>
+    <string name="webshare_request_allow">Allow</string>
+    <string name="webshare_request_deny">Deny</string>
     <string name="webshare_no_internet_note">Transfers stay on this local network — mobile data is never used and nothing is uploaded. Both devices just need to be on the same hotspot or Wi-Fi.</string>
     <string name="webshare_type_hint">Type this address in the browser on the other device:</string>
     <string name="date_today">Today</string>

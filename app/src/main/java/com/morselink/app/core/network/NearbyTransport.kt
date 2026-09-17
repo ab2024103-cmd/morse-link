@@ -528,6 +528,10 @@ class NearbySession(
                     } catch (_: Exception) {
                     }
                 }
+                // Tell the peer (b6/b7): the receiver otherwise stays "idle".
+                scope.launch {
+                    sendControl(JSONObject().put("type", "CANCEL").put("fileId", fileId))
+                }
             }
             TransferDirection.RECEIVING -> {
                 TransferEngine.markIncoming(fileId, com.morselink.app.core.model.TransferItemState.CANCELLED)

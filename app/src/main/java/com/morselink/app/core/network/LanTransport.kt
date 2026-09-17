@@ -457,7 +457,14 @@ class LanSession(
             "RESUME_INCOMING" -> {
                 TransferEngine.onPeerResumedOurSend(json.optString("fileId"))
             }
-            "CANCEL" -> TransferEngine.onPeerCancelled(json.optString("fileId"))
+            "CANCEL" -> {
+                val fileId = json.optString("fileId")
+                // Peer cancelled: stop sending it if we are, and stop/clean any
+                // incoming stream for that id, then mark the row cancelled.
+                cancelOutgoingFlags[fileId] = true
+                incoming[fileId]?.cancelled?.set(true)
+                TransferEngine.onPeerCancelled(fileId)
+            }
             "DONE" -> {
                 val fileId = json.optString("fileId")
                 doneWaiters.remove(fileId)?.complete(json)
@@ -590,6 +597,8 @@ class LanSession(
                     part = FileOutputStream(partFile, true)
                 }
                 val magic = ByteArray(4)
+                var idleTimeouts = 0
+                var lastProgressSize = partFile?.length() ?: 0L
                 while (isActive && !ctx.cancelled.get()) {
                     try {
                         input.readFully(magic)
@@ -614,10 +623,21 @@ class LanSession(
                         part!!.flush()
                         val realSize = partFile!!.length() // real on-disk state (spec Section 15)
                         TransferEngine.updateIncomingProgress(fileId, realSize)
+                        if (realSize > lastProgressSize) {
+                            lastProgressSize = realSize
+                            idleTimeouts = 0
+                        }
                         if (realSize >= ctx.meta.size) break
                     } catch (e: SocketTimeoutException) {
                         if (ctx.cancelled.get() || !isActive) break
-                        // Idle is not closed (spec 7.4): loop and keep waiting.
+                        // Brief pauses are fine, but a stream that never
+                        // resumes is dead (b7): stop waiting after ~2.5 minutes
+                        // of zero progress and keep the .part for resuming.
+                        idleTimeouts++
+                        if (idleTimeouts >= 6) {
+                            LogStore.w("LAN: no data for ${idleTimeouts * 25}s on $fileId — treating as interrupted")
+                            break
+                        }
                         continue
                     }
                 }
@@ -723,6 +743,8 @@ class LanSession(
                 while (sent < meta.size) {
                     if (cancelOutgoingFlags[meta.fileId] == true) {
                         out.flush()
+                        sendLine(JSONObject().put("type", "CANCEL").put("fileId", meta.fileId))
+                        LogStore.i("LAN: cancelled ${meta.name} at offset $sent — peer notified")
                         return SendOutcome.Cancelled
                     }
                     if (pauseOutgoingFlags[meta.fileId] == true) {
@@ -795,7 +817,14 @@ class LanSession(
 
     override fun cancel(fileId: String, direction: TransferDirection) {
         when (direction) {
-            TransferDirection.SENDING -> cancelOutgoingFlags[fileId] = true
+            TransferDirection.SENDING -> {
+                cancelOutgoingFlags[fileId] = true
+                // Tell the peer (b6/b7): without this the receiver waits on a
+                // dead stream forever and its row shows "idle".
+                scope.launch {
+                    sendLine(JSONObject().put("type", "CANCEL").put("fileId", fileId))
+                }
+            }
             TransferDirection.RECEIVING -> {
                 val ctx = incoming[fileId]
                 ctx?.cancelled?.set(true)

@@ -12,6 +12,9 @@ import androidx.core.content.ContextCompat
  */
 object Permissions {
 
+    private const val VISUAL_USER_SELECTED = "android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
+
+
     fun has(context: Context, permission: String): Boolean =
         ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 
@@ -33,6 +36,25 @@ object Permissions {
             if (!has(context, p)) missing.add(p)
         }
         return missing
+    }
+
+    /**
+     * The array to actually REQUEST (b2/b3). On Android 13+, when the user
+     * previously chose "Select photos and videos", requesting the plain media
+     * permissions again is silently auto-denied and the settings toggle is
+     * greyed out. Including READ_MEDIA_VISUAL_USER_SELECTED in the same
+     * request makes the system show the full dialog again with "Allow all".
+     */
+    fun mediaRequestArray(context: Context): Array<String> {
+        val missing = mediaReadPermissions(context).toMutableList()
+        if (Build.VERSION.SDK_INT >= 33 && missing.any {
+                it == Manifest.permission.READ_MEDIA_IMAGES ||
+                    it == Manifest.permission.READ_MEDIA_VIDEO
+            }
+        ) {
+            if (!missing.contains(VISUAL_USER_SELECTED)) missing.add(VISUAL_USER_SELECTED)
+        }
+        return missing.toTypedArray()
     }
 
     /** Media library read permissions on this device. */
@@ -79,7 +101,7 @@ object Permissions {
     fun hasPartialMediaAccess(context: Context): Boolean {
         if (Build.VERSION.SDK_INT < 33) return false
         val visualSelected = ContextCompat.checkSelfPermission(
-            context, "android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
+            context, VISUAL_USER_SELECTED
         ) == PackageManager.PERMISSION_GRANTED
         if (!visualSelected) return false
         return mediaReadPermissions(context).isNotEmpty()

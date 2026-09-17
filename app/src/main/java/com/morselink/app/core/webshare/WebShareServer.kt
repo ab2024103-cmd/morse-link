@@ -86,6 +86,17 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         if (!authorized(session)) {
             return newJson(Response.Status.UNAUTHORIZED, JSONObject().put("error", "invalid or missing session token")).noStore()
         }
+        if (session.method == Method.GET && path == "/api/hello") {
+            return apiHello(session)
+        }
+        if (!clientAllowed(session)) {
+            val client = session.parameters["client"]?.firstOrNull()
+            val status = if (client != null && WebShareController.isClientDenied(client)) "denied" else "pending"
+            return newJson(
+                Response.Status.FORBIDDEN,
+                JSONObject().put("error", "device approval required").put("status", status)
+            ).noStore()
+        }
         return when {
             session.method == Method.GET && path == "/api/info" -> apiInfo()
             session.method == Method.GET && path == "/api/counts" -> apiCounts()
@@ -123,10 +134,69 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         return resp
     }
 
+    /** Wrong-token attempts per IP — throttled so a 4-char PIN stays safe (b1). */
+    private val tokenFailures = java.util.concurrent.ConcurrentHashMap<String, java.util.ArrayDeque<Long>>()
+
     private fun authorized(session: IHTTPSession): Boolean {
+        val ip = clientIp(session)
+        val now = System.currentTimeMillis()
+        val fails = tokenFailures[ip]
+        if (fails != null && fails.size >= 8 && now - fails.last() < 60_000) {
+            return false
+        }
         val provided = session.parameters["t"]?.firstOrNull()
             ?: session.headers?.get("x-session-token")
-        return provided != null && provided == token
+        val ok = provided != null && provided == token
+        if (!ok && ip != "?") {
+            val deque = tokenFailures.getOrPut(ip) { java.util.ArrayDeque() }
+            synchronized(deque) {
+                while (deque.isNotEmpty() && now - deque.first() > 60_000) deque.removeFirst()
+                deque.addLast(now)
+            }
+        } else if (ok) {
+            tokenFailures.remove(ip)
+        }
+        return ok
+    }
+
+    private fun clientIp(session: IHTTPSession): String =
+        try {
+            session.headers?.get("http-client-ip") ?: "?"
+        } catch (_: Exception) {
+            "?"
+        }
+
+    /** True when this browser was accepted in the phone's popup (b1). */
+    private fun clientAllowed(session: IHTTPSession): Boolean {
+        val client = session.parameters["client"]?.firstOrNull() ?: return false
+        return WebShareController.isClientAllowed(client)
+    }
+
+    /**
+     * Pairing handshake (b1): the browser introduces itself and learns whether
+     * the phone owner has accepted it. Unknown browsers trigger the popup.
+     */
+    private fun apiHello(session: IHTTPSession): Response {
+        val ip = clientIp(session)
+        val provided = session.parameters["client"]?.firstOrNull()
+        val clientId: String
+        val status: String
+        if (provided != null && WebShareController.knowsClient(provided)) {
+            clientId = provided
+            status = if (WebShareController.isClientAllowed(provided)) "allowed" else "denied"
+        } else {
+            clientId = provided ?: java.util.UUID.randomUUID().toString()
+            status = WebShareController.requestApproval(clientId, ip)
+        }
+        return noStoreJson(
+            newJson(
+                Response.Status.OK,
+                JSONObject()
+                    .put("clientId", clientId)
+                    .put("status", status)
+                    .put("deviceName", AppServices.prefs.deviceName)
+            )
+        )
     }
 
     private fun indexPage(): Response {

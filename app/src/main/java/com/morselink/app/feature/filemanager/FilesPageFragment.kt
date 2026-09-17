@@ -218,7 +218,7 @@ class FilesPageFragment : Fragment(), PageWithItems {
         categoryError = false
         binding.loading.visibility = View.VISIBLE
         binding.empty.visibility = View.GONE
-        val query = parentManager?.searchQuery?.takeIf { it.isNotEmpty() }
+        val query = parentManager?.searchQuery?.trim()?.takeIf { it.isNotEmpty() }
         val sortKey = parentManager?.sortKey ?: com.morselink.app.core.media.SortKey.DATE
         val descending = parentManager?.sortDescending ?: true
         viewLifecycleOwner.lifecycleScope.launch {

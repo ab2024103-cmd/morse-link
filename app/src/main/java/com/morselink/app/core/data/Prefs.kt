@@ -52,6 +52,10 @@ class Prefs(context: Context) {
         get() = sp.getString(KEY_DOWNLOAD_DIR, null)
         set(value) = sp.edit().putString(KEY_DOWNLOAD_DIR, value).apply()
 
+    var lastSeenCrashSize: Long
+        get() = sp.getLong("lastSeenCrashSize", 0L)
+        set(v) = sp.edit().putLong("lastSeenCrashSize", v).apply()
+
     var onboardingDone: Boolean
         get() = sp.getBoolean(KEY_ONBOARDING, false)
         set(value) = sp.edit().putBoolean(KEY_ONBOARDING, value).apply()

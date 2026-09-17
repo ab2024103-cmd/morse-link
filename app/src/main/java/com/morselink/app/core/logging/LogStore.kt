@@ -50,6 +50,9 @@ object LogStore {
     fun hasCrashReports(): Boolean =
         crashFile != null && crashFile!!.length() > 0L
 
+    /** Current size of the crash-report file — used to detect NEW crashes. */
+    fun crashFileSize(): Long = crashFile?.length() ?: 0L
+
     /** Last [maxLines] of recorded crash traces, oldest first. */
     fun crashTail(maxLines: Int): List<String> {
         val file = crashFile ?: return emptyList()
