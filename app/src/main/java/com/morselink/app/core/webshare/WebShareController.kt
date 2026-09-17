@@ -52,7 +52,7 @@ object WebShareController {
     // ---- browser pairing consent (b1): every new browser must be accepted ----
     // clientId -> "pending" | "allowed" | "denied"
     private val clientStates = java.util.concurrent.ConcurrentHashMap<String, String>()
-    private val _approvalRequests = MutableSharedFlow<Pair<String, String>>(extraBuffer = 16)
+    private val _approvalRequests = MutableSharedFlow<Pair<String, String>>(extraBufferCapacity = 16)
 
     /** (clientId, ip) for each browser waiting to be accepted or rejected. */
     val approvalRequests: SharedFlow<Pair<String, String>> = _approvalRequests
