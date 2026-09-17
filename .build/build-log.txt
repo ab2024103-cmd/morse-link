@@ -20,11 +20,11 @@ Daemon will be stopped at the end of the build
 > Task :app:packageDebugResources
 > Task :app:mergeDebugResources
 > Task :app:generateDebugBuildConfig
-> Task :app:parseDebugLocalResources
 > Task :app:checkDebugAarMetadata
-> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:mapDebugSourceSetPaths
+> Task :app:parseDebugLocalResources
 > Task :app:createDebugCompatibleScreenManifests
+> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
@@ -44,38 +44,38 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
-> Task :app:mergeLibDexDebug
 > Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:mergeLibDexDebug
 > Task :app:stripDebugDebugSymbols NO-SOURCE
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:buildKotlinToolingMetadata
 > Task :app:preReleaseBuild UP-TO-DATE
-> Task :app:dataBindingMergeDependencyArtifactsRelease
 > Task :app:generateReleaseResValues
+> Task :app:dataBindingMergeDependencyArtifactsRelease
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
-> Task :app:generateReleaseBuildConfig
 > Task :app:parseReleaseLocalResources
+> Task :app:generateReleaseBuildConfig
 > Task :app:checkReleaseAarMetadata
 > Task :app:mapReleaseSourceSetPaths
 > Task :app:createReleaseCompatibleScreenManifests
 > Task :app:extractDeepLinksRelease
+> Task :app:mergeReleaseResources
 > Task :app:processReleaseMainManifest
+> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:processReleaseManifest
 > Task :app:javaPreCompileRelease
 > Task :app:processReleaseManifestForPackage
-> Task :app:mergeReleaseResources
 > Task :app:extractProguardFiles
-> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:mergeReleaseJniLibFolders
 > Task :app:mergeReleaseNativeLibs NO-SOURCE
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
-> Task :app:desugarReleaseFileDependencies
 > Task :app:checkReleaseDuplicateClasses
+> Task :app:desugarReleaseFileDependencies
 > Task :app:mergeReleaseStartupProfile
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
@@ -282,11 +282,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789630709982.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789664545899.json
 
-BUILD SUCCESSFUL in 3m 55s
+BUILD SUCCESSFUL in 4m 6s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8181582
-APK_SIZE_RELEASE=6682974
+APK_SIZE_DEBUG=8181604
+APK_SIZE_RELEASE=6682970
