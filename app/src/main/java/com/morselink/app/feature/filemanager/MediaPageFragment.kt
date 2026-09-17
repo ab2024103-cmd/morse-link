@@ -203,17 +203,18 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 firstLoadDone = true
                 loading = false
                 binding.loading.visibility = View.GONE
-                if (page == null) {
+                val loaded = page
+                if (loaded == null) {
                     // A real failure — never render it as an empty library.
                     binding.empty.visibility = View.VISIBLE
                     binding.empty.text = getString(R.string.files_load_failed)
                     binding.empty.setOnClickListener { reload() }
                     return@withContext
                 }
-                mediaItems.addAll(page)
-                offset += page!!.size
+                mediaItems.addAll(loaded)
+                offset += loaded.size
                 totalCount = count
-                reachedEnd = page!!.size < pageSize || mediaItems.size >= count
+                reachedEnd = loaded.size < pageSize || mediaItems.size >= count
                 binding.empty.visibility =
                     if (mediaItems.isEmpty()) View.VISIBLE else View.GONE
                 if (mediaItems.isEmpty()) {

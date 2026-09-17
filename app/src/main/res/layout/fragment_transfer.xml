@@ -68,6 +68,31 @@
                             android:src="@drawable/ic_chevron_right" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/connecting_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:visibility="gone">
+
+                        <ProgressBar
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:importantForAccessibility="no" />
+
+                        <TextView
+                            android:id="@+id/connecting_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/connecting_to"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/pairing_transport_label"
                         android:layout_width="match_parent"
