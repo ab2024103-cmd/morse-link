@@ -26,8 +26,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # The legacy "tools" package was removed from Google's SDK repository
+      # (sdkmanager: "Failed to find package 'tools'"), so only platform-tools
+      # is requested — everything else Gradle needs is installed below.
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Install SDK packages
         run: sdkmanager --install "platforms;android-34" "build-tools;34.0.0" >/dev/null

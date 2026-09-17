@@ -1,12 +1,14 @@
 name: Attach release assets
 
 # Uploads the built APKs from .build/ (committed by the Build APK workflow)
-# to the GitHub Release matching the app's versionName. Runs on pushes to the
-# working branch and on v* tag pushes. The sandbox cannot reach
+# to the GitHub Release matching the app's versionName. Triggered by pushing
+# the v<version> tag after a green build. The sandbox cannot reach
 # uploads.github.com, so asset uploads happen from GitHub's own runners.
+# Tag-only: the Build APK workflow commits fresh APKs with [skip ci], so a
+# branch push would race ahead of the build and attach stale assets. The
+# release is published by pushing the v<version> tag after a green build.
 on:
   push:
-    branches: ["arena/**"]
     tags: ["v*"]
 
 permissions:
