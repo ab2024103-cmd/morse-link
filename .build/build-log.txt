@@ -14,22 +14,22 @@ Daemon will be stopped at the end of the build
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
 > Task :app:checkKotlinGradlePluginConfigurationErrors
-> Task :app:generateDebugResValues
 > Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugResValues
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
 > Task :app:mergeDebugResources
 > Task :app:generateDebugBuildConfig
-> Task :app:checkDebugAarMetadata
 > Task :app:mapDebugSourceSetPaths
 > Task :app:parseDebugLocalResources
-> Task :app:createDebugCompatibleScreenManifests
+> Task :app:checkDebugAarMetadata
 > Task :app:dataBindingGenBaseClassesDebug
+> Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
-> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
+> Task :app:processDebugManifestForPackage
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
@@ -52,12 +52,12 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:buildKotlinToolingMetadata
 > Task :app:preReleaseBuild UP-TO-DATE
-> Task :app:generateReleaseResValues
 > Task :app:dataBindingMergeDependencyArtifactsRelease
+> Task :app:generateReleaseResValues
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
-> Task :app:parseReleaseLocalResources
 > Task :app:generateReleaseBuildConfig
+> Task :app:parseReleaseLocalResources
 > Task :app:checkReleaseAarMetadata
 > Task :app:mapReleaseSourceSetPaths
 > Task :app:createReleaseCompatibleScreenManifests
@@ -74,12 +74,12 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
-> Task :app:checkReleaseDuplicateClasses
 > Task :app:desugarReleaseFileDependencies
 > Task :app:mergeReleaseStartupProfile
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:mergeReleaseArtProfile
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:processReleaseResources
 
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:156:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -163,17 +163,17 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 
+> Task :app:processReleaseResources
 > Task :app:mergeExtDexRelease
 > Task :app:compileDebugJavaWithJavac
 > Task :app:processDebugJavaRes
 > Task :app:mergeDebugJavaResource
 > Task :app:dexBuilderDebug
-> Task :app:mergeProjectDexDebug
-> Task :app:mergeReleaseArtProfile
 > Task :app:mergeReleaseShaders
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
 > Task :app:mergeReleaseAssets
+> Task :app:mergeProjectDexDebug
 > Task :app:compressReleaseAssets
 > Task :app:extractReleaseVersionControlInfo
 > Task :app:collectReleaseDependencies
@@ -282,11 +282,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789664545899.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789672889523.json
 
-BUILD SUCCESSFUL in 4m 6s
+BUILD SUCCESSFUL in 3m 22s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8181604
-APK_SIZE_RELEASE=6682970
+APK_SIZE_DEBUG=8181505
+APK_SIZE_RELEASE=6682979
