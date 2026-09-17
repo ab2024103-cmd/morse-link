@@ -6,103 +6,121 @@
 <title>MorseLink WebShare</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Crect x='6' y='6' width='96' height='96' rx='22' fill='%231FA36B'/%3E%3Crect x='28' y='43.5' width='22' height='7' rx='3.5' fill='%23fff'/%3E%3Crect x='58' y='43.5' width='22' height='7' rx='3.5' fill='%23fff'/%3E%3Ccircle cx='31.5' cy='61' r='3.5' fill='%23fff'/%3E%3Crect x='41' y='57.5' width='13' height='7' rx='3.5' fill='%23fff'/%3E%3Ccircle cx='63.5' cy='61' r='3.5' fill='%23fff'/%3E%3Ccircle cx='76.5' cy='61' r='3.5' fill='%23fff'/%3E%3C/svg%3E">
 <style>
+  /* Palette extracted from the reference screenshots */
   :root {
-    color-scheme: light dark;
-    --bg: #f4f6f8; --surface: #ffffff; --surface2: #eef1f4;
-    --text: #1a1c1e; --muted: #5f6672;
-    --accent: #1fa36b; --accent-soft: rgba(31,163,107,.12);
-    --accent2: #2d9cdb; --accent2-soft: rgba(45,156,219,.12);
-    --danger: #e5484d; --border: #e1e5ea; --shadow: 0 8px 28px rgba(16,24,40,.10);
-    --radius: 16px;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #101214; --surface: #191c1f; --surface2: #22262b;
-      --text: #eceff1; --muted: #9aa3ad;
-      --accent: #2bb673; --accent-soft: rgba(43,182,115,.16);
-      --accent2: #4daee8; --accent2-soft: rgba(77,174,232,.16);
-      --border: #2a2f36; --shadow: 0 8px 28px rgba(0,0,0,.45);
-    }
+    --bg: #121212;
+    --rail: #1b1b1b;
+    --panel: #1e1e1e;
+    --row: #242424;
+    --row-hover: #2a2a44;          /* purple-tinted hover (ref #24243C) */
+    --header-a: #35353e;
+    --header-b: #26252c;
+    --text: #ececec;
+    --muted: #9c9ca4;
+    --green: #1fa36b;
+    --green-bright: #249c6c;
+    --green-soft: rgba(31,163,107,.16);
+    --blue: #3c84fc;
+    --blue-soft: rgba(60,132,252,.18);
+    --purple: #3c3c54;
+    --danger: #e45454;
+    --gold: #b49c6c;
+    --border: #2a2a2e;
+    --shadow: 0 10px 32px rgba(0,0,0,.5);
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html, body { height: 100%; }
   body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-         background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+         background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased;
+         display: flex; }
 
-  /* ---------- header ---------- */
-  header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 12px;
-           padding: 12px clamp(14px, 4vw, 32px); background: color-mix(in srgb, var(--surface) 88%, transparent);
-           backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-           border-bottom: 1px solid var(--border); }
-  header .logo { width: 34px; height: 34px; border-radius: 10px;
-                 background: var(--accent); display: grid; place-items: center; flex: none; }
-  header h1 { font-size: 16px; margin: 0; flex: 1; min-width: 0;
+  /* ---------------- left nav rail (reference: #1B1B1B column on every page) ---------------- */
+  #rail { width: 84px; flex: none; background: var(--rail); border-right: 1px solid var(--border);
+          display: flex; flex-direction: column; align-items: stretch; padding: 14px 0 18px;
+          position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  #rail .brand { display: grid; place-items: center; margin-bottom: 18px; }
+  #rail .brand .bx { width: 40px; height: 40px; border-radius: 12px; background: var(--green);
+                     display: grid; place-items: center; box-shadow: 0 6px 18px var(--green-soft); }
+  #tabs { display: flex; flex-direction: column; gap: 4px; padding: 0 10px; }
+  #tabs button { display: flex; flex-direction: column; align-items: center; gap: 4px;
+                 background: transparent; border: 0; border-radius: 14px; color: var(--muted);
+                 padding: 10px 4px 8px; font-size: 10.5px; font-weight: 600; cursor: pointer;
+                 transition: .15s; }
+  #tabs button svg { width: 21px; height: 21px; }
+  #tabs button:hover { color: var(--text); background: rgba(255,255,255,.05); }
+  #tabs button.active { color: #fff; background: var(--green); box-shadow: 0 6px 16px var(--green-soft); }
+  #tabs button .badge { background: rgba(255,255,255,.14); color: inherit; border-radius: 999px;
+                        font-size: 9.5px; padding: 1px 7px; }
+  #rail .spacer { flex: 1; }
+  #rail .railbtn { display: grid; place-items: center; gap: 4px; margin: 0 10px; padding: 10px 0;
+                   border: 0; border-radius: 14px; background: transparent; color: var(--muted);
+                   font-size: 10px; font-weight: 600; cursor: pointer; }
+  #rail .railbtn:hover { color: var(--text); background: rgba(255,255,255,.05); }
+  #rail .railbtn svg { width: 20px; height: 20px; }
+
+  /* ---------------- main column ---------------- */
+  .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+  /* header: reference gradient band #35353E -> #26252C, green action top-right */
+  header { display: flex; align-items: center; gap: 12px; padding: 14px clamp(16px, 3vw, 30px);
+           background: linear-gradient(90deg, var(--header-a), var(--header-b));
+           border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  header .logo { display: none; }
+  header h1 { font-size: 16px; margin: 0; flex: 1; min-width: 0; font-weight: 700;
               white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   header h1 small { display: block; color: var(--muted); font-size: 11.5px; font-weight: 400; }
   .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted);
-          background: var(--surface2); border: 1px solid var(--border);
+          background: rgba(255,255,255,.06); border: 1px solid var(--border);
           padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
-  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
-               box-shadow: 0 0 0 3px var(--accent-soft); }
-  .iconbtn { width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border);
-             background: var(--surface2); color: var(--text); cursor: pointer; display: grid;
-             place-items: center; flex: none; transition: transform .12s; }
-  .iconbtn:active { transform: scale(.94); }
-  .iconbtn svg { width: 18px; height: 18px; }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+               box-shadow: 0 0 0 3px var(--green-soft); }
+  #sendTop { display: inline-flex; align-items: center; gap: 8px; background: var(--green);
+             color: #fff; border: 0; border-radius: 12px; padding: 10px 18px; font-size: 13.5px;
+             font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px var(--green-soft); }
+  #sendTop:active { transform: scale(.97); }
+  #sendTop svg { width: 16px; height: 16px; }
 
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 18px clamp(14px, 4vw, 32px) 130px; }
+  /* active upload banner (reference a13: full-width bright progress bar) */
+  #uploadbar { display: none; align-items: center; gap: 12px; padding: 10px clamp(16px, 3vw, 30px);
+               background: var(--panel); border-bottom: 1px solid var(--border); }
+  #uploadbar.show { display: flex; }
+  #uploadbar .ub-name { font-size: 13px; font-weight: 600; min-width: 140px; max-width: 260px;
+                        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #uploadbar .ub-track { flex: 1; height: 10px; background: var(--row); border-radius: 6px;
+                         overflow: hidden; }
+  #uploadbar .ub-fill { height: 100%; width: 0; border-radius: 6px;
+                        background: linear-gradient(90deg, #d7d7d7, #fff); transition: width .2s; }
+  #uploadbar.done .ub-fill { background: var(--green); }
+  #uploadbar .ub-pct { font-size: 12px; color: var(--muted); min-width: 42px; text-align: right; }
 
-  /* ---------- hero / dropzone ---------- */
-  #dropzone { position: relative; overflow: hidden; border-radius: var(--radius);
-              background: linear-gradient(135deg, var(--accent-soft), var(--accent2-soft));
-              border: 1.5px dashed color-mix(in srgb, var(--accent) 55%, transparent);
-              padding: 26px 22px; text-align: center; transition: .18s; }
-  #dropzone.over { border-color: var(--accent2); background: var(--accent2-soft);
-                   transform: scale(1.008); }
-  #dropzone .dz-ic { font-size: 30px; line-height: 1; }
-  #dropzone .dz-t { font-weight: 600; margin-top: 8px; }
+  .wrap { max-width: 1100px; width: 100%; margin: 0 auto; padding: 20px clamp(14px, 3vw, 30px) 130px; }
+
+  /* ---------------- dropzone ---------------- */
+  #dropzone { position: relative; overflow: hidden; border-radius: 16px; background: var(--panel);
+              border: 1.5px dashed #34343a; padding: 22px; text-align: center; transition: .18s; }
+  #dropzone.over { border-color: var(--green); background: var(--green-soft); }
+  #dropzone .dz-ic { font-size: 26px; line-height: 1; }
+  #dropzone .dz-t { font-weight: 600; margin-top: 8px; font-size: 15px; }
   #dropzone .dz-s { color: var(--muted); font-size: 13px; margin-top: 3px; }
-  #dropzone .btn { margin-top: 12px; display: inline-flex; align-items: center; gap: 8px;
-                   background: var(--accent); color: #fff; padding: 11px 22px; border: 0;
-                   border-radius: 999px; font-size: 14px; font-weight: 600; cursor: pointer;
-                   box-shadow: 0 6px 18px var(--accent-soft); }
-  #dropzone .btn:active { transform: scale(.97); }
+  #dropzone .btn { margin-top: 12px; display: none; }
 
-  /* ---------- tabs ---------- */
-  nav { display: flex; gap: 8px; padding: 18px 0 4px; overflow-x: auto; scrollbar-width: none; }
-  nav::-webkit-scrollbar { display: none; }
-  nav button { display: inline-flex; align-items: center; gap: 7px; background: var(--surface);
-               color: var(--muted); border: 1px solid var(--border); border-radius: 999px;
-               padding: 9px 16px; font-size: 13.5px; font-weight: 500; cursor: pointer;
-               white-space: nowrap; transition: .15s; }
-  nav button:hover { border-color: var(--accent); color: var(--text); }
-  nav button.active { background: var(--accent); color: #fff; border-color: var(--accent);
-                      box-shadow: 0 4px 14px var(--accent-soft); }
-  nav .badge { background: var(--surface2); color: var(--muted); border-radius: 999px;
-               font-size: 11px; padding: 1.5px 8px; }
-  nav button.active .badge { background: rgba(255,255,255,.25); color: #fff; }
-
-  /* ---------- section headers (date groups) ---------- */
-  .section { margin-top: 20px; }
-  .section-h { display: flex; align-items: center; gap: 10px; padding: 6px 2px 10px; }
+  /* ---------------- sections (date groups) ---------------- */
+  .section { margin-top: 22px; }
+  .section-h { display: flex; align-items: center; gap: 10px; padding: 4px 2px 10px; }
   .section-h .t { font-size: 14.5px; font-weight: 700; }
   .section-h .c { font-size: 12px; color: var(--muted); flex: 1; }
-  .section-h .selall { border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+  .section-h .selall { border: 1px solid var(--border); background: var(--panel); color: var(--muted);
                        font-size: 12px; padding: 5px 12px; border-radius: 999px; cursor: pointer; }
-  .section-h .selall.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .section-h .selall.on { background: var(--green); border-color: var(--green); color: #fff; }
 
-  /* ---------- grid (photos / videos) ---------- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-  .card { position: relative; border-radius: 14px; overflow: hidden; cursor: pointer;
-          background: var(--surface); border: 1px solid var(--border); aspect-ratio: 1;
-          transition: transform .12s, box-shadow .12s; }
-  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .card img { width: 100%; height: 100%; object-fit: cover; display: block; background: var(--surface2); }
+  /* ---------------- photo/video grid ---------------- */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 10px; }
+  .card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer;
+          background: var(--row); border: 1px solid var(--border); aspect-ratio: 1; transition: .12s; }
+  .card:hover { transform: translateY(-2px); border-color: #3a3a42; }
+  .card img { width: 100%; height: 100%; object-fit: cover; display: block; background: #151515; }
   .card .ph { width: 100%; height: 100%; display: grid; place-items: center;
-              background: var(--surface2); font-size: 34px; }
-  .card .nm { position: absolute; left: 0; right: 0; bottom: 0; font-size: 11.5px;
-              padding: 16px 8px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-              background: linear-gradient(transparent, rgba(0,0,0,.72)); color: #fff; display: none; }
+              background: var(--row); font-size: 34px; }
   .card .dur { position: absolute; right: 6px; bottom: 6px; background: rgba(0,0,0,.65); color: #fff;
                font-size: 11px; padding: 2px 7px; border-radius: 6px; }
   .card .play { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
@@ -112,18 +130,18 @@
               background: rgba(0,0,0,.4); border: 2px solid #fff; color: #fff; font-size: 13px;
               display: none; align-items: center; justify-content: center; }
   body.selecting .card .ck { display: flex; }
-  .card.selected .ck { display: flex; background: var(--accent2); border-color: var(--accent2); }
-  .card.selected { outline: 3px solid var(--accent2); outline-offset: -3px; }
+  .card.selected .ck { display: flex; background: var(--blue); border-color: var(--blue); }
+  .card.selected { outline: 3px solid var(--blue); outline-offset: -3px; }
 
-  /* ---------- rows (music / apps / files) ---------- */
-  .row { display: flex; align-items: center; gap: 12px; background: var(--surface);
-         border: 1px solid var(--border); border-radius: 14px; padding: 10px 14px;
+  /* ---------------- list rows (music / apps / files) ---------------- */
+  .row { display: flex; align-items: center; gap: 12px; background: var(--row);
+         border: 1px solid transparent; border-radius: 12px; padding: 10px 14px;
          margin-bottom: 8px; cursor: pointer; transition: .12s; }
-  .row:hover { border-color: var(--accent); }
-  .row.selected { border-color: var(--accent2); background: var(--accent2-soft); }
-  .row .ic { width: 40px; height: 40px; border-radius: 12px; flex: none; display: grid;
-             place-items: center; font-size: 18px; background: var(--accent-soft); }
-  .row .ic.blue { background: var(--accent2-soft); }
+  .row:hover { background: var(--row-hover); }
+  .row.selected { background: var(--blue-soft); border-color: var(--blue); }
+  .row .ic { width: 42px; height: 42px; border-radius: 10px; flex: none; display: grid;
+             place-items: center; font-size: 19px; background: #2d2d33; }
+  .row .ic.warm { background: #3a3028; }   /* warm folder tint (reference) */
   .row .meta { flex: 1; min-width: 0; }
   .row .nm { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden;
              text-overflow: ellipsis; }
@@ -132,51 +150,51 @@
   .row .ck { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--muted);
              color: #fff; flex: none; display: flex; align-items: center; justify-content: center;
              font-size: 12px; }
-  .row.selected .ck { background: var(--accent2); border-color: var(--accent2); }
+  .row.selected .ck { background: var(--blue); border-color: var(--blue); }
 
-  /* ---------- breadcrumbs / misc ---------- */
+  /* ---------------- misc ---------------- */
   .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 2px; padding: 12px 2px 2px;
             color: var(--muted); font-size: 13px; }
-  .crumbs a { color: var(--accent2); text-decoration: none; margin-right: 4px; font-weight: 500; }
-  #more { display: none; width: 100%; margin-top: 14px; padding: 13px; background: var(--surface);
-          color: var(--text); border: 1px solid var(--border); border-radius: 14px; font-size: 14px;
+  .crumbs a { color: var(--blue); text-decoration: none; margin-right: 4px; font-weight: 500; }
+  #more { display: none; width: 100%; margin-top: 14px; padding: 13px; background: var(--panel);
+          color: var(--text); border: 1px solid var(--border); border-radius: 12px; font-size: 14px;
           font-weight: 500; cursor: pointer; }
-  #more:hover { border-color: var(--accent); }
-  #err { display: none; color: var(--danger); background: color-mix(in srgb, var(--danger) 10%, transparent);
-         border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
-         border-radius: 12px; padding: 12px 14px; margin: 14px 0; font-size: 13.5px; }
+  #more:hover { border-color: var(--green); }
+  #err { display: none; color: var(--danger); background: rgba(228,84,84,.1);
+         border: 1px solid rgba(228,84,84,.35); border-radius: 12px; padding: 12px 14px;
+         margin: 14px 0; font-size: 13.5px; }
   .empty { text-align: center; color: var(--muted); padding: 46px 20px; }
   .empty .e-ic { font-size: 34px; opacity: .6; }
   .empty .e-t { margin-top: 8px; font-weight: 600; color: var(--text); }
 
-  /* ---------- bottom action bar ---------- */
+  /* ---------------- bottom action bar ---------------- */
   #bar { position: fixed; left: 50%; transform: translateX(-50%) translateY(90px); bottom: 18px;
          display: flex; align-items: center; gap: 10px; padding: 10px 12px 10px 20px;
-         background: color-mix(in srgb, var(--surface) 92%, transparent);
-         backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+         background: rgba(30,30,30,.96); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
          border: 1px solid var(--border); border-radius: 999px; box-shadow: var(--shadow);
          z-index: 30; max-width: calc(100vw - 24px); transition: transform .22s; }
   #bar.show { transform: translateX(-50%) translateY(0); }
   #bar .sel { color: var(--muted); font-size: 13.5px; font-weight: 600; white-space: nowrap; }
   #bar button { padding: 11px 18px; border-radius: 999px; border: 0; font-size: 13.5px;
                 font-weight: 600; cursor: pointer; white-space: nowrap; }
-  #bar .go { background: var(--accent); color: #fff; box-shadow: 0 5px 16px var(--accent-soft); }
-  #bar .alt { background: var(--surface2); color: var(--text); }
+  #bar .go { background: var(--green); color: #fff; box-shadow: 0 5px 16px var(--green-soft); }
+  #bar .alt { background: var(--row); color: var(--text); }
 
-  /* ---------- uploads ---------- */
+  /* ---------------- upload toasts ---------------- */
   #uploads { position: fixed; right: 16px; bottom: 90px; width: 300px; max-width: calc(100vw - 32px);
              z-index: 25; display: flex; flex-direction: column; gap: 8px; }
-  .up { background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  .up { background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
         padding: 11px 13px; font-size: 12.5px; box-shadow: var(--shadow); }
   .up .nm { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .up .track { height: 6px; background: var(--surface2); border-radius: 4px; margin-top: 8px; overflow: hidden; }
-  .up .fill { height: 6px; background: linear-gradient(90deg, var(--accent), var(--accent2));
-              border-radius: 4px; width: 0; transition: width .2s; }
+  .up .track { height: 6px; background: var(--row); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+  .up .fill { height: 6px; background: linear-gradient(90deg, #d7d7d7, #fff); border-radius: 4px;
+              width: 0; transition: width .2s; }
+  .up.done .fill { background: var(--green); }
   .up.err .fill { background: var(--danger); }
   .up .st { color: var(--muted); margin-top: 5px; font-size: 11.5px; }
 
-  /* ---------- approval / denied screens ---------- */
-  .gate { position: fixed; inset: 0; z-index: 80; background: var(--bg);
+  /* ---------------- approval / denied screens ---------------- */
+  .gate { position: fixed; inset: 0; z-index: 80; background: #0a0a0a;
           display: none; flex-direction: column; align-items: center;
           justify-content: center; gap: 14px; padding: 28px; text-align: center; }
   .gate.show { display: flex; }
@@ -184,64 +202,111 @@
   .gate .g-t { font-size: 17px; font-weight: 700; }
   .gate .g-s { color: var(--muted); font-size: 14px; max-width: 420px; line-height: 1.5; }
   .gate .spin { width: 34px; height: 34px; border-radius: 50%;
-                border: 3px solid var(--surface2); border-top-color: var(--accent);
+                border: 3px solid var(--row); border-top-color: var(--green);
                 animation: spin 1s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ---------- QR modal ---------- */
-  #qrmodal { position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 60; display: none;
+  /* ---------------- QR modal (reference: near-black backdrop, white QR, green button) ---------------- */
+  #qrmodal { position: fixed; inset: 0; background: rgba(4,4,4,.9); z-index: 60; display: none;
              align-items: center; justify-content: center; padding: 20px; }
   #qrmodal.show { display: flex; }
-  #qrmodal .box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+  #qrmodal .box { background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
                   padding: 22px; text-align: center; max-width: 340px; width: 100%;
                   box-shadow: var(--shadow); }
   #qrmodal img { width: 230px; height: 230px; border-radius: 12px; background: #fff; padding: 10px; }
   #qrmodal .t { font-weight: 700; margin-bottom: 4px; }
   #qrmodal .s { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
   #qrmodal button { margin-top: 16px; width: 100%; padding: 12px; border: 0; border-radius: 999px;
-                    background: var(--accent); color: #fff; font-size: 14px; font-weight: 600;
+                    background: var(--green); color: #fff; font-size: 14px; font-weight: 600;
                     cursor: pointer; }
+
+  /* ---------------- small screens: rail becomes a top bar ---------------- */
+  @media (max-width: 760px) {
+    body { flex-direction: column; }
+    #rail { width: 100%; height: auto; position: static; flex-direction: row; align-items: center;
+            padding: 8px 10px; border-right: 0; border-bottom: 1px solid var(--border);
+            overflow-x: auto; }
+    #rail .brand { margin-bottom: 0; margin-right: 8px; }
+    #rail .brand .bx { width: 32px; height: 32px; border-radius: 10px; }
+    #tabs { flex-direction: row; gap: 2px; padding: 0; flex: 1; }
+    #tabs button { flex-direction: row; gap: 6px; padding: 8px 12px; font-size: 12px;
+                   white-space: nowrap; border-radius: 999px; }
+    #tabs button svg { width: 16px; height: 16px; }
+    #rail .spacer { display: none; }
+    #rail .railbtn { margin: 0; padding: 8px 10px; }
+    header h1 small { display: none; }
+    #sendTop span { display: none; }
+    #sendTop { padding: 10px 13px; }
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">
-    <svg width="22" height="22" viewBox="0 0 108 108" aria-hidden="true">
-      <rect x="28" y="43.5" width="22" height="7" rx="3.5" fill="#fff"/>
-      <rect x="58" y="43.5" width="22" height="7" rx="3.5" fill="#fff"/>
-      <circle cx="31.5" cy="61" r="3.5" fill="#fff"/>
-      <rect x="41" y="57.5" width="13" height="7" rx="3.5" fill="#fff"/>
-      <circle cx="63.5" cy="61" r="3.5" fill="#fff"/>
-      <circle cx="76.5" cy="61" r="3.5" fill="#fff"/>
-    </svg>
+
+<aside id="rail">
+  <div class="brand">
+    <div class="bx">
+      <svg width="24" height="24" viewBox="0 0 108 108" aria-hidden="true">
+        <rect x="28" y="43.5" width="22" height="7" rx="3.5" fill="#fff"/>
+        <rect x="58" y="43.5" width="22" height="7" rx="3.5" fill="#fff"/>
+        <circle cx="31.5" cy="61" r="3.5" fill="#fff"/>
+        <rect x="41" y="57.5" width="13" height="7" rx="3.5" fill="#fff"/>
+        <circle cx="63.5" cy="61" r="3.5" fill="#fff"/>
+        <circle cx="76.5" cy="61" r="3.5" fill="#fff"/>
+      </svg>
+    </div>
   </div>
-  <h1 id="title">MorseLink<small id="subtitle">WebShare session</small></h1>
-  <span class="chip"><span class="dot"></span>Connected</span>
-  <button class="iconbtn" id="qrBtn" title="Show QR code" aria-label="Show QR code">
+  <nav id="tabs"></nav>
+  <div class="spacer"></div>
+  <button class="railbtn" id="qrBtn" title="Show QR code" aria-label="Show QR code">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M3,11H5V5H11V3H3V11M13,3V5H19V11H21V3H13M21,13H19V19H13V21H21V13M3,21H11V19H5V13H3V21M7,7V9H9V7H7M15,7V9H17V7H15M7,15V17H9V15H7M15,15V17H17V15H15Z"/>
     </svg>
+    <span>QR</span>
   </button>
-</header>
+</aside>
 
-<div class="wrap">
-  <div id="err"></div>
+<div class="main">
+  <header>
+    <h1 id="title">MorseLink<small id="subtitle">WebShare session</small></h1>
+    <span class="chip"><span class="dot"></span>Connected</span>
+    <button id="sendTop" title="Send files to this phone">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20,6H16V4A2,2 0 0,0 14,2H10A2,2 0 0,0 8,4V6H4C2.89,6 2,6.89 2,8V19A2,2 0 0,0 4,21H20A2,2 0 0,0 22,19V8C22,6.89 21.1,6 20,6M10,4H14V6H10V4M12,13L7,18H10V22H14V18H17L12,13Z"/>
+      </svg>
+      <span>Send files</span>
+    </button>
+  </header>
 
-  <div id="dropzone">
-    <div class="dz-ic">&#128228;</div>
-    <div class="dz-t">Send files to this phone</div>
-    <div class="dz-s">Drop files anywhere on this card, or browse</div>
-    <button class="btn" id="pick">&#128193; Choose files</button>
-    <input type="file" id="fileInput" multiple style="display:none">
+  <div id="uploadbar">
+    <span class="ub-name" id="ubName"></span>
+    <div class="ub-track"><div class="ub-fill" id="ubFill"></div></div>
+    <span class="ub-pct" id="ubPct">0%</span>
   </div>
 
-  <nav id="tabs"></nav>
-  <div class="crumbs" id="crumbs" style="display:none"></div>
-  <div id="list"></div>
-  <button id="more">Load more</button>
+  <div class="wrap">
+    <div id="err"></div>
+
+    <div id="dropzone">
+      <div class="dz-ic">&#128228;</div>
+      <div class="dz-t">Send files to this phone</div>
+      <div class="dz-s">Drop files anywhere on this page, or use Send files above</div>
+      <button class="btn" id="pick">&#128193; Choose files</button>
+      <input type="file" id="fileInput" multiple style="display:none">
+    </div>
+
+    <div class="crumbs" id="crumbs" style="display:none"></div>
+    <div id="list"></div>
+    <button id="more">Load more</button>
+  </div>
 </div>
 
 <div id="uploads"></div>
+
+<div id="bar">
+  <span class="sel" id="selInfo"></span>
+  <button class="go" id="download">&#8681; Download</button>
+  <button class="alt" id="clear">Clear</button>
+</div>
 
 <div id="gate-pending" class="gate">
   <div class="spin"></div>
@@ -255,12 +320,6 @@
   <div class="g-t">Access was rejected</div>
   <div class="g-s">The phone owner denied this browser. Ask them to start a new
     WebShare session and allow this device.</div>
-</div>
-
-<div id="bar">
-  <span class="sel" id="selInfo"></span>
-  <button class="go" id="download">&#8681; Download</button>
-  <button class="alt" id="clear">Clear</button>
 </div>
 
 <div id="qrmodal">
@@ -289,11 +348,16 @@ if (!TOKEN) {
 }
 
 var TABS = [
-  { key: "photos", label: "Photos", icon: "\u{1F5BC}" },
-  { key: "videos", label: "Videos", icon: "\u{1F3AC}" },
-  { key: "music",  label: "Music",  icon: "\u{1F3B5}" },
-  { key: "apps",   label: "Apps",   icon: "\u{1F4E6}" },
-  { key: "files",  label: "Files",  icon: "\u{1F4C1}" }
+  { key: "photos", label: "Photos",
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"/></svg>' },
+  { key: "videos", label: "Videos",
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17,10.5V7C17,6.45 16.55,6 16,6H4C3.45,6 3,6.45 3,7V17C3,17.55 3.45,18 4,18H16C16.55,18 17,17.55 17,17V13.5L21,17.5V6.5L17,10.5Z"/></svg>' },
+  { key: "music",  label: "Music",
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12,3V12.55C11.41,12.21 10.73,12 10,12A4,4 0 0,0 10,20A4,4 0 0,0 14,16V7H18V3H12Z"/></svg>' },
+  { key: "apps",   label: "Apps",
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16,20H20V16H16M16,14H20V10H16M10,8H14V4H10M16,8H20V4H16M10,14H14V10H10M4,14H8V10H4M4,20H8V16H4M10,20H14V16H10M4,8H8V4H4V8Z"/></svg>' },
+  { key: "files",  label: "Files",
+    icon: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z"/></svg>' }
 ];
 var state = { tab: "photos", cursor: 0, items: [], nextCursor: null, path: "", selected: {} };
 
@@ -389,7 +453,7 @@ function refreshCounts() {
   }).catch(function () {});
 }
 
-/* ---- tabs ---- */
+/* ---- rail tabs ---- */
 function renderTabs() {
   var nav = $("tabs");
   if (nav.childElementCount) {
@@ -401,7 +465,7 @@ function renderTabs() {
   TABS.forEach(function (t) {
     var b = document.createElement("button");
     b.id = "tab-" + t.key;
-    b.innerHTML = '<span>' + t.icon + '</span>' + t.label + ' <span class="badge">0</span>';
+    b.innerHTML = t.icon + '<span>' + t.label + '</span> <span class="badge">0</span>';
     if (t.key === state.tab) b.className = "active";
     b.onclick = function () {
       state.tab = t.key; state.cursor = 0; state.items = []; state.path = ""; state.selected = {};
@@ -500,11 +564,11 @@ function render() {
   var anySelected = Object.keys(state.selected).length > 0;
   document.body.className = anySelected ? "selecting" : "";
 
-  /* folder rows first (files tab) */
+  /* folder rows first (files tab) — warm folder tint like the reference */
   (state.folders || []).forEach(function (f) {
     var row = document.createElement("div");
     row.className = "row";
-    row.innerHTML = '<div class="ic blue">\u{1F4C1}</div>' +
+    row.innerHTML = '<div class="ic warm">\u{1F4C1}</div>' +
       '<div class="meta"><div class="nm">' + esc(f.name) + '</div>' +
       '<div class="sub">folder</div></div><div></div>';
     row.onclick = function () {
@@ -517,7 +581,6 @@ function render() {
   var gridMode = (state.tab === "photos" || state.tab === "videos");
 
   if (gridMode) {
-    /* date-grouped gallery (matches the phone UI, m21) */
     var groups = groupByDate(state.items);
     groups.forEach(function (g) {
       var sec = document.createElement("div");
@@ -574,7 +637,8 @@ function tileFor(item) {
   var inner;
   if (item.hasThumb) {
     inner = '<img loading="lazy" src="/thumbnail?kind=' + state.tab + "&id=" +
-      encodeURIComponent(item.id) + "&t=" + TOKEN + '" alt="">';
+      encodeURIComponent(item.id) + "&t=" + TOKEN +
+      (CLIENT ? "&client=" + encodeURIComponent(CLIENT) : "") + '" alt="">';
   } else {
     inner = '<div class="ph">' + iconFor(item) + "</div>";
   }
@@ -583,7 +647,7 @@ function tileFor(item) {
     inner += '<div class="play"><span>&#9654;</span></div>' +
       (d ? '<div class="dur">' + esc(d) + "</div>" : "");
   }
-  el.innerHTML = inner + '<div class="ck">\u2713</div><div class="nm">' + esc(item.name) + "</div>";
+  el.innerHTML = inner + '<div class="ck">\u2713</div>';
   el.onclick = function () {
     state.selected[key] = !state.selected[key];
     if (!state.selected[key]) delete state.selected[key];
@@ -602,7 +666,8 @@ function rowFor(item) {
   if (item.artist) sub += " · " + esc(item.artist);
   if (item.version) sub += " · v" + esc(item.version);
   if (item.date) sub += " · " + new Date(item.date).toLocaleDateString();
-  el.innerHTML = '<div class="ic' + (state.tab === "files" ? " blue" : "") + '">' + iconFor(item) + "</div>" +
+  var warm = state.tab === "files" ? " warm" : "";
+  el.innerHTML = '<div class="ic' + warm + '">' + iconFor(item) + "</div>" +
     '<div class="meta"><div class="nm">' + esc(item.name) + "</div>" +
     '<div class="sub">' + sub + '</div></div>' +
     '<div class="ck">' + (selected ? "\u2713" : "") + "</div>";
@@ -655,7 +720,7 @@ $("download").onclick = function () {
   });
 };
 
-/* ---- session QR (served by the phone, token-gated) ---- */
+/* ---- session QR ---- */
 $("qrBtn").onclick = function () {
   $("qrImg").src = "/api/qr?t=" + TOKEN +
     (CLIENT ? "&client=" + encodeURIComponent(CLIENT) : "") + "&v=" + Date.now();
@@ -666,8 +731,19 @@ $("qrmodal").onclick = function (e) { if (e.target === $("qrmodal")) $("qrmodal"
 
 /* ---- uploads (chunked + resumable) ---- */
 var CHUNK = 1024 * 1024;
+var activeUploads = 0;
+
+function uploadBanner(name, pct, done) {
+  var bar = $("uploadbar");
+  if (activeUploads <= 0 && !done) { bar.className = ""; return; }
+  bar.className = "show" + (done ? " done" : "");
+  $("ubName").textContent = name;
+  $("ubFill").style.width = Math.round(pct * 100) + "%";
+  $("ubPct").textContent = done ? "\u2713" : Math.round(pct * 100) + "%";
+}
 
 function uploadWidget(name) {
+  activeUploads++;
   var d = document.createElement("div");
   d.className = "up";
   d.innerHTML = '<div class="nm">' + esc(name) + '</div>' +
@@ -677,11 +753,20 @@ function uploadWidget(name) {
     setProgress: function (p) {
       d.querySelector(".fill").style.width = Math.round(p * 100) + "%";
       d.querySelector(".st").textContent = "Uploading… " + Math.round(p * 100) + "%";
+      uploadBanner(name, p, false);
     },
     done: function (ok) {
+      activeUploads--;
       d.querySelector(".fill").style.width = "100%";
       d.querySelector(".st").textContent = ok ? "\u2713 Received by phone" : "Failed";
-      if (!ok) d.className = "up err";
+      d.className = ok ? "up done" : "up err";
+      uploadBanner(name, 1, true);
+      if (activeUploads <= 0) {
+        setTimeout(function () {
+          $("uploadbar").className = "";
+          activeUploads = 0;
+        }, 2500);
+      }
       setTimeout(function () { d.remove(); }, 6000);
     }
   };
@@ -745,6 +830,7 @@ function handleFiles(files) {
   Array.prototype.forEach.call(files, uploadFile);
 }
 
+$("sendTop").onclick = function () { $("fileInput").click(); };
 $("pick").onclick = function () { $("fileInput").click(); };
 $("fileInput").addEventListener("change", function () {
   handleFiles(this.files);
