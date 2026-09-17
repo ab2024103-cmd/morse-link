@@ -14,22 +14,22 @@ Daemon will be stopped at the end of the build
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
 > Task :app:checkKotlinGradlePluginConfigurationErrors
-> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugResValues
+> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
 > Task :app:mergeDebugResources
 > Task :app:generateDebugBuildConfig
-> Task :app:mapDebugSourceSetPaths
 > Task :app:parseDebugLocalResources
 > Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
 > Task :app:dataBindingGenBaseClassesDebug
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
-> Task :app:javaPreCompileDebug
 > Task :app:processDebugManifestForPackage
+> Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
@@ -44,8 +44,8 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
-> Task :app:mergeDebugNativeLibs NO-SOURCE
 > Task :app:mergeLibDexDebug
+> Task :app:mergeDebugNativeLibs NO-SOURCE
 > Task :app:stripDebugDebugSymbols NO-SOURCE
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
@@ -57,14 +57,12 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
 > Task :app:generateReleaseBuildConfig
-> Task :app:parseReleaseLocalResources
 > Task :app:checkReleaseAarMetadata
+> Task :app:parseReleaseLocalResources
 > Task :app:mapReleaseSourceSetPaths
 > Task :app:createReleaseCompatibleScreenManifests
 > Task :app:extractDeepLinksRelease
-> Task :app:mergeReleaseResources
 > Task :app:processReleaseMainManifest
-> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:processReleaseManifest
 > Task :app:javaPreCompileRelease
 > Task :app:processReleaseManifestForPackage
@@ -72,7 +70,9 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:mergeReleaseJniLibFolders
 > Task :app:mergeReleaseNativeLibs NO-SOURCE
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
+> Task :app:mergeReleaseResources
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
+> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
 > Task :app:desugarReleaseFileDependencies
 > Task :app:mergeReleaseStartupProfile
@@ -80,6 +80,7 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:mergeReleaseArtProfile
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
+> Task :app:processReleaseResources
 
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:156:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -163,7 +164,6 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 
-> Task :app:processReleaseResources
 > Task :app:mergeExtDexRelease
 > Task :app:compileDebugJavaWithJavac
 > Task :app:processDebugJavaRes
@@ -173,8 +173,8 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
 > Task :app:mergeReleaseAssets
-> Task :app:mergeProjectDexDebug
 > Task :app:compressReleaseAssets
+> Task :app:mergeProjectDexDebug
 > Task :app:extractReleaseVersionControlInfo
 > Task :app:collectReleaseDependencies
 > Task :app:sdkReleaseDependencyData
@@ -282,11 +282,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789672889523.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789676487232.json
 
-BUILD SUCCESSFUL in 3m 22s
+BUILD SUCCESSFUL in 3m 44s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8181505
-APK_SIZE_RELEASE=6682979
+APK_SIZE_DEBUG=8181698
+APK_SIZE_RELEASE=6682973
