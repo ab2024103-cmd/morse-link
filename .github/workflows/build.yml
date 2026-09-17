@@ -79,7 +79,9 @@ jobs:
           VER="$(grep -oP 'versionName = "\K[^\"]+' app/build.gradle.kts)"
           TAG="v${VER}"
           echo "Release tag: $TAG"
-          REL_ID="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq .id 2>/dev/null || true)"
+          REL_ID="$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}" --jq .id 2>/dev/null </dev/null || true)"
+          # A 404 response body would otherwise be captured as a non-numeric id.
+          REL_ID="${REL_ID//[!0-9]/}"
           if [ -n "$REL_ID" ]; then
             echo "Release $TAG exists (id $REL_ID)"
             gh api -X PATCH "repos/${GITHUB_REPOSITORY}/releases/${REL_ID}" -f draft=false >/dev/null
