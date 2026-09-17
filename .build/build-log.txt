@@ -21,22 +21,22 @@ Daemon will be stopped at the end of the build
 > Task :app:mergeDebugResources
 > Task :app:generateDebugBuildConfig
 > Task :app:parseDebugLocalResources
-> Task :app:mapDebugSourceSetPaths
 > Task :app:checkDebugAarMetadata
 > Task :app:dataBindingGenBaseClassesDebug
+> Task :app:mapDebugSourceSetPaths
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
-> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
+> Task :app:processDebugManifestForPackage
+> Task :app:compressDebugAssets
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:compressDebugAssets
 > Task :app:processDebugResources
 > Task :app:checkDebugDuplicateClasses
 > Task :app:desugarDebugFileDependencies
@@ -44,16 +44,16 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
-> Task :app:mergeDebugNativeLibs NO-SOURCE
 > Task :app:mergeLibDexDebug
+> Task :app:mergeDebugNativeLibs NO-SOURCE
 > Task :app:stripDebugDebugSymbols NO-SOURCE
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:buildKotlinToolingMetadata
 > Task :app:preReleaseBuild UP-TO-DATE
-> Task :app:generateReleaseResValues
 > Task :app:dataBindingMergeDependencyArtifactsRelease
+> Task :app:generateReleaseResValues
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
 > Task :app:parseReleaseLocalResources
@@ -66,6 +66,7 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:processReleaseMainManifest
 > Task :app:dataBindingGenBaseClassesRelease
 > Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
 > Task :app:javaPreCompileRelease
 > Task :app:extractProguardFiles
 > Task :app:mergeReleaseJniLibFolders
@@ -73,9 +74,12 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
-> Task :app:desugarReleaseFileDependencies
 > Task :app:checkReleaseDuplicateClasses
+> Task :app:desugarReleaseFileDependencies
 > Task :app:mergeReleaseStartupProfile
+note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
+
+> Task :app:processReleaseResources
 
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:156:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -159,17 +163,16 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 
-> Task :app:processReleaseManifestForPackage
 > Task :app:mergeExtDexRelease
 > Task :app:compileDebugJavaWithJavac
 > Task :app:processDebugJavaRes
 > Task :app:mergeDebugJavaResource
 > Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
 > Task :app:mergeReleaseArtProfile
 > Task :app:mergeReleaseShaders
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
-> Task :app:mergeProjectDexDebug
 > Task :app:mergeReleaseAssets
 > Task :app:compressReleaseAssets
 > Task :app:extractReleaseVersionControlInfo
@@ -178,13 +181,10 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:validateSigningRelease
 > Task :app:writeReleaseAppMetadata
 > Task :app:writeReleaseSigningConfigVersions
+> Task :app:optimizeReleaseResources
 > Task :app:packageDebug
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
-note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
-
-> Task :app:processReleaseResources
-> Task :app:optimizeReleaseResources
 
 > Task :app:compileReleaseKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:156:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -282,11 +282,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789629923830.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789630402660.json
 
-BUILD SUCCESSFUL in 4m 2s
+BUILD SUCCESSFUL in 3m 9s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8181647
-APK_SIZE_RELEASE=6682971
+APK_SIZE_DEBUG=8181601
+APK_SIZE_RELEASE=6682968
