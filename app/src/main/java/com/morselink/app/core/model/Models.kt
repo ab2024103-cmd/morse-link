@@ -39,7 +39,7 @@ enum class TransferDirection { SENDING, RECEIVING }
  */
 data class TransferItem(
     val id: String,
-    val file: TransferableFile,
+    var file: TransferableFile,
     val direction: TransferDirection,
     var state: TransferItemState = TransferItemState.QUEUED,
     var bytesTransferred: Long = 0,

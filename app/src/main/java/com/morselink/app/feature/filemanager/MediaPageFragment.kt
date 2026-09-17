@@ -3,6 +3,7 @@ package com.morselink.app.feature.filemanager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,6 +48,9 @@ class MediaPageFragment : Fragment(), PageWithItems {
     private var firstLoadDone = false
     private var totalCount = -1
     private val mediaItems = ArrayList<MediaItem>()
+
+    /** Section header for date grouping (photos/videos, m2/m21). */
+    class DateHeader(val key: String, val label: String, var count: Int)
     private val appItems = ArrayList<AppEntry>()
     private val appIconCache = HashMap<String, android.graphics.drawable.Drawable>()
     private var adapter: MediaAdapter? = null
@@ -83,6 +87,12 @@ class MediaPageFragment : Fragment(), PageWithItems {
             }
         })
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            SelectionState.selected.collect {
+                adapter?.notifyDataSetChanged()
+            }
+        }
+
         binding.grantButton.setOnClickListener {
             val missing = Permissions.mediaReadPermissions(requireContext())
             if (missing.isEmpty()) {
@@ -105,9 +115,16 @@ class MediaPageFragment : Fragment(), PageWithItems {
     private fun applyLayoutManager() {
         val gridCategories = categoryKey == "photos" || categoryKey == "videos"
         val wantGrid = gridCategories && com.morselink.app.di.AppServices.prefs.mediaViewGrid
-        binding.recycler.layoutManager =
-            if (wantGrid) GridLayoutManager(requireContext(), 3)
-            else LinearLayoutManager(requireContext())
+        if (wantGrid) {
+            val glm = GridLayoutManager(requireContext(), 3)
+            glm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int =
+                    if (adapter?.getItemViewType(position) == TYPE_HEADER) 3 else 1
+            }
+            binding.recycler.layoutManager = glm
+        } else {
+            binding.recycler.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     fun reload() {
@@ -159,6 +176,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 withContext(Dispatchers.Main) {
                     binding.loading.visibility = View.GONE
                     binding.empty.visibility = if (appItems.isEmpty()) View.VISIBLE else View.GONE
+                    rebuildRows()
                     adapter?.notifyDataSetChanged()
                     reachedEnd = true
                     firstLoadDone = true
@@ -171,25 +189,53 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 "videos" -> MediaCategory.VIDEOS
                 else -> MediaCategory.MUSIC
             }
-            val page = withContext(Dispatchers.IO) {
-                MediaLibrary.page(category, offset, pageSize, sortKey, descending, query?.takeIf { it.isNotEmpty() })
-            }
-            val count = withContext(Dispatchers.IO) {
-                MediaLibrary.count(category, query?.takeIf { it.isNotEmpty() })
+            var page: List<MediaItem>? = null
+            var count = 0
+            withContext(Dispatchers.IO) {
+                try {
+                    page = MediaLibrary.page(category, offset, pageSize, sortKey, descending, query?.takeIf { it.isNotEmpty() })
+                    count = MediaLibrary.count(category, query?.takeIf { it.isNotEmpty() })
+                } catch (e: Exception) {
+                    com.morselink.app.core.logging.LogStore.e("Media page load failed (${category.key})", e)
+                }
             }
             withContext(Dispatchers.Main) {
-                mediaItems.addAll(page)
-                offset += page.size
-                totalCount = count
-                reachedEnd = page.size < pageSize || mediaItems.size >= count
                 firstLoadDone = true
                 loading = false
                 binding.loading.visibility = View.GONE
+                if (page == null) {
+                    // A real failure — never render it as an empty library.
+                    binding.empty.visibility = View.VISIBLE
+                    binding.empty.text = getString(R.string.files_load_failed)
+                    binding.empty.setOnClickListener { reload() }
+                    return@withContext
+                }
+                mediaItems.addAll(page)
+                offset += page!!.size
+                totalCount = count
+                reachedEnd = page!!.size < pageSize || mediaItems.size >= count
                 binding.empty.visibility =
-                    if (mediaItems.isEmpty() && firstLoadDone) View.VISIBLE else View.GONE
+                    if (mediaItems.isEmpty()) View.VISIBLE else View.GONE
+                if (mediaItems.isEmpty()) {
+                    if (Build.VERSION.SDK_INT >= 33 && Permissions.hasPartialMediaAccess(requireContext())) {
+                        // Android 13/14 "Select photos" grants: only chosen items are visible.
+                        binding.empty.text = getString(R.string.media_partial_access)
+                        binding.empty.setOnClickListener { requestFullMediaAccess() }
+                    } else {
+                        binding.empty.text = getString(R.string.history_empty)
+                        binding.empty.setOnClickListener(null)
+                    }
+                }
+                rebuildRows()
                 adapter?.notifyDataSetChanged()
             }
         }
+    }
+
+    private fun requestFullMediaAccess() {
+        val missing = Permissions.mediaReadPermissions(requireContext())
+        if (missing.isEmpty()) return
+        requestPermissions(missing.toTypedArray(), RC_MEDIA)
     }
 
     override fun selectAllVisible() {
@@ -241,32 +287,120 @@ class MediaPageFragment : Fragment(), PageWithItems {
 
     // ---------------- adapter ----------------
 
+    /** True when this page shows date sections (photos/videos, m2/m21). */
+    private val useDateSections: Boolean
+        get() = categoryKey == "photos" || categoryKey == "videos"
+
+    /** Flat row list: DateHeader and MediaItem interleaved, newest first. */
+    private var adapterRows: List<Any> = emptyList()
+
+    private fun rebuildRows() {
+        adapterRows = buildRows()
+    }
+
+    private fun buildRows(): List<Any> {
+        if (categoryKey == "apps") return ArrayList(appItems)
+        if (!useDateSections) return ArrayList(mediaItems)
+        val out = ArrayList<Any>()
+        var lastKey: String? = null
+        var count = 0
+        var header: DateHeader? = null
+        fun flush() {
+            if (header != null) out.add(DateHeader(header!!.key, header!!.label, count))
+        }
+        for (m in mediaItems) {
+            val key = dayKey(m)
+            if (key != lastKey) {
+                flush()
+                header = DateHeader(key, dayLabel(key), 0)
+                count = 0
+                lastKey = key
+            }
+            count++
+            header!!.count = count
+            out.add(m)
+        }
+        flush()
+        return out
+    }
+
+    private fun dayKey(m: MediaItem): String {
+        val ms = if (m.dateTakenMs > 0) m.dateTakenMs else m.dateModifiedSec * 1000L
+        val cal = java.util.Calendar.getInstance()
+        cal.timeInMillis = ms
+        return "${cal.get(java.util.Calendar.YEAR)}-${cal.get(java.util.Calendar.MONTH)}-${cal.get(java.util.Calendar.DAY_OF_MONTH)}"
+    }
+
+    private fun dayLabel(key: String): String {
+        val parts = key.split("-")
+        val cal = java.util.Calendar.getInstance()
+        val today = java.util.Calendar.getInstance()
+        val yesterday = java.util.Calendar.getInstance().apply { add(java.util.Calendar.DAY_OF_YEAR, -1) }
+        cal.set(parts[0].toInt(), parts[1].toInt(), parts[2].toInt(), 0, 0, 0)
+        return when {
+            cal.get(java.util.Calendar.YEAR) == today.get(java.util.Calendar.YEAR) &&
+                cal.get(java.util.Calendar.DAY_OF_YEAR) == today.get(java.util.Calendar.DAY_OF_YEAR) ->
+                getString(R.string.date_today)
+            cal.get(java.util.Calendar.YEAR) == yesterday.get(java.util.Calendar.YEAR) &&
+                cal.get(java.util.Calendar.DAY_OF_YEAR) == yesterday.get(java.util.Calendar.DAY_OF_YEAR) ->
+                getString(R.string.date_yesterday)
+            else -> {
+                val fmt = java.text.SimpleDateFormat("d MMMM yyyy", java.util.Locale.getDefault())
+                fmt.format(cal.time)
+            }
+        }
+    }
+
+    private fun toggleDateGroup(header: DateHeader) {
+        val items = mediaItems.filter { dayKey(it) == header.key }
+        val allSelected = items.all { SelectionState.isSelected(it.uri) }
+        SelectionState.setAll(items.map { mediaSelectable(it) }, !allSelected)
+    }
+
     private inner class MediaAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-        private val gridCategories = categoryKey == "photos" || categoryKey == "videos"
-        private val wantGrid get() = gridCategories && com.morselink.app.di.AppServices.prefs.mediaViewGrid
+        override fun getItemCount(): Int = adapterRows.size
 
-        override fun getItemViewType(position: Int): Int =
-            if (wantGrid) TYPE_GRID else TYPE_ROW
+        override fun getItemViewType(position: Int): Int = when {
+            adapterRows[position] is DateHeader -> TYPE_HEADER
+            wantGridStatic -> TYPE_GRID
+            else -> TYPE_ROW
+        }
+
+        private val wantGridStatic: Boolean
+            get() = useDateSections && com.morselink.app.di.AppServices.prefs.mediaViewGrid
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            return if (viewType == TYPE_GRID) {
-                GridHolder(
+            return when (viewType) {
+                TYPE_HEADER -> HeaderHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_date_header, parent, false)
+                )
+                TYPE_GRID -> GridHolder(
                     LayoutInflater.from(parent.context).inflate(R.layout.item_media_grid, parent, false)
                 )
-            } else {
-                RowHolder(
+                else -> RowHolder(
                     LayoutInflater.from(parent.context).inflate(R.layout.item_media_row, parent, false)
                 )
             }
         }
 
-        override fun getItemCount(): Int =
-            if (categoryKey == "apps") appItems.size else mediaItems.size
-
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            val row = adapterRows[position]
+            if (row is DateHeader) {
+                holder as HeaderHolder
+                holder.title.text = row.label
+                holder.count.text = getString(R.string.files_item_count, row.count)
+                val groupItems = mediaItems.filter { dayKey(it) == row.key }
+                val allSelected = groupItems.isNotEmpty() && groupItems.all { SelectionState.isSelected(it.uri) }
+                holder.check.setImageResource(
+                    if (allSelected) R.drawable.ic_check_circle else R.drawable.ic_circle
+                )
+                holder.check.contentDescription = getString(R.string.cd_select_date_group)
+                holder.root.setOnClickListener { toggleDateGroup(row) }
+                return
+            }
             if (categoryKey == "apps") {
-                val app = appItems[position]
+                val app = row as AppEntry
                 if (holder is RowHolder) {
                     holder.title.text = app.label
                     holder.subtitle.text = app.packageName
@@ -281,7 +415,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 }
                 return
             }
-            val item = mediaItems[position]
+            val item = row as MediaItem
             if (holder is GridHolder) {
                 // Glide cancels the previous request bound to this recycled view —
                 // the recycling-token rule (spec Section 10.5).
@@ -407,6 +541,13 @@ class MediaPageFragment : Fragment(), PageWithItems {
         return fmt.format(java.util.Date(seconds * 1000))
     }
 
+    private class HeaderHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val root: View = v
+        val title: TextView = v.findViewById(R.id.date_title)
+        val count: TextView = v.findViewById(R.id.date_count)
+        val check: ImageView = v.findViewById(R.id.date_check)
+    }
+
     private class GridHolder(v: View) : RecyclerView.ViewHolder(v) {
         val thumb: ImageView = v.findViewById(R.id.thumb)
         val videoDuration: TextView = v.findViewById(R.id.video_duration)
@@ -426,6 +567,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
         private const val RC_MEDIA = 4103
         private const val TYPE_GRID = 1
         private const val TYPE_ROW = 2
+        private const val TYPE_HEADER = 3
 
         fun newInstance(category: String): MediaPageFragment {
             val f = MediaPageFragment()

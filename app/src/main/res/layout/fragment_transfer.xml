@@ -121,12 +121,22 @@
                                 android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
+                        <ImageButton
+                            android:id="@+id/button_scan_qr"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginStart="4dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="@string/transfer_scan_connect"
+                            android:src="@drawable/ic_qr_scan"
+                            app:tint="?attr/colorOnSurface" />
+
                         <Button
                             android:id="@+id/button_manual_connect"
                             style="@style/Widget.Material3.Button.TonalButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:layout_marginStart="4dp"
                             android:minHeight="48dp"
                             android:text="@string/transfer_manual_connect" />
                     </LinearLayout>

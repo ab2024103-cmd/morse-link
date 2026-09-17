@@ -183,12 +183,33 @@ object MediaLibrary {
             args.add(like)
         }
 
-        val sortOrder = orderBy(sortKey, descending) + " LIMIT $limit OFFSET $offset"
         val out = ArrayList<MediaItem>()
+        var cursorQuery: android.database.Cursor? = null
         try {
-            context.contentResolver.query(
-                uri, projection.toTypedArray(), selection, args.toTypedArray(), sortOrder
-            )?.use { cursor ->
+            try {
+                cursorQuery = context.contentResolver.query(
+                    uri, projection.toTypedArray(), selection, args.toTypedArray(),
+                    orderBy(sortKey, descending) + " LIMIT $limit OFFSET $offset"
+                )
+            } catch (e: Exception) {
+                // Some OEM MediaProvider builds reject LIMIT in sortOrder —
+                // fall back to an unbounded query and window it here.
+                com.morselink.app.core.logging.LogStore.w(
+                    "Media query with LIMIT failed (${category.key}): ${e.message}; retrying without LIMIT"
+                )
+                cursorQuery = null
+            }
+            if (cursorQuery == null && offset == 0) {
+                try {
+                    cursorQuery = context.contentResolver.query(
+                        uri, projection.toTypedArray(), selection, args.toTypedArray(),
+                        orderBy(sortKey, descending)
+                    )
+                } catch (e: Exception) {
+                    com.morselink.app.core.logging.LogStore.e("Media query failed (${category.key})", e)
+                }
+            }
+            cursorQuery?.use { cursor ->
                 val idCol = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
                 val nameCol = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
                 val sizeCol = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE)
@@ -222,7 +243,13 @@ object MediaLibrary {
                     )
                 }
             }
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            com.morselink.app.core.logging.LogStore.e("Media page() failed (${category.key})", e)
+        } finally {
+            try {
+                cursorQuery?.close()
+            } catch (_: Exception) {
+            }
         }
         return out
     }
@@ -241,7 +268,8 @@ object MediaLibrary {
             context.contentResolver.query(
                 uri, arrayOf(MediaStore.MediaColumns._ID), selection, args.toTypedArray(), null
             )?.use { it.count } ?: 0
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            com.morselink.app.core.logging.LogStore.e("Media count() failed (${category.key})", e)
             0
         }
     }

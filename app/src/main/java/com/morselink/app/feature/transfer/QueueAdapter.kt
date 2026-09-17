@@ -8,7 +8,12 @@ import com.morselink.app.R
 import com.morselink.app.core.model.TransferItem
 
 /** Adapter for the queue sheet; rows reuse the shared transfer row renderer. */
-class QueueAdapter(val items: List<TransferItem>) : RecyclerView.Adapter<QueueAdapter.Holder>() {
+class QueueAdapter(var items: List<TransferItem>) : RecyclerView.Adapter<QueueAdapter.Holder>() {
+
+    fun update(newItems: List<TransferItem>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
 
     class Holder(v: View) : RecyclerView.ViewHolder(v)
 

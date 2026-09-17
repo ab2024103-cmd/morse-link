@@ -1,5 +1,6 @@
 package com.morselink.app.feature.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +28,43 @@ import com.morselink.app.feature.transfer.TransferFragment
 import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
+
+    private val qrScanLauncher = registerForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
+    ) { res ->
+        if (res.resultCode == android.app.Activity.RESULT_OK) {
+            val text = res.data?.getStringExtra(com.morselink.app.feature.transfer.QrScanActivity.EXTRA_RESULT)
+            if (!text.isNullOrBlank() && isAdded) handleScannedText(text)
+        }
+    }
+
+    private fun handleScannedText(raw: String) {
+        val t = raw.trim()
+        if (t.startsWith("http://", true) || t.startsWith("https://", true)) {
+            try {
+                startActivity(android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(t)))
+            } catch (_: Exception) {
+            }
+            return
+        }
+        val hostPort = t.removePrefix("morselink://connect?")
+        val host: String
+        var port = com.morselink.app.core.network.LanTransport.TCP_PORT
+        if (hostPort.startsWith("host=")) {
+            val params = hostPort.split("&")
+            host = params.firstOrNull()?.removePrefix("host=") ?: return
+            params.firstOrNull { it.startsWith("port=") }?.removePrefix("port=")?.toIntOrNull()?.let { port = it }
+        } else {
+            val parts = hostPort.split(":")
+            host = parts[0]
+            parts.getOrNull(1)?.toIntOrNull()?.let { port = it }
+        }
+        if (host.isBlank()) return
+        viewLifecycleOwner.lifecycleScope.launch {
+            com.morselink.app.core.transfer.TransferEngine.connectManual(host, port)
+        }
+        (activity as? MainActivity)?.openTransferScreen(com.morselink.app.feature.transfer.TransferFragment.Mode.RECEIVE)
+    }
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
@@ -66,6 +105,15 @@ class DashboardFragment : Fragment() {
         }
         binding.pcCard.setOnClickListener {
             (activity as? MainActivity)?.openOverlay(com.morselink.app.feature.webshare.WebShareFragment())
+        }
+        binding.buttonPcScan.setOnClickListener {
+            try {
+                qrScanLauncher.launch(
+                    android.content.Intent(requireContext(), com.morselink.app.feature.transfer.QrScanActivity::class.java)
+                )
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), R.string.transfer_camera_needed, Toast.LENGTH_SHORT).show()
+            }
         }
         binding.helpButton.setOnClickListener {
             (activity as? MainActivity)?.openOverlay(com.morselink.app.feature.settings.ConnectionDoctorFragment())

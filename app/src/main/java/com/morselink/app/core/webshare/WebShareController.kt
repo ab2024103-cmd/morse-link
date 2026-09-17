@@ -77,6 +77,15 @@ object WebShareController {
                             ssid = result.ssid, password = result.password
                         )
                         LogStore.i("WebShare: hotspot mode ready at $url (ssid=${result.ssid})")
+                        // The interface may still be settling; keep correcting
+                        // the address in the background until it serves. The
+                        // check itself must run off the main thread (hotspot
+                        // callbacks arrive there and socket I/O is forbidden).
+                        scope.launch {
+                            if (!selfReachable(result.gatewayIp)) {
+                                pollForHotspotAddress(token)
+                            }
+                        }
                     }
                     is HotspotResult.ManualSetupRequired -> {
                         _state.value = WebShareState(
@@ -112,17 +121,23 @@ object WebShareController {
         return true
     }
 
+    /**
+     * Waits until the hotspot AP interface has an address we can actually
+     * serve on, then publishes the URL. Used for manual/legacy hotspot setups
+     * where the Ready callback fired before the interface settled — the main
+     * reason WebShare appeared dead until mobile data was toggled on.
+     */
     private fun pollForHotspotAddress(token: String) {
         scope.launch {
             var attempts = 0
-            while (isActive && _isRunning.value && attempts < 120) {
-                val ip = LanTransport.preferredAddress()
-                if (ip != null && ip.startsWith("192.168.")) {
-                    // Heuristic: once an AP interface is up we expose our address.
-                    _state.value = _state.value.copy(
-                        manualSetup = false,
-                        url = "http://$ip:${WebShareServer.PORT}/#t=$token"
-                    )
+            while (isActive && _isRunning.value && attempts < 150) {
+                val ip = hotspotGatewayIp()
+                val guess = _state.value.url
+                val currentHost = guess?.substringAfter("//")?.substringBefore(":")
+                if (ip != currentHost && selfReachable(ip)) {
+                    val url = "http://$ip:${WebShareServer.PORT}/#t=$token"
+                    _state.value = _state.value.copy(manualSetup = false, url = url)
+                    LogStore.i("WebShare: hotspot address settled on $ip")
                     return@launch
                 }
                 attempts++
@@ -131,8 +146,23 @@ object WebShareController {
         }
     }
 
+    /** Connects to our own server socket to prove the address is servable. */
+    private fun selfReachable(ip: String): Boolean {
+        return try {
+            java.net.Socket().use { sock ->
+                sock.connect(java.net.InetSocketAddress(ip, WebShareServer.PORT), 400)
+            }
+            true
+        } catch (_: Exception) {
+            false
+        }
+    }
+
     private fun newToken(): String {
-        val bytes = ByteArray(16)
+        // 4 random bytes → 8 hex chars: short enough to read aloud or type on
+        // a PC (m4/m14) while staying far out of brute-force range for the
+        // token-gated local session.
+        val bytes = ByteArray(4)
         SecureRandom().nextBytes(bytes)
         return com.morselink.app.core.util.Integrity.toHex(bytes)
     }

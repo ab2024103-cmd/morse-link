@@ -91,12 +91,36 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             session.method == Method.GET && path == "/api/counts" -> apiCounts()
             session.method == Method.GET && path == "/api/files" -> apiFiles(session)
             session.method == Method.GET && path == "/api/upload-status" -> apiUploadStatus(session)
+            session.method == Method.GET && path == "/api/qr" -> apiQr()
             session.method == Method.GET && path == "/thumbnail" -> thumbnail(session)
             session.method == Method.GET && path == "/download" -> download(session)
             session.method == Method.GET && path == "/download-folder" -> downloadFolder(session)
             session.method == Method.POST && path == "/upload" -> upload(session)
             else -> newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "not found")).noStore()
         }
+    }
+
+    /**
+     * PNG QR of the full session URL so another device (or any camera) can
+     * join without typing the address (m4).
+     */
+    private fun apiQr(): Response {
+        val url = WebShareController.state.value.url
+            ?: "http://127.0.0.1:$PORT/"
+        val qr = com.morselink.app.core.util.Qr.encode(url, 560)
+        if (qr == null) {
+            return newJson(Response.Status.INTERNAL_ERROR, JSONObject().put("error", "qr failed"))
+        }
+        val bytes = java.io.ByteArrayOutputStream().use { out ->
+            qr.compress(android.graphics.Bitmap.CompressFormat.PNG, 90, out)
+            out.toByteArray()
+        }
+        val resp = newFixedLengthResponse(
+            Response.Status.OK, "image/png",
+            java.io.ByteArrayInputStream(bytes), bytes.size.toLong()
+        )
+        resp.addHeader("Cache-Control", "no-store")
+        return resp
     }
 
     private fun authorized(session: IHTTPSession): Boolean {

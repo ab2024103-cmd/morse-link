@@ -87,7 +87,12 @@ class QueueSheet : BottomSheetDialogFragment() {
                         val sendQueue = items.filter {
                             it.direction == com.morselink.app.core.model.TransferDirection.SENDING
                         }
-                        recycler.adapter = QueueAdapter(sendQueue)
+                        val current = recycler.adapter as? QueueAdapter
+                        if (current == null) {
+                            recycler.adapter = QueueAdapter(sendQueue)
+                        } else {
+                            current.update(sendQueue)
+                        }
                         retryAll.isVisibleOrGone(sendQueue.any { it.state == TransferItemState.FAILED })
                     }
                 }

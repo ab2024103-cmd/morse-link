@@ -56,6 +56,8 @@
     <string name="transfer_title_send">Send to a device</string>
     <string name="transfer_title_receive">Receive from a device</string>
     <string name="transfer_scan_connect">Scan to connect</string>
+    <string name="transfer_camera_needed">Camera permission is needed to scan QR codes</string>
+    <string name="transfer_scan_open_web">This is a WebShare page address. Open it in your browser?</string>
     <string name="transfer_connected_to">Connected to %1$s</string>
     <string name="transfer_via_nearby">via Nearby (Wi-Fi / Bluetooth)</string>
     <string name="transfer_via_lan">via Wi-Fi LAN</string>
@@ -342,4 +344,16 @@
     <string name="pref_battery_status_restricted">Restricted — transfers may be paused</string>
     <string name="oem_guidance_body">Some phones (Xiaomi, Oppo, Vivo, Huawei and others) force-stop apps to save battery. To make sure transfers keep running when the screen is off:\n\n1. Open system settings for MorseLink.\n2. Find Battery or Power usage.\n3. Choose No restrictions / Allow background activity (wording differs by brand).\n4. If there is an Autostart switch, turn it on.\n\nTransfers always pause safely when the system does stop the app — reopen MorseLink and tap Resume.</string>
     <string name="log_crash_reports">Crash reports</string>
+    <string name="files_item_count">%1$d items</string>
+    <string name="files_load_failed">Could not load this category. Tap to retry.</string>
+    <string name="files_all_files_title">Internal storage</string>
+    <string name="files_all_files_message">To browse all of internal storage, Android requires you to allow \"All files access\" for MorseLink once. Nothing else changes — MorseLink never uploads or modifies anything on its own.</string>
+    <string name="connecting_to">Connecting to %1$s…</string>
+    <string name="connecting_hint">Waiting for the other device to accept…</string>
+    <string name="webshare_no_internet_note">Transfers stay on this local network — mobile data is never used and nothing is uploaded. Both devices just need to be on the same hotspot or Wi-Fi.</string>
+    <string name="webshare_type_hint">Type this address in the browser on the other device:</string>
+    <string name="date_today">Today</string>
+    <string name="date_yesterday">Yesterday</string>
+    <string name="cd_select_date_group">Select all items from this date</string>
+    <string name="media_partial_access">Only selected photos and videos are visible. Tap to grant full access.</string>
 </resources>

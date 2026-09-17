@@ -47,7 +47,11 @@ class WebShareFragment : Fragment() {
         binding.buttonStartHotspot.setOnClickListener { confirmHotspotThenStart() }
         binding.buttonStartLan.setOnClickListener { WebShareController.start(false) }
         binding.buttonStop.setOnClickListener { WebShareController.stop() }
-        binding.buttonCopyUrl.setOnClickListener { copyUrl() }
+        binding.buttonCopyAddress.setOnClickListener { copyText(binding.addressValue.text.toString()) }
+        binding.buttonCopyToken.setOnClickListener { copyText(binding.tokenValue.text.toString()) }
+        binding.addressValue.setOnClickListener { copyText(binding.addressValue.text.toString()) }
+        binding.tokenValue.setOnClickListener { copyText(binding.tokenValue.text.toString()) }
+        binding.qrCode.setOnClickListener { showFullscreenQr() }
         binding.buttonDoctor.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .setCustomAnimations(
@@ -112,8 +116,16 @@ class WebShareFragment : Fragment() {
 
         val url = state.url
         if (url != null) {
+            // Short, readable pieces instead of one long URL (m4/m14):
+            // address + token are what a person actually types on the PC.
+            val address = url
+                .substringAfter("://", url)
+                .substringBefore("/#t=")
+            val token = url.substringAfter("#t=", "")
+            binding.addressValue.text = address
+            binding.tokenValue.text = token
             binding.urlValue.text = url
-            val qr = Qr.encode(url, 520)
+            val qr = Qr.encode(url, 640)
             if (qr != null) {
                 binding.qrCode.setImageBitmap(qr)
                 binding.qrCode.visibility = View.VISIBLE
@@ -121,6 +133,32 @@ class WebShareFragment : Fragment() {
                 binding.qrCode.visibility = View.GONE
             }
         }
+    }
+
+    /** Big, scannable-from-a-distance QR — laptops with webcams can read it. */
+    private fun showFullscreenQr() {
+        val url = WebShareController.state.value.url ?: return
+        val qr = Qr.encode(url, 1080) ?: return
+        val img = android.widget.ImageView(requireContext()).apply {
+            adjustViewBounds = true
+            layoutParams = android.view.ViewGroup.LayoutParams(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
+        img.setImageBitmap(qr)
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.webshare_title)
+            .setView(img)
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun copyText(value: String) {
+        if (value.isBlank()) return
+        val cm = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        cm.setPrimaryClip(ClipData.newPlainText("MorseLink", value))
+        Toast.makeText(requireContext(), R.string.webshare_copied, Toast.LENGTH_SHORT).show()
     }
 
     private fun copyUrl() {

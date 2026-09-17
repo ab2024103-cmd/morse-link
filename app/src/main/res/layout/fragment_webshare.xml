@@ -77,8 +77,8 @@
 
                 <ImageView
                     android:id="@+id/qr_code"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
                     android:layout_gravity="center_horizontal"
                     android:contentDescription="@string/cd_qr"
                     android:padding="8dp" />
@@ -87,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@string/webshare_url"
+                    android:text="@string/webshare_type_hint"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textSize="12sp" />
 
@@ -98,22 +98,74 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/url_value"
+                        android:id="@+id/address_value"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
                         android:fontFamily="monospace"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
                         android:textIsSelectable="true"
-                        android:textSize="16sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button_copy_url"
+                        android:id="@+id/button_copy_address"
                         style="@style/Widget.Material3.Button.TonalButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="48dp"
                         android:text="@string/webshare_copy" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/token_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="?attr/selectableItemBackground"
+                        android:fontFamily="monospace"
+                        android:letterSpacing="0.15"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:textIsSelectable="true"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_copy_token"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:text="@string/webshare_copy" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/url_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:alpha="0.6"
+                    android:fontFamily="monospace"
+                    android:textIsSelectable="true"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/no_internet_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/webshare_no_internet_note"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:id="@+id/hotspot_creds"

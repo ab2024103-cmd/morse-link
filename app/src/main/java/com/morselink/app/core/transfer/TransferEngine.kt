@@ -77,6 +77,8 @@ object TransferEngine {
     private val itemsLock = Any()
     private val itemsInternal = ArrayList<TransferItem>()
     private var lastEmit = 0L
+    @Volatile
+    private var trailingPublishScheduled = false
 
     private val peerLastSeen = ConcurrentHashMap<String, Long>()
     private val peerMap = ConcurrentHashMap<String, DiscoveredPeer>()
@@ -135,6 +137,17 @@ object TransferEngine {
 
     fun addPeer(peer: DiscoveredPeer) {
         if (_sessionState.value.active && peer.deviceId != _sessionState.value.peerId) return
+        // One row per physical device: the same phone re-advertising with a
+        // fresh Nearby endpoint id (or found over two transports) replaces its
+        // earlier entry instead of stacking duplicates (m13).
+        val stale = ArrayList<String>()
+        for ((id, existing) in peerMap) {
+            if (id != peer.deviceId && existing.name == peer.name) stale.add(id)
+        }
+        for (id in stale) {
+            peerMap.remove(id)
+            peerLastSeen.remove(id)
+        }
         peerMap[peer.deviceId] = peer
         peerLastSeen[peer.deviceId] = System.currentTimeMillis()
         publishPeers()
@@ -300,6 +313,7 @@ object TransferEngine {
     }
 
     fun onSessionLost(session: TransportSession, reason: String?) {
+        incomingBatchId = null
         if (currentSession === session) {
             currentSession = null
         }
@@ -353,8 +367,17 @@ object TransferEngine {
         val batchId = UUID.randomUUID().toString()
         batchStartTimes[batchId] = System.currentTimeMillis()
         batchConflictOverride = null
+        var skippedDuplicates = 0
         synchronized(itemsLock) {
             for (f in files) {
+                val duplicate = itemsInternal.any {
+                    !it.isTerminal && it.direction == TransferDirection.SENDING &&
+                        it.file.uri == f.uri && it.file.displayName == f.displayName
+                }
+                if (duplicate) {
+                    skippedDuplicates++
+                    continue
+                }
                 itemsInternal.add(
                     TransferItem(
                         id = if (f.id.isEmpty()) UUID.randomUUID().toString() else f.id,
@@ -366,6 +389,9 @@ object TransferEngine {
                     )
                 )
             }
+        }
+        if (skippedDuplicates > 0) {
+            LogStore.i("Skipped $skippedDuplicates duplicate queue entr${if (skippedDuplicates == 1) "y" else "ies"} (already queued or in progress)")
         }
         LogStore.i("Queued ${files.size} outgoing file(s)")
         publishItems(force = true)
@@ -399,13 +425,28 @@ object TransferEngine {
 
     private fun publishItems(force: Boolean = false) {
         val now = System.currentTimeMillis()
-        if (!force && now - lastEmit < 180) return
+        if (!force && now - lastEmit < 180) {
+            // Throttled: schedule a trailing publish so the final state of a
+            // burst is never dropped (updates must always reach the UI).
+            if (!trailingPublishScheduled) {
+                trailingPublishScheduled = true
+                scope.launch {
+                    delay(220)
+                    trailingPublishScheduled = false
+                    publishItems(force = true)
+                }
+            }
+            return
+        }
         lastEmit = now
         val snapshot: List<TransferItem>
         synchronized(itemsLock) {
-            snapshot = ArrayList(itemsInternal)
+            computeSpeeds(itemsInternal)
+            // Fresh instances every time: StateFlow deduplicates by equals(),
+            // and mutating items in place would make consecutive snapshots
+            // compare equal — freezing the UI until a re-subscribe.
+            snapshot = itemsInternal.map { it.copy() }
         }
-        computeSpeeds(snapshot)
         _items.value = snapshot
         updateLocks()
     }
@@ -588,6 +629,7 @@ object TransferEngine {
                 "Batch $batchId done: ${summary.succeeded} ok, ${summary.failed} failed, " +
                     "${summary.skipped} skipped, ${summary.cancelled} cancelled"
             )
+            if (batchId == incomingBatchId) incomingBatchId = null
             _events.tryEmit(EngineEvent.BatchCompleted(summary))
             if (summary.failed == 0) {
                 SoundFx.play(SoundFx.COMPLETE)
@@ -604,15 +646,22 @@ object TransferEngine {
 
     private fun mutateItem(id: String, block: (TransferItem) -> Unit) {
         synchronized(itemsLock) {
-            val item = itemsInternal.firstOrNull { it.id == id } ?: return
+            val candidates = itemsInternal.filter { it.id == id }
+            val item = candidates.firstOrNull { !it.isTerminal } ?: candidates.lastOrNull() ?: return
             block(item)
         }
+    }
+
+    /** Looks up the live row for an id (prefers non-terminal, falls back to newest). */
+    private fun findItem(id: String): TransferItem? = synchronized(itemsLock) {
+        val candidates = itemsInternal.filter { it.id == id }
+        candidates.firstOrNull { !it.isTerminal } ?: candidates.lastOrNull()
     }
 
     // ---------------- user queue controls ----------------
 
     fun pauseItem(id: String) {
-        val item: TransferItem? = synchronized(itemsLock) { itemsInternal.firstOrNull { it.id == id } }
+        val item: TransferItem? = findItem(id)
         if (item == null) return
         when {
             item.direction == TransferDirection.SENDING && item.state == TransferItemState.QUEUED -> {
@@ -632,7 +681,7 @@ object TransferEngine {
     }
 
     fun resumeItem(id: String) {
-        val item: TransferItem? = synchronized(itemsLock) { itemsInternal.firstOrNull { it.id == id } }
+        val item: TransferItem? = findItem(id)
         if (item == null) return
         when {
             item.direction == TransferDirection.SENDING && item.state == TransferItemState.PAUSED -> {
@@ -650,7 +699,7 @@ object TransferEngine {
     }
 
     fun cancelItem(id: String) {
-        val item: TransferItem? = synchronized(itemsLock) { itemsInternal.firstOrNull { it.id == id } }
+        val item: TransferItem? = findItem(id)
         if (item == null) return
         when (item.state) {
             TransferItemState.QUEUED -> mutateItem(id) { it.state = TransferItemState.CANCELLED }
@@ -793,24 +842,7 @@ object TransferEngine {
         Destinations.tempFileFor(MorselinkServices.appContext, partKey(meta))
 
     suspend fun handleIncomingOffer(meta: FileMeta): OfferDecision {
-        val batchId = "in-${UUID.randomUUID()}"
-        val item = TransferItem(
-            id = meta.fileId,
-            file = TransferableFile(
-                id = meta.fileId,
-                displayName = meta.name,
-                size = meta.size,
-                uri = "",
-                mime = meta.mime,
-                relativePath = meta.relativePath
-            ),
-            direction = TransferDirection.RECEIVING,
-            state = TransferItemState.IN_PROGRESS,
-            totalBytes = meta.size,
-            batchId = batchId
-        )
-        batchStartTimes[batchId] = System.currentTimeMillis()
-        synchronized(itemsLock) { itemsInternal.add(item) }
+        val item = reviveOrCreateIncoming(meta, null)
         publishItems(force = true)
         LogStore.i("Incoming offer: ${meta.name} (${meta.size} bytes)")
 
@@ -847,28 +879,77 @@ object TransferEngine {
     }
 
     fun beginIncomingFromUri(meta: FileMeta, uri: String) {
+        reviveOrCreateIncoming(meta, uri)
+        publishItems(force = true)
+    }
+
+    /**
+     * A paused/resumed or re-offered file must reuse its existing row — adding
+     * a second item with the same id made every lookup hit the stale entry:
+     * progress froze, resumed Nearby files verified against the old partial
+     * URI ("size mismatch"), and rows duplicated (m11/m16).
+     */
+    private fun reviveOrCreateIncoming(meta: FileMeta, uri: String?): TransferItem {
+        val existing: TransferItem? = synchronized(itemsLock) {
+            itemsInternal.lastOrNull { it.id == meta.fileId }
+        }
+        if (existing != null) {
+            synchronized(itemsLock) {
+                existing.file = TransferableFile(
+                    id = meta.fileId,
+                    displayName = meta.name,
+                    size = meta.size,
+                    uri = uri ?: existing.file.uri,
+                    mime = meta.mime,
+                    relativePath = meta.relativePath
+                )
+                existing.state = TransferItemState.IN_PROGRESS
+                existing.lastError = null
+                existing.bytesTransferred = if (uri != null) 0L else existing.bytesTransferred
+                if (existing.batchId.isEmpty()) existing.batchId = currentIncomingBatchId()
+            }
+            LogStore.i("Revived incoming row for ${meta.name}")
+            return existing
+        }
+        val batchId = currentIncomingBatchId()
         val item = TransferItem(
             id = meta.fileId,
             file = TransferableFile(
                 id = meta.fileId,
                 displayName = meta.name,
                 size = meta.size,
-                uri = uri,
+                uri = uri ?: "",
                 mime = meta.mime,
                 relativePath = meta.relativePath
             ),
             direction = TransferDirection.RECEIVING,
             state = TransferItemState.IN_PROGRESS,
             totalBytes = meta.size,
-            batchId = "in-${meta.fileId}"
+            batchId = batchId
         )
-        batchStartTimes[item.batchId] = System.currentTimeMillis()
         synchronized(itemsLock) { itemsInternal.add(item) }
-        publishItems(force = true)
+        return item
+    }
+
+    /**
+     * One batch id per incoming session so the batch summary (and its sound)
+     * fires once when the whole session's files finish — not once per file
+     * (m19).
+     */
+    private var incomingBatchId: String? = null
+
+    private fun currentIncomingBatchId(): String {
+        var id = incomingBatchId
+        if (id == null) {
+            id = "in-${UUID.randomUUID()}"
+            incomingBatchId = id
+            batchStartTimes[id] = System.currentTimeMillis()
+        }
+        return id
     }
 
     fun markIncoming(fileId: String, state: TransferItemState) {
-        val item: TransferItem? = synchronized(itemsLock) { itemsInternal.firstOrNull { it.id == fileId } }
+        val item: TransferItem? = findItem(fileId)
         if (item == null) return
         if (state == TransferItemState.CANCELLED) {
             Destinations.tempFileFor(MorselinkServices.appContext, partKey(
@@ -883,7 +964,7 @@ object TransferEngine {
 
     /** Verifies and finalizes an incoming file from its .part temp file (LAN). */
     suspend fun verifyAndFinalizeIncoming(meta: FileMeta, partFile: File): Boolean {
-        val item: TransferItem? = synchronized(itemsLock) { itemsInternal.firstOrNull { it.id == meta.fileId } }
+        val item: TransferItem? = findItem(meta.fileId)
         if (item == null) return false
         if (partFile.length() != meta.size) {
             LogStore.e("Size check failed for ${meta.name}: ${partFile.length()} != ${meta.size}")
@@ -913,7 +994,7 @@ object TransferEngine {
 
     /** Verifies and finalizes an incoming file from a Uri (Nearby path). */
     suspend fun verifyAndFinalizeIncomingUri(meta: FileMeta): Boolean {
-        val item: TransferItem? = synchronized(itemsLock) { itemsInternal.firstOrNull { it.id == meta.fileId } }
+        val item: TransferItem? = findItem(meta.fileId)
         if (item == null) return false
         val context = MorselinkServices.appContext
         val size = Integrity.fileLength(context, item.file.uri)

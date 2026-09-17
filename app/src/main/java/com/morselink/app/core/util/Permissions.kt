@@ -70,6 +70,21 @@ object Permissions {
         return true
     }
 
+    /**
+     * Android 13/14 "Select photos and videos" grants: READ_MEDIA_VISUAL_USER_SELECTED
+     * is granted while the full permissions are not — queries then return only
+     * the hand-picked items (often none), which must not render as an empty
+     * library (m12/m17).
+     */
+    fun hasPartialMediaAccess(context: Context): Boolean {
+        if (Build.VERSION.SDK_INT < 33) return false
+        val visualSelected = ContextCompat.checkSelfPermission(
+            context, "android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
+        ) == PackageManager.PERMISSION_GRANTED
+        if (!visualSelected) return false
+        return mediaReadPermissions(context).isNotEmpty()
+    }
+
     fun hasAllFilesAccess(context: Context): Boolean {
         return Build.VERSION.SDK_INT >= 30 && android.os.Environment.isExternalStorageManager()
     }

@@ -58,6 +58,19 @@
             android:src="@drawable/ic_help" />
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/dashboard_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <FrameLayout
         android:id="@+id/radar_container"
         android:layout_width="match_parent"
@@ -87,17 +100,28 @@
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never" />
 
+    <TextView
+        android:id="@+id/recent_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/screen_padding"
+        android:paddingEnd="@dimen/screen_padding"
+        android:paddingTop="4dp"
+        android:text="@string/dashboard_recent"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/screen_padding">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
@@ -173,11 +197,23 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/button_pc_scan"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/transfer_scan_connect"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_qr_scan"
+                    android:tint="?attr/colorOnSurfaceVariant" />
+
+                <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_chevron_right" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 </LinearLayout>

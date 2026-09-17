@@ -103,7 +103,12 @@ class Prefs(context: Context) {
     }
 
     fun addRecentDevice(device: RecentDevice) {
-        val list = ArrayList(recentDevices().filter { it.deviceId != device.deviceId })
+        // Dedupe by id AND by name+transport: Nearby endpoint ids change every
+        // session, so the same phone would otherwise stack duplicate rows.
+        val list = ArrayList(recentDevices().filter {
+            it.deviceId != device.deviceId &&
+                !(it.name == device.name && it.transport == device.transport)
+        })
         list.add(0, device)
         while (list.size > 5) list.removeAt(list.size - 1)
         val arr = JSONArray()

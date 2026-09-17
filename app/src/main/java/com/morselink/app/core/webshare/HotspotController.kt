@@ -34,6 +34,32 @@ object Hotspots {
     }
 }
 
+/** Finds this phone's address on the hotspot/AP interface, preferring real APs. */
+internal fun hotspotGatewayIp(): String {
+    try {
+        val interfaces = java.util.Collections.list(java.net.NetworkInterface.getNetworkInterfaces())
+        var fallback: String? = null
+        for (ni in interfaces) {
+            if (!ni.isUp || ni.isLoopback) continue
+            val name = ni.name ?: continue
+            val cellular = name.startsWith("rmnet") || name.startsWith("ccmni") ||
+                name.startsWith("usb") || name.startsWith("vtun") || name.startsWith("tun")
+            for (ia in java.util.Collections.list(ni.inetAddresses)) {
+                if (!ia.isLoopbackAddress && ia is java.net.Inet4Address) {
+                    val addr = ia.hostAddress ?: continue
+                    if (cellular) continue
+                    if (name.contains("ap") || name.contains("swlan") || name == "wlan1") return addr
+                    if (addr.startsWith("192.168.")) return addr
+                    if (fallback == null) fallback = addr
+                }
+            }
+        }
+        if (fallback != null) return fallback
+    } catch (_: Exception) {
+    }
+    return "192.168.43.1"
+}
+
 @SuppressLint("MissingPermission")
 class ModernHotspotController(private val context: Context) : HotspotController {
 
@@ -67,7 +93,7 @@ class ModernHotspotController(private val context: Context) : HotspotController 
                     } catch (e: Exception) {
                         LogStore.w("Could not read hotspot config: ${e.message}")
                     }
-                    val ip = gatewayIp()
+                    val ip = hotspotGatewayIp()
                     LogStore.i("LocalOnlyHotspot started: ssid=$ssid ip=$ip")
                     callback?.invoke(
                         HotspotResult.Ready(ssid ?: "MorseLink Hotspot", password, ip)
@@ -90,26 +116,6 @@ class ModernHotspotController(private val context: Context) : HotspotController 
         }
     }
 
-    private fun gatewayIp(): String {
-        // The phone acts as the AP/gateway; find the address of the AP interface.
-        try {
-            val interfaces = java.util.Collections.list(java.net.NetworkInterface.getNetworkInterfaces())
-            for (ni in interfaces) {
-                if (!ni.isUp || ni.isLoopback) continue
-                val name = ni.name ?: continue
-                if (name.contains("ap") || name.contains("wlan") || name.contains("swlan")) {
-                    for (ia in java.util.Collections.list(ni.inetAddresses)) {
-                        if (!ia.isLoopbackAddress && ia is java.net.Inet4Address) {
-                            return ia.hostAddress ?: continue
-                        }
-                    }
-                }
-            }
-        } catch (_: Exception) {
-        }
-        return "192.168.43.1"
-    }
-
     override fun stop() {
         try {
             reservation?.close()
@@ -125,15 +131,68 @@ class LegacyHotspotController(private val context: Context) : HotspotController 
         context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
 
     override fun start(onResult: (HotspotResult) -> Unit) {
-        try {
-            context.startActivity(
-                Intent(Settings.ACTION_WIRELESS_SETTINGS)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
-        } catch (e: Exception) {
-            LogStore.w("Could not open wireless settings: ${e.message}")
+        callback = onResult
+        // 1. Hotspot already on (m5): deliver Ready immediately — no settings trip.
+        if (isApActive()) {
+            deliverReady()
+            return
         }
-        onResult(HotspotResult.ManualSetupRequired)
+        // 2. Try to switch it on programmatically (works on most API<=25 builds).
+        val toggled = tryEnableAp()
+        // 3. Poll in the background; only deep-link into settings if it stays off.
+        Thread {
+            var openedSettings = false
+            var waited = 0
+            while (waited < 60) {
+                if (isApActive()) {
+                    deliverReady()
+                    return@Thread
+                }
+                if (!openedSettings && waited >= (if (toggled) 20 else 6)) {
+                    openedSettings = true
+                    openHotspotSettings()
+                }
+                try {
+                    Thread.sleep(1000)
+                } catch (_: InterruptedException) {
+                    return@Thread
+                }
+                waited++
+            }
+            postResult(HotspotResult.Failed("hotspot did not turn on"))
+        }.apply { isDaemon = true }.start()
+    }
+
+    @Volatile
+    private var callback: ((HotspotResult) -> Unit)? = null
+
+    private fun postResult(result: HotspotResult) {
+        val cb = callback ?: return
+        android.os.Handler(android.os.Looper.getMainLooper()).post { cb(result) }
+    }
+
+    private fun deliverReady() {
+        val cfg = readApConfig()
+        val ip = hotspotGatewayIp()
+        LogStore.i("Legacy hotspot ready: ssid=${cfg?.first} ip=$ip")
+        postResult(HotspotResult.Ready(cfg?.first ?: "AndroidHotspot", cfg?.second, ip))
+    }
+
+    private fun openHotspotSettings() {
+        try {
+            val intent = Intent("android.settings.WIFI_AP_SETTINGS")
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (_: Exception) {
+            try {
+                context.startActivity(
+                    Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
+            } catch (e: Exception) {
+                LogStore.w("Could not open hotspot settings: ${e.message}")
+            }
+        }
     }
 
     @Suppress("UNNECESSARY_SAFE_CALL")
@@ -144,6 +203,33 @@ class LegacyHotspotController(private val context: Context) : HotspotController 
             (result as? Boolean) == true
         } catch (_: Exception) {
             false
+        }
+    }
+
+    private fun tryEnableAp(): Boolean {
+        return try {
+            val method = wm?.javaClass?.getMethod("setWifiApEnabled", WifiConfiguration::class.java, Boolean::class.javaPrimitiveType)
+            method?.isAccessible = true
+            val ok = method?.invoke(wm, null, true) as? Boolean
+            LogStore.i("setWifiApEnabled reflection result: $ok")
+            ok == true
+        } catch (e: Exception) {
+            LogStore.w("setWifiApEnabled not available: ${e.message}")
+            false
+        }
+    }
+
+    /** Reads (ssid, password) via the hidden tethering API, best-effort. */
+    fun readApConfig(): Pair<String?, String?>? {
+        return try {
+            val method = wm?.javaClass?.getMethod("getWifiApConfiguration")
+            val cfg = method?.invoke(wm) as? WifiConfiguration ?: return null
+            Pair(
+                cfg.SSID?.removeSurrounding("\""),
+                cfg.preSharedKey?.removeSurrounding("\"")
+            )
+        } catch (_: Exception) {
+            null
         }
     }
 

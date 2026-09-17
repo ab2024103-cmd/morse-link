@@ -1,6 +1,7 @@
 package com.morselink.app.feature.transfer
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -44,7 +45,18 @@ class TransferFragment : Fragment() {
     private var _binding: FragmentTransferBinding? = null
     private val binding get() = _binding!!
 
+    private val qrScanLauncher = registerForActivityResult(
+        androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
+    ) { res ->
+        if (res.resultCode == android.app.Activity.RESULT_OK) {
+            val text = res.data?.getStringExtra(QrScanActivity.EXTRA_RESULT)
+            if (!text.isNullOrBlank()) handleScannedText(text)
+        }
+    }
+
     private var mode = Mode.SEND
+    private var sendingAdapter: TransferItemsAdapter? = null
+    private var receivingAdapter: TransferItemsAdapter? = null
     private var pairingCollapsed = false
     private var lastPairingFaceConnected = false
     private var peerClickPending = false
@@ -79,6 +91,10 @@ class TransferFragment : Fragment() {
 
         binding.sendingList.layoutManager = LinearLayoutManager(requireContext())
         binding.receivingList.layoutManager = LinearLayoutManager(requireContext())
+        sendingAdapter = TransferItemsAdapter(emptyList())
+        receivingAdapter = TransferItemsAdapter(emptyList())
+        binding.sendingList.adapter = sendingAdapter
+        binding.receivingList.adapter = receivingAdapter
 
         binding.pairingToggle.setOnClickListener {
             pairingCollapsed = !pairingCollapsed
@@ -94,15 +110,25 @@ class TransferFragment : Fragment() {
             }
         }
 
+        binding.buttonScanQr.setOnClickListener {
+            try {
+                qrScanLauncher.launch(Intent(requireContext(), QrScanActivity::class.java))
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), R.string.transfer_camera_needed, Toast.LENGTH_SHORT).show()
+            }
+        }
+
         binding.buttonManualConnect.setOnClickListener {
             val hostPort = binding.manualHost.text.toString().trim()
             if (hostPort.isEmpty()) return@setOnClickListener
             val parts = hostPort.split(":")
             val host = parts[0]
             val port = parts.getOrNull(1)?.toIntOrNull() ?: LanTransport.TCP_PORT
+            showConnecting(host, host)
             viewLifecycleOwner.lifecycleScope.launch {
                 val ok = TransferEngine.connectManual(host, port)
                 if (!ok) {
+                    hideConnecting()
                     Toast.makeText(requireContext(), R.string.transfer_no_devices, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -230,9 +256,59 @@ class TransferFragment : Fragment() {
         binding.manualConnectRow.visibility = if (usingLan) View.VISIBLE else View.GONE
     }
 
+    /**
+     * QR payload formats (m4): "host", "host:port",
+     * "morselink://connect?host=H&port=P" for LAN connects, or a WebShare
+     * URL (http://ip:33455/#t=token) which opens in the browser.
+     */
+    private fun handleScannedText(raw: String) {
+        val t = raw.trim()
+        if (t.startsWith("morselink://", ignoreCase = true)) {
+            val host = Regex("host=([^&]+)").find(t)?.groupValues?.get(1)
+            val port = Regex("port=(\\d+)").find(t)?.groupValues?.get(1)?.toIntOrNull()
+                ?: LanTransport.TCP_PORT
+            if (!host.isNullOrBlank()) {
+                connectScanned(host, port)
+            } else {
+                Toast.makeText(requireContext(), R.string.transfer_no_devices, Toast.LENGTH_SHORT).show()
+            }
+            return
+        }
+        if (t.startsWith("http://", ignoreCase = true) || t.startsWith("https://", ignoreCase = true)) {
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setMessage(R.string.transfer_scan_open_web)
+                .setPositiveButton(R.string.action_yes) { _, _ ->
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, android.net.Uri.parse(t)))
+                    } catch (e: Exception) {
+                        Toast.makeText(requireContext(), R.string.transfer_no_devices, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton(R.string.action_cancel, null)
+                .show()
+            return
+        }
+        val parts = t.split(":")
+        val host = parts[0]
+        val port = parts.getOrNull(1)?.toIntOrNull() ?: LanTransport.TCP_PORT
+        if (host.isNotBlank()) connectScanned(host, port)
+    }
+
+    private fun connectScanned(host: String, port: Int) {
+        showConnecting(host, host)
+        viewLifecycleOwner.lifecycleScope.launch {
+            val ok = TransferEngine.connectManual(host, port)
+            if (!ok) {
+                hideConnecting()
+                Toast.makeText(requireContext(), R.string.transfer_no_devices, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun connectTo(peer: DiscoveredPeer) {
         if (peerClickPending) return
         peerClickPending = true
+        showConnecting(peer.name, peer.deviceId)
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 TransferEngine.connectPeer(peer)
@@ -240,6 +316,26 @@ class TransferFragment : Fragment() {
                 peerClickPending = false
             }
         }
+    }
+
+    /** Sender-side feedback while the peer handshake/consent round-trip runs. */
+    private var connectingPeerId: String? = null
+
+    private fun showConnecting(name: String, peerId: String?) {
+        connectingPeerId = peerId
+        binding.connectingRow.visibility = View.VISIBLE
+        binding.connectingLabel.text = getString(R.string.connecting_to, name) +
+            "\n" + getString(R.string.connecting_hint)
+        // Safety: never spin forever if nothing comes back.
+        viewLifecycleOwner.lifecycleScope.launch {
+            kotlinx.coroutines.delay(30000)
+            if (connectingPeerId == peerId) hideConnecting()
+        }
+    }
+
+    private fun hideConnecting() {
+        connectingPeerId = null
+        binding.connectingRow.visibility = View.GONE
     }
 
     private fun openPicker() {
@@ -267,8 +363,10 @@ class TransferFragment : Fragment() {
                     TransferEngine.items.collect { items ->
                         val sending = items.filter { it.direction == com.morselink.app.core.model.TransferDirection.SENDING }
                         val receiving = items.filter { it.direction == com.morselink.app.core.model.TransferDirection.RECEIVING }
-                        binding.sendingList.adapter = TransferItemsAdapter(sending)
-                        binding.receivingList.adapter = TransferItemsAdapter(receiving)
+                        // Update the existing adapters: reassigning new ones
+                        // every 200 ms reset scroll and flickered (m9).
+                        sendingAdapter?.update(sending)
+                        receivingAdapter?.update(receiving)
                         renderStatusLine(sending + receiving)
                     }
                 }
@@ -277,6 +375,7 @@ class TransferFragment : Fragment() {
     }
 
     private fun renderSession(active: Boolean, peerName: String?, transport: TransportType?) {
+        if (active) hideConnecting()
         val title = if (active) {
             getString(R.string.transfer_connected_to, peerName ?: "")
         } else {

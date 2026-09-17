@@ -27,8 +27,14 @@ import java.io.File
  * shared with the queue sheet via [bindRow] so both surfaces always match.
  */
 class TransferItemsAdapter(
-    private val items: List<TransferItem>
+    private var items: List<TransferItem>
 ) : RecyclerView.Adapter<TransferItemsAdapter.Holder>() {
+
+    /** Swap the dataset in place: keeps scroll position and avoids flicker. */
+    fun update(newItems: List<TransferItem>) {
+        items = newItems
+        notifyDataSetChanged()
+    }
 
     class Holder(v: View) : RecyclerView.ViewHolder(v) {
         val icon: ImageView = v.findViewById(R.id.item_icon)

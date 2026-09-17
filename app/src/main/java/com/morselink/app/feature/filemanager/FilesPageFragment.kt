@@ -58,6 +58,8 @@ class FilesPageFragment : Fragment(), PageWithItems {
     private var pickMode = false
     private var categoryOffset = 0
     private var categoryReachedEnd = false
+    private var categoryLoading = false
+    private var categoryError = false
     private val categoryItems = ArrayList<MediaItem>()
 
     private val parentManager: FileManagerFragment?
@@ -164,9 +166,12 @@ class FilesPageFragment : Fragment(), PageWithItems {
             for (uri in SafStore.persistedGrants()) {
                 rows.add(FolderEntry(SafStore.treeLabel(uri), uri, SafStore.treeRootDocumentUri(uri)))
             }
-            if (canBrowseInternal()) {
-                rows.add(FolderEntry(getString(R.string.files_internal_storage), null, File("/storage/emulated/0")))
-            }
+            rows.add(
+                FolderEntry(
+                    getString(R.string.files_internal_storage), null,
+                    if (canBrowseInternal()) File("/storage/emulated/0") else LockedStorage
+                )
+            )
             rows.add(AddFolderEntry())
             withContext(Dispatchers.Main) {
                 binding.loading.visibility = View.GONE
@@ -185,6 +190,9 @@ class FilesPageFragment : Fragment(), PageWithItems {
         }
     }
 
+    /** Marker for the internal-storage row when all-files access is missing. */
+    private object LockedStorage
+
     private fun canBrowseInternal(): Boolean {
         if (Permissions.hasAllFilesAccess(requireContext())) return true
         return Build.VERSION.SDK_INT < 29 &&
@@ -196,32 +204,53 @@ class FilesPageFragment : Fragment(), PageWithItems {
     private fun loadCategory(category: MediaCategory) {
         binding.addressBar.visibility = View.VISIBLE
         renderBreadcrumb(listOf(getString(R.string.files_files), categoryLabel(category)))
-        binding.loading.visibility = View.VISIBLE
         categoryOffset = 0
         categoryReachedEnd = false
         categoryItems.clear()
         loadCategoryMore(category)
     }
 
-    private fun isLoading(): Boolean = binding.loading.visibility == View.VISIBLE
+    private fun isLoading(): Boolean = categoryLoading || binding.loading.visibility == View.VISIBLE
 
     private fun loadCategoryMore(category: MediaCategory) {
-        if (isLoading()) return
+        if (categoryLoading) return
+        categoryLoading = true
+        categoryError = false
         binding.loading.visibility = View.VISIBLE
+        binding.empty.visibility = View.GONE
         val query = parentManager?.searchQuery?.takeIf { it.isNotEmpty() }
         val sortKey = parentManager?.sortKey ?: com.morselink.app.core.media.SortKey.DATE
         val descending = parentManager?.sortDescending ?: true
         viewLifecycleOwner.lifecycleScope.launch {
             val page = withContext(Dispatchers.IO) {
-                MediaLibrary.page(category, categoryOffset, 100, sortKey, descending, query)
+                try {
+                    MediaLibrary.page(category, categoryOffset, 100, sortKey, descending, query)
+                } catch (e: Exception) {
+                    com.morselink.app.core.logging.LogStore.e("Files category load failed", e)
+                    null
+                }
             }
             withContext(Dispatchers.Main) {
+                categoryLoading = false
+                binding.loading.visibility = View.GONE
+                if (page == null) {
+                    categoryError = true
+                    binding.empty.visibility = View.VISIBLE
+                    binding.empty.text = getString(R.string.files_load_failed)
+                    binding.empty.setOnClickListener {
+                        loadCategory(category)
+                    }
+                    return@withContext
+                }
                 categoryItems.addAll(page)
                 categoryOffset += page.size
                 categoryReachedEnd = page.size < 100
-                binding.loading.visibility = View.GONE
                 binding.empty.visibility =
                     if (categoryItems.isEmpty()) View.VISIBLE else View.GONE
+                if (categoryItems.isEmpty()) {
+                    binding.empty.text = getString(R.string.history_empty)
+                    binding.empty.setOnClickListener(null)
+                }
                 val rows = ArrayList<Any>(
                     categoryItems.map { m ->
                         FileEntry(m.name, m.size, m.mime, m.uri)
@@ -308,6 +337,32 @@ class FilesPageFragment : Fragment(), PageWithItems {
                 binding.recycler.adapter = FilesAdapter(rows)
             }
         }
+    }
+
+    /** Android 11+: browsing all of storage needs the All-files-access grant. */
+    private fun promptAllFilesAccess() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.files_all_files_title)
+            .setMessage(R.string.files_all_files_message)
+            .setPositiveButton(R.string.action_open_settings) { d, _ ->
+                d.dismiss()
+                try {
+                    startActivity(
+                        Intent(
+                            android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                            Uri.parse("package:" + requireContext().packageName)
+                        )
+                    )
+                } catch (_: Exception) {
+                    try {
+                        startActivity(Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION))
+                    } catch (_: Exception) {
+                        Toast.makeText(requireContext(), R.string.state_failed, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton(R.string.action_cancel, null)
+            .show()
     }
 
     private fun createFolder() {
@@ -509,20 +564,17 @@ class FilesPageFragment : Fragment(), PageWithItems {
                     h.name.text = row.name
                     h.count.text = ""
                     h.root.setOnClickListener {
-                        when (row.docUri) {
+                        when (val doc = row.docUri) {
                             is Uri -> {
                                 state = BrowseState.SafFolder(
                                     row.treeUri ?: return@setOnClickListener,
-                                    row.docUri as Uri,
+                                    doc,
                                     listOf(row.name)
                                 )
                                 loadState()
                             }
                             is File -> {
-                                state = BrowseState.PlainFolder(
-                                    row.docUri as File,
-                                    listOf(row.name)
-                                )
+                                state = BrowseState.PlainFolder(doc, listOf(row.name))
                                 loadState()
                             }
                             null -> {
@@ -530,6 +582,7 @@ class FilesPageFragment : Fragment(), PageWithItems {
                                 state = BrowseState.Category(MediaCategory.DOWNLOADS)
                                 loadState()
                             }
+                            else -> promptAllFilesAccess()
                         }
                     }
                 }
