@@ -51,13 +51,20 @@ object Ui {
             m.startsWith("image/") -> R.drawable.ic_cat_photos
             m.startsWith("video/") -> R.drawable.ic_cat_videos
             m.startsWith("audio/") -> R.drawable.ic_cat_music
-            m == "application/vnd.android.package-archive" || lower.endsWith(".apk") -> R.drawable.ic_cat_apps
+            m == "application/vnd.android.package-archive" || lower.endsWith(".apk") -> R.drawable.ic_file_apk
+            lower.endsWith(".pdf") -> R.drawable.ic_file_pdf
+            lower.endsWith(".doc") || lower.endsWith(".docx") || lower.endsWith(".rtf") ||
+                lower.endsWith(".odt") || m.contains("word") -> R.drawable.ic_file_doc
+            lower.endsWith(".xls") || lower.endsWith(".xlsx") || lower.endsWith(".csv") ||
+                lower.endsWith(".ods") || m.contains("excel") || m.contains("sheet") -> R.drawable.ic_file_xls
+            lower.endsWith(".ppt") || lower.endsWith(".pptx") || lower.endsWith(".odp") ||
+                m.contains("powerpoint") || m.contains("presentation") -> R.drawable.ic_file_ppt
+            lower.endsWith(".epub") || lower.endsWith(".mobi") || lower.endsWith(".azw3") -> R.drawable.ic_file_epub
             lower.endsWith(".zip") || lower.endsWith(".rar") || lower.endsWith(".7z") ||
-                lower.endsWith(".tar") || lower.endsWith(".gz") -> R.drawable.ic_cat_archives
-            lower.endsWith(".epub") || lower.endsWith(".mobi") -> R.drawable.ic_cat_ebooks
-            m.startsWith("text/") || m == "application/pdf" || m.contains("word") ||
-                m.contains("excel") || m.contains("powerpoint") || m.contains("presentation") ||
-                m.contains("sheet") -> R.drawable.ic_cat_documents
+                lower.endsWith(".tar") || lower.endsWith(".gz") -> R.drawable.ic_file_zip
+            lower.endsWith(".html") || lower.endsWith(".htm") || lower.endsWith(".xml") ||
+                lower.endsWith(".json") -> R.drawable.ic_file_html
+            m.startsWith("text/") -> R.drawable.ic_file_txt
             else -> R.drawable.ic_cat_files
         }
     }

@@ -144,7 +144,8 @@ object MediaLibrary {
         limit: Int,
         sortKey: SortKey,
         descending: Boolean,
-        query: String?
+        query: String?,
+        folder: String? = null
     ): List<MediaItem> {
         val context = MorselinkServices.appContext
         val uri = if (category == MediaCategory.DOWNLOADS && Build.VERSION.SDK_INT < 29) {
@@ -176,6 +177,12 @@ object MediaLibrary {
             )?.absolutePath ?: "/Download"
             selection = (selection?.plus(" AND ") ?: "") + "${MediaStore.MediaColumns.DATA} LIKE ?"
             args.add("$dl%")
+        }
+        if (!folder.isNullOrBlank()) {
+            // Folder browse (WebShare a2/a3): filter by parent directory name.
+            val esc = folder.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+            selection = (selection?.plus(" AND ") ?: "") + "${MediaStore.MediaColumns.DATA} LIKE ? ESCAPE '\\'"
+            args.add("%/" + esc + "/%")
         }
         if (!query.isNullOrBlank()) {
             val like = "%" + query.replace("%", "").replace("_", "") + "%"
@@ -225,7 +232,13 @@ object MediaLibrary {
                 while (cursor.moveToNext()) {
                     val id = cursor.getLong(idCol)
                     val contentUri = ContentUris.withAppendedId(baseUri(category), id)
-                    val name = cursor.getString(nameCol) ?: "file"
+                    val dataPath = if (dataCol >= 0) cursor.getString(dataCol) else null
+                    // DISPLAY_NAME is often null on older MediaStore rows (Android 6
+                    // Files collection) — fall back to the file's real name from DATA,
+                    // never a generic "file".
+                    val name = cursor.getString(nameCol)
+                        ?: dataPath?.trimEnd('/')?.substringAfterLast('/')
+                        ?: "file"
                     val mime = cursor.getString(mimeCol) ?: guessMime(name)
                     out.add(
                         MediaItem(
@@ -238,7 +251,7 @@ object MediaLibrary {
                             dateTakenMs = if (takenCol >= 0 && !cursor.isNull(takenCol)) cursor.getLong(takenCol) else 0L,
                             durationMs = if (durCol >= 0 && !cursor.isNull(durCol)) cursor.getLong(durCol) else 0L,
                             artist = if (artistCol >= 0 && !cursor.isNull(artistCol)) cursor.getString(artistCol) else null,
-                            path = if (dataCol >= 0) cursor.getString(dataCol) else null
+                            path = dataPath
                         )
                     )
                 }
@@ -252,6 +265,32 @@ object MediaLibrary {
             }
         }
         return out
+    }
+
+    /** Folder (parent directory) counts for a category, largest first. */
+    fun folderCounts(category: MediaCategory): List<Pair<String, Int>> {
+        val context = MorselinkServices.appContext
+        val selection = selectionFor(category).first
+        val args = selectionFor(category).second.toTypedArray()
+        val counts = HashMap<String, Int>()
+        try {
+            context.contentResolver.query(
+                baseUri(category), arrayOf(MediaStore.MediaColumns.DATA), selection, args, null
+            )?.use { cursor ->
+                while (cursor.moveToNext()) {
+                    val p = cursor.getString(0) ?: continue
+                    val label = p.trimEnd('/').substringBeforeLast('/').substringAfterLast('/')
+                    if (label.isEmpty()) continue
+                    counts[label] = (counts[label] ?: 0) + 1
+                }
+            }
+        } catch (e: Exception) {
+            com.morselink.app.core.logging.LogStore.e("Media folderCounts failed (${category.key})", e)
+        }
+        return counts.entries
+            .sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key })
+            .take(300)
+            .map { it.key to it.value }
     }
 
     fun count(category: MediaCategory, query: String? = null): Int {

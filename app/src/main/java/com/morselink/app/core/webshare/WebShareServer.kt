@@ -323,12 +323,21 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         val mediaCategory = MediaCategory.fromKey(category)
             ?: return newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "unknown category")).noStore()
         val query = session.parameters["q"]?.firstOrNull()?.trim()?.takeIf { it.isNotEmpty() }
-        val page = MediaLibrary.page(mediaCategory, cursor, pageSize, com.morselink.app.core.media.SortKey.DATE, true, query)
+        val folder = session.parameters["folder"]?.firstOrNull()?.takeIf { it.isNotEmpty() }
+        val page = MediaLibrary.page(mediaCategory, cursor, pageSize, com.morselink.app.core.media.SortKey.DATE, true, query, folder)
         for (m in page) {
             items.put(mediaJson(m))
         }
         json.put("items", items)
         if (page.size == pageSize) json.put("nextCursor", cursor + page.size)
+        if (cursor == 0 && (mediaCategory == MediaCategory.PHOTOS || mediaCategory == MediaCategory.VIDEOS)) {
+            // Folder sidebar with counts (reference a2/a3) — full list, not just this page.
+            val folders = JSONArray()
+            for (f in MediaLibrary.folderCounts(mediaCategory)) {
+                folders.put(JSONObject().put("name", f.first).put("count", f.second))
+            }
+            json.put("folders", folders)
+        }
         return newJson(Response.Status.OK, json).noStore()
     }
 
@@ -345,10 +354,10 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             .put("hasThumb", true)
     }
 
-    /** Last path segment (e.g. Pictures/Screenshots -> Screenshots). */
+    /** Parent folder display name (e.g. .../DCIM/Camera/IMG_1.jpg -> Camera). */
     private fun folderLabel(m: com.morselink.app.core.media.MediaItem): String {
         val p = m.path ?: return ""
-        return p.trimEnd('/').substringAfterLast('/')
+        return p.trimEnd('/').substringBeforeLast('/').substringAfterLast('/')
     }
 
     /** Returns (items, nextCursor, folders) for a Downloads-relative path. */

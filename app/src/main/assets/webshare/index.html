@@ -61,18 +61,6 @@
   #sendTop:active { transform: scale(.97); }
   #sendTop svg { width: 16px; height: 16px; }
 
-  /* upload banner */
-  #uploadbar { display: none; align-items: center; gap: 12px; padding: 10px clamp(16px, 3vw, 30px);
-               background: var(--panel); border-bottom: 1px solid var(--border); }
-  #uploadbar.show { display: flex; }
-  #uploadbar .ub-name { font-size: 13px; font-weight: 600; min-width: 140px; max-width: 260px;
-                        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  #uploadbar .ub-track { flex: 1; height: 10px; background: var(--row); border-radius: 6px; overflow: hidden; }
-  #uploadbar .ub-fill { height: 100%; width: 0; border-radius: 6px;
-                        background: linear-gradient(90deg, #d7d7d7, #fff); transition: width .2s; }
-  #uploadbar.done .ub-fill { background: var(--green); }
-  #uploadbar .ub-pct { font-size: 12px; color: var(--muted); min-width: 42px; text-align: right; }
-
   .wrap { max-width: 1100px; width: 100%; margin: 0 auto; padding: 20px clamp(14px, 3vw, 30px) 150px; }
 
   /* ---------- category toolbar (search / sort / selection) ---------- */
@@ -84,12 +72,32 @@
       border-radius: 10px; padding: 9px 10px; font-size: 13px; outline: none; }
   .selinfo { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
 
-  /* ---------- folder chips (photos / videos) ---------- */
-  #folders { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: thin; }
-  #folders button { border: 1px solid var(--border); background: var(--panel); color: var(--muted);
-      border-radius: 999px; padding: 7px 14px; font-size: 12.5px; cursor: pointer; white-space: nowrap; }
-  #folders button.active { background: var(--green); border-color: var(--green); color: #fff; }
-  #folders button .n { opacity: .7; margin-left: 4px; font-size: 11px; }
+  /* ---------- category layout: folder sidebar + content (reference a2/a3) ---------- */
+  .catLayout { display: flex; gap: 18px; align-items: flex-start; }
+  .catSide { width: 200px; flex: none; display: flex; flex-direction: column; gap: 4px;
+             background: var(--bg); }
+  .catSide .sf { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px;
+                 background: var(--panel); border: 1px solid var(--border); color: var(--muted);
+                 font-size: 13px; cursor: pointer; text-align: left; }
+  .catSide .sf:hover { color: var(--text); }
+  .catSide .sf.active { color: #fff; border-color: var(--green); background: var(--green-soft); }
+  .catSide .sf .fn { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .catSide .sf .n { font-size: 11px; opacity: .7; }
+  .catMain { flex: 1; min-width: 0; }
+  @media (max-width: 760px) {
+    .catLayout { flex-direction: column; }
+    .catSide { width: 100%; flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+    .catSide .sf { flex: none; }
+  }
+
+  /* ---------- document type badges ---------- */
+  .docic { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center;
+           font-size: 10px; font-weight: 800; letter-spacing: .02em; color: #fff; flex: none; }
+  .docic.pdf { background: #b3363b; } .docic.doc { background: #2f6fc4; }
+  .docic.xls { background: #1f8a55; } .docic.ppt { background: #c2671c; }
+  .docic.txt { background: #5a6270; } .docic.epub { background: #7d4bbd; }
+  .docic.zip { background: #9a7b28; } .docic.apk { background: #3d9e57; }
+  .docic.htm { background: #c2581c; } .docic.gen { background: #44464f; }
 
   /* ---------- home dashboard ---------- */
   .hero { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
@@ -185,7 +193,8 @@
 
   /* ---------- files browser ---------- */
   #filesLayout { display: flex; gap: 18px; align-items: flex-start; }
-  #fsSidebar { width: 190px; flex: none; display: flex; flex-direction: column; gap: 4px; }
+  #fsSidebar { width: 190px; flex: none; display: flex; flex-direction: column; gap: 4px;
+               background: var(--bg); }
   #fsSidebar .sf { display: flex; align-items: center; gap: 9px; padding: 8px 12px; border-radius: 10px;
                    background: var(--panel); border: 1px solid var(--border); color: var(--muted);
                    font-size: 13px; cursor: pointer; }
@@ -229,6 +238,8 @@
                 font-weight: 600; cursor: pointer; white-space: nowrap; }
   #bar .go { background: var(--green); color: #fff; box-shadow: 0 5px 16px var(--green-soft); }
   #bar .alt { background: var(--row); color: var(--text); }
+  body.playing #bar { bottom: 96px; }
+  body.playing #uploads { bottom: 168px; }
 
   /* ---------- upload toasts ---------- */
   #uploads { position: fixed; right: 16px; bottom: 90px; width: 300px; max-width: calc(100vw - 32px);
@@ -360,12 +371,6 @@
       <span>Send files</span>
     </button>
   </header>
-
-  <div id="uploadbar">
-    <span class="ub-name" id="ubName"></span>
-    <div class="ub-track"><div class="ub-fill" id="ubFill"></div></div>
-    <span class="ub-pct" id="ubPct">0%</span>
-  </div>
 
   <div class="wrap">
     <div id="err"></div>
@@ -620,7 +625,7 @@ function go(tab) {
   state.tab = tab;
   state.cursor = 0; state.items = []; state.nextCursor = null;
   state.selected = {}; state.folder = ""; state.q = ""; state.sort = "newest";
-  stopMedia();
+  closeViewer(); // the music player keeps playing across tabs
   document.querySelectorAll("#tabs button").forEach(function (b) {
     b.className = b.id === "tab-" + tab ? "active" : "";
   });
@@ -634,11 +639,12 @@ function go(tab) {
 function load() {
   var params = { category: state.tab, cursor: state.cursor, pageSize: 60 };
   if (state.q) params.q = state.q;
+  if (state.folder) params.folder = state.folder;
   api("/api/files", params).then(function (data) {
     if (state.cursor === 0) state.items = [];
     (data.items || []).forEach(function (it) { state.items.push(it); });
     state.nextCursor = data.nextCursor;
-    if (data.folders) state.folders = data.folders; else state.folders = [];
+    if (data.folders) state.folders = data.folders;
     render();
   }).catch(function (e) { showError(e); });
 }
@@ -652,7 +658,6 @@ $("more").onclick = function () {
 function sortedItems() {
   var items = state.items.slice();
   var folder = state.folder;
-  if (folder) items = items.filter(function (it) { return it.folder === folder; });
   if (state.sort === "oldest") items.sort(function (a, b) { return (a.date||0) - (b.date||0); });
   else if (state.sort === "name") items.sort(function (a, b) {
     return String(a.name).localeCompare(String(b.name)); });
@@ -748,52 +753,67 @@ function statCard(tab, value, label) {
 /* ---------- category views ---------- */
 function renderCategory(view) {
   var wrap = document.createElement("div");
-  if (state.tab === "photos" || state.tab === "videos" || state.tab === "apps") {
-    wrap.innerHTML = toolbarHtml() + '<div id="folders"></div><div id="list"></div>';
+  if (state.tab === "photos" || state.tab === "videos") {
+    // Reference a2/a3: folders sit in a sticky left sidebar and are browsable.
+    wrap.innerHTML = '<div class="catLayout">' +
+        '<aside class="catSide" id="catSide"></aside>' +
+        '<div class="catMain">' + toolbarHtml() + '<div id="list"></div></div>' +
+      '</div>';
+    view.appendChild(wrap);
+    bindToolbar();
+    renderFolderSide(wrap.querySelector("#catSide"));
+    makeSticky(wrap.querySelector("#catSide"), 12);
+    renderGrid(wrap.querySelector("#list"));
   } else {
     wrap.innerHTML = toolbarHtml() + '<div id="list"></div>';
-  }
-  view.appendChild(wrap);
-  bindToolbar();
-
-  if (state.tab === "photos" || state.tab === "videos") {
-    renderFolderChips(wrap.querySelector("#folders"));
-    renderGrid(wrap.querySelector("#list"));
-  } else if (state.tab === "music") {
-    renderMusicTable(wrap.querySelector("#list"));
-  } else if (state.tab === "documents") {
-    renderDocList(wrap.querySelector("#list"));
-  } else if (state.tab === "apps") {
-    renderFolderChips(wrap.querySelector("#folders"), true);
-    renderAppsGrid(wrap.querySelector("#list"));
+    view.appendChild(wrap);
+    bindToolbar();
+    if (state.tab === "music") {
+      renderMusicTable(wrap.querySelector("#list"));
+    } else if (state.tab === "documents") {
+      renderDocList(wrap.querySelector("#list"));
+    } else if (state.tab === "apps") {
+      renderAppsGrid(wrap.querySelector("#list"));
+    }
   }
   updateSelCount();
 }
 
-function renderFolderChips(el, isApps) {
+/* Pins a panel below the page header so it stays visible while scrolling. */
+function makeSticky(el, gap) {
+  if (!el) return;
+  var header = document.querySelector("header");
+  var top = (header ? header.offsetHeight : 56) + gap;
+  el.style.position = "sticky";
+  el.style.top = top + "px";
+  el.style.maxHeight = "calc(100vh - " + (top + 8) + "px)";
+  el.style.overflowY = "auto";
+}
+
+function renderFolderSide(el) {
   if (!el) return;
   el.innerHTML = "";
-  if (isApps) return;
-  var countsByFolder = {};
-  state.items.forEach(function (it) {
-    var f = it.folder || "Other";
-    countsByFolder[f] = (countsByFolder[f] || 0) + 1;
-  });
-  var folders = Object.keys(countsByFolder).sort(function (a, b) {
-    return countsByFolder[b] - countsByFolder[a];
-  });
-  function chip(label, key, count) {
+  var folders = state.folders || [];
+  var total = 0;
+  folders.forEach(function (f) { total += f.count; });
+  function item(label, key, count) {
     var b = document.createElement("button");
-    b.innerHTML = esc(label) + (count != null ? '<span class="n">' + count + '</span>' : "");
-    if ((state.folder || "All") === key) b.className = "active";
+    b.className = "sf" + ((state.folder || "All") === key ? " active" : "");
+    b.innerHTML = '<span class="fn">' + esc(label) + '</span>' +
+      (count != null ? '<span class="n">' + count + '</span>' : "");
     b.onclick = function () {
+      if ((state.folder || "All") === key) return;
       state.folder = key === "All" ? "" : key;
-      render();
+      state.cursor = 0; state.items = []; state.nextCursor = null;
+      load();
     };
     el.appendChild(b);
   }
-  chip("All", "All", state.items.length);
-  folders.forEach(function (f) { chip(f, f, countsByFolder[f]); });
+  item(state.tab === "photos" ? "All photos" : "All videos", "All", total || null);
+  folders.forEach(function (f) { item(f.name, f.name, f.count); });
+  if (!folders.length && state.folder) {
+    item(state.folder, state.folder, null);
+  }
 }
 
 function tileFor(item, idx) {
@@ -802,11 +822,16 @@ function tileFor(item, idx) {
   var el = document.createElement("div");
   el.className = "card" + (selected ? " selected" : "");
   var inner;
-  if (item.hasThumb && !isAppsTab()) {
+  if (isAppsTab()) {
+    // Real launcher icon; the emoji placeholder stays behind if it fails.
+    inner = '<div class="ph">&#128230;</div>' +
+      '<img loading="lazy" alt="" src="' + apiUrl("/thumbnail", {
+        kind: "apps", id: item.id }) + '" onerror="this.remove()">';
+  } else if (item.hasThumb) {
     inner = '<img loading="lazy" src="' + apiUrl("/thumbnail", {
       kind: state.tab, id: item.id }) + '" alt="">';
   } else {
-    inner = '<div class="ph">' + (isAppsTab() ? "&#128230;" : (state.tab === "videos" ? "&#127916;" : "&#128444;")) + "</div>";
+    inner = '<div class="ph">' + (state.tab === "videos" ? "&#127916;" : "&#128444;") + "</div>";
   }
   if (state.tab === "videos") {
     var d = fmtDur(item.duration);
@@ -815,7 +840,7 @@ function tileFor(item, idx) {
   }
   el.innerHTML = inner +
     '<div class="ck' + (selected ? " on" : "") + '">\u2713</div>' +
-    '<div class="nm">' + esc(item.name) + '</div>';
+    (isAppsTab() ? '<div class="nm">' + esc(item.name) + '</div>' : "");
   el.onclick = function (ev) {
     if (ev.target.classList && ev.target.classList.contains("ck")) return;
     openViewer(idx);
@@ -935,7 +960,7 @@ function renderDocList(list) {
     var row = document.createElement("div");
     row.className = "row" + (state.selected[key] ? " selected" : "");
     row.innerHTML =
-      '<div class="ic">' + docIcon(item) + '</div>' +
+      '<div class="ic">' + docBadge(item) + '</div>' +
       '<div class="meta"><div class="nm">' + esc(item.name) + '</div>' +
       '<div class="sub">' + fmt(item.size) + (item.date ? " · " + esc(fmtDate(item.date)) : "") + '</div></div>' +
       '<div class="act"><button title="Open">&#128194;</button></div>' +
@@ -957,15 +982,31 @@ function renderDocList(list) {
   if (!items.length) emptyState(list, "No documents found");
 }
 
-function docIcon(item) {
-  var m = item.mime || "";
-  if (m.indexOf("pdf") >= 0) return "&#128196;";
-  if (m.indexOf("text") >= 0) return "&#128209;";
-  if (m.indexOf("word") >= 0) return "&#128209;";
-  if (m.indexOf("sheet") >= 0 || m.indexOf("excel") >= 0) return "&#128202;";
-  if (m.indexOf("presentation") >= 0) return "&#128200;";
-  if (m.indexOf("epub") >= 0) return "&#128214;";
-  return "&#128196;";
+function docBadge(item) {
+  var name = item.name || "";
+  var ext = name.indexOf(".") >= 0 ? name.split(".").pop().toLowerCase() : "";
+  var known = {
+    pdf: "pdf", doc: "doc", docx: "doc", rtf: "doc", odt: "doc",
+    xls: "xls", xlsx: "xls", csv: "xls", ods: "xls",
+    ppt: "ppt", pptx: "ppt", odp: "ppt",
+    txt: "txt", log: "txt", md: "txt",
+    epub: "epub", mobi: "epub", azw3: "epub",
+    zip: "zip", rar: "zip", "7z": "zip", tar: "zip", gz: "zip",
+    apk: "apk", html: "htm", htm: "htm", xml: "htm", json: "htm"
+  };
+  var cls = known[ext];
+  if (!cls) {
+    var m = item.mime || "";
+    if (m.indexOf("pdf") >= 0) cls = "pdf";
+    else if (m.indexOf("word") >= 0) cls = "doc";
+    else if (m.indexOf("sheet") >= 0 || m.indexOf("excel") >= 0) cls = "xls";
+    else if (m.indexOf("presentation") >= 0) cls = "ppt";
+    else if (m.indexOf("epub") >= 0) cls = "epub";
+    else if (m.indexOf("zip") >= 0 || m.indexOf("rar") >= 0) cls = "zip";
+    else if (m.indexOf("text") >= 0) cls = "txt";
+  }
+  var label = ext && ext.length <= 5 ? ext.toUpperCase() : "FILE";
+  return '<span class="docic ' + (cls || "gen") + '">' + esc(label) + "</span>";
 }
 
 function emptyState(list, text) {
@@ -1026,10 +1067,11 @@ function renderFiles(view) {
     addr.appendChild(a);
     addr.appendChild(document.createTextNode(" / "));
   }
-  seg("storage", "/storage");
-  addr.appendChild(document.createTextNode("emulated / 0"));
+  // Every segment is a link; the storage/emulated/0 prefix all lead to the root.
+  seg("storage", rootPath);
+  seg("emulated", rootPath);
+  seg("0", rootPath);
   if (rel) {
-    addr.appendChild(document.createTextNode(" / "));
     var parts = rel.split("/");
     parts.forEach(function (p, i) {
       acc = acc + "/" + p;
@@ -1037,6 +1079,10 @@ function renderFiles(view) {
       else addr.appendChild(document.createTextNode(p));
     });
   }
+  // Keep the address bar (and, on wide screens, the quick-folder sidebar)
+  // pinned while the file list scrolls.
+  makeSticky(addr, 12);
+  if (window.innerWidth > 760) makeSticky(sidebar, 24 + addr.offsetHeight + 12);
 
   var list = d.querySelector("#fslist");
   if (state.fsError) {
@@ -1243,6 +1289,7 @@ function playMusic(item) {
 function playMusicUrl(title, url) {
   $("pTitle").textContent = title || "";
   $("player").className = "show";
+  document.body.classList.add("playing");
   audio.src = url;
   audio.play().catch(function () {});
 }
@@ -1269,12 +1316,8 @@ audio.addEventListener("pause", function () { $("pPlay").innerHTML = "&#9654;"; 
 $("pClose").onclick = function () {
   audio.pause();
   $("player").className = "";
+  document.body.classList.remove("playing");
 };
-function stopMedia() {
-  audio.pause();
-  $("player").className = "";
-  closeViewer();
-}
 
 /* ---------------- QR ---------------- */
 $("qrBtn").onclick = function () {
@@ -1286,19 +1329,8 @@ $("qrmodal").onclick = function (e) { if (e.target === $("qrmodal")) $("qrmodal"
 
 /* ---------------- uploads ---------------- */
 var CHUNK = 1024 * 1024;
-var activeUploads = 0;
-
-function uploadBanner(name, pct, done) {
-  var bar = $("uploadbar");
-  if (activeUploads <= 0 && !done) { bar.className = ""; return; }
-  bar.className = "show" + (done ? " done" : "");
-  $("ubName").textContent = name;
-  $("ubFill").style.width = Math.round(pct * 100) + "%";
-  $("ubPct").textContent = done ? "\u2713" : Math.round(pct * 100) + "%";
-}
 
 function uploadWidget(name) {
-  activeUploads++;
   var d = document.createElement("div");
   d.className = "up";
   d.innerHTML = '<div class="nm">' + esc(name) + '</div>' +
@@ -1308,20 +1340,11 @@ function uploadWidget(name) {
     setProgress: function (p) {
       d.querySelector(".fill").style.width = Math.round(p * 100) + "%";
       d.querySelector(".st").textContent = "Uploading… " + Math.round(p * 100) + "%";
-      uploadBanner(name, p, false);
     },
     done: function (ok) {
-      activeUploads--;
       d.querySelector(".fill").style.width = "100%";
       d.querySelector(".st").textContent = ok ? "\u2713 Received by phone" : "Failed";
       d.className = ok ? "up done" : "up err";
-      uploadBanner(name, 1, true);
-      if (activeUploads <= 0) {
-        setTimeout(function () {
-          $("uploadbar").className = "";
-          activeUploads = 0;
-        }, 2500);
-      }
       setTimeout(function () { d.remove(); }, 6000);
     }
   };

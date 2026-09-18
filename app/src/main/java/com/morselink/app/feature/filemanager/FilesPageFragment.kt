@@ -253,7 +253,7 @@ class FilesPageFragment : Fragment(), PageWithItems {
                 }
                 val rows = ArrayList<Any>(
                     categoryItems.map { m ->
-                        FileEntry(m.name, m.size, m.mime, m.uri)
+                        FileEntry(m.name, m.size, m.mime, m.uri, m.path)
                     }
                 )
                 binding.recycler.adapter = FilesAdapter(rows)
@@ -315,7 +315,7 @@ class FilesPageFragment : Fragment(), PageWithItems {
                         if (f.isDirectory) {
                             FolderEntry(f.name, null, f)
                         } else {
-                            FileEntry(f.name, f.length(), MediaLibrary.guessMime(f.name), "file://" + f.absolutePath)
+                            FileEntry(f.name, f.length(), MediaLibrary.guessMime(f.name), "file://" + f.absolutePath, f.absolutePath)
                         }
                     }?.sortedBy { it.javaClass.simpleName + it.toString() }
                 } catch (_: Exception) {
@@ -500,13 +500,51 @@ class FilesPageFragment : Fragment(), PageWithItems {
         _binding = null
     }
 
+    // ---------------- apk icons ----------------
+
+    private val apkIconCache = HashMap<String, android.graphics.drawable.Drawable?>()
+
+    /** Loads the embedded launcher icon of an apk file on disk (package archive). */
+    private fun loadApkIcon(target: ImageView, entry: FileEntry) {
+        val path = entry.path ?: return
+        target.tag = path
+        if (apkIconCache.containsKey(path)) {
+            val cached = apkIconCache[path]
+            if (cached != null) target.setImageDrawable(cached)
+            else target.setImageResource(R.drawable.ic_file_apk)
+            return
+        }
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val icon = try {
+                val pm = requireContext().packageManager
+                val info = pm.getPackageArchiveInfo(path, 0)
+                val ai = info?.applicationInfo
+                if (ai != null) {
+                    // Older platforms only resolve resources via these fields.
+                    ai.sourceDir = path
+                    ai.publicSourceDir = path
+                }
+                ai?.loadIcon(pm)
+            } catch (_: Exception) {
+                null
+            }
+            apkIconCache[path] = icon
+            withContext(Dispatchers.Main) {
+                if (target.tag == path) {
+                    if (icon != null) target.setImageDrawable(icon)
+                    else target.setImageResource(R.drawable.ic_file_apk)
+                }
+            }
+        }
+    }
+
     // ---------------- row models ----------------
 
     class Header(val label: String)
     class CatEntry(val label: String, val icon: Int, var count: Int, val category: MediaCategory?)
     class FolderEntry(val name: String, val treeUri: Uri?, val docUri: Any?) // docUri: Uri (SAF) or File (plain)
     class AddFolderEntry
-    class FileEntry(val name: String, val size: Long, val mime: String, val uri: String)
+    class FileEntry(val name: String, val size: Long, val mime: String, val uri: String, val path: String? = null)
 
     private inner class FilesAdapter(val rows: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -600,7 +638,15 @@ class FilesPageFragment : Fragment(), PageWithItems {
                     h.title.text = row.name
                     h.subtitle.text = row.mime
                     h.meta.text = Fmt.bytes(row.size)
-                    h.thumb.setImageResource(Ui.iconForFile(row.name, row.mime))
+                    if (row.mime == "application/vnd.android.package-archive" ||
+                        row.name.endsWith(".apk", true)
+                    ) {
+                        // Show the app's own launcher icon when the apk is readable.
+                        h.thumb.setImageResource(R.drawable.ic_file_apk)
+                        loadApkIcon(h.thumb, row)
+                    } else {
+                        h.thumb.setImageResource(Ui.iconForFile(row.name, row.mime))
+                    }
                     if (SelectionState.isSelected(row.uri)) {
                         h.check.visibility = View.VISIBLE
                         h.check.contentDescription = getString(R.string.cd_selected)

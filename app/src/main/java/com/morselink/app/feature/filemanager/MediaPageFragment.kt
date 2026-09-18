@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.graphics.Bitmap
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -53,6 +54,11 @@ class MediaPageFragment : Fragment(), PageWithItems {
     class DateHeader(val key: String, val label: String, var count: Int)
     private val appItems = ArrayList<AppEntry>()
     private val appIconCache = HashMap<String, android.graphics.drawable.Drawable>()
+
+    /** Small LRU of MediaStore mini thumbnails (photos/videos). */
+    private val thumbCache = object : LinkedHashMap<Int, Bitmap>(32, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<Int, Bitmap>): Boolean = size > 32
+    }
     private var adapter: MediaAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -459,13 +465,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
             }
             val item = row as MediaItem
             if (holder is GridHolder) {
-                // Glide cancels the previous request bound to this recycled view —
-                // the recycling-token rule (spec Section 10.5).
-                Glide.with(holder.thumb)
-                    .load(Uri.parse(item.uri))
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_cat_photos)
-                    .into(holder.thumb)
+                loadMediaThumb(holder.thumb, item)
                 holder.gridLabel.visibility = View.VISIBLE
                 holder.gridLabel.text = dateLabel(item.dateModifiedSec)
                 if (categoryKey == "videos" && item.durationMs > 0) {
@@ -474,7 +474,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 } else {
                     holder.videoDuration.visibility = View.GONE
                 }
-                bindSelection(holder.itemView, holder.check, item.uri, mediaSelectable(item))
+                bindSelection(holder.itemView, holder.check, item.uri, mediaSelectable(item), showCircle = true)
                 holder.itemView.setOnLongClickListener { v ->
                     openUri(v, Uri.parse(item.uri), item.mime)
                     true
@@ -489,11 +489,15 @@ class MediaPageFragment : Fragment(), PageWithItems {
                     else -> holder.subtitle.text = dateLabel(item.dateModifiedSec)
                 }
                 holder.meta.text = Fmt.bytes(item.size)
-                Glide.with(holder.thumb)
-                    .load(Uri.parse(item.uri))
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_cat_music)
-                    .into(holder.thumb)
+                if (categoryKey == "photos" || categoryKey == "videos") {
+                    loadMediaThumb(holder.thumb, item)
+                } else {
+                    Glide.with(holder.thumb)
+                        .load(Uri.parse(item.uri))
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_cat_music)
+                        .into(holder.thumb)
+                }
                 bindSelection(holder.itemView, holder.check, item.uri, mediaSelectable(item))
                 holder.itemView.setOnLongClickListener { v ->
                     openUri(v, Uri.parse(item.uri), item.mime)
@@ -525,17 +529,74 @@ class MediaPageFragment : Fragment(), PageWithItems {
         root: View,
         check: ImageView,
         key: String,
-        item: Selectable
+        item: Selectable,
+        showCircle: Boolean = false
     ) {
         if (SelectionState.isSelected(key)) {
             check.visibility = View.VISIBLE
+            check.alpha = 1f
+            check.setImageResource(R.drawable.ic_check_circle)
             check.contentDescription = getString(R.string.cd_selected)
+        } else if (showCircle) {
+            // An empty circle on every tile signals "tap to select" (mlogs2).
+            check.visibility = View.VISIBLE
+            check.alpha = 0.6f
+            check.setImageResource(R.drawable.ic_circle)
+            check.contentDescription = getString(R.string.cd_not_selected)
         } else {
             check.visibility = View.GONE
             check.contentDescription = getString(R.string.cd_not_selected)
         }
         root.setOnClickListener {
             SelectionState.toggle(item)
+        }
+    }
+
+    /**
+     * MediaStore MINI_KIND thumbnails: far more reliable (and lighter) than
+     * full decodes through Glide on old devices — photos and videos actually
+     * show up in the grid (mlogs2).
+     */
+    private fun loadMediaThumb(target: ImageView, item: MediaItem) {
+        target.tag = item.id
+        val cached = synchronized(thumbCache) { thumbCache[item.id.toInt()] }
+        if (cached != null) {
+            target.setImageBitmap(cached)
+            return
+        }
+        target.setImageResource(if (categoryKey == "videos") R.drawable.ic_cat_videos else R.drawable.ic_cat_photos)
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            val bmp: Bitmap? = try {
+                if (categoryKey == "videos") {
+                    android.provider.MediaStore.Video.Thumbnails.getThumbnail(
+                        requireContext().contentResolver, item.id,
+                        android.provider.MediaStore.Video.Thumbnails.MINI_KIND, null
+                    )
+                } else {
+                    android.provider.MediaStore.Images.Thumbnails.getThumbnail(
+                        requireContext().contentResolver, item.id,
+                        android.provider.MediaStore.Images.Thumbnails.MINI_KIND, null
+                    )
+                }
+            } catch (_: Exception) {
+                null
+            }
+            if (bmp != null) {
+                synchronized(thumbCache) { thumbCache[item.id.toInt()] = bmp }
+            }
+            withContext(Dispatchers.Main) {
+                if (target.tag != item.id) return@withContext
+                if (bmp != null) {
+                    target.setImageBitmap(bmp)
+                } else {
+                    // Fall back to a full decode through Glide.
+                    Glide.with(target)
+                        .load(Uri.parse(item.uri))
+                        .centerCrop()
+                        .placeholder(R.drawable.ic_cat_photos)
+                        .into(target)
+                }
+            }
         }
     }
 
