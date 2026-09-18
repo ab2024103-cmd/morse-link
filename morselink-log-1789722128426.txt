@@ -1,0 +1,557 @@
+MorseLink 1.1.2 (5)
+Device: HUAWEI MYA-AL10 (Android 6.0, SDK 23)
+Exported: 2026-09-18 10:02:08.426
+
+===== APP LOG =====
+2026-09-17 18:56:40.309 I MorseLink 1.1.0 (3) started
+2026-09-17 18:56:40.310 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 18:56:40.317 I LAN: server listening on 33456
+2026-09-17 18:56:58.806 E CRASH: java.lang.IllegalStateException: Preference already has a SummaryProvider set. (full trace in the crash-reports section)
+2026-09-17 18:57:02.210 I MorseLink 1.1.0 (3) started
+2026-09-17 18:57:02.214 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 18:57:02.215 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 18:57:02.262 I LAN: server listening on 33456
+2026-09-17 18:57:24.220 I Legacy hotspot ready: ssid=                    ip=192.168.43.1
+2026-09-17 18:57:24.615 I WebShare: hotspot mode ready at http://192.168.43.1:33455/#t=d02239d0 (ssid=                   )
+2026-09-17 18:57:25.298 I WebShare: mDNS registered
+2026-09-17 18:57:46.180 E Media count() failed (documents) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=6813, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-17 18:57:46.346 E Media count() failed (ebooks) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=6813, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-17 18:57:46.571 E Media count() failed (archives) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=6813, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-17 18:57:46.615 E Media count() failed (apk_files) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=6813, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-17 18:57:46.645 E Media count() failed (large_files) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=6813, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-17 19:00:18.699 E CRASH: java.lang.IllegalStateException: Preference already has a SummaryProvider set. (full trace in the crash-reports section)
+2026-09-17 19:00:20.158 I MorseLink 1.1.0 (3) started
+2026-09-17 19:00:20.159 I LAN: server listening on 33456
+2026-09-17 19:00:20.160 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:00:20.161 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:00:23.402 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:00:24.135 I MorseLink 1.1.0 (3) started
+2026-09-17 19:00:24.136 I LAN: server listening on 33456
+2026-09-17 19:00:24.136 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:00:24.137 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:00:26.288 E CRASH: java.lang.IllegalStateException: Preference already has a SummaryProvider set. (full trace in the crash-reports section)
+2026-09-17 19:00:27.635 I MorseLink 1.1.0 (3) started
+2026-09-17 19:00:27.636 I LAN: server listening on 33456
+2026-09-17 19:00:27.636 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:00:27.637 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:01:35.352 I MorseLink 1.1.0 (3) started
+2026-09-17 19:01:35.353 I LAN: server listening on 33456
+2026-09-17 19:01:35.354 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:01:35.354 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:01:48.466 I Nearby: discovery started
+2026-09-17 19:01:48.466 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:02:07.035 I Nearby: discovery started
+2026-09-17 19:02:07.035 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:02:52.174 E CRASH: java.lang.IllegalStateException: Preference already has a SummaryProvider set. (full trace in the crash-reports section)
+2026-09-17 19:02:54.136 I MorseLink 1.1.0 (3) started
+2026-09-17 19:02:54.137 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:02:54.138 I LAN: server listening on 33456
+2026-09-17 19:02:54.138 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:18:08.090 I LAN: server listening on 33456
+2026-09-17 19:18:08.095 I MorseLink 1.1.0 (3) started
+2026-09-17 19:18:08.096 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:18:08.097 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:18:18.323 I Nearby: discovery started
+2026-09-17 19:18:18.323 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:18:36.750 I Nearby: discovery started
+2026-09-17 19:18:36.750 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:18:37.074 I Nearby: connection initiated by C41Y (TECNO KL4), incoming=true
+2026-09-17 19:18:37.076 I Consent requested for incoming connection from TECNO KL4 (NEARBY_CONNECTIONS)
+2026-09-17 19:18:45.293 I Consent for TECNO KL4: false
+2026-09-17 19:18:45.298 I Nearby: rejected connection from TECNO KL4
+2026-09-17 19:18:45.368 W Nearby: connection to C41Y failed: STATUS_CONNECTION_REJECTED
+2026-09-17 19:19:08.978 I Nearby: connection initiated by C41Y (TECNO KL4), incoming=true
+2026-09-17 19:19:08.979 I Consent requested for incoming connection from TECNO KL4 (NEARBY_CONNECTIONS)
+2026-09-17 19:19:12.906 I Consent for TECNO KL4: true
+2026-09-17 19:19:12.978 I Nearby: connected to C41Y
+2026-09-17 19:19:12.985 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-17 19:19:13.002 I Outgoing worker started
+2026-09-17 19:19:37.371 I Queued 1 outgoing file(s)
+2026-09-17 19:19:37.543 I Nearby: sending MorseLink.apk (6682970 bytes)
+2026-09-17 19:19:37.874 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:19:39.900 I Batch ac9f49eb-654e-40d6-9921-b445303f9c09 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:19:50.179 I Nearby: C41Y disconnected
+2026-09-17 19:19:50.180 I Nearby: session closed (peer disconnected)
+2026-09-17 19:19:50.184 I Nearby: discovery started
+2026-09-17 19:19:50.185 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:19:50.186 W Session lost (peer disconnected)
+2026-09-17 19:19:54.350 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:19:55.667 I MorseLink 1.1.0 (3) started
+2026-09-17 19:19:55.669 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:19:55.670 I LAN: server listening on 33456
+2026-09-17 19:19:55.670 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:19:59.291 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:20:43.458 I MorseLink 1.1.0 (3) started
+2026-09-17 19:20:43.459 I LAN: server listening on 33456
+2026-09-17 19:20:43.460 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:20:43.460 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:20:59.197 I Nearby: discovery started
+2026-09-17 19:20:59.198 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:21:16.519 I Nearby: discovery started
+2026-09-17 19:21:16.520 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:21:22.097 I Nearby: discovery started
+2026-09-17 19:21:22.098 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:21:46.769 I Nearby: connection initiated by 43KW (TECNO KL4), incoming=true
+2026-09-17 19:21:46.772 I Consent requested for incoming connection from TECNO KL4 (NEARBY_CONNECTIONS)
+2026-09-17 19:21:48.192 I Consent for TECNO KL4: true
+2026-09-17 19:21:48.223 I Nearby: connected to 43KW
+2026-09-17 19:21:48.230 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-17 19:21:48.251 I Outgoing worker started
+2026-09-17 19:23:04.822 I Queued 1 outgoing file(s)
+2026-09-17 19:23:05.012 I Nearby: sending morse-link.apk (8846248 bytes)
+2026-09-17 19:23:05.196 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:23:07.695 I Batch 7454f0b6-2f18-4a1b-96c7-e904d4bac68f done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:23:40.716 I Nearby: metadata received for VID_20260729_174853.mp4 (150783189 bytes)
+2026-09-17 19:24:14.202 I Nearby: metadata received for VID_20260729_174853.mp4 (150783189 bytes)
+2026-09-17 19:24:14.414 I Revived incoming row for VID_20260729_174853.mp4
+2026-09-17 19:24:23.076 I Nearby: metadata received for VID_20260729_174853.mp4 (150783189 bytes)
+2026-09-17 19:24:23.263 I Revived incoming row for VID_20260729_174853.mp4
+2026-09-17 19:24:31.468 I Batch in-1bf6e0d1-0989-467f-a4d8-e5c1c899b959 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-17 19:24:55.468 I Nearby: metadata received for VID_20260729_174853.mp4 (150783189 bytes)
+2026-09-17 19:25:01.407 I Batch in-db168e6d-b5a4-4da2-8629-f77b5f24eb91 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-17 19:25:15.036 I Nearby: metadata received for VID_20260729_174853.mp4 (150783189 bytes)
+2026-09-17 19:26:33.808 I WebShare: LAN mode ready at http://192.168.43.1:33455/#t=d2e7aeba
+2026-09-17 19:26:34.861 I WebShare: mDNS registered
+2026-09-17 19:26:45.246 I WebShare: stopped
+2026-09-17 19:26:49.413 I Legacy hotspot ready: ssid=                    ip=192.168.43.1
+2026-09-17 19:26:49.471 I WebShare: hotspot mode ready at http://192.168.43.1:33455/#t=ab8b9342 (ssid=                   )
+2026-09-17 19:26:50.217 I WebShare: mDNS registered
+2026-09-17 19:27:45.898 I Nearby: metadata received for Screenshot_20260917-192543.png (105353 bytes)
+2026-09-17 19:27:45.997 I Saved Screenshot_20260917-192543.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192543.png
+2026-09-17 19:27:46.159 I Nearby: metadata received for Screenshot_20260917-192532.png (107626 bytes)
+2026-09-17 19:27:46.244 I Saved Screenshot_20260917-192532.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192532.png
+2026-09-17 19:27:46.354 I Nearby: metadata received for Screenshot_20260917-192359.png (106017 bytes)
+2026-09-17 19:27:46.423 I Saved Screenshot_20260917-192359.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192359.png
+2026-09-17 19:27:54.927 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:28:02.109 I Batch in-2c193cbc-e3d0-4fad-a877-fb161ede4885 done: 3 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-17 19:30:24.028 I WebShare: auto-teardown (screen off, no client for 3 minutes)
+2026-09-17 19:30:24.035 I WebShare: stopped
+2026-09-17 19:31:18.672 I Nearby: metadata received for Screenshot_20260917-193100.png (63162 bytes)
+2026-09-17 19:31:20.600 I Saved Screenshot_20260917-193100.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-193100.png
+2026-09-17 19:31:20.603 I Batch in-49accbff-2f3f-47c5-9ac7-cee27584d2ae done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:31:20.767 I Nearby: metadata received for Screenshot_20260917-193052.png (118410 bytes)
+2026-09-17 19:31:24.753 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:31:29.317 I Saved Screenshot_20260917-193052.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-193052.png
+2026-09-17 19:31:29.321 I Batch in-950578b2-82fe-4748-b78b-3e233600715c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:31:29.554 I Nearby: metadata received for Screenshot_20260917-192832.png (339072 bytes)
+2026-09-17 19:31:40.924 I Saved Screenshot_20260917-192832.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192832.png
+2026-09-17 19:31:40.930 I Batch in-74f2ee24-b364-4fbf-89eb-20127885a533 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:32:22.306 I Nearby: metadata received for Screenshot_20260917-192825.png (43037 bytes)
+2026-09-17 19:32:22.357 I Saved Screenshot_20260917-192825.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192825.png
+2026-09-17 19:32:22.360 I Batch in-19c41634-7dc7-441b-bc12-fb35ee4c02b8 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:32:22.573 I Nearby: metadata received for Screenshot_20260917-192359.png (106017 bytes)
+2026-09-17 19:32:32.268 I Conflict for Screenshot_20260917-192359.png resolved as OVERWRITE
+2026-09-17 19:32:32.289 I Saved Screenshot_20260917-192359.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192359.png
+2026-09-17 19:32:32.292 I Batch in-3ea70735-075a-4b95-b69b-71b1c3f7cc56 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:32:32.420 I Nearby: metadata received for Screenshot_20260917-192543.png (105353 bytes)
+2026-09-17 19:32:32.492 I Saved Screenshot_20260917-192543.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192543.png
+2026-09-17 19:32:32.497 I Batch in-ec6f570d-ef1c-450a-a151-b19a6722412c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:32:32.617 I Nearby: metadata received for Screenshot_20260917-192532.png (107626 bytes)
+2026-09-17 19:32:32.701 I Saved Screenshot_20260917-192532.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260917-192532.png
+2026-09-17 19:32:32.704 I Batch in-0c1e1a9a-3492-4521-9660-64137b31d444 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-17 19:33:18.857 I Nearby: 43KW disconnected
+2026-09-17 19:33:18.858 I Nearby: session closed (peer disconnected)
+2026-09-17 19:33:18.858 W Session lost (peer disconnected)
+2026-09-17 19:33:22.099 I Nearby: discovery started
+2026-09-17 19:33:22.099 I Discovery started on NEARBY_CONNECTIONS
+2026-09-17 19:33:22.569 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:33:24.352 I MorseLink 1.1.0 (3) started
+2026-09-17 19:33:24.356 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:33:24.357 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:33:24.365 I LAN: server listening on 33456
+2026-09-17 19:33:27.998 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:37:59.462 I LAN: server listening on 33456
+2026-09-17 19:37:59.482 I MorseLink 1.1.0 (3) started
+2026-09-17 19:37:59.495 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:37:59.496 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:38:58.496 I Legacy hotspot ready: ssid=                    ip=192.168.43.1
+2026-09-17 19:38:58.889 I WebShare: hotspot mode ready at http://192.168.43.1:33455/#t=331fa7ef (ssid=                   )
+2026-09-17 19:38:59.528 I WebShare: mDNS registered
+2026-09-17 19:42:48.286 I WebShare: stopped
+2026-09-17 19:42:52.431 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:42:54.554 I MorseLink 1.1.0 (3) started
+2026-09-17 19:42:54.555 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:42:54.556 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:42:54.579 I LAN: server listening on 33456
+2026-09-17 19:42:58.263 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:44:26.575 I MorseLink 1.1.0 (3) started
+2026-09-17 19:44:26.576 I LAN: server listening on 33456
+2026-09-17 19:44:26.576 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:44:26.576 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:44:30.896 I Legacy hotspot ready: ssid=                    ip=192.168.43.1
+2026-09-17 19:44:31.249 I WebShare: hotspot mode ready at http://192.168.43.1:33455/#t=5bed0add (ssid=                   )
+2026-09-17 19:44:31.947 I WebShare: mDNS registered
+2026-09-17 19:46:33.866 I WebShare: stopped
+2026-09-17 19:46:37.803 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-17 19:46:39.151 I LAN: server listening on 33456
+2026-09-17 19:46:39.153 I MorseLink 1.1.0 (3) started
+2026-09-17 19:46:39.154 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-17 19:46:39.155 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-17 19:46:42.867 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-18 09:40:27.374 I MorseLink 1.1.0 (3) started
+2026-09-18 09:40:27.375 I LAN: server listening on 33456
+2026-09-18 09:40:27.376 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-18 09:40:27.377 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-18 09:40:37.560 I Legacy hotspot ready: ssid=                    ip=192.168.43.1
+2026-09-18 09:40:37.945 I WebShare: hotspot mode ready at http://192.168.43.1:33455/#t=15baa6ad (ssid=                   )
+2026-09-18 09:40:38.602 I WebShare: mDNS registered
+2026-09-18 09:42:08.930 I WebShare: stopped
+2026-09-18 09:42:13.502 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-18 09:42:14.981 I MorseLink 1.1.0 (3) started
+2026-09-18 09:42:14.982 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-18 09:42:14.982 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-18 09:42:14.984 I LAN: server listening on 33456
+2026-09-18 09:42:18.419 E CRASH: java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk) (full trace in the crash-reports section)
+2026-09-18 09:42:18.739 I LAN: server listening on 33456
+2026-09-18 09:42:18.740 I MorseLink 1.1.0 (3) started
+2026-09-18 09:42:18.741 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-18 09:42:18.742 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-18 10:01:55.520 I MorseLink 1.1.2 (5) started
+2026-09-18 10:01:55.522 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-18 10:01:55.526 W Previous run ended in a crash — see the crash-reports section in the log viewer
+2026-09-18 10:01:55.547 I LAN: server listening on 33456
+
+===== CRASH REPORTS =====
+
+==== CRASH 2026-09-17 18:56:58.797 thread=main ====
+java.lang.IllegalStateException: Preference already has a SummaryProvider set.
+	at androidx.preference.Preference.setSummary(Preference.java:763)
+	at com.morselink.app.feature.settings.SettingsFragment$PrefsRoot.onCreatePreferences(SettingsFragment.kt:98)
+	at androidx.preference.PreferenceFragmentCompat.onCreate(PreferenceFragmentCompat.java:161)
+	at androidx.fragment.app.Fragment.performCreate(Fragment.java:3095)
+	at androidx.fragment.app.FragmentStateManager.create(FragmentStateManager.java:516)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:274)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager.dispatchStateChange(FragmentManager.java:3206)
+	at androidx.fragment.app.FragmentManager.dispatchViewCreated(FragmentManager.java:3109)
+	at androidx.fragment.app.Fragment.performViewCreated(Fragment.java:3149)
+	at androidx.fragment.app.FragmentStateManager.createView(FragmentStateManager.java:600)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:278)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager$5.run(FragmentManager.java:661)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+
+==== CRASH 2026-09-17 19:00:18.697 thread=main ====
+java.lang.IllegalStateException: Preference already has a SummaryProvider set.
+	at androidx.preference.Preference.setSummary(Preference.java:763)
+	at com.morselink.app.feature.settings.SettingsFragment$PrefsRoot.onCreatePreferences(SettingsFragment.kt:98)
+	at androidx.preference.PreferenceFragmentCompat.onCreate(PreferenceFragmentCompat.java:161)
+	at androidx.fragment.app.Fragment.performCreate(Fragment.java:3095)
+	at androidx.fragment.app.FragmentStateManager.create(FragmentStateManager.java:516)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:274)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager.dispatchStateChange(FragmentManager.java:3206)
+	at androidx.fragment.app.FragmentManager.dispatchViewCreated(FragmentManager.java:3109)
+	at androidx.fragment.app.Fragment.performViewCreated(Fragment.java:3149)
+	at androidx.fragment.app.FragmentStateManager.createView(FragmentStateManager.java:600)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:278)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager$5.run(FragmentManager.java:661)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+
+==== CRASH 2026-09-17 19:00:23.400 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@a5dcce3, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:00:26.287 thread=main ====
+java.lang.IllegalStateException: Preference already has a SummaryProvider set.
+	at androidx.preference.Preference.setSummary(Preference.java:763)
+	at com.morselink.app.feature.settings.SettingsFragment$PrefsRoot.onCreatePreferences(SettingsFragment.kt:98)
+	at androidx.preference.PreferenceFragmentCompat.onCreate(PreferenceFragmentCompat.java:161)
+	at androidx.fragment.app.Fragment.performCreate(Fragment.java:3095)
+	at androidx.fragment.app.FragmentStateManager.create(FragmentStateManager.java:516)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:274)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager.dispatchStateChange(FragmentManager.java:3206)
+	at androidx.fragment.app.FragmentManager.dispatchViewCreated(FragmentManager.java:3109)
+	at androidx.fragment.app.Fragment.performViewCreated(Fragment.java:3149)
+	at androidx.fragment.app.FragmentStateManager.createView(FragmentStateManager.java:600)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:278)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager$5.run(FragmentManager.java:661)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+
+==== CRASH 2026-09-17 19:02:52.173 thread=main ====
+java.lang.IllegalStateException: Preference already has a SummaryProvider set.
+	at androidx.preference.Preference.setSummary(Preference.java:763)
+	at com.morselink.app.feature.settings.SettingsFragment$PrefsRoot.onCreatePreferences(SettingsFragment.kt:98)
+	at androidx.preference.PreferenceFragmentCompat.onCreate(PreferenceFragmentCompat.java:161)
+	at androidx.fragment.app.Fragment.performCreate(Fragment.java:3095)
+	at androidx.fragment.app.FragmentStateManager.create(FragmentStateManager.java:516)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:274)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager.dispatchStateChange(FragmentManager.java:3206)
+	at androidx.fragment.app.FragmentManager.dispatchViewCreated(FragmentManager.java:3109)
+	at androidx.fragment.app.Fragment.performViewCreated(Fragment.java:3149)
+	at androidx.fragment.app.FragmentStateManager.createView(FragmentStateManager.java:600)
+	at androidx.fragment.app.FragmentStateManager.moveToExpectedState(FragmentStateManager.java:278)
+	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:2103)
+	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1998)
+	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1941)
+	at androidx.fragment.app.FragmentManager$5.run(FragmentManager.java:661)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+
+==== CRASH 2026-09-17 19:19:54.347 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@d0d1b98, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:19:59.290 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@19a9c6b, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:33:22.563 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@283b92a, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:33:27.996 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@19a9c6b, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:42:52.417 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@60a1afb, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:42:58.258 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@19a9c6b, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:46:37.796 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@4f01b99, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-17 19:46:42.863 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@19a9c6b, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-18 09:42:13.493 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@89e2dca, Dispatchers.Main.immediate]
+
+==== CRASH 2026-09-18 09:42:18.418 thread=main ====
+java.lang.NoSuchMethodError: No virtual method stopForeground(I)V in class Lcom/morselink/app/core/transfer/TransferService; or its super classes (declaration of 'com.morselink.app.core.transfer.TransferService' appears in /data/app/com.morselink.app-1/base.apk)
+	at com.morselink.app.core.util.Permissions$$ExternalSyntheticApiModelOutline0.m(D8$$SyntheticClass:0)
+	at com.morselink.app.core.transfer.TransferService$onCreate$1.invokeSuspend(TransferService.kt:84)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:33)
+	at kotlinx.coroutines.DispatchedTaskKt.resume(DispatchedTask.kt:231)
+	at kotlinx.coroutines.DispatchedTaskKt.dispatch(DispatchedTask.kt:164)
+	at kotlinx.coroutines.CancellableContinuationImpl.dispatchResume(CancellableContinuationImpl.kt:466)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl(CancellableContinuationImpl.kt:500)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeImpl$default(CancellableContinuationImpl.kt:489)
+	at kotlinx.coroutines.CancellableContinuationImpl.resumeUndispatched(CancellableContinuationImpl.kt:587)
+	at kotlinx.coroutines.android.HandlerContext$scheduleResumeAfterDelay$$inlined$Runnable$1.run(Runnable.kt:15)
+	at android.os.Handler.handleCallback(Handler.java:819)
+	at android.os.Handler.dispatchMessage(Handler.java:104)
+	at android.os.Looper.loop(Looper.java:210)
+	at android.app.ActivityThread.main(ActivityThread.java:5982)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:852)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:742)
+	Suppressed: kotlinx.coroutines.internal.DiagnosticCoroutineContextException: [StandaloneCoroutine{Cancelling}@1abaada, Dispatchers.Main.immediate]
