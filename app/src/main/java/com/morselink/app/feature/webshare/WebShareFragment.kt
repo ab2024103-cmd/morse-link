@@ -116,14 +116,13 @@ class WebShareFragment : Fragment() {
 
         val url = state.url
         if (url != null) {
-            // Short, readable pieces instead of one long URL (m4/m14):
-            // address + token are what a person actually types on the PC.
+            // Typed access needs no token: 192.168.43.1:33455 is enough —
+            // each new browser must be accepted in a popup on this phone.
             val address = url
                 .substringAfter("://", url)
                 .substringBefore("/#t=")
-            val token = url.substringAfter("#t=", "")
             binding.addressValue.text = address
-            binding.tokenValue.text = token
+            binding.tokenValue.text = ""
             binding.urlValue.text = url
             val qr = Qr.encode(url, 640)
             if (qr != null) {

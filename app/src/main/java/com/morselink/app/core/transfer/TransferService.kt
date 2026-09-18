@@ -81,7 +81,14 @@ class TransferService : Service() {
                 } else {
                     if (idleSince < 0) idleSince = System.currentTimeMillis()
                     if (System.currentTimeMillis() - idleSince > 3000) {
-                        stopForeground(STOP_FOREGROUND_REMOVE)
+                        // stopForeground(int) exists only from API 24 — the
+                        // int overload crashed Android 6 phones outright.
+                        if (Build.VERSION.SDK_INT >= 24) {
+                            stopForeground(STOP_FOREGROUND_REMOVE)
+                        } else {
+                            @Suppress("DEPRECATION")
+                            stopForeground(true)
+                        }
                         stopSelf()
                         break
                     }

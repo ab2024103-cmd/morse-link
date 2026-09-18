@@ -83,11 +83,14 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         if (session.method == Method.GET && (path == "/" || path == "/index.html")) {
             return indexPage()
         }
-        if (!authorized(session)) {
-            return newJson(Response.Status.UNAUTHORIZED, JSONObject().put("error", "invalid or missing session token")).noStore()
-        }
+        // The pairing handshake is public (b1): a manually typed address like
+        // 192.168.43.1:33455 has no token — approval happens on the phone and
+        // the token is handed to the browser only once allowed.
         if (session.method == Method.GET && path == "/api/hello") {
             return apiHello(session)
+        }
+        if (!authorized(session)) {
+            return newJson(Response.Status.UNAUTHORIZED, JSONObject().put("error", "invalid or missing session token")).noStore()
         }
         if (!clientAllowed(session)) {
             val client = session.parameters["client"]?.firstOrNull()
@@ -101,6 +104,9 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             session.method == Method.GET && path == "/api/info" -> apiInfo()
             session.method == Method.GET && path == "/api/counts" -> apiCounts()
             session.method == Method.GET && path == "/api/files" -> apiFiles(session)
+            session.method == Method.GET && path == "/api/fs" -> apiFs(session)
+            session.method == Method.GET && path == "/download-file" -> downloadRawFile(session)
+            session.method == Method.GET && path == "/download-zip" -> downloadZip(session)
             session.method == Method.GET && path == "/api/upload-status" -> apiUploadStatus(session)
             session.method == Method.GET && path == "/api/qr" -> apiQr()
             session.method == Method.GET && path == "/thumbnail" -> thumbnail(session)
@@ -179,24 +185,31 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     private fun apiHello(session: IHTTPSession): Response {
         val ip = clientIp(session)
         val provided = session.parameters["client"]?.firstOrNull()
-        val clientId: String
+        val urlToken = session.parameters["t"]?.firstOrNull()
+        val hasValidToken = urlToken != null && urlToken == token
+        var clientId = provided ?: java.util.UUID.randomUUID().toString()
         val status: String
-        if (provided != null && WebShareController.knowsClient(provided)) {
+        if (hasValidToken) {
+            // QR-scanned session (URL carried the token): pre-approved.
+            if (!WebShareController.knowsClient(clientId)) {
+                WebShareController.respondApproval(clientId, true)
+            }
+            status = "allowed"
+        } else if (provided != null && WebShareController.knowsClient(provided)) {
             clientId = provided
             status = if (WebShareController.isClientAllowed(provided)) "allowed" else "denied"
         } else {
-            clientId = provided ?: java.util.UUID.randomUUID().toString()
             status = WebShareController.requestApproval(clientId, ip)
         }
-        return noStoreJson(
-            newJson(
-                Response.Status.OK,
-                JSONObject()
-                    .put("clientId", clientId)
-                    .put("status", status)
-                    .put("deviceName", AppServices.prefs.deviceName)
-            )
-        )
+        val json = JSONObject()
+            .put("clientId", clientId)
+            .put("status", status)
+            .put("deviceName", AppServices.prefs.deviceName)
+        if (status == "allowed") {
+            // The session token is only handed to approved browsers.
+            json.put("token", token)
+        }
+        return noStoreJson(newJson(Response.Status.OK, json))
     }
 
     private fun indexPage(): Response {
@@ -225,6 +238,14 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     // ---------------- APIs ----------------
 
     private fun apiInfo(): Response {
+        var total = 0L
+        var avail = 0L
+        try {
+            val stat = android.os.StatFs(android.os.Environment.getExternalStorageDirectory().absolutePath)
+            total = stat.totalBytes
+            avail = stat.availableBytes
+        } catch (_: Exception) {
+        }
         return noStoreJson(
             newJson(
                 Response.Status.OK,
@@ -232,6 +253,10 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
                     .put("deviceName", AppServices.prefs.deviceName)
                     .put("version", "1.0")
                     .put("transport", "WebShare")
+                    .put("os", "Android " + android.os.Build.VERSION.RELEASE)
+                    .put("model", android.os.Build.MANUFACTURER + " " + android.os.Build.MODEL)
+                    .put("storageTotal", total)
+                    .put("storageAvail", avail)
             )
         )
     }
@@ -243,6 +268,7 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             .put("videos", MediaLibrary.count(MediaCategory.VIDEOS))
             .put("music", MediaLibrary.count(MediaCategory.MUSIC))
             .put("apps", apps.size)
+            .put("documents", MediaLibrary.count(MediaCategory.DOCUMENTS))
             .put("files", MediaLibrary.count(MediaCategory.DOWNLOADS))
         return newJson(Response.Status.OK, json).noStore()
     }
@@ -296,7 +322,8 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
 
         val mediaCategory = MediaCategory.fromKey(category)
             ?: return newJson(Response.Status.NOT_FOUND, JSONObject().put("error", "unknown category")).noStore()
-        val page = MediaLibrary.page(mediaCategory, cursor, pageSize, com.morselink.app.core.media.SortKey.DATE, true, null)
+        val query = session.parameters["q"]?.firstOrNull()?.trim()?.takeIf { it.isNotEmpty() }
+        val page = MediaLibrary.page(mediaCategory, cursor, pageSize, com.morselink.app.core.media.SortKey.DATE, true, query)
         for (m in page) {
             items.put(mediaJson(m))
         }
@@ -314,7 +341,14 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             .put("date", m.dateModifiedSec * 1000L)
             .put("duration", m.durationMs)
             .put("artist", m.artist ?: "")
+            .put("folder", folderLabel(m))
             .put("hasThumb", true)
+    }
+
+    /** Last path segment (e.g. Pictures/Screenshots -> Screenshots). */
+    private fun folderLabel(m: com.morselink.app.core.media.MediaItem): String {
+        val p = m.path ?: return ""
+        return p.trimEnd('/').substringAfterLast('/')
     }
 
     /** Returns (items, nextCursor, folders) for a Downloads-relative path. */
@@ -567,9 +601,206 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             }
             val item = MediaLibrary.byId(category, id) ?: return notFound()
             val stream = ZipUtil.openStream(MorselinkServices.appContext, item.uri) ?: return notFound()
-            return rangedStream(session, stream, item.size, item.name, item.mime)
+            return rangedStream(session, stream, item.size, item.name, item.mime, inline(session))
         } finally {
             activeOperations--
+        }
+    }
+
+    // ---------------- internal-storage browsing (reference images 8-11) ----------------
+
+    private val storageRoot: File
+        get() = File("/storage/emulated/0")
+
+    /** True when raw filesystem access is possible (all-files or legacy grant). */
+    private fun canBrowseFs(): Boolean {
+        val root = storageRoot
+        return root.exists() && root.canRead() && root.listFiles() != null
+    }
+
+    /** Resolves and sandboxes a requested path under /storage/emulated/0. */
+    private fun safeFsPath(raw: String?): File? {
+        if (raw.isNullOrBlank()) return storageRoot
+        return try {
+            val f = File(raw).canonicalFile
+            if (f.absolutePath == storageRoot.absolutePath ||
+                f.absolutePath.startsWith(storageRoot.absolutePath + "/")
+            ) f else null
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** Lists a directory of internal storage: folders first, then files. */
+    private fun apiFs(session: IHTTPSession): Response {
+        if (!canBrowseFs()) {
+            return noStoreJson(
+                newJson(
+                    Response.Status.FORBIDDEN,
+                    JSONObject().put("error", "no_access")
+                        .put(
+                            "hint",
+                            "Grant \"All files access\" to MorseLink on the phone to browse internal storage."
+                        )
+                )
+            )
+        }
+        val dir = safeFsPath(session.parameters["path"]?.firstOrNull()) ?: return badRequest("invalid path")
+        if (!dir.isDirectory) return badRequest("not a directory")
+        val folders = JSONArray()
+        val files = JSONArray()
+        val listing = dir.listFiles() ?: emptyArray()
+        for (f in listing.sortedWith(
+            compareByDescending<File> { it.isDirectory }.thenBy { it.name.lowercase() }
+        )) {
+            try {
+                if (f.isDirectory) {
+                    folders.put(
+                        JSONObject().put("name", f.name).put("path", f.absolutePath).put("dir", true)
+                    )
+                } else {
+                    files.put(
+                        JSONObject()
+                            .put("name", f.name)
+                            .put("path", f.absolutePath)
+                            .put("dir", false)
+                            .put("size", f.length())
+                            .put("modified", f.lastModified() / 1000)
+                            .put("mime", mimeFor(f.name))
+                    )
+                }
+            } catch (_: Exception) {
+            }
+        }
+        val json = JSONObject()
+            .put("path", dir.absolutePath)
+            .put("folders", folders)
+            .put("files", files)
+        if (dir.absolutePath == storageRoot.absolutePath) {
+            // Quick-access shortcuts for the sidebar (reference image 9).
+            val quick = JSONArray()
+            for (name in listOf(
+                "Download", "DCIM", "Documents", "Pictures", "Movies", "Music",
+                "WhatsApp", "Telegram", "Screenshots"
+            )) {
+                val f = File(storageRoot, name)
+                if (f.isDirectory) quick.put(JSONObject().put("name", name).put("path", f.absolutePath))
+            }
+            json.put("quick", quick)
+        }
+        return noStoreJson(newJson(Response.Status.OK, json))
+    }
+
+    /** Downloads (or streams) a raw file from internal storage. */
+    private fun downloadRawFile(session: IHTTPSession): Response {
+        val file = safeFsPath(session.parameters["path"]?.firstOrNull()) ?: return notFound()
+        if (!file.isFile) return notFound()
+        activeOperations++
+        return try {
+            rangedFile(session, file, file.name, mimeFor(file.name))
+        } finally {
+            activeOperations--
+        }
+    }
+
+    /**
+     * Zips a selection: media ids ("kind" + "ids"), or raw paths ("paths",
+     * newline-separated, from the Files browser).
+     */
+    private fun downloadZip(session: IHTTPSession): Response {
+        val kind = session.parameters["kind"]?.firstOrNull() ?: "photos"
+        val ids = session.parameters["ids"]?.firstOrNull() ?: ""
+        val paths = session.parameters["paths"]?.firstOrNull() ?: ""
+        activeOperations++
+        val pipedIn = PipedInputStream(256 * 1024)
+        val pipeOut = PipedOutputStream(pipedIn)
+        Thread {
+            try {
+                val zos = ZipOutputStream(pipeOut)
+                if (paths.isNotBlank()) {
+                    for (raw in paths.split("\n")) {
+                        val f = safeFsPath(raw.trim()) ?: continue
+                        if (!f.exists()) continue
+                        addFsEntryToZip(zos, f, f.name)
+                    }
+                } else {
+                    val category = when (kind) {
+                        "photos" -> MediaCategory.PHOTOS
+                        "videos" -> MediaCategory.VIDEOS
+                        "music" -> MediaCategory.MUSIC
+                        "documents" -> MediaCategory.DOCUMENTS
+                        "downloads", "files" -> MediaCategory.DOWNLOADS
+                        else -> null
+                    }
+                    if (category != null) {
+                        for (idRaw in ids.split(",")) {
+                            val id = idRaw.trim().toLongOrNull() ?: continue
+                            val item = MediaLibrary.byId(category, id) ?: continue
+                            try {
+                                val input = ZipUtil.openStream(MorselinkServices.appContext, item.uri) ?: continue
+                                zos.putNextEntry(ZipEntry(ZipUtil.sanitize(item.name)))
+                                input.use { copyStreams(it, zos) }
+                                zos.closeEntry()
+                            } catch (e: IOException) {
+                                throw e
+                            } catch (_: Exception) {
+                            }
+                        }
+                    } else if (kind == "apps") {
+                        for (pkg in ids.split(",")) {
+                            val app = cachedApps().firstOrNull { it.packageName == pkg.trim() } ?: continue
+                            try {
+                                val f = File(app.apkPath)
+                                if (!f.exists()) continue
+                                zos.putNextEntry(ZipEntry(ZipUtil.sanitize(app.label + ".apk")))
+                                FileInputStream(f).use { copyStreams(it, zos) }
+                                zos.closeEntry()
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+                }
+                zos.finish()
+                zos.flush()
+                pipeOut.close()
+            } catch (e: IOException) {
+                LogStore.i("WebShare: zip download aborted by client (${e.message})")
+                try {
+                    pipeOut.close()
+                } catch (_: Exception) {
+                }
+            } catch (e: Exception) {
+                LogStore.e("WebShare: zip generation failed", e)
+                try {
+                    pipeOut.close()
+                } catch (_: Exception) {
+                }
+            } finally {
+                activeOperations--
+            }
+        }.start()
+        val response = newChunkedResponse(Response.Status.OK, "application/zip", pipedIn)
+        response.addHeader("Content-Disposition", "attachment; filename=\"morselink-selection.zip\"")
+        response.addHeader("Cache-Control", "no-store")
+        return response
+    }
+
+    /** Adds a file or a whole directory tree to the zip under the given prefix. */
+    private fun addFsEntryToZip(zos: ZipOutputStream, entry: File, prefix: String) {
+        if (entry.isDirectory) {
+            val children = entry.listFiles() ?: return
+            for (child in children) {
+                addFsEntryToZip(zos, child, prefix + "/" + child.name)
+            }
+        } else {
+            try {
+                zos.putNextEntry(ZipEntry(ZipUtil.sanitize(prefix)))
+                FileInputStream(entry).use { copyStreams(it, zos) }
+                zos.closeEntry()
+            } catch (e: IOException) {
+                throw e
+            } catch (_: Exception) {
+            }
         }
     }
 
@@ -797,12 +1028,56 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         } catch (_: Exception) {
             return notFound()
         }
-        return rangedStream(session, stream, file.length(), name, mime)
+        return rangedStream(session, stream, file.length(), name, mime, inline(session))
     }
 
-    private fun rangedStream(session: IHTTPSession, stream: InputStream, size: Long, name: String, mime: String): Response {
+    /** stream=1 → inline disposition so the browser can play media (b: viewers). */
+    private fun inline(session: IHTTPSession): Boolean =
+        session.parameters["stream"]?.firstOrNull() == "1"
+
+    private fun mimeFor(name: String): String {
+        val ext = name.substringAfterLast('.', "").lowercase()
+        return when (ext) {
+            "jpg", "jpeg" -> "image/jpeg"
+            "png" -> "image/png"
+            "gif" -> "image/gif"
+            "webp" -> "image/webp"
+            "bmp" -> "image/bmp"
+            "mp4", "m4v" -> "video/mp4"
+            "3gp" -> "video/3gpp"
+            "mkv" -> "video/x-matroska"
+            "webm" -> "video/webm"
+            "mp3" -> "audio/mpeg"
+            "m4a", "aac" -> "audio/mp4"
+            "ogg" -> "audio/ogg"
+            "wav" -> "audio/wav"
+            "flac" -> "audio/flac"
+            "pdf" -> "application/pdf"
+            "txt" -> "text/plain"
+            "html" -> "text/html"
+            "zip" -> "application/zip"
+            "apk" -> "application/vnd.android.package-archive"
+            "doc" -> "application/msword"
+            "docx" -> "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            "xls" -> "application/vnd.ms-excel"
+            "xlsx" -> "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            "ppt" -> "application/vnd.ms-powerpoint"
+            "pptx" -> "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+            "epub" -> "application/epub+zip"
+            else -> "application/octet-stream"
+        }
+    }
+
+    private fun rangedStream(
+        session: IHTTPSession,
+        stream: InputStream,
+        size: Long,
+        name: String,
+        mime: String,
+        inline: Boolean = false
+    ): Response {
         val rangeHeader = session.headers?.get("range")
-        val disposition = "attachment; filename=\"$name\"; filename*=UTF-8''${percentEncode(name)}"
+        val disposition = if (inline) "inline" else "attachment; filename=\"$name\"; filename*=UTF-8''${percentEncode(name)}"
         if (rangeHeader != null && rangeHeader.startsWith("bytes=")) {
             val spec = rangeHeader.removePrefix("bytes=").split("-")
             val start = spec.getOrNull(0)?.toLongOrNull() ?: 0L
