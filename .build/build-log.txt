@@ -18,34 +18,35 @@ Daemon will be stopped at the end of the build
 > Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
-> Task :app:mergeDebugResources
 > Task :app:generateDebugBuildConfig
-> Task :app:mapDebugSourceSetPaths
-> Task :app:checkDebugAarMetadata
+> Task :app:mergeDebugResources
 > Task :app:parseDebugLocalResources
-> Task :app:createDebugCompatibleScreenManifests
+> Task :app:checkDebugAarMetadata
 > Task :app:dataBindingGenBaseClassesDebug
+> Task :app:mapDebugSourceSetPaths
+> Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
-> Task :app:checkDebugDuplicateClasses
-> Task :app:desugarDebugFileDependencies
-> Task :app:mergeDebugStartupProfile
-> Task :app:processDebugManifestForPackage
-> Task :app:mergeExtDexDebug
-> Task :app:mergeDebugJniLibFolders
-> Task :app:mergeDebugNativeLibs NO-SOURCE
-> Task :app:mergeLibDexDebug
-> Task :app:stripDebugDebugSymbols NO-SOURCE
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
 > Task :app:processDebugResources
+> Task :app:checkDebugDuplicateClasses
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugStartupProfile
+> Task :app:compileDebugKotlin
+> Task :app:mergeExtDexDebug
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeLibDexDebug
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
@@ -55,45 +56,30 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:generateReleaseResValues
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
+> Task :app:parseReleaseLocalResources
 > Task :app:generateReleaseBuildConfig
 > Task :app:checkReleaseAarMetadata
 > Task :app:mapReleaseSourceSetPaths
 > Task :app:createReleaseCompatibleScreenManifests
-> Task :app:parseReleaseLocalResources
 > Task :app:extractDeepLinksRelease
+> Task :app:mergeReleaseResources
 > Task :app:processReleaseMainManifest
+> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:processReleaseManifest
 > Task :app:javaPreCompileRelease
-> Task :app:processReleaseManifestForPackage
-> Task :app:mergeReleaseResources
 > Task :app:extractProguardFiles
-> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:mergeReleaseJniLibFolders
 > Task :app:mergeReleaseNativeLibs NO-SOURCE
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
+> Task :app:processReleaseManifestForPackage
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
 > Task :app:desugarReleaseFileDependencies
-> Task :app:mergeReleaseStartupProfile
 > Task :app:checkReleaseDuplicateClasses
-> Task :app:mergeReleaseArtProfile
+> Task :app:mergeReleaseStartupProfile
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:compileDebugKotlin
 > Task :app:processReleaseResources
-> Task :app:mergeExtDexRelease
-> Task :app:mergeReleaseShaders
-> Task :app:compileReleaseShaders NO-SOURCE
-> Task :app:generateReleaseAssets UP-TO-DATE
-> Task :app:mergeReleaseAssets
-> Task :app:compressReleaseAssets
-> Task :app:extractReleaseVersionControlInfo
-> Task :app:collectReleaseDependencies
-> Task :app:sdkReleaseDependencyData
-> Task :app:validateSigningRelease
-> Task :app:writeReleaseAppMetadata
-> Task :app:writeReleaseSigningConfigVersions
-> Task :app:optimizeReleaseResources
 
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -120,7 +106,7 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:158:17 Variable 'done' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:85:40 'getter for ssid: String?' is deprecated. Deprecated in Java
@@ -177,6 +163,29 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferFragment.kt:184:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+
+> Task :app:mergeExtDexRelease
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:mergeDebugJavaResource
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeReleaseShaders
+> Task :app:mergeReleaseArtProfile
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:optimizeReleaseResources
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
 
 > Task :app:compileReleaseKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -203,7 +212,7 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:158:17 Variable 'done' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:85:40 'getter for ssid: String?' is deprecated. Deprecated in Java
@@ -261,18 +270,10 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
 
-> Task :app:compileDebugJavaWithJavac
-> Task :app:processDebugJavaRes
-> Task :app:mergeDebugJavaResource
-> Task :app:dexBuilderDebug
-> Task :app:mergeProjectDexDebug
 > Task :app:compileReleaseJavaWithJavac
 > Task :app:generateReleaseLintVitalReportModel
 > Task :app:dexBuilderRelease
 > Task :app:mergeReleaseGlobalSynthetics
-> Task :app:packageDebug
-> Task :app:createDebugApkListingFileRedirect
-> Task :app:assembleDebug
 > Task :app:processReleaseJavaRes
 > Task :app:mergeReleaseJavaResource
 > Task :app:mergeDexRelease
@@ -283,11 +284,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789730534227.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789731282290.json
 
-BUILD SUCCESSFUL in 3m 38s
+BUILD SUCCESSFUL in 3m 53s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8202127
-APK_SIZE_RELEASE=6697736
+APK_SIZE_DEBUG=8215028
+APK_SIZE_RELEASE=6707150
