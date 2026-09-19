@@ -14,256 +14,337 @@ Daemon will be stopped at the end of the build
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
 > Task :app:checkKotlinGradlePluginConfigurationErrors
-> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugResValues
+> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
-> Task :app:generateDebugBuildConfig
 > Task :app:mergeDebugResources
-> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugBuildConfig
 > Task :app:parseDebugLocalResources
+> Task :app:mapDebugSourceSetPaths
 > Task :app:checkDebugAarMetadata
-> Task :app:createDebugCompatibleScreenManifests
 > Task :app:dataBindingGenBaseClassesDebug
+> Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
-> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
+> Task :app:processDebugManifestForPackage
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:processDebugResources
 > Task :app:checkDebugDuplicateClasses
+> Task :app:processDebugResources
 > Task :app:desugarDebugFileDependencies
 > Task :app:mergeDebugStartupProfile
 > Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
-> Task :app:mergeDebugNativeLibs NO-SOURCE
 > Task :app:mergeLibDexDebug
+> Task :app:mergeDebugNativeLibs NO-SOURCE
 > Task :app:stripDebugDebugSymbols NO-SOURCE
-
-> Task :app:compileDebugKotlin FAILED
-e: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:556:57 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Bitmap?
-e: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:559:12 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type Bitmap?
-
 > Task :app:validateSigningDebug
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789807886144.json
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:buildKotlinToolingMetadata
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:generateReleaseResValues
+> Task :app:dataBindingMergeDependencyArtifactsRelease
+> Task :app:generateReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:generateReleaseBuildConfig
+> Task :app:parseReleaseLocalResources
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:checkReleaseAarMetadata
+> Task :app:processReleaseMainManifest
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:javaPreCompileRelease
+> Task :app:extractProguardFiles
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:mergeReleaseNativeLibs NO-SOURCE
+> Task :app:stripReleaseDebugSymbols NO-SOURCE
+> Task :app:extractReleaseNativeSymbolTables NO-SOURCE
+> Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseResources
+> Task :app:mergeReleaseStartupProfile
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:dataBindingGenBaseClassesRelease
+note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-FAILURE: Build failed with an exception.
+> Task :app:processReleaseResources
 
-* What went wrong:
-Execution failed for task ':app:compileDebugKotlin'.
-> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-   > Compilation error. See log for more details
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:164:31 'getParcelableArrayListExtra(String!): ArrayList<T!>?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:61 Unnecessary safe call on a non-null receiver of type CharSequence
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:601:48 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:622:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:623:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:624:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:644:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:646:41 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:648:29 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:651:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:775:65 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:775:94 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:85:40 'getter for ssid: String?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:90:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:91:45 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:211:71 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:226:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:228:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:229:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareController.kt:247:21 Variable 'engineBusy' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:42 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:53 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:46 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:57 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:43 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:54 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:47 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:127:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:74 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:67 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:78 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:75 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:68 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:79 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:613:38 Parameter 'resolver' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:112:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:289:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:365:31 Unnecessary non-null assertion (!!) on a non-null receiver of type MediaPageFragment.DateHeader
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:59 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:60 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:601:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:163:13 Variable 'dayFmt' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:165:13 Variable 'now' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:225:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:229:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:233:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:237:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/settings/ConnectionDoctorFragment.kt:130:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:8:25 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:40:25 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:26 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:33 'open(): Camera!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:98:34 'getter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:100:28 'setPreviewSize(Int, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:101:21 'setter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:102:21 'setDisplayOrientation(Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:103:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:104:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:108:25 'setPreviewDisplay(SurfaceHolder!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:109:25 'startPreview(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:46 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:53 'Parameters' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:28 'getter for supportedPreviewSizes: (Mutable)List<Camera.Size!>!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:63 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:70 'Size' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:16 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:41 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:28 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:39 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:27 'equals(Any?): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:48 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:62 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:129:76 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:131:17 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:147:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:214:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:215:21 'stopPreview(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:216:21 'release(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferFragment.kt:184:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:72:52 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:346:16 'setAudioStreamType(Int): Unit' is deprecated. Deprecated in Java
 
-* Try:
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
+> Task :app:mergeExtDexRelease
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:mergeDebugJavaResource
+> Task :app:dexBuilderDebug
+> Task :app:mergeReleaseShaders
+> Task :app:mergeReleaseArtProfile
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:optimizeReleaseResources
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
 
-* Exception is:
-org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:compileDebugKotlin'.
-	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.lambda$executeIfValid$1(ExecuteActionsTaskExecuter.java:130)
-	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:282)
-	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:128)
-	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
-	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
-	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
-	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
-	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
-	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
-	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:80)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:463)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:380)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
-	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
-Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionException: A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-	at org.gradle.workers.internal.DefaultWorkerExecutor$WorkItemExecution.waitForCompletion(DefaultWorkerExecutor.java:287)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.lambda$waitForItemsAndGatherFailures$2(DefaultAsyncWorkTracker.java:130)
-	at org.gradle.internal.Factories$1.create(Factories.java:31)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks(DefaultWorkerLeaseService.java:336)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLocks(DefaultWorkerLeaseService.java:319)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withoutLock(DefaultWorkerLeaseService.java:324)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:126)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForItemsAndGatherFailures(DefaultAsyncWorkTracker.java:92)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForAll(DefaultAsyncWorkTracker.java:78)
-	at org.gradle.internal.work.DefaultAsyncWorkTracker.waitForCompletion(DefaultAsyncWorkTracker.java:66)
-	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:252)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:29)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:26)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:47)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.run(DefaultBuildOperationExecutor.java:68)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:229)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:212)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:195)
-	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:162)
-	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:105)
-	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:44)
-	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:59)
-	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:56)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:56)
-	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:44)
-	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:41)
-	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:74)
-	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
-	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:50)
-	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:28)
-	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:67)
-	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.execute(RemovePreviousOutputsStep.java:37)
-	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:61)
-	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:26)
-	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:67)
-	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:45)
-	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:40)
-	at org.gradle.internal.execution.steps.ResolveInputChangesStep.execute(ResolveInputChangesStep.java:29)
-	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
-	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$1(BuildCacheStep.java:75)
-	at org.gradle.internal.Either$Right.fold(Either.java:175)
-	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
-	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:73)
-	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:48)
-	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:46)
-	at org.gradle.internal.execution.steps.StoreExecutionStateStep.execute(StoreExecutionStateStep.java:35)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:76)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:54)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:54)
-	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:36)
-	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
-	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
-	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:49)
-	at org.gradle.internal.execution.steps.ResolveIncrementalCachingStateStep.executeDelegate(ResolveIncrementalCachingStateStep.java:27)
-	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:71)
-	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:39)
-	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:65)
-	at org.gradle.internal.execution.steps.ResolveChangesStep.execute(ResolveChangesStep.java:36)
-	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:106)
-	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:55)
-	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:64)
-	at org.gradle.internal.execution.steps.AbstractCaptureStateBeforeExecutionStep.execute(AbstractCaptureStateBeforeExecutionStep.java:43)
-	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.executeWithNonEmptySources(AbstractSkipEmptyWorkStep.java:125)
-	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:61)
-	at org.gradle.internal.execution.steps.AbstractSkipEmptyWorkStep.execute(AbstractSkipEmptyWorkStep.java:36)
-	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
-	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:36)
-	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.execute(LoadPreviousExecutionStateStep.java:23)
-	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:75)
-	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.execute(HandleStaleOutputsStep.java:41)
-	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$execute$0(AssignMutableWorkspaceStep.java:35)
-	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:289)
-	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:31)
-	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.execute(AssignMutableWorkspaceStep.java:22)
-	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
-	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
-	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
-	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
-	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
-	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
-	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
-	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:48)
-	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:35)
-	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:61)
-	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.executeIfValid(ExecuteActionsTaskExecuter.java:127)
-	at org.gradle.api.internal.tasks.execution.ExecuteActionsTaskExecuter.execute(ExecuteActionsTaskExecuter.java:116)
-	at org.gradle.api.internal.tasks.execution.FinalizePropertiesTaskExecuter.execute(FinalizePropertiesTaskExecuter.java:46)
-	at org.gradle.api.internal.tasks.execution.ResolveTaskExecutionModeExecuter.execute(ResolveTaskExecutionModeExecuter.java:51)
-	at org.gradle.api.internal.tasks.execution.SkipTaskWithNoActionsExecuter.execute(SkipTaskWithNoActionsExecuter.java:57)
-	at org.gradle.api.internal.tasks.execution.SkipOnlyIfTaskExecuter.execute(SkipOnlyIfTaskExecuter.java:74)
-	at org.gradle.api.internal.tasks.execution.CatchExceptionTaskExecuter.execute(CatchExceptionTaskExecuter.java:36)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.executeTask(EventFiringTaskExecuter.java:77)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:55)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter$1.call(EventFiringTaskExecuter.java:52)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.api.internal.tasks.execution.EventFiringTaskExecuter.execute(EventFiringTaskExecuter.java:52)
-	at org.gradle.execution.plan.LocalTaskNodeExecutor.execute(LocalTaskNodeExecutor.java:42)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:331)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$InvokeNodeExecutorsAction.execute(DefaultTaskExecutionGraph.java:318)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.lambda$execute$0(DefaultTaskExecutionGraph.java:314)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:80)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:314)
-	at org.gradle.execution.taskgraph.DefaultTaskExecutionGraph$BuildOperationAwareExecutionAction.execute(DefaultTaskExecutionGraph.java:303)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:463)
-	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:380)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
-	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
-Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Compilation error. See log for more details
-	at org.jetbrains.kotlin.gradle.tasks.TasksUtilsKt.throwExceptionIfCompilationFailed(tasksUtils.kt:20)
-	at org.jetbrains.kotlin.compilerRunner.GradleKotlinCompilerWork.run(GradleKotlinCompilerWork.kt:141)
-	at org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction.execute(GradleCompilerRunnerWithWorkers.kt:73)
-	at org.gradle.workers.internal.DefaultWorkerServer.execute(DefaultWorkerServer.java:63)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:66)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1$1.create(NoIsolationWorkerFactory.java:62)
-	at org.gradle.internal.classloader.ClassLoaderUtils.executeInClassloader(ClassLoaderUtils.java:100)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.lambda$execute$0(NoIsolationWorkerFactory.java:62)
-	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:44)
-	at org.gradle.workers.internal.AbstractWorker$1.call(AbstractWorker.java:41)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:200)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:195)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:66)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:157)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:59)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:53)
-	at org.gradle.internal.operations.DefaultBuildOperationExecutor.call(DefaultBuildOperationExecutor.java:73)
-	at org.gradle.workers.internal.AbstractWorker.executeWrappedInBuildOperation(AbstractWorker.java:41)
-	at org.gradle.workers.internal.NoIsolationWorkerFactory$1.execute(NoIsolationWorkerFactory.java:59)
-	at org.gradle.workers.internal.DefaultWorkerExecutor.lambda$submitWork$0(DefaultWorkerExecutor.java:174)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runExecution(DefaultConditionalExecutionQueue.java:187)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.access$700(DefaultConditionalExecutionQueue.java:120)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner$1.run(DefaultConditionalExecutionQueue.java:162)
-	at org.gradle.internal.Factories$1.create(Factories.java:31)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:264)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:128)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:133)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.runBatch(DefaultConditionalExecutionQueue.java:157)
-	at org.gradle.internal.work.DefaultConditionalExecutionQueue$ExecutionRunner.run(DefaultConditionalExecutionQueue.java:126)
-	... 2 more
+> Task :app:compileReleaseKotlin
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:164:31 'getParcelableArrayListExtra(String!): ArrayList<T!>?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:61 Unnecessary safe call on a non-null receiver of type CharSequence
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:601:48 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:622:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:623:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:624:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:644:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:646:41 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:648:29 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:651:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:775:65 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:775:94 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:85:40 'getter for ssid: String?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:90:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:91:45 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:211:71 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:226:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:228:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:229:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareController.kt:247:21 Variable 'engineBusy' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:42 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:53 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:46 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:57 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:43 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:54 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:47 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:127:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:74 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:67 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:78 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:75 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:68 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:79 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:613:38 Parameter 'resolver' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:112:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:289:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:365:31 Unnecessary non-null assertion (!!) on a non-null receiver of type MediaPageFragment.DateHeader
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:59 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:60 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:601:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:163:13 Variable 'dayFmt' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:165:13 Variable 'now' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:225:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:229:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:233:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:237:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/settings/ConnectionDoctorFragment.kt:130:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:8:25 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:40:25 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:26 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:33 'open(): Camera!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:98:34 'getter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:100:28 'setPreviewSize(Int, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:101:21 'setter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:102:21 'setDisplayOrientation(Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:103:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:104:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:108:25 'setPreviewDisplay(SurfaceHolder!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:109:25 'startPreview(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:46 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:53 'Parameters' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:28 'getter for supportedPreviewSizes: (Mutable)List<Camera.Size!>!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:63 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:70 'Size' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:16 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:41 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:28 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:39 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:27 'equals(Any?): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:48 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:62 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:129:76 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:131:17 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:147:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:214:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:215:21 'stopPreview(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:216:21 'release(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferFragment.kt:184:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:72:52 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:346:16 'setAudioStreamType(Int): Unit' is deprecated. Deprecated in Java
 
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:dexBuilderRelease
+> Task :app:mergeReleaseGlobalSynthetics
+> Task :app:processReleaseJavaRes
+> Task :app:mergeReleaseJavaResource
+> Task :app:mergeDexRelease
+> Task :app:compileReleaseArtProfile
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:lintVitalReportRelease
+> Task :app:lintVitalRelease
+> Task :app:assembleRelease
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789808126061.json
 
-BUILD FAILED in 1m 54s
-29 actionable tasks: 29 executed
+BUILD SUCCESSFUL in 3m 50s
+87 actionable tasks: 87 executed
 
-=== JOB CONCLUSION: failure ===
-NO_APK_PRODUCED
+=== JOB CONCLUSION: success ===
+APK_SIZE_DEBUG=8253957
+APK_SIZE_RELEASE=6735811
