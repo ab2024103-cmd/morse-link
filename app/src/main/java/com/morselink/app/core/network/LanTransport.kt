@@ -80,16 +80,49 @@ object LanTransport {
     @Volatile
     private var udpSocket: DatagramSocket? = null
 
-    private fun bindToNetwork(socket: ServerSocket) {
-        val n = appNetwork ?: return
+    /**
+     * bindSocket(ServerSocket) is not part of the public SDK anymore, so the
+     * listening socket's file descriptor is marked directly — exactly what
+     * the hidden framework method does. Accepted sockets inherit the network
+     * from a marked listener. Returns true when the mark was applied.
+     */
+    internal fun bindToNetwork(socket: ServerSocket): Boolean {
+        val n = appNetwork ?: return true
         try {
-            n.bindSocket(socket)
+            val fd = serverSocketFd(socket)
+            if (fd != null) {
+                n.bindSocket(fd)
+                return true
+            }
+            LogStore.w("LAN: server socket fd unreachable for network bind")
         } catch (e: Exception) {
             LogStore.w("LAN: server network bind failed: ${e.message}")
         }
+        return false
     }
 
-    private fun bindToNetwork(socket: DatagramSocket) {
+    private fun serverSocketFd(socket: ServerSocket): java.io.FileDescriptor? {
+        // libcore's hidden accessor used by the framework itself.
+        try {
+            val m = ServerSocket::class.java.getMethod("getFileDescriptor\$")
+            m.isAccessible = true
+            (m.invoke(socket) as? java.io.FileDescriptor)?.let { return it }
+        } catch (_: Exception) {
+        }
+        // Classic SocketImpl reflection fallback.
+        return try {
+            val getImpl = ServerSocket::class.java.getDeclaredMethod("getImpl")
+            getImpl.isAccessible = true
+            val impl = getImpl.invoke(socket) ?: return null
+            val getFd = impl.javaClass.getMethod("getFileDescriptor")
+            getFd.isAccessible = true
+            getFd.invoke(impl) as? java.io.FileDescriptor
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    internal fun bindToNetwork(socket: DatagramSocket) {
         val n = appNetwork ?: return
         try {
             n.bindSocket(socket)
@@ -98,7 +131,7 @@ object LanTransport {
         }
     }
 
-    private fun bindToNetwork(socket: Socket) {
+    internal fun bindToNetwork(socket: Socket) {
         val n = appNetwork ?: return
         try {
             n.bindSocket(socket)
@@ -143,8 +176,9 @@ object LanTransport {
             try {
                 val server = ServerSocket()
                 server.reuseAddress = true
-                bindToNetwork(server)
+                val marked = bindToNetwork(server)
                 server.bind(InetSocketAddress(TCP_PORT))
+                if (!marked) bindToNetwork(server)
                 serverSocket = server
                 LogStore.i("LAN: server listening on $TCP_PORT")
                 while (isActive) {
@@ -789,7 +823,7 @@ class LanSession(
             }
             dataSocket = Socket()
             dataSocket.tcpNoDelay = true
-            bindToNetwork(dataSocket)
+            LanTransport.bindToNetwork(dataSocket)
             dataSocket.connect(InetSocketAddress(peerHost, peerTcpPort), 8000)
             val out = DataOutputStream(BufferedOutputStream(dataSocket.getOutputStream(), LanTransport.CHUNK_SIZE + 64))
             val header = JSONObject().put("type", "DATA").put("fileId", meta.fileId).toString() + "\n"
