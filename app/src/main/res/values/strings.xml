@@ -189,6 +189,8 @@
     <string name="temp_link_join_action">Join</string>
     <string name="temp_link_joining">Joining %1$s…</string>
     <string name="temp_link_connected">Connected to %1$s — the other phone appears under Send / Receive.</string>
+    <string name="temp_link_disconnect">End link and disconnect</string>
+    <string name="temp_link_disconnected">Link ended — the network is gone and nothing was saved</string>
     <string name="temp_link_manual_hint">This Android version cannot join a Wi-Fi from an app. Join it in Settings → Wi-Fi with the name and password you were given, then open Send / Receive.</string>
     <string name="viewer_now_playing">Now playing</string>
     <string name="history_filter_all">All</string>

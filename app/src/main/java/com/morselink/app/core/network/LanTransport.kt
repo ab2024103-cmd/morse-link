@@ -68,6 +68,65 @@ object LanTransport {
     private var serverSocket: ServerSocket? = null
     private var announceJob: Job? = null
 
+    /**
+     * App-scoped network from WifiNetworkSpecifier (TempLink on API 29+).
+     * When set, every LAN socket is bound to it, because the system does not
+     * route traffic on such networks without an explicit bind. Null on older
+     * Androids and for normal Wi-Fi/hotspot use.
+     */
+    @Volatile
+    private var appNetwork: android.net.Network? = null
+
+    @Volatile
+    private var udpSocket: DatagramSocket? = null
+
+    private fun bindToNetwork(socket: ServerSocket) {
+        val n = appNetwork ?: return
+        try {
+            n.bindSocket(socket)
+        } catch (e: Exception) {
+            LogStore.w("LAN: server network bind failed: ${e.message}")
+        }
+    }
+
+    private fun bindToNetwork(socket: DatagramSocket) {
+        val n = appNetwork ?: return
+        try {
+            n.bindSocket(socket)
+        } catch (e: Exception) {
+            LogStore.w("LAN: udp network bind failed: ${e.message}")
+        }
+    }
+
+    private fun bindToNetwork(socket: Socket) {
+        val n = appNetwork ?: return
+        try {
+            n.bindSocket(socket)
+        } catch (e: Exception) {
+            LogStore.w("LAN: socket network bind failed: ${e.message}")
+        }
+    }
+
+    /** Re-creates all LAN sockets bound to [network] (or the default when null). */
+    fun restartWithAppNetwork(network: android.net.Network?) {
+        appNetwork = network
+        stopDiscovery()
+        try {
+            serverSocket?.close()
+        } catch (_: Exception) {
+        }
+        serverSocket = null
+        try {
+            udpSocket?.close()
+        } catch (_: Exception) {
+        }
+        udpSocket = null
+        if (network != null) {
+            start()
+            startDiscovery()
+        }
+    }
+
     @Volatile
     private var announcing = false
 
@@ -84,6 +143,7 @@ object LanTransport {
             try {
                 val server = ServerSocket()
                 server.reuseAddress = true
+                bindToNetwork(server)
                 server.bind(InetSocketAddress(TCP_PORT))
                 serverSocket = server
                 LogStore.i("LAN: server listening on $TCP_PORT")
@@ -146,7 +206,8 @@ object LanTransport {
                 .put("port", TCP_PORT)
                 .toString()
                 .toByteArray(Charsets.UTF_8)
-            val socket = DatagramSocket()
+            val socket = DatagramSocket(null as java.net.SocketAddress?)
+            bindToNetwork(socket)
             socket.broadcast = true
             try {
                 val targets = HashSet<String>()
@@ -170,8 +231,12 @@ object LanTransport {
 
     private fun udpListenLoop() {
         try {
-            val socket = DatagramSocket(UDP_PORT)
+            val socket = DatagramSocket(null as java.net.SocketAddress?)
+            socket.reuseAddress = true
+            bindToNetwork(socket)
+            socket.bind(InetSocketAddress(UDP_PORT))
             socket.broadcast = true
+            udpSocket = socket
             val buf = ByteArray(2048)
             while (true) {
                 try {
@@ -190,7 +255,8 @@ object LanTransport {
                         port = json.optInt("port", TCP_PORT)
                     )
                     TransferEngine.addPeer(peer)
-                } catch (_: Exception) {
+                } catch (e: Exception) {
+                    if (socket.isClosed) break
                 }
             }
         } catch (e: Exception) {
@@ -330,6 +396,7 @@ object LanTransport {
             try {
                 val socket = Socket()
                 socket.tcpNoDelay = true
+                bindToNetwork(socket)
                 socket.connect(InetSocketAddress(host, port), 8000)
                 socket.soTimeout = 60000
                 val hello = JSONObject()
@@ -722,6 +789,7 @@ class LanSession(
             }
             dataSocket = Socket()
             dataSocket.tcpNoDelay = true
+            bindToNetwork(dataSocket)
             dataSocket.connect(InetSocketAddress(peerHost, peerTcpPort), 8000)
             val out = DataOutputStream(BufferedOutputStream(dataSocket.getOutputStream(), LanTransport.CHUNK_SIZE + 64))
             val header = JSONObject().put("type", "DATA").put("fileId", meta.fileId).toString() + "\n"

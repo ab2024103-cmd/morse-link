@@ -202,15 +202,36 @@ class DashboardFragment : Fragment() {
     private var tempClient: TempLinkClient? = null
 
     private fun showStrangerOptions() {
-        val options = arrayOf(
-            getString(R.string.temp_link_create),
-            getString(R.string.temp_link_join)
-        )
+        val active = tempClient?.isActive == true
+        val options = if (active) {
+            arrayOf(
+                getString(R.string.temp_link_disconnect),
+                getString(R.string.temp_link_create),
+                getString(R.string.temp_link_join)
+            )
+        } else {
+            arrayOf(
+                getString(R.string.temp_link_create),
+                getString(R.string.temp_link_join)
+            )
+        }
         AlertDialog.Builder(requireContext())
             .setTitle(R.string.temp_link_title)
             .setItems(options) { d, which ->
                 d.dismiss()
-                if (which == 0) createTempLink() else showJoinTempLink(null, null)
+                when {
+                    active && which == 0 -> {
+                        tempClient?.leave()
+                        tempClient = null
+                        Toast.makeText(
+                            requireContext(), R.string.temp_link_disconnected, Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    active && which == 1 -> createTempLink()
+                    active && which == 2 -> showJoinTempLink(null, null)
+                    which == 0 -> createTempLink()
+                    else -> showJoinTempLink(null, null)
+                }
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
@@ -306,15 +327,6 @@ class DashboardFragment : Fragment() {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(pad, (6 * dp).toInt(), pad, 0)
         }
-        if (!TempLinkClient(ctx).canJoinProgrammatically()) {
-            col.addView(
-                TextView(ctx).apply {
-                    text = getString(R.string.temp_link_manual_hint)
-                    textSize = 12.5f
-                    setPadding(0, 0, 0, (10 * dp).toInt())
-                }
-            )
-        }
         val ssidEdit = EditText(ctx).apply {
             hint = getString(R.string.temp_link_hint_ssid)
             setText(prefillSsid ?: "")
@@ -362,10 +374,6 @@ class DashboardFragment : Fragment() {
         val ctx = requireContext()
         val client = TempLinkClient(ctx)
         tempClient = client
-        if (!client.canJoinProgrammatically()) {
-            Toast.makeText(ctx, R.string.temp_link_manual_hint, Toast.LENGTH_LONG).show()
-            return
-        }
         val dp = resources.displayMetrics.density
         val col = android.widget.LinearLayout(ctx).apply {
             orientation = android.widget.LinearLayout.VERTICAL

@@ -309,10 +309,12 @@ class TempLinkHost(private val context: Context) {
 }
 
 /**
- * Client side. On API < 29 MorseLink adds the network itself (and removes it
- * in leave(), so the OS forgets it — nothing to clean up in Settings). On
- * API 29+ apps can no longer join networks programmatically; join() reports
- * "manual" so the UI can guide the user.
+ * Client side.
+ * - API 29+: WifiNetworkSpecifier — the system shows a one-tap dialog, MorseLink
+ *   supplies the password, and the connection lives only inside the app: the
+ *   OS stores nothing at all. Leaving = unregistering the callback.
+ * - API < 29: MorseLink adds the network itself and removes it in leave(),
+ *   so the OS forgets it — nothing to clean up in Settings either way.
  */
 @SuppressLint("MissingPermission")
 class TempLinkClient(private val context: Context) {
@@ -323,9 +325,18 @@ class TempLinkClient(private val context: Context) {
     private var netId: Int = -1
     private var lastSsid: String = ""
 
-    val joinedSsid: String? get() = if (netId >= 0) lastSsid else null
+    @Volatile
+    private var specifierActive = false
 
-    fun canJoinProgrammatically(): Boolean = Build.VERSION.SDK_INT < 29
+    private var networkCallback: android.net.ConnectivityManager.NetworkCallback? = null
+    private var connectivityManager: android.net.ConnectivityManager? = null
+
+    val joinedSsid: String? get() = if (netId >= 0 || specifierActive) lastSsid else null
+
+    val isActive: Boolean get() = netId >= 0 || specifierActive
+
+    /** True on every Android: 29+ via the system specifier dialog, older via addNetwork. */
+    fun canJoinProgrammatically(): Boolean = true
 
     fun join(
         ssid: String,
@@ -333,8 +344,9 @@ class TempLinkClient(private val context: Context) {
         onConnected: (ip: String) -> Unit,
         onFailed: (reason: String) -> Unit
     ) {
+        lastSsid = ssid
         if (Build.VERSION.SDK_INT >= 29) {
-            onFailed("manual")
+            joinViaSpecifier(ssid, password, onConnected, onFailed)
             return
         }
         val manager = wm
@@ -355,7 +367,6 @@ class TempLinkClient(private val context: Context) {
                     return@Thread
                 }
                 netId = id
-                lastSsid = ssid
                 manager.enableNetwork(id, true)
                 var waited = 0
                 while (waited < 30) {
@@ -386,16 +397,90 @@ class TempLinkClient(private val context: Context) {
 
     /** Forgets the temporary network — the OS keeps nothing afterwards. */
     fun leave() {
+        // API 29+: dropping the callback drops the whole app-scoped connection.
+        val cb = networkCallback
+        if (specifierActive || cb != null) {
+            specifierActive = false
+            networkCallback = null
+            try {
+                connectivityManager?.unregisterNetworkCallback(cb!!)
+            } catch (_: Exception) {
+            }
+            LanTransport.restartWithAppNetwork(null)
+            LogStore.i("TempLink: app-scoped connection dropped (nothing remembered)")
+        }
         val id = netId
-        if (id < 0) return
-        netId = -1
+        if (id >= 0) {
+            netId = -1
+            try {
+                wm?.removeNetwork(id)
+                @Suppress("DEPRECATION")
+                wm?.saveConfiguration()
+                LogStore.i("TempLink: temporary network removed (nothing remembered)")
+            } catch (e: Exception) {
+                LogStore.w("TempLink: remove network failed: ${e.message}")
+            }
+        }
+    }
+
+    // ---------------- API 29+: WifiNetworkSpecifier ----------------
+
+    @android.annotation.SuppressLint("MissingPermission")
+    @androidx.annotation.RequiresApi(29)
+    private fun joinViaSpecifier(
+        ssid: String,
+        password: String,
+        onConnected: (ip: String) -> Unit,
+        onFailed: (reason: String) -> Unit
+    ) {
+        val cm = context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE)
+            as? android.net.ConnectivityManager
+        if (cm == null) {
+            onFailed("no ConnectivityManager")
+            return
+        }
+        connectivityManager = cm
         try {
-            wm?.removeNetwork(id)
-            @Suppress("DEPRECATION")
-            wm?.saveConfiguration()
-            LogStore.i("TempLink: temporary network removed (nothing remembered)")
+            val specifier = android.net.wifi.WifiNetworkSpecifier.Builder()
+                .setSsid(ssid)
+                .setWpa2Passphrase(password)
+                .build()
+            val request = android.net.NetworkRequest.Builder()
+                .addTransportType(android.net.NetworkCapabilities.TRANSPORT_WIFI)
+                .removeCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .setNetworkSpecifier(specifier)
+                .build()
+            val callback = object : android.net.ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: android.net.Network) {
+                    specifierActive = true
+                    // All LAN sockets must bind to this network or the system
+                    // silently drops their traffic.
+                    LanTransport.restartWithAppNetwork(network)
+                    var ip = ""
+                    try {
+                        val lp = cm.getLinkProperties(network)
+                        for (a in lp?.linkAddresses ?: emptyList()) {
+                            if (a.address is java.net.Inet4Address) {
+                                ip = a.address.hostAddress ?: ""
+                                break
+                            }
+                        }
+                    } catch (_: Exception) {
+                    }
+                    post { onConnected(ip) }
+                }
+
+                override fun onUnavailable() {
+                    specifierActive = false
+                    networkCallback = null
+                    post { onFailed("could not join $ssid") }
+                }
+            }
+            networkCallback = callback
+            cm.requestNetwork(request, callback)
         } catch (e: Exception) {
-            LogStore.w("TempLink: remove network failed: ${e.message}")
+            LogStore.e("TempLink: specifier join failed", e)
+            onFailed(e.message ?: "could not join")
         }
     }
 
