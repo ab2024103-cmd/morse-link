@@ -177,7 +177,7 @@
     <string name="dashboard_stranger_hint">One-time hotspot — nothing is saved afterwards</string>
     <string name="temp_link_title">Temporary link</string>
     <string name="temp_link_create">Create a temporary hotspot</string>
-    <string name="temp_link_join">Join someone's hotspot</string>
+    <string name="temp_link_join">Join someone\'s hotspot</string>
     <string name="temp_link_starting">Turning on the temporary hotspot…</string>
     <string name="temp_link_ready">Link is on. Share these with the other person only:</string>
     <string name="temp_link_end">End link</string>
