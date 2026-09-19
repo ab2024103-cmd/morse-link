@@ -28,12 +28,12 @@ Daemon will be stopped at the end of the build
 > Task :app:extractDeepLinksDebug
 > Task :app:processDebugMainManifest
 > Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
-> Task :app:processDebugManifestForPackage
 > Task :app:compressDebugAssets
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
@@ -44,8 +44,8 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
 > Task :app:mergeDebugJniLibFolders
-> Task :app:mergeLibDexDebug
 > Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:mergeLibDexDebug
 > Task :app:stripDebugDebugSymbols NO-SOURCE
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
@@ -59,13 +59,12 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:parseReleaseLocalResources
 > Task :app:generateReleaseBuildConfig
 > Task :app:checkReleaseAarMetadata
-> Task :app:mergeReleaseResources
 > Task :app:mapReleaseSourceSetPaths
-> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:createReleaseCompatibleScreenManifests
 > Task :app:extractDeepLinksRelease
 > Task :app:processReleaseMainManifest
 > Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
 > Task :app:javaPreCompileRelease
 > Task :app:extractProguardFiles
 > Task :app:mergeReleaseJniLibFolders
@@ -73,10 +72,11 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
-> Task :app:processReleaseManifestForPackage
-> Task :app:checkReleaseDuplicateClasses
 > Task :app:desugarReleaseFileDependencies
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:mergeReleaseResources
 > Task :app:mergeReleaseStartupProfile
+> Task :app:dataBindingGenBaseClassesRelease
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
 > Task :app:processReleaseResources
@@ -96,72 +96,72 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:61 Unnecessary safe call on a non-null receiver of type CharSequence
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:702:48 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:723:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:724:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:725:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:745:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:747:41 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:749:29 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:752:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:877:65 Unnecessary safe call on a non-null receiver of type JSONObject?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:877:94 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:705:48 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:726:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:727:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:728:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:748:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:750:41 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:752:29 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:755:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:65 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:94 Unnecessary safe call on a non-null receiver of type JSONObject?
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:5:25 'WifiConfiguration' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:63:30 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:96:60 'getter for ssid: String?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:101:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:102:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:139:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:152:28 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:152:28 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:153:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:154:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:169:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:170:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:171:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:199:29 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:224:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:227:45 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:228:44 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:248:23 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:248:23 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:249:17 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:250:39 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:17 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:60 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:68 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:253:50 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:271:35 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:275:17 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:359:27 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:359:27 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:360:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:361:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:364:34 'addNetwork(WifiConfiguration!): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:370:25 'enableNetwork(Int, Boolean): Boolean' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:373:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:375:46 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:378:64 'formatIpAddress(Int): String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:378:85 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:416:21 'removeNetwork(Int): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:108:60 'getter for ssid: String?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:113:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:114:41 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:165:68 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:180:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:181:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:64 'KeyMgmt' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:205:68 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:206:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:207:41 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:237:29 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:262:42 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:265:45 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:266:44 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:287:17 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:288:39 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:17 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:42 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:60 'KeyMgmt' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:68 'WPA_PSK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:291:50 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:389:35 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:393:17 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:478:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:479:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:64 'KeyMgmt' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:482:34 'addNetwork(WifiConfiguration!): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:488:25 'enableNetwork(Int, Boolean): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:491:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:493:46 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:64 'formatIpAddress(Int): String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:85 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:534:21 'removeNetwork(Int): Boolean' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:289:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:410:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:821:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:858:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1210:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
@@ -181,6 +181,7 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:47 'Thumbnails' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:145:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:285:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
@@ -252,12 +253,12 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:processDebugJavaRes
 > Task :app:mergeDebugJavaResource
 > Task :app:dexBuilderDebug
-> Task :app:mergeProjectDexDebug
 > Task :app:mergeReleaseArtProfile
 > Task :app:mergeReleaseShaders
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
 > Task :app:mergeReleaseAssets
+> Task :app:mergeProjectDexDebug
 > Task :app:compressReleaseAssets
 > Task :app:extractReleaseVersionControlInfo
 > Task :app:collectReleaseDependencies
@@ -285,72 +286,72 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:61 Unnecessary safe call on a non-null receiver of type CharSequence
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:702:48 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:723:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:724:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:725:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:745:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:747:41 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:749:29 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:752:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:877:65 Unnecessary safe call on a non-null receiver of type JSONObject?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:877:94 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:705:48 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:726:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:727:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:728:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:748:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:750:41 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:752:29 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:755:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:65 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:94 Unnecessary safe call on a non-null receiver of type JSONObject?
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:5:25 'WifiConfiguration' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:63:30 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:96:60 'getter for ssid: String?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:101:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:102:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:139:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:152:28 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:152:28 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:153:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:154:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:155:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:169:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:170:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:171:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:199:29 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:224:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:227:45 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:228:44 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:248:23 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:248:23 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:249:17 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:250:39 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:17 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:60 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:251:68 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:253:50 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:271:35 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:275:17 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:359:27 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:359:27 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:360:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:361:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:362:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:364:34 'addNetwork(WifiConfiguration!): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:370:25 'enableNetwork(Int, Boolean): Boolean' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:373:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:375:46 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:378:64 'formatIpAddress(Int): String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:378:85 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:416:21 'removeNetwork(Int): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:108:60 'getter for ssid: String?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:113:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:114:41 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:165:68 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:180:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:181:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:64 'KeyMgmt' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:205:68 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:206:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:207:41 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:237:29 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:262:42 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:265:45 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:266:44 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:287:17 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:288:39 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:17 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:42 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:60 'KeyMgmt' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:68 'WPA_PSK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:291:50 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:389:35 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:393:17 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:478:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:479:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:64 'KeyMgmt' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:482:34 'addNetwork(WifiConfiguration!): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:488:25 'enableNetwork(Int, Boolean): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:491:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:493:46 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:64 'formatIpAddress(Int): String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:85 'getter for ipAddress: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:534:21 'removeNetwork(Int): Boolean' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:289:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:410:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:821:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:858:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1210:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
@@ -370,6 +371,7 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:47 'Thumbnails' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:145:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:285:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
@@ -450,11 +452,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789852394128.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789853453329.json
 
-BUILD SUCCESSFUL in 3m 59s
+BUILD SUCCESSFUL in 3m 55s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8283540
-APK_SIZE_RELEASE=6759683
+APK_SIZE_DEBUG=8293452
+APK_SIZE_RELEASE=6767216
