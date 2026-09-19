@@ -235,7 +235,7 @@ class DashboardFragment : Fragment() {
             ).also { it.topMargin = (12 * dp).toInt() }
         }
         val creds = TextView(ctx).apply {
-            textIsSelectable = true
+            setTextIsSelectable(true)
             textSize = 16f
             visibility = View.GONE
             layoutParams = android.widget.LinearLayout.LayoutParams(
