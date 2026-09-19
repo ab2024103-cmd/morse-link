@@ -140,6 +140,9 @@ object LanTransport {
         }
     }
 
+    /** True while a temporary-link (app-scoped) network is active. */
+    fun hasAppNetwork(): Boolean = appNetwork != null
+
     /** Re-creates all LAN sockets bound to [network] (or the default when null). */
     fun restartWithAppNetwork(network: android.net.Network?) {
         appNetwork = network

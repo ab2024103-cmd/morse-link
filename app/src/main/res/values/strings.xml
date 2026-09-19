@@ -190,6 +190,14 @@
     <string name="temp_link_joining">Joining %1$s…</string>
     <string name="temp_link_connected">Connected to %1$s — the other phone appears under Send / Receive.</string>
     <string name="temp_link_disconnect">End link and disconnect</string>
+    <string name="temp_link_show_details">Show QR &amp; details</string>
+    <string name="temp_link_continue">Continue</string>
+    <string name="temp_link_how">How does it work?</string>
+    <string name="temp_link_running_hint">The link stays on. To end it later: Dashboard → Link with a stranger → End link.</string>
+    <string name="temp_link_perm_title">Permissions needed</string>
+    <string name="temp_link_perm_message">To turn the temporary hotspot on, Android requires the nearby-devices permission. It is used only while the link is running.</string>
+    <string name="temp_link_perm_denied">Without the permission the temporary hotspot cannot be turned on</string>
+    <string name="temp_link_steps">ONE PHONE CREATES THE LINK:\n1. Dashboard → Link with a stranger → Create a temporary hotspot\n2. Allow the permission if asked, then wait for the QR code\n3. Tap Continue and stay on the Send/Receive screen\n\nTHE OTHER PHONE JOINS:\n1. Dashboard → Link with a stranger → Join someone\'s hotspot\n2. Tap Scan QR and point the camera at the QR code (or type the name and password shown under it)\n3. Tap Join — on newer Androids the system asks once, just tap the network\n4. Wait on the Send/Receive screen until the other phone appears, then tap it\n\nTHEN:\n• Tap the phone that appears and choose files to send — accept the popup on the other side\n• Both phones must stay in MorseLink during the transfer\n• When done, both sides tap End link: the hotspot credentials stop working and nothing is remembered</string>
     <string name="temp_link_disconnected">Link ended — the network is gone and nothing was saved</string>
     <string name="temp_link_manual_hint">This Android version cannot join a Wi-Fi from an app. Join it in Settings → Wi-Fi with the name and password you were given, then open Send / Receive.</string>
     <string name="viewer_now_playing">Now playing</string>

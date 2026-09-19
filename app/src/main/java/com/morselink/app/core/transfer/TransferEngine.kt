@@ -176,7 +176,12 @@ object TransferEngine {
 
     /** Starts discovery on the primary transport (Nearby on GMS, else LAN). */
     fun startDiscovery(prefer: TransportType? = null) {
-        val transport = prefer ?: if (NearbyTransport.isAvailable() && hasDiscoveryPermission()) {
+        val transport = if (LanTransport.hasAppNetwork()) {
+            // A temporary link is active: the peers are on that network only —
+            // Nearby would find nothing and would stop the LAN discovery
+            // (mlogs4: "no device found" right after joining).
+            TransportType.LAN_WIFI
+        } else prefer ?: if (NearbyTransport.isAvailable() && hasDiscoveryPermission()) {
             TransportType.NEARBY_CONNECTIONS
         } else {
             TransportType.LAN_WIFI

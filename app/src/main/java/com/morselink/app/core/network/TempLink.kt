@@ -66,11 +66,23 @@ class TempLinkHost(private val context: Context) {
     var running: Boolean = false
         private set
 
+    @Volatile
+    private var stopped = false
+
+    // Host-side network binding (see bindHostSide()).
+    private var hostNetCallback: android.net.ConnectivityManager.NetworkCallback? = null
+    private var hostCm: android.net.ConnectivityManager? = null
+    @Volatile
+    private var hostBound: android.net.Network? = null
+    private var retryOnce = false
+
     /** ssid/password are the values the system actually applied. */
     fun start(
         onReady: (ssid: String, password: String, ip: String) -> Unit,
         onFailed: (reason: String) -> Unit
     ) {
+        stopped = false
+        retryOnce = false
         if (Build.VERSION.SDK_INT >= 26) startModern(onReady, onFailed) else startLegacy(onReady, onFailed)
     }
 
@@ -105,11 +117,25 @@ class TempLinkHost(private val context: Context) {
                     }
                     running = true
                     LogStore.i("TempLink: local-only hotspot ready (ssid=$ssid)")
+                    // The hotspot has no internet, so it is NOT the system
+                    // default network: every socket must be bound to it or
+                    // replies egress via mobile data and transfers stall
+                    // (mlogs4 n7: stuck at 100% "Sending").
+                    bindHostSide()
                     onReady(ssid, pass, hotspotGatewayIp())
                 }
 
                 override fun onFailed(reason: Int) {
                     LogStore.w("TempLink: local-only hotspot failed ($reason)")
+                    // Code 3 usually means the previous reservation was not
+                    // fully released yet (mlogs4) — one delayed retry fixes it.
+                    if (!retryOnce && !stopped) {
+                        retryOnce = true
+                        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                            if (!stopped) startModern(onReady, onFailed)
+                        }, 3000)
+                        return
+                    }
                     onFailed("hotspot failed (code $reason)")
                 }
 
@@ -143,7 +169,8 @@ class TempLinkHost(private val context: Context) {
                 }
                 // If the user's hotspot is already on, restart it so the
                 // temporary configuration actually applies.
-                if (apActive()) {
+                val wasAlreadyOn = apActive()
+                if (wasAlreadyOn) {
                     setApEnabled(null, false)
                     Thread.sleep(1500)
                 }
@@ -161,7 +188,16 @@ class TempLinkHost(private val context: Context) {
                     waited++
                 }
                 if (!apActive()) {
-                    post { onFailed(if (toggled) "hotspot did not turn on" else "cannot control the hotspot on this phone") }
+                    post { onFailed(if (toggled) "hotspot did not turn on" else "This phone does not let apps turn the hotspot on. Turn it on manually, or use Join instead.") }
+                    return@Thread
+                }
+                if (!toggled && wasAlreadyOn) {
+                    // Could not apply our configuration, but a hotspot with
+                    // DIFFERENT credentials is running — advertising ours would
+                    // hand out a name/password that does not work. Fail honestly.
+                    originalCfg = null
+                    clearRestorePoint()
+                    post { onFailed("Your hotspot is already on with its own name and password. Turn it off in phone Settings, then try again.") }
                     return@Thread
                 }
                 running = true
@@ -179,7 +215,9 @@ class TempLinkHost(private val context: Context) {
     }
 
     fun stop() {
+        stopped = true
         if (Build.VERSION.SDK_INT >= 26) {
+            unbindHostSide()
             try {
                 reservation?.close()
             } catch (_: Exception) {
@@ -255,6 +293,86 @@ class TempLinkHost(private val context: Context) {
             clearRestorePoint()
         } catch (_: Exception) {
         }
+    }
+
+    // ---------------- host-side network binding ----------------
+
+    /**
+     * Finds the hotspot's own Network (it carries no internet, so it is not
+     * the default) and binds all LAN sockets to it while the link runs.
+     */
+    private fun bindHostSide() {
+        try {
+            val cm = context.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE)
+                as? android.net.ConnectivityManager ?: return
+            hostCm = cm
+            val request = android.net.NetworkRequest.Builder()
+                .addTransportType(android.net.NetworkCapabilities.TRANSPORT_WIFI)
+                .removeCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .build()
+            val cb = object : android.net.ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: android.net.Network) {
+                    considerBind(network, null)
+                }
+
+                override fun onLinkPropertiesChanged(
+                    network: android.net.Network,
+                    lp: android.net.LinkProperties
+                ) {
+                    considerBind(network, lp)
+                }
+            }
+            hostNetCallback = cb
+            cm.requestNetwork(request, cb)
+        } catch (e: Exception) {
+            LogStore.w("TempLink: host network watch failed: ${e.message}")
+        }
+    }
+
+    private fun considerBind(network: android.net.Network, lpIn: android.net.LinkProperties?) {
+        if (hostBound != null || stopped) return
+        try {
+            val lp = lpIn ?: hostCm?.getLinkProperties(network) ?: return
+            val gw = hotspotGatewayIp()
+            val byAddress = lp.linkAddresses.any {
+                it.address is java.net.Inet4Address && it.address.hostAddress == gw
+            }
+            val byInterface = apInterfaceName()?.let { lp.interfaceName == it } == true
+            if (byAddress || byInterface) {
+                hostBound = network
+                LanTransport.restartWithAppNetwork(network)
+                LogStore.i("TempLink: host sockets bound to ${lp.interfaceName}")
+            }
+        } catch (_: Exception) {
+        }
+    }
+
+    /** Interface that owns the hotspot gateway address, e.g. "swlan0"/"ap0". */
+    private fun apInterfaceName(): String? {
+        return try {
+            val gw = hotspotGatewayIp()
+            for (ni in java.util.Collections.list(java.net.NetworkInterface.getNetworkInterfaces())) {
+                for (ia in java.util.Collections.list(ni.inetAddresses)) {
+                    if (ia.hostAddress == gw) return ni.name
+                }
+            }
+            null
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private fun unbindHostSide() {
+        hostBound = null
+        val cb = hostNetCallback
+        hostNetCallback = null
+        if (cb != null) {
+            try {
+                hostCm?.unregisterNetworkCallback(cb)
+            } catch (_: Exception) {
+            }
+        }
+        LanTransport.restartWithAppNetwork(null)
     }
 
     // ---------------- reflection helpers ----------------

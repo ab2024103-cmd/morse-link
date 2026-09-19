@@ -11,8 +11,8 @@ android {
         applicationId = "com.morselink.app"
         minSdk = 21
         targetSdk = 34
-        versionCode = 12
-        versionName = "1.4.1"
+        versionCode = 13
+        versionName = "1.4.2"
     }
 
     signingConfigs {

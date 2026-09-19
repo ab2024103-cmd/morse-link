@@ -200,19 +200,29 @@ class DashboardFragment : Fragment() {
     private var tempHostDialog: AlertDialog? = null
     private var joinProgressDialog: AlertDialog? = null
     private var tempClient: TempLinkClient? = null
+    private var lastLinkSsid: String? = null
+    private var lastLinkPass: String? = null
+    private var pendingTempAction: (() -> Unit)? = null
 
     private fun showStrangerOptions() {
-        val active = tempClient?.isActive == true
-        val options = if (active) {
-            arrayOf(
+        val hosting = tempHost?.running == true
+        val joined = tempClient?.isActive == true
+        val options = when {
+            hosting -> arrayOf(
+                getString(R.string.temp_link_show_details),
+                getString(R.string.temp_link_end),
+                getString(R.string.temp_link_how)
+            )
+            joined -> arrayOf(
                 getString(R.string.temp_link_disconnect),
                 getString(R.string.temp_link_create),
-                getString(R.string.temp_link_join)
+                getString(R.string.temp_link_join),
+                getString(R.string.temp_link_how)
             )
-        } else {
-            arrayOf(
+            else -> arrayOf(
                 getString(R.string.temp_link_create),
-                getString(R.string.temp_link_join)
+                getString(R.string.temp_link_join),
+                getString(R.string.temp_link_how)
             )
         }
         AlertDialog.Builder(requireContext())
@@ -220,16 +230,19 @@ class DashboardFragment : Fragment() {
             .setItems(options) { d, which ->
                 d.dismiss()
                 when {
-                    active && which == 0 -> {
+                    hosting && which == 0 -> showHostLinkDialog()
+                    hosting && which == 1 -> endTempLink()
+                    joined && which == 0 -> {
                         tempClient?.leave()
                         tempClient = null
                         Toast.makeText(
                             requireContext(), R.string.temp_link_disconnected, Toast.LENGTH_SHORT
                         ).show()
                     }
-                    active && which == 1 -> createTempLink()
-                    active && which == 2 -> showJoinTempLink(null, null)
+                    joined && which == 1 -> createTempLink()
+                    joined && which == 2 -> showJoinTempLink(null, null)
                     which == 0 -> createTempLink()
+                    options[which] == getString(R.string.temp_link_how) -> showTempLinkTutorial()
                     else -> showJoinTempLink(null, null)
                 }
             }
@@ -237,8 +250,74 @@ class DashboardFragment : Fragment() {
             .show()
     }
 
-    private fun createTempLink() {
+    private fun endTempLink() {
         tempHost?.stop()
+        tempHost = null
+        tempHostDialog?.dismiss()
+        tempHostDialog = null
+        lastLinkSsid = null
+        lastLinkPass = null
+        Toast.makeText(requireContext(), R.string.temp_link_disconnected, Toast.LENGTH_SHORT).show()
+    }
+
+    /** Step-by-step walkthrough for both roles (mlogs4 request). */
+    private fun showTempLinkTutorial() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.temp_link_how)
+            .setMessage(getString(R.string.temp_link_steps))
+            .setPositiveButton(R.string.action_ok, null)
+            .show()
+    }
+
+    /** Asks for the permissions a hotspot needs the first time, then runs [action]. */
+    private fun ensureTempLinkPermissions(action: () -> Unit) {
+        val missing = Permissions.discoveryPermissions(requireContext())
+        if (missing.isEmpty()) {
+            action()
+            return
+        }
+        pendingTempAction = action
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.temp_link_perm_title)
+            .setMessage(getString(R.string.temp_link_perm_message))
+            .setPositiveButton(R.string.action_ok) { d, _ ->
+                d.dismiss()
+                requestPermissions(missing.toTypedArray(), RC_TEMP_PERMS)
+            }
+            .setNegativeButton(android.R.string.cancel) { d, _ ->
+                d.dismiss()
+                pendingTempAction = null
+            }
+            .show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == RC_TEMP_PERMS) {
+            val action = pendingTempAction
+            pendingTempAction = null
+            if (action != null && grantResults.isNotEmpty() &&
+                grantResults.all { it == android.content.pm.PackageManager.PERMISSION_GRANTED }
+            ) {
+                action()
+            } else if (isAdded) {
+                Toast.makeText(
+                    requireContext(), R.string.temp_link_perm_denied, Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun createTempLink() {
+        ensureTempLinkPermissions { startTempLink() }
+    }
+
+    private fun startTempLink() {
+        tempHost?.stop()
+        tempHost = null
         val ctx = requireContext()
         val dp = resources.displayMetrics.density
         val pad = (18 * dp).toInt()
@@ -264,6 +343,7 @@ class DashboardFragment : Fragment() {
                 android.view.ViewGroup.LayoutParams.WRAP_CONTENT
             ).also { it.topMargin = (10 * dp).toInt() }
         }
+
         val note = TextView(ctx).apply {
             text = getString(R.string.temp_link_note)
             textSize = 12f
@@ -274,17 +354,7 @@ class DashboardFragment : Fragment() {
         col.addView(creds)
         col.addView(note)
 
-        tempHostDialog = AlertDialog.Builder(ctx)
-            .setTitle(R.string.temp_link_title)
-            .setView(col)
-            .setCancelable(false)
-            .setPositiveButton(R.string.temp_link_end) { d, _ ->
-                d.dismiss()
-                tempHost?.stop()
-                tempHost = null
-                tempHostDialog = null
-            }
-            .show()
+        tempHostDialog = buildHostDialog(col)
 
         tempHost = TempLinkHost(ctx)
         tempHost?.start(
@@ -294,6 +364,8 @@ class DashboardFragment : Fragment() {
                     tempHost = null
                     return@start
                 }
+                lastLinkSsid = ssid
+                lastLinkPass = pass
                 status.text = getString(R.string.temp_link_ready)
                 val payload = "morselink://temp?ssid=" + Uri.encode(ssid) +
                     "&key=" + Uri.encode(pass)
@@ -317,6 +389,69 @@ class DashboardFragment : Fragment() {
                 if (isAdded) Toast.makeText(ctx, reason, Toast.LENGTH_LONG).show()
             }
         )
+    }
+
+    /** The QR dialog: Continue keeps the link running; End link wipes it. */
+    private fun buildHostDialog(content: android.widget.LinearLayout): AlertDialog {
+        return AlertDialog.Builder(requireContext())
+            .setTitle(R.string.temp_link_title)
+            .setView(content)
+            .setCancelable(false)
+            .setPositiveButton(R.string.temp_link_end) { d, _ ->
+                d.dismiss()
+                endTempLink()
+            }
+            .setNeutralButton(R.string.temp_link_continue) { d, _ ->
+                d.dismiss()
+                tempHostDialog = null
+                // The link keeps running; go where the other phone will appear.
+                Toast.makeText(requireContext(), R.string.temp_link_running_hint, Toast.LENGTH_LONG)
+                    .show()
+                (activity as? MainActivity)?.openTransferScreen(TransferFragment.Mode.RECEIVE)
+            }
+            .show()
+    }
+
+    /** Re-opens the QR + credentials for a link that is already running. */
+    private fun showHostLinkDialog() {
+        val ssid = lastLinkSsid ?: return
+        val pass = lastLinkPass ?: ""
+        val dp = resources.displayMetrics.density
+        val pad = (18 * dp).toInt()
+        val ctx = requireContext()
+        val col = android.widget.LinearLayout(ctx).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(pad, (6 * dp).toInt(), pad, 0)
+        }
+        val status = TextView(ctx).apply { text = getString(R.string.temp_link_ready) }
+        val qrImage = ImageView(ctx).apply {
+            adjustViewBounds = true
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
+                android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+            ).also { it.topMargin = (12 * dp).toInt() }
+        }
+        val creds = TextView(ctx).apply { textSize = 16f }
+        val note = TextView(ctx).apply {
+            text = getString(R.string.temp_link_note)
+            textSize = 12f
+            setPadding(0, (12 * dp).toInt(), 0, (4 * dp).toInt())
+        }
+        col.addView(status)
+        col.addView(qrImage)
+        col.addView(creds)
+        col.addView(note)
+
+        val payload = "morselink://temp?ssid=" + Uri.encode(ssid) + "&key=" + Uri.encode(pass)
+        com.morselink.app.core.util.Qr.encode(payload, 640)?.let { bmp ->
+            qrImage.setImageBitmap(bmp)
+            qrImage.visibility = View.VISIBLE
+        }
+        creds.text = getString(R.string.temp_link_hint_ssid) + ": " + ssid +
+            "\n" + getString(R.string.temp_link_hint_password) + ": " + pass
+
+        tempHostDialog?.dismiss()
+        tempHostDialog = buildHostDialog(col)
     }
 
     private fun showJoinTempLink(prefillSsid: String?, prefillKey: String?) {
@@ -410,6 +545,10 @@ class DashboardFragment : Fragment() {
                 if (isAdded) Toast.makeText(ctx, reason, Toast.LENGTH_LONG).show()
             }
         )
+    }
+
+    companion object {
+        private const val RC_TEMP_PERMS = 4104
     }
 
     private class RecentAdapter(
