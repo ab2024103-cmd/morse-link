@@ -1,0 +1,278 @@
+MorseLink 1.4.1 (12)
+Device: HUAWEI MYA-AL10 (Android 6.0, SDK 23)
+Exported: 2026-09-19 21:39:50.233
+
+===== APP LOG =====
+2026-09-19 21:09:21.785 I MorseLink 1.4.1 (12) started
+2026-09-19 21:09:21.786 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-19 21:09:21.789 I LAN: server listening on 33456
+2026-09-19 21:09:30.690 E Media count() failed (documents) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=5980, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-19 21:09:30.710 E Media count() failed (ebooks) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=5980, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-19 21:09:30.714 E Media count() failed (archives) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=5980, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-19 21:09:30.794 E Media count() failed (apk_files) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=5980, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-19 21:09:30.831 E Media count() failed (large_files) :: SecurityException: Permission Denial: reading com.android.providers.media.MediaProvider uri content://media/external/file from pid=5980, uid=10144 requires android.permission.READ_EXTERNAL_STORAGE, or grantUriPermission()
+2026-09-19 21:11:16.886 I Nearby: discovery started
+2026-09-19 21:11:16.887 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:11:23.891 I Nearby: requested connection to TECNO KL4 (4QFL)
+2026-09-19 21:11:31.805 I Nearby: connection initiated by 4QFL (TECNO KL4), incoming=false
+2026-09-19 21:11:33.429 I Nearby: connected to 4QFL
+2026-09-19 21:11:33.446 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-19 21:11:33.492 I Outgoing worker started
+2026-09-19 21:11:44.436 I Nearby: metadata received for Screenshot_20260919-205855.png (90758 bytes)
+2026-09-19 21:11:44.986 I Saved Screenshot_20260919-205855.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260919-205855.png
+2026-09-19 21:11:44.990 I Batch in-a65c92f2-4a34-4ee2-9353-eefba82ee39c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:11:45.151 I Nearby: metadata received for Screenshot_20260919-205500.png (101490 bytes)
+2026-09-19 21:11:45.325 I Saved Screenshot_20260919-205500.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260919-205500.png
+2026-09-19 21:11:45.333 I Batch in-3ecf134a-3a5c-486a-951f-509674726c7c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:11:45.455 I Nearby: metadata received for Screenshot_20260919-204054.png (60887 bytes)
+2026-09-19 21:11:45.533 I Saved Screenshot_20260919-204054.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260919-204054.png
+2026-09-19 21:11:45.535 I Batch in-16391f8d-b39f-4995-a2ed-976a5680f4dd done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:11:56.593 I Queued 3 outgoing file(s)
+2026-09-19 21:11:56.617 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:11:56.631 W Auto-retry 1 for IMG-20260919-WA0000.jpg: No such file or directory
+2026-09-19 21:11:56.743 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:11:57.449 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:11:57.451 W Auto-retry 2 for IMG-20260919-WA0000.jpg: No such file or directory
+2026-09-19 21:11:58.269 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:11:58.270 W Auto-retry 3 for IMG-20260919-WA0000.jpg: No such file or directory
+2026-09-19 21:11:59.089 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:11:59.115 I Nearby: sending Screenshot_2026-09-19-06-04-02.png (52020 bytes)
+2026-09-19 21:11:59.837 I Nearby: sending Screenshot_2026-09-19-06-00-35.png (100337 bytes)
+2026-09-19 21:12:00.157 I Batch 9b1d3e7a-cbc1-4a60-bc85-aff319e77bc2 done: 2 ok, 1 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:02.472 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:12:02.474 W Auto-retry 1 for IMG-20260919-WA0000.jpg: No such file or directory
+2026-09-19 21:12:03.289 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:12:03.290 W Auto-retry 2 for IMG-20260919-WA0000.jpg: No such file or directory
+2026-09-19 21:12:04.134 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:12:04.137 W Auto-retry 3 for IMG-20260919-WA0000.jpg: No such file or directory
+2026-09-19 21:12:04.955 E Nearby: send IMG-20260919-WA0000.jpg failed :: FileNotFoundException: No such file or directory
+2026-09-19 21:12:04.965 I Batch 9b1d3e7a-cbc1-4a60-bc85-aff319e77bc2 done: 2 ok, 1 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:19.300 I Queued 3 outgoing file(s)
+2026-09-19 21:12:19.323 I Nearby: sending Screenshot_2026-09-18-19-09-05.png (101761 bytes)
+2026-09-19 21:12:19.449 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:12:19.754 I Nearby: sending Screenshot_2026-09-18-18-56-33.png (90085 bytes)
+2026-09-19 21:12:20.036 I Nearby: sending Screenshot_2026-09-18-18-55-39.png (91245 bytes)
+2026-09-19 21:12:20.324 I Batch 83b55ae3-a9db-464a-8f41-66de77a47d5f done: 3 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:41.308 I Nearby: metadata received for IMG_20260918_080552_933.jpg (7263622 bytes)
+2026-09-19 21:12:43.656 I Saved IMG_20260918_080552_933.jpg -> /storage/emulated/0/Download/MorseLink/IMG_20260918_080552_933.jpg
+2026-09-19 21:12:43.659 I Batch in-d674c9b4-7804-41ea-a1d9-7ad00d5ff290 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:38.696 I Queued 2 outgoing file(s)
+2026-09-19 21:13:38.781 I Nearby: sending IMG_20260918_080552_933.jpg (7263622 bytes)
+2026-09-19 21:13:39.155 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:13:41.039 I Nearby: metadata received for VID-20260909-WA0000.mp4 (3264060 bytes)
+2026-09-19 21:13:42.477 I Nearby: sending Screenshot_2026-09-18-19-09-05.png (101761 bytes)
+2026-09-19 21:13:42.610 I Saved VID-20260909-WA0000.mp4 -> /storage/emulated/0/Download/MorseLink/VID-20260909-WA0000.mp4
+2026-09-19 21:13:42.612 I Batch in-7a17d01f-5d05-45d6-8422-19ee1f442530 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:42.849 I Batch 738b8bcb-5af9-4119-b79e-4b6195e21797 done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:49.216 W Media page empty but count=5 (music) — retrying
+2026-09-19 21:13:54.984 I Nearby: metadata received for dc06156adb6e4485ac0051c391b255fa.mp4 (10654454 bytes)
+2026-09-19 21:13:56.054 I Queued 2 outgoing file(s)
+2026-09-19 21:13:56.077 I Nearby: sending Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-19 21:13:56.375 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:13:59.186 I Nearby: sending Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-19 21:13:59.414 I Saved dc06156adb6e4485ac0051c391b255fa.mp4 -> /storage/emulated/0/Download/MorseLink/dc06156adb6e4485ac0051c391b255fa.mp4
+2026-09-19 21:13:59.417 I Batch in-e1576f2b-4afc-4821-8f90-0eca08f366ab done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:59.712 I Nearby: metadata received for 5eab68644b5f485ebcbfb21eb53be3c0.mp4 (10650324 bytes)
+2026-09-19 21:13:59.716 I Batch f1f15ae2-27ef-4649-aeab-e878d2392eaf done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:04.583 I Saved 5eab68644b5f485ebcbfb21eb53be3c0.mp4 -> /storage/emulated/0/Download/MorseLink/5eab68644b5f485ebcbfb21eb53be3c0.mp4
+2026-09-19 21:14:04.586 I Batch in-5c0fd010-f43f-44e3-9f9f-98aa5c2ade5c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:26.993 I Nearby: metadata received for Screenshot_20260916-173027.png (113792 bytes)
+2026-09-19 21:14:31.437 I Conflict for Screenshot_20260916-173027.png resolved as SKIP
+2026-09-19 21:14:31.447 I Batch in-caa07bb9-85da-424b-af95-0f594e224ede done: 0 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-19 21:14:31.589 I Nearby: metadata received for IMG_20260915_080438_303.jpg (3325840 bytes)
+2026-09-19 21:14:33.849 I Batch in-dfabb12f-ab7c-43d5-9c03-5c38b6fff712 done: 0 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-19 21:14:33.955 I Nearby: metadata received for IMG_20260915_080425_161.jpg (3361453 bytes)
+2026-09-19 21:14:35.005 I Batch in-3d1f5ebd-85ca-4b16-b6d0-02fd18ae7cb7 done: 0 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-19 21:14:35.140 I Nearby: metadata received for IMG_20260915_080348_527.jpg (3606718 bytes)
+2026-09-19 21:14:36.311 I Batch in-5d2cb3b9-ae43-4dc9-bc7a-ceaf779be72f done: 0 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-19 21:14:50.395 I Nearby: 4QFL disconnected
+2026-09-19 21:14:50.396 I Nearby: session closed (peer disconnected)
+2026-09-19 21:14:50.404 I Nearby: discovery started
+2026-09-19 21:14:50.405 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:14:50.408 W Session lost (peer disconnected)
+2026-09-19 21:14:54.239 W Media page empty but count=5 (music) — retrying
+2026-09-19 21:14:56.206 I Nearby: discovery started
+2026-09-19 21:14:56.206 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:15:24.173 I Nearby: connection initiated by 4QFL (TECNO KL4), incoming=true
+2026-09-19 21:15:24.214 I Nearby: connected to 4QFL
+2026-09-19 21:15:24.227 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:15:42.130 I Queued 2 outgoing file(s)
+2026-09-19 21:15:42.150 I Nearby: sending IMG-20260917-WA0035.jpg (63031 bytes)
+2026-09-19 21:15:42.267 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:15:44.207 I Nearby: sending IMG-20260917-WA0034.jpg (72704 bytes)
+2026-09-19 21:15:45.079 I Batch 0864a396-7b8c-4b79-8652-252b70f40fd3 done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:15:56.652 I Nearby: metadata received for IMG_20260914_175745_154.jpg (3966023 bytes)
+2026-09-19 21:15:58.919 I Saved IMG_20260914_175745_154.jpg -> /storage/emulated/0/Download/MorseLink/IMG_20260914_175745_154.jpg
+2026-09-19 21:15:58.923 I Batch in-0722c879-191b-4184-a604-77d8bf35b5a8 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:15:59.230 I Nearby: metadata received for IMG_20260914_175452_312.jpg (3690711 bytes)
+2026-09-19 21:16:00.399 I Saved IMG_20260914_175452_312.jpg -> /storage/emulated/0/Download/MorseLink/IMG_20260914_175452_312.jpg
+2026-09-19 21:16:00.402 I Batch in-6ae569da-ff95-40f3-81dd-dce6233f62cc done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:16:05.842 I Nearby: discovery started
+2026-09-19 21:16:05.842 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:16:05.844 W Session lost (user ended session)
+2026-09-19 21:16:06.172 I Nearby: 4QFL disconnected
+2026-09-19 21:16:40.843 I TempLink: saved original hotspot configuration
+2026-09-19 21:16:40.902 W TempLink: setWifiApEnabled unavailable: null
+2026-09-19 21:16:42.406 W TempLink: setWifiApEnabled unavailable: null
+2026-09-19 21:16:42.408 I TempLink: temporary hotspot ready (ssid=MorseLink-A8CU)
+2026-09-19 21:16:42.525 I Discovery started on LAN_WIFI
+2026-09-19 21:17:36.502 I TempLink: link ended
+2026-09-19 21:17:36.504 W TempLink: setWifiApEnabled unavailable: null
+2026-09-19 21:17:36.505 I TempLink: original hotspot configuration restored (true)
+2026-09-19 21:19:05.197 I TempLink: joined AndroidShare_5795 (192.168.94.136)
+2026-09-19 21:19:05.757 I Nearby: discovery started
+2026-09-19 21:19:05.758 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:19:26.774 I Queued 3 outgoing file(s)
+2026-09-19 21:19:27.143 I Nearby: discovery started
+2026-09-19 21:19:27.143 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:20:27.299 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-19 21:20:27.376 I LAN: connected directly to TECNO KL4 at 192.168.94.26
+2026-09-19 21:20:27.406 I LAN: offering Screenshot_2026-09-16-17-48-59.png (88449 bytes) to TECNO KL4
+2026-09-19 21:21:13.176 I Queued 2 outgoing file(s)
+2026-09-19 21:21:13.510 I Nearby: discovery started
+2026-09-19 21:21:13.511 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:21:17.899 I Paused (queued) Screenshot_2026-09-16-17-48-16.png
+2026-09-19 21:21:20.840 I Paused (queued) Screenshot_2026-09-16-17-46-23.png
+2026-09-19 21:21:24.671 I Paused (queued) Screenshot_20260912-150454.png
+2026-09-19 21:21:27.617 I Paused (queued) Screenshot_20260912-150624.png
+2026-09-19 21:21:28.295 W Auto-retry 1 for Screenshot_2026-09-16-17-48-59.png: peer did not confirm completion
+2026-09-19 21:21:29.102 I LAN: offering Screenshot_2026-09-16-17-48-59.png (88449 bytes) to TECNO KL4
+2026-09-19 21:21:29.679 I LAN: cancelled Screenshot_2026-09-16-17-48-59.png at offset 0 — peer notified
+2026-09-19 21:21:41.613 I LAN: offering Screenshot_20260912-150454.png (79545 bytes) to TECNO KL4
+2026-09-19 21:22:41.790 W Auto-retry 1 for Screenshot_20260912-150454.png: peer did not confirm completion
+2026-09-19 21:22:42.605 I LAN: offering Screenshot_20260912-150454.png (79545 bytes) to TECNO KL4
+2026-09-19 21:22:50.650 I Incoming offer: Screenshot_20260912-071057.png (119964 bytes)
+2026-09-19 21:22:50.686 I LAN: accepted Screenshot_20260912-071057.png from offset 0
+2026-09-19 21:22:50.800 E LAN: data connection for 9ce65cce-26a3-469c-8e68-75ebe663e62d failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:23:42.966 W Auto-retry 2 for Screenshot_20260912-150454.png: peer did not confirm completion
+2026-09-19 21:23:43.775 I LAN: offering Screenshot_20260912-150454.png (79545 bytes) to TECNO KL4
+2026-09-19 21:23:43.783 I LAN: session closed (control write failure: sendto failed: ETIMEDOUT (Connection timed out))
+2026-09-19 21:23:43.785 W Session lost (control write failure: sendto failed: ETIMEDOUT (Connection timed out))
+2026-09-19 21:25:10.511 I TempLink: saved original hotspot configuration
+2026-09-19 21:25:10.529 W TempLink: setWifiApEnabled unavailable: null
+2026-09-19 21:25:12.032 W TempLink: setWifiApEnabled unavailable: null
+2026-09-19 21:25:12.033 I TempLink: temporary hotspot ready (ssid=MorseLink-6gwm)
+2026-09-19 21:25:12.082 I Discovery started on LAN_WIFI
+2026-09-19 21:25:53.075 I Nearby: discovery started
+2026-09-19 21:25:53.075 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:25:57.892 I Nearby: requested connection to TECNO KL4 (4QFL)
+2026-09-19 21:26:02.852 I Nearby: connection initiated by 4QFL (TECNO KL4), incoming=false
+2026-09-19 21:26:02.958 I Nearby: connected to 4QFL
+2026-09-19 21:26:02.961 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-19 21:26:03.345 I Nearby: sending Screenshot_2026-09-16-17-48-16.png (88675 bytes)
+2026-09-19 21:26:06.135 I Nearby: metadata received for Screenshot_20260912-071057.png (119964 bytes)
+2026-09-19 21:26:06.271 I Revived incoming row for Screenshot_20260912-071057.png
+2026-09-19 21:26:11.052 I Saved Screenshot_20260912-071057.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260912-071057.png
+2026-09-19 21:26:11.055 I Batch in-61927b4d-0a93-4aa7-8473-c4230402125e done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:26:11.066 I Nearby: sending Screenshot_2026-09-16-17-46-23.png (84445 bytes)
+2026-09-19 21:26:11.217 I Nearby: metadata received for Screenshot_20260912-071011.png (119749 bytes)
+2026-09-19 21:26:16.607 I Saved Screenshot_20260912-071011.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260912-071011.png
+2026-09-19 21:26:16.609 I Batch in-6d715326-b284-46cb-a8c7-73f3fa7c6e55 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:27:17.491 W Nearby: completed without receiver ACK for 9e82b8ea-451f-4fd9-b110-0f7ad0684dfd
+2026-09-19 21:27:23.109 I Nearby: metadata received for Screenshot_20260919-204054.png (60887 bytes)
+2026-09-19 21:27:44.717 I Nearby: requested connection to TECNO KL4 (4QFL)
+2026-09-19 21:28:53.265 I Conflict for Screenshot_20260919-204054.png resolved as KEEP_BOTH
+2026-09-19 21:28:53.366 I Saved Screenshot_20260919-204054.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260919-204054 (1).png
+2026-09-19 21:28:53.370 I Batch in-1087f605-92a7-4f2f-b649-f3e81aa3e269 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:29:01.066 I TempLink: saved original hotspot configuration
+2026-09-19 21:29:01.085 W TempLink: setWifiApEnabled unavailable: null
+2026-09-19 21:29:06.721 I Nearby: 4QFL disconnected
+2026-09-19 21:29:06.725 I Nearby: session closed (peer disconnected)
+2026-09-19 21:29:06.726 W Session lost (peer disconnected)
+2026-09-19 21:29:43.375 I TempLink: joined AndroidShare_9282 (192.168.94.136)
+2026-09-19 21:29:43.819 I Nearby: discovery started
+2026-09-19 21:29:43.820 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:30:08.260 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-19 21:30:08.283 I LAN: connected directly to TECNO KL4 at 192.168.94.26
+2026-09-19 21:31:04.113 I Nearby: discovery started
+2026-09-19 21:31:04.118 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:31:11.234 E LAN: direct connect to 192.168.94.26 failed :: ConnectException: failed to connect to /192.168.94.26 (port 33456) after 8000ms: connect failed: ENETUNREACH (Network is unreachable)
+2026-09-19 21:31:24.326 I Nearby: connection initiated by 4QFL (TECNO KL4), incoming=true
+2026-09-19 21:31:24.336 I Nearby: connected to 4QFL
+2026-09-19 21:31:24.341 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:31:49.944 I Paused (queued) Screenshot_20260912-150624.png
+2026-09-19 21:31:50.327 I Paused (queued) Screenshot_20260912-150454.png
+2026-09-19 21:31:51.581 I Paused (queued) Screenshot_2026-09-16-17-46-23.png
+2026-09-19 21:31:51.826 E LAN: direct connect to 192.168.94.26 failed :: SocketTimeoutException: failed to connect to /192.168.94.26 (port 33456) after 8000ms
+2026-09-19 21:32:49.598 I Nearby: discovery started
+2026-09-19 21:32:49.599 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:32:49.600 W Session lost (user ended session)
+2026-09-19 21:32:49.828 E LAN: direct connect to 192.168.94.26 failed :: SocketTimeoutException: failed to connect to /192.168.94.26 (port 33456) after 8000ms
+2026-09-19 21:32:50.106 I Nearby: 4QFL disconnected
+2026-09-19 21:32:56.745 I Nearby: discovery started
+2026-09-19 21:32:56.746 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:10.674 I Nearby: connection initiated by 4QFL (TECNO KL4), incoming=true
+2026-09-19 21:33:10.729 I Nearby: connected to 4QFL
+2026-09-19 21:33:10.732 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-19 21:33:40.667 I Nearby: discovery started
+2026-09-19 21:33:40.668 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:40.669 W Session lost (user ended session)
+2026-09-19 21:33:41.013 I Nearby: 4QFL disconnected
+2026-09-19 21:33:44.790 I Nearby: requested connection to TECNO KL4 (4QFL)
+2026-09-19 21:33:53.955 I Nearby: connection initiated by 4QFL (TECNO KL4), incoming=true
+2026-09-19 21:33:54.131 I Nearby: connected to 4QFL
+2026-09-19 21:33:54.137 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-19 21:34:02.584 I Queued 1 outgoing file(s)
+2026-09-19 21:34:02.716 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:08.257 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:11.601 I Nearby: discovery started
+2026-09-19 21:34:11.602 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:11.603 W Session lost (user ended session)
+2026-09-19 21:34:11.930 I Nearby: 4QFL disconnected
+2026-09-19 21:34:38.077 I Nearby: requested connection to TECNO KL4 (4QFL)
+2026-09-19 21:35:10.459 I Nearby: discovery started
+2026-09-19 21:35:10.460 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:25.306 I MorseLink 1.4.1 (12) started
+2026-09-19 21:35:25.306 I LAN: server listening on 33456
+2026-09-19 21:35:25.307 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-19 21:35:27.977 I Nearby: discovery started
+2026-09-19 21:35:27.977 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:35.021 I Nearby: requested connection to TECNO KL4 (YHY4)
+2026-09-19 21:35:41.694 I Nearby: requested connection to TECNO KL4 (YHY4)
+2026-09-19 21:35:41.740 I Nearby: connection initiated by YHY4 (TECNO KL4), incoming=false
+2026-09-19 21:35:43.250 I Nearby: connected to YHY4
+2026-09-19 21:35:43.266 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-19 21:35:43.296 I Outgoing worker started
+2026-09-19 21:35:51.954 I Nearby: metadata received for Screenshot_2026-09-16-17-48-16.png (88675 bytes)
+2026-09-19 21:35:52.197 I Saved Screenshot_2026-09-16-17-48-16.png -> /storage/emulated/0/Download/MorseLink/Screenshot_2026-09-16-17-48-16.png
+2026-09-19 21:35:52.200 I Batch in-408a1bc5-9e4a-453d-9655-aba42b56b970 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:35:52.398 I Nearby: metadata received for Screenshot_20260919-211730.png (85535 bytes)
+2026-09-19 21:35:52.530 I Saved Screenshot_20260919-211730.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260919-211730.png
+2026-09-19 21:35:52.537 I Batch in-b656f1f5-18b2-47d6-87a4-ac2dd97a20a1 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:35:52.659 I Nearby: metadata received for Screenshot_20260919-212311.png (103750 bytes)
+2026-09-19 21:35:52.723 I Saved Screenshot_20260919-212311.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260919-212311.png
+2026-09-19 21:35:52.725 I Batch in-a3f4a30e-adc0-43eb-9548-8521ad5dba85 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:35:52.890 I Nearby: metadata received for Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-19 21:35:52.970 I Saved Screenshot_2026-09-12-14-54-59.png -> /storage/emulated/0/Download/MorseLink/Screenshot_2026-09-12-14-54-59.png
+2026-09-19 21:35:52.976 I Batch in-0e1fe9f8-f939-419d-bec6-e219c5e54e6b done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:35:53.123 I Nearby: metadata received for Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-19 21:35:53.176 I Saved Screenshot_2026-09-12-14-55-53.png -> /storage/emulated/0/Download/MorseLink/Screenshot_2026-09-12-14-55-53.png
+2026-09-19 21:35:53.178 I Batch in-a8336c3e-7edf-491b-b9d8-2e58af38fae7 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:35:53.301 I Nearby: metadata received for Screenshot_2026-09-18-19-09-05 (1).png (101761 bytes)
+2026-09-19 21:35:53.337 I Saved Screenshot_2026-09-18-19-09-05 (1).png -> /storage/emulated/0/Download/MorseLink/Screenshot_2026-09-18-19-09-05 (1).png
+2026-09-19 21:35:53.339 I Batch in-fecf1482-70e3-4704-a60f-51eaf283783b done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:36:08.736 I Nearby: discovery started
+2026-09-19 21:36:08.737 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:08.738 W Session lost (user ended session)
+2026-09-19 21:36:09.112 I Nearby: YHY4 disconnected
+2026-09-19 21:36:20.124 I Nearby: discovery started
+2026-09-19 21:36:20.124 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:27.947 I Nearby: requested connection to TECNO KL4 (YHY4)
+2026-09-19 21:36:34.299 I Nearby: requested connection to TECNO KL4 (YHY4)
+2026-09-19 21:36:40.850 I Nearby: connection initiated by YHY4 (TECNO KL4), incoming=false
+2026-09-19 21:36:42.873 I Nearby: connected to YHY4
+2026-09-19 21:36:42.876 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-19 21:36:57.399 I Nearby: metadata received for VID-20260913-WA0005.mp4 (1751655 bytes)
+2026-09-19 21:36:58.223 I Saved VID-20260913-WA0005.mp4 -> /storage/emulated/0/Download/MorseLink/VID-20260913-WA0005.mp4
+2026-09-19 21:36:58.226 I Batch in-8ddb91c5-63ca-4edd-851c-a23909c58181 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:37:13.580 I Nearby: metadata received for morselink-log-1789850229521.txt (30321 bytes)
+2026-09-19 21:37:13.722 I Saved morselink-log-1789850229521.txt -> /storage/emulated/0/Download/MorseLink/morselink-log-1789850229521.txt
+2026-09-19 21:37:13.725 I Batch in-e1495eef-3c37-4f3b-8f16-ffba279d3d31 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:38:10.072 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:38:14.062 I Nearby: discovery started
+2026-09-19 21:38:14.063 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:38:14.064 W Session lost (user ended session)
+2026-09-19 21:38:14.445 I Nearby: YHY4 disconnected
+2026-09-19 21:39:35.391 I LAN: server listening on 33456
+2026-09-19 21:39:35.395 I MorseLink 1.4.1 (12) started
+2026-09-19 21:39:35.396 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)

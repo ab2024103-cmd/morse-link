@@ -1,0 +1,106 @@
+### image_n1.png: Temporary Link Dialog (Light Mode)
+- **Context:** Android mobile screenshot showing a popup dialog box within an app.
+- **Status Bar:** Shows 2G, 4G, VoLTE network icons, battery at 60%, and time 15:27.
+- **Dialog Box:** 
+  - Title: "Temporary link"
+  - Subtitle: "Link is on. Share these with the other person only:"
+  - Visual: A large black-and-white QR code in the center.
+  - Text below QR: "Hotspot name: MorseLink-A8CU" and "Password: 1234alienyb".
+  - Footer text: "These work only while this link is on. Ending it wipes them — the other phone keeps nothing and cannot reconnect."
+  - Button: "End link" (green text, bottom right).
+- **Background:** Dimmed app interface showing partial green circular icons with letters (like "A") and right-pointing arrows.
+
+### image_n2.png: Receive from a device (Sending/Receiving)
+- **Context:** Android mobile screenshot of a file transfer app screen.
+- **Status Bar:** Shows 2.5K/s speed, 2G, 4G, VoLTE, battery at 59%, and time 21:20.
+- **Header:** Back arrow and title "Receive from a device".
+- **Link:** "Connection Doctor" (green text).
+- **Section: Sending**
+  - Item 1: Upload arrow icon. Filename: `Screenshot_...7-48-59.png`. Status: "Sending · 86.4 KB / 86.4 KB". A blue progress bar is complete. Icons for pause and cancel (X) are present.
+  - Item 2: Clock icon. Filename: `Screenshot_...7-48-16.png`. Status: "Queued". Icons for pause and cancel.
+  - Item 3: Clock icon. Filename: `Screenshot_...7-46-23.png`. Status: "Queued". Icons for pause and cancel.
+- **Section: Receiving**
+  - Text: "0 B/s · --:--"
+- **Bottom Buttons:** Green "Choose files" button and "Show queue" text button.
+- **Footer Links:** "Pause all", "Minimize", "End session" (all green text).
+
+### image_n3.png: Receive from a device (Completed/Cancelled Queue)
+- **Context:** Android mobile screenshot of a file transfer app screen.
+- **Status Bar:** Shows 1.6K/s speed, 2G, 4G, VoLTE, battery at 57%, and time 21:30.
+- **Header:** Back arrow and title "Receive from a device".
+- **Link:** "Connection Doctor" (green text).
+- **Section: Sending**
+  - Item 1: X icon. Filename: `Screenshot_...7-48-59.png`. Status: "Cancelled".
+  - Item 2: Checkmark circle icon. Filename: `Screenshot_...7-48-16.png`. Status: "Completed".
+  - Item 3: Clock icon. Filename: `Screenshot_...7-46-23.png`. Status: "Queued". Pause and cancel icons.
+  - Item 4: Clock icon. Filename: `Screenshot_...-150454.png`. Status: "Queued". Pause and cancel icons.
+  - Item 5: Clock icon. Filename: `Screenshot_...-150624.png`. Status: "Queued". Pause and cancel icons.
+- **Section: Receiving**
+  - Item: Clock icon. Filename: `Screenshot_...-071057.png`. (Partially visible at the bottom).
+
+### image_n4.png: Send to a device (Dark Mode Queue)
+- **Context:** Android mobile screenshot of a file transfer app screen in dark mode.
+- **Status Bar:** Shows 1.1K/s speed, 2G, 4G, VoLTE, battery at 63%, and time 21:02.
+- **Header:** Back arrow and title "Send to a device".
+- **Section: Sending**
+  - Item 1: X icon. Filename: `IMG-202609...WA0007.jpg`. Status: "Cancelled".
+  - Item 2: X icon. Filename: `IMG-202609...WA0006.jpg`. Status: "Cancelled".
+  - Item 3: X icon. Filename: `IMG-202609...WA0002.jpg`. Status: "Cancelled".
+  - Item 4: Clock icon. Filename: `IMG-202609...WA0006.jpg`. Status: "Queued". Pause and cancel icons.
+  - Item 5: Clock icon. Filename: `IMG-202609...WA0005.jpg`. Status: "Queued". Pause and cancel icons.
+- **Section: Receiving**
+- **Bottom Buttons:** Green "Choose files" button and "Show queue" text button (green).
+
+### image_n5.png: Temporary Link Dialog (Dark Mode)
+- **Context:** Android mobile screenshot showing a popup dialog box within an app (dark mode).
+- **Status Bar:** Shows 4G, 4G, VoLTE, battery at 62%, and time 8:55 PM.
+- **Dialog Box:**
+  - Title: "Temporary link"
+  - Subtitle: "Link is on. Share these with the other person only:"
+  - Visual: A large black-and-white QR code.
+  - Text below QR: "Hotspot name: AndroidShare_2940" and "Password: fg2hp6vtf65xxmy".
+  - Footer text: "These work only while this link is on. Ending it wipes them — the other phone keeps nothing and cannot reconnect."
+  - Button: "End link" (green text, bottom right).
+- **Background:** Dimmed app interface. Top left shows "TECNO KL4". Bottom navigation shows "Connect", "Files", "History", "Settings".
+
+### image_n6.png: Device Search Error Popups
+- **Context:** Android mobile screenshot of a file transfer app screen in dark mode.
+- **Status Bar:** Shows 4G, 4G, VoLTE, battery at 62%, and time 8:58 PM.
+- **Header:** Top left shows "TECNO KL4" and "Not connected" with a question mark icon on the right.
+- **Main Text:** "Searching for nearby devices" (gray text).
+- **Popup 1 (Top):** 
+  - Title: "Temporary link"
+  - Text: "Joining MorseLink-gvP7..."
+  - Visual: Green circular loading spinner.
+  - Button: "Cancel" (green text).
+- **Popup 2 (Bottom Error):**
+  - Text: "No devices found. Make sure devices are turned on and available to connect."
+  - Buttons: "Cancel" (gray text) and "Try again" (blue text).
+- **Background UI:** A list item visible reads "Link with a stranger" and "One-time hotspot — nothing is saved afterwards" with an icon of two people.
+- **Bottom Navigation:** Connect, Files, History, Settings.
+
+### image_n7.png: Send to a device (Wi-Fi Transfer)
+- **Context:** Android mobile screenshot of a file transfer app screen in dark mode.
+- **Status Bar:** Shows 4G, 4G, VoLTE, battery at 60%, and time 9:23 PM.
+- **Header:** Back arrow and title "Send to a device".
+- **Subtitle:** "Searching on this Wi-Fi network".
+- **Device Found:** Green circle with "M", "MYA-AL10", "Wi-Fi", right arrow.
+- **Link:** "Connection Doctor" (green text).
+- **Section: Sending**
+  - Item 1: Upload arrow icon. Filename: `Screens...057.png`. Status: "Sending · 117.2 KB / 117.2 KB". Blue progress bar (complete). Pause and cancel icons.
+  - Item 2: Clock icon. Filename: `Screens...011.png`. Status: "Queued". Pause and cancel icons.
+- **Section: Receiving**
+  - Item: Pause icon. Filename: `Screens...454.png`. Status: "Paused · 0 B / 77.7 KB". Play and cancel icons. A gray progress bar is visible.
+- **Data Rate:** "0 B/s · --:--"
+- **Bottom Buttons:** Green "Choose files" button and "Show queue" text button (green).
+
+### image_n8.png: App Permissions - All Files Access
+- **Context:** Android system settings screen for app permissions (dark mode).
+- **Status Bar:** Shows 4G, 4G, VoLTE, battery at 63%, and time 8:40 PM.
+- **Header:** Back arrow and title "All Files Access".
+- **App Card:** 
+  - Icon: Green square with white dots.
+  - App Name: "MorseLink"
+  - Version: "1.4.1"
+  - Setting: "Allow access to manage all files" with a toggle switch (currently off/gray).
+- **Warning Text:** An info icon followed by: "Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge."

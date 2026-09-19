@@ -1,0 +1,357 @@
+MorseLink 1.4.1 (12)
+Device: TECNO TECNO KL4 (Android 14, SDK 34)
+Exported: 2026-09-19 21:37:53.122
+
+===== APP LOG =====
+2026-09-19 21:10:00.976 I MorseLink 1.4.1 (12) started
+2026-09-19 21:10:00.978 I LAN: server listening on 33456
+2026-09-19 21:10:00.978 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-19 21:11:02.428 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:17.219 I Nearby: discovery started
+2026-09-19 21:11:17.221 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:11:32.714 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=true
+2026-09-19 21:11:32.718 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-19 21:11:34.210 I Consent for MYA-AL10: true
+2026-09-19 21:11:34.233 I Nearby: connected to OX6P
+2026-09-19 21:11:34.238 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:11:34.249 I Outgoing worker started
+2026-09-19 21:11:38.248 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:38.252 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:38.260 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:45.205 I Queued 3 outgoing file(s)
+2026-09-19 21:11:45.265 I Nearby: sending Screenshot_20260919-205855.png (90758 bytes)
+2026-09-19 21:11:45.286 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:11:46.083 I Nearby: sending Screenshot_20260919-205500.png (101490 bytes)
+2026-09-19 21:11:46.393 I Nearby: sending Screenshot_20260919-204054.png (60887 bytes)
+2026-09-19 21:11:46.540 I Batch 07d0a68e-dd11-4107-a720-5c81de5c58ef done: 3 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:00.113 I Nearby: metadata received for Screenshot_2026-09-19-06-04-02.png (52020 bytes)
+2026-09-19 21:12:00.395 I Verification for Screenshot_2026-09-19-06-04-02.png: size-only (logged)
+2026-09-19 21:12:00.599 I Saved Screenshot_2026-09-19-06-04-02.png -> Screenshot_2026-09-19-06-04-02.png
+2026-09-19 21:12:00.606 I Batch in-dcde3df4-6776-414b-928d-509e712e7115 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:00.832 I Nearby: metadata received for Screenshot_2026-09-19-06-00-35.png (100337 bytes)
+2026-09-19 21:12:00.958 I Verification for Screenshot_2026-09-19-06-00-35.png: size-only (logged)
+2026-09-19 21:12:01.119 I Saved Screenshot_2026-09-19-06-00-35.png -> Screenshot_2026-09-19-06-00-35.png
+2026-09-19 21:12:01.124 I Batch in-62e06693-1215-418b-a342-6c168ac03ea7 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:20.336 I Nearby: metadata received for Screenshot_2026-09-18-19-09-05.png (101761 bytes)
+2026-09-19 21:12:20.501 I Verification for Screenshot_2026-09-18-19-09-05.png: size-only (logged)
+2026-09-19 21:12:20.674 I Saved Screenshot_2026-09-18-19-09-05.png -> Screenshot_2026-09-18-19-09-05.png
+2026-09-19 21:12:20.680 I Batch in-194680d6-7aab-4ab8-9137-64f5dd2602f5 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:20.824 I Nearby: metadata received for Screenshot_2026-09-18-18-56-33.png (90085 bytes)
+2026-09-19 21:12:20.899 I Verification for Screenshot_2026-09-18-18-56-33.png: size-only (logged)
+2026-09-19 21:12:20.983 I Saved Screenshot_2026-09-18-18-56-33.png -> Screenshot_2026-09-18-18-56-33.png
+2026-09-19 21:12:20.986 I Batch in-02197d26-87ee-40b7-8099-74158d9c7730 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:21.080 I Nearby: metadata received for Screenshot_2026-09-18-18-55-39.png (91245 bytes)
+2026-09-19 21:12:21.143 I Verification for Screenshot_2026-09-18-18-55-39.png: size-only (logged)
+2026-09-19 21:12:21.248 I Saved Screenshot_2026-09-18-18-55-39.png -> Screenshot_2026-09-18-18-55-39.png
+2026-09-19 21:12:21.254 I Batch in-5ff06f25-a1b6-4b6e-ae20-b99d2ff9d5fe done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:39.292 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:39.296 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:39.306 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:42.201 I Queued 1 outgoing file(s)
+2026-09-19 21:12:42.253 I Nearby: sending IMG_20260918_080552_933.jpg (7263622 bytes)
+2026-09-19 21:12:42.439 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:12:44.660 I Batch 90029ad9-c919-4ee5-9754-313194a3359f done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:52.198 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:52.201 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:52.204 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:52.445 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:12:52.446 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:12:52.447 W Media page empty but count=3559 (photos) — retrying
+2026-09-19 21:12:53.053 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:53.054 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:53.065 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:59.637 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:59.640 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:59.651 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:39.780 I Nearby: metadata received for IMG_20260918_080552_933.jpg (7263622 bytes)
+2026-09-19 21:13:41.920 I Queued 1 outgoing file(s)
+2026-09-19 21:13:42.001 I Nearby: sending VID-20260909-WA0000.mp4 (3264060 bytes)
+2026-09-19 21:13:42.150 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:13:42.318 I Verification for IMG_20260918_080552_933.jpg: size-only (logged)
+2026-09-19 21:13:42.499 I Saved IMG_20260918_080552_933.jpg -> IMG_20260918_080552_933.jpg
+2026-09-19 21:13:42.501 I Batch in-6a71b8e8-a88d-4733-9b6a-8484a8d48b67 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:43.486 I Nearby: metadata received for Screenshot_2026-09-18-19-09-05.png (101761 bytes)
+2026-09-19 21:13:43.608 I Verification for Screenshot_2026-09-18-19-09-05.png: size-only (logged)
+2026-09-19 21:13:43.632 I Batch d810b4e7-1051-48af-a5f1-d407f11ac185 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:43.814 I Saved Screenshot_2026-09-18-19-09-05.png -> Screenshot_2026-09-18-19-09-05 (1).png
+2026-09-19 21:13:43.816 I Batch in-cc0c4fa7-d93f-4113-8004-29b4bffe790f done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:52.939 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:52.943 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:52.957 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:53.177 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:13:53.179 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:13:53.181 W Media page empty but count=3561 (photos) — retrying
+2026-09-19 21:13:53.785 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:53.786 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:53.790 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:55.733 I Queued 2 outgoing file(s)
+2026-09-19 21:13:55.877 I Nearby: sending dc06156adb6e4485ac0051c391b255fa.mp4 (10654454 bytes)
+2026-09-19 21:13:55.974 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:13:57.453 I Nearby: metadata received for Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-19 21:13:58.032 I Verification for Screenshot_2026-09-12-14-55-53.png: size-only (logged)
+2026-09-19 21:13:58.178 I Saved Screenshot_2026-09-12-14-55-53.png -> Screenshot_2026-09-12-14-55-53.png
+2026-09-19 21:13:58.182 I Batch in-36179ec6-45a3-4c25-9bd5-c91b7bd29acd done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:00.181 I Nearby: metadata received for Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-19 21:14:00.421 I Verification for Screenshot_2026-09-12-14-54-59.png: size-only (logged)
+2026-09-19 21:14:00.544 I Saved Screenshot_2026-09-12-14-54-59.png -> Screenshot_2026-09-12-14-54-59.png
+2026-09-19 21:14:00.547 I Batch in-7c6e28f5-22f1-43ac-82fa-02725a10a0ef done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:00.595 I Nearby: sending 5eab68644b5f485ebcbfb21eb53be3c0.mp4 (10650324 bytes)
+2026-09-19 21:14:04.983 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:04.984 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:04.988 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:05.208 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:14:05.210 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:14:05.216 W Media page empty but count=3563 (photos) — retrying
+2026-09-19 21:14:05.593 I Batch 1ee60ca0-09c1-43b3-9b2a-f57e26a4097f done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:05.814 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:05.814 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:05.827 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:27.661 I Queued 4 outgoing file(s)
+2026-09-19 21:14:27.707 I Nearby: sending Screenshot_20260916-173027.png (113792 bytes)
+2026-09-19 21:14:27.855 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:14:32.519 I Nearby: sending IMG_20260915_080438_303.jpg (3325840 bytes)
+2026-09-19 21:14:34.905 I Nearby: sending IMG_20260915_080425_161.jpg (3361453 bytes)
+2026-09-19 21:14:36.060 I Nearby: sending IMG_20260915_080348_527.jpg (3606718 bytes)
+2026-09-19 21:14:37.313 I Batch d6b98c8a-894c-47f3-b75c-6cbb67fcf025 done: 4 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:50.539 I Nearby: discovery started
+2026-09-19 21:14:50.540 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:14:50.541 W Session lost (user ended session)
+2026-09-19 21:14:51.038 I Nearby: OX6P disconnected
+2026-09-19 21:14:59.884 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:59.886 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:59.890 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:00.118 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:15:00.121 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:15:00.124 W Media page empty but count=3563 (photos) — retrying
+2026-09-19 21:15:00.727 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:00.728 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:00.732 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:02.307 I Nearby: discovery started
+2026-09-19 21:15:02.308 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:15:14.585 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:17.537 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:21.792 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:23.494 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:25.048 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:15:25.245 I Nearby: connected to OX6P
+2026-09-19 21:15:25.251 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:15:43.146 I Nearby: metadata received for IMG-20260917-WA0035.jpg (63031 bytes)
+2026-09-19 21:15:43.412 I Verification for IMG-20260917-WA0035.jpg: size-only (logged)
+2026-09-19 21:15:43.607 I Saved IMG-20260917-WA0035.jpg -> IMG-20260917-WA0035.jpg
+2026-09-19 21:15:43.612 I Batch in-f324db20-41c1-4d1e-b4a6-89dfefbe0863 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:15:45.747 I Nearby: metadata received for IMG-20260917-WA0034.jpg (72704 bytes)
+2026-09-19 21:15:45.855 I Verification for IMG-20260917-WA0034.jpg: size-only (logged)
+2026-09-19 21:15:46.020 I Saved IMG-20260917-WA0034.jpg -> IMG-20260917-WA0034.jpg
+2026-09-19 21:15:46.027 I Batch in-291098ef-0b42-4fc6-95b3-8718811407b9 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:15:49.101 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:49.109 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:49.115 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:57.510 I Queued 2 outgoing file(s)
+2026-09-19 21:15:57.563 I Nearby: sending IMG_20260914_175745_154.jpg (3966023 bytes)
+2026-09-19 21:15:57.579 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:16:00.171 I Nearby: sending IMG_20260914_175452_312.jpg (3690711 bytes)
+2026-09-19 21:16:01.402 I Batch 4265a36f-21bc-498c-a14a-8e136db9598c done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:16:09.171 I Nearby: discovery started
+2026-09-19 21:16:09.172 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:16:09.173 W Session lost (user ended session)
+2026-09-19 21:16:10.416 I Nearby: OX6P disconnected
+2026-09-19 21:17:41.916 I TempLink: local-only hotspot ready (ssid=AndroidShare_4019)
+2026-09-19 21:17:41.996 I Discovery started on LAN_WIFI
+2026-09-19 21:18:16.761 I TempLink: link ended
+2026-09-19 21:18:28.720 W TempLink: local-only hotspot failed (3)
+2026-09-19 21:18:38.016 W TempLink: local-only hotspot failed (3)
+2026-09-19 21:18:49.668 I TempLink: local-only hotspot ready (ssid=AndroidShare_5795)
+2026-09-19 21:18:49.702 I Discovery started on LAN_WIFI
+2026-09-19 21:20:21.360 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-19 21:20:28.030 I Consent for MYA-AL10: true
+2026-09-19 21:20:28.046 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-19 21:20:28.051 I LAN: session established with MYA-AL10 (192.168.94.136)
+2026-09-19 21:20:28.784 I Incoming offer: Screenshot_2026-09-16-17-48-59.png (88449 bytes)
+2026-09-19 21:20:28.837 I LAN: accepted Screenshot_2026-09-16-17-48-59.png from offset 0
+2026-09-19 21:20:29.241 E LAN: data connection for 63871dd6-eddf-467b-8732-5b9b9674529e failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:21:30.206 I Revived incoming row for Screenshot_2026-09-16-17-48-59.png
+2026-09-19 21:21:30.217 I Incoming offer: Screenshot_2026-09-16-17-48-59.png (88449 bytes)
+2026-09-19 21:21:30.251 I LAN: accepted Screenshot_2026-09-16-17-48-59.png from offset 0
+2026-09-19 21:21:30.663 E LAN: data connection for 63871dd6-eddf-467b-8732-5b9b9674529e failed :: EOFException: null
+2026-09-19 21:21:30.696 I Batch in-52e8bd11-e330-47b0-ae15-32addff7c8b7 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:21:30.701 I Batch in-52e8bd11-e330-47b0-ae15-32addff7c8b7 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:21:42.711 I Incoming offer: Screenshot_20260912-150454.png (79545 bytes)
+2026-09-19 21:21:42.741 I LAN: accepted Screenshot_20260912-150454.png from offset 0
+2026-09-19 21:21:42.772 E LAN: data connection for 1152e500-1ad7-443b-8152-353cc42871ef failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:21:51.324 I Batch in-4a9d0444-3c24-49ef-9de0-48ed66e53798 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:21:57.756 I Batch in-4a9d0444-3c24-49ef-9de0-48ed66e53798 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:22:42.137 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:42.142 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:42.149 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:43.608 I Revived incoming row for Screenshot_20260912-150454.png
+2026-09-19 21:22:43.617 I Incoming offer: Screenshot_20260912-150454.png (79545 bytes)
+2026-09-19 21:22:43.644 I LAN: accepted Screenshot_20260912-150454.png from offset 0
+2026-09-19 21:22:43.951 E LAN: data connection for 1152e500-1ad7-443b-8152-353cc42871ef failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:22:47.013 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:47.018 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:47.027 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:51.347 I Queued 2 outgoing file(s)
+2026-09-19 21:22:51.379 I LAN: offering Screenshot_20260912-071057.png (119964 bytes) to MYA-AL10
+2026-09-19 21:22:51.531 I Nearby: discovery started
+2026-09-19 21:22:51.531 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:23:21.436 E LAN: direct connect to 192.168.94.136 failed :: ConnectException: failed to connect to /192.168.94.136 (port 33456) from /:: (port 0) after 8000ms: connect failed: ENETUNREACH (Network is unreachable)
+2026-09-19 21:23:33.212 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:33.214 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:33.216 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:33.450 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:23:33.451 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:23:33.452 W Media page empty but count=3567 (photos) — retrying
+2026-09-19 21:23:34.057 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:34.059 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:34.060 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:51.741 W Auto-retry 1 for Screenshot_20260912-071057.png: peer did not confirm completion
+2026-09-19 21:23:52.562 I LAN: offering Screenshot_20260912-071057.png (119964 bytes) to MYA-AL10
+2026-09-19 21:23:52.580 I LAN: session closed (control write failure: Software caused connection abort)
+2026-09-19 21:23:52.583 W Session lost (control write failure: Software caused connection abort)
+2026-09-19 21:26:03.903 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=true
+2026-09-19 21:26:03.925 I Nearby: connected to OX6P
+2026-09-19 21:26:03.932 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:26:03.979 I Nearby: sending Screenshot_20260912-071057.png (119964 bytes)
+2026-09-19 21:26:04.394 I Nearby: metadata received for Screenshot_2026-09-16-17-48-16.png (88675 bytes)
+2026-09-19 21:26:11.754 I Verification for Screenshot_2026-09-16-17-48-16.png: size-only (logged)
+2026-09-19 21:26:11.948 I Saved Screenshot_2026-09-16-17-48-16.png -> Screenshot_2026-09-16-17-48-16.png
+2026-09-19 21:26:11.951 I Batch in-3c15f2dc-9aaa-4ae8-8391-9d2877070ddb done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:26:12.130 I Nearby: sending Screenshot_20260912-071011.png (119749 bytes)
+2026-09-19 21:26:12.180 W Nearby: file payload without metadata; dropping
+2026-09-19 21:26:12.188 I Nearby: metadata received for Screenshot_2026-09-16-17-46-23.png (84445 bytes)
+2026-09-19 21:26:18.285 I Batch b5b3eae3-78c4-4ba6-8a7a-90233fb659fb done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:26:47.043 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:26:55.200 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:26:55.203 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:26:55.208 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:07.701 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:07.705 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:07.706 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:23.920 I Queued 6 outgoing file(s)
+2026-09-19 21:27:23.965 I Nearby: sending Screenshot_20260919-204054.png (60887 bytes)
+2026-09-19 21:27:24.140 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:27:48.934 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:28:24.227 W Nearby: completed without receiver ACK for 2132222f-0c1f-4696-8bfa-ffb628a90380
+2026-09-19 21:29:06.459 I Nearby: discovery started
+2026-09-19 21:29:06.460 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:29:06.461 W Session lost (user ended session)
+2026-09-19 21:29:07.001 I Nearby: OX6P disconnected
+2026-09-19 21:29:07.877 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:07.879 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:07.882 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:08.094 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:29:08.095 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:29:08.096 W Media page empty but count=3568 (photos) — retrying
+2026-09-19 21:29:08.701 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:08.702 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:08.703 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:24.592 W TempLink: local-only hotspot failed (2)
+2026-09-19 21:29:34.175 I TempLink: local-only hotspot ready (ssid=AndroidShare_9282)
+2026-09-19 21:29:34.205 I Discovery started on LAN_WIFI
+2026-09-19 21:30:07.833 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-19 21:30:09.119 I Consent for MYA-AL10: true
+2026-09-19 21:30:09.121 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-19 21:30:09.129 I LAN: session established with MYA-AL10 (192.168.94.136)
+2026-09-19 21:30:17.598 I Nearby: discovery started
+2026-09-19 21:30:17.599 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:30:19.392 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:30:31.866 I LAN: session closed (user ended session)
+2026-09-19 21:30:31.870 W Session lost (user ended session)
+2026-09-19 21:31:05.927 I Nearby: discovery started
+2026-09-19 21:31:05.927 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:31:20.884 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:31:24.350 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:31:24.643 I Nearby: connected to OX6P
+2026-09-19 21:31:24.648 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:31:58.555 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:31:58.557 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:31:58.563 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:04.618 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:04.620 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:04.623 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:11.395 I Queued 4 outgoing file(s)
+2026-09-19 21:32:11.457 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:32:50.641 I Nearby: OX6P disconnected
+2026-09-19 21:32:50.642 I Nearby: session closed (peer disconnected)
+2026-09-19 21:32:50.644 I Nearby: discovery started
+2026-09-19 21:32:50.644 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:32:50.645 W Session lost (peer disconnected)
+2026-09-19 21:33:00.464 I Nearby: discovery started
+2026-09-19 21:33:00.464 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:08.223 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:33:10.848 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:33:11.049 I Nearby: connected to OX6P
+2026-09-19 21:33:11.052 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:33:15.999 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:33:16.003 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:33:16.009 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:33:20.370 I Queued 6 outgoing file(s)
+2026-09-19 21:33:20.430 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:46.210 I Nearby: OX6P disconnected
+2026-09-19 21:33:46.211 I Nearby: session closed (peer disconnected)
+2026-09-19 21:33:46.215 I Nearby: discovery started
+2026-09-19 21:33:46.216 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:46.217 W Session lost (peer disconnected)
+2026-09-19 21:33:51.046 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:33:54.150 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:33:54.341 I Nearby: connected to OX6P
+2026-09-19 21:33:54.345 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:34:14.491 I Nearby: OX6P disconnected
+2026-09-19 21:34:14.493 I Nearby: session closed (peer disconnected)
+2026-09-19 21:34:14.496 I Nearby: discovery started
+2026-09-19 21:34:14.498 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:14.498 W Session lost (peer disconnected)
+2026-09-19 21:34:16.938 I Nearby: discovery started
+2026-09-19 21:34:16.938 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:33.895 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:35:18.825 I Nearby: discovery started
+2026-09-19 21:35:18.826 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:23.654 I MorseLink 1.4.1 (12) started
+2026-09-19 21:35:23.655 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-19 21:35:23.656 I LAN: server listening on 33456
+2026-09-19 21:35:28.725 I Nearby: discovery started
+2026-09-19 21:35:28.726 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:41.992 I Nearby: connection initiated by Q2CQ (MYA-AL10), incoming=true
+2026-09-19 21:35:41.995 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-19 21:35:43.360 I Consent for MYA-AL10: true
+2026-09-19 21:35:43.369 I Nearby: connected to Q2CQ
+2026-09-19 21:35:43.387 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:35:43.396 I Outgoing worker started
+2026-09-19 21:35:45.704 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:35:45.708 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:35:45.716 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:35:52.082 I Queued 6 outgoing file(s)
+2026-09-19 21:35:52.129 I Nearby: sending Screenshot_2026-09-16-17-48-16.png (88675 bytes)
+2026-09-19 21:35:52.166 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:52.492 I Nearby: sending Screenshot_20260919-211730.png (85535 bytes)
+2026-09-19 21:35:52.814 I Nearby: sending Screenshot_20260919-212311.png (103750 bytes)
+2026-09-19 21:35:53.001 I Nearby: sending Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-19 21:35:53.256 I Nearby: sending Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-19 21:35:53.452 I Nearby: sending Screenshot_2026-09-18-19-09-05 (1).png (101761 bytes)
+2026-09-19 21:35:53.576 I Batch a3c1a8f3-c615-4455-953a-565480eea309 done: 6 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:36:12.350 I Nearby: Q2CQ disconnected
+2026-09-19 21:36:12.351 I Nearby: session closed (peer disconnected)
+2026-09-19 21:36:12.356 I Nearby: discovery started
+2026-09-19 21:36:12.358 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:12.359 W Session lost (peer disconnected)
+2026-09-19 21:36:16.828 I Nearby: discovery started
+2026-09-19 21:36:16.829 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:41.590 I Nearby: connection initiated by Q2CQ (MYA-AL10), incoming=true
+2026-09-19 21:36:41.592 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-19 21:36:43.081 I Consent for MYA-AL10: true
+2026-09-19 21:36:43.089 I Nearby: connected to Q2CQ
+2026-09-19 21:36:43.093 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:36:46.681 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:46.687 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:46.701 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:52.210 W Media query with LIMIT failed (large_files): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:57.535 I Queued 1 outgoing file(s)
+2026-09-19 21:36:57.609 I Nearby: sending VID-20260913-WA0005.mp4 (1751655 bytes)
+2026-09-19 21:36:57.624 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:58.483 I Batch ebfba36c-d4ba-492f-9467-8c4b53ac53c7 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:37:13.706 I Queued 1 outgoing file(s)
+2026-09-19 21:37:13.741 I Nearby: sending morselink-log-1789850229521.txt (30321 bytes)
+2026-09-19 21:37:13.842 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:37:13.992 I Batch ec60fa2b-26b2-49cd-99b5-6009305bc9a1 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:37:20.418 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:37:29.388 I Discovery started on NEARBY_CONNECTIONS
