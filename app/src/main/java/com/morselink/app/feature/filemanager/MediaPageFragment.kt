@@ -368,6 +368,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
             }
             count++
             header!!.count = count
+            out.add(m) // the item itself - without this the grid never renders (mlogs3 v1/v2)
         }
         return out
     }
@@ -466,8 +467,8 @@ class MediaPageFragment : Fragment(), PageWithItems {
             val item = row as MediaItem
             if (holder is GridHolder) {
                 loadMediaThumb(holder.thumb, item)
-                holder.gridLabel.visibility = View.VISIBLE
-                holder.gridLabel.text = dateLabel(item.dateModifiedSec)
+                // Gallery look: the section header already carries the date.
+                holder.gridLabel.visibility = View.GONE
                 if (categoryKey == "videos" && item.durationMs > 0) {
                     holder.videoDuration.visibility = View.VISIBLE
                     holder.videoDuration.text = Fmt.eta(item.durationMs / 1000)
