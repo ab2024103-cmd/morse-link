@@ -14,8 +14,8 @@ Daemon will be stopped at the end of the build
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
 > Task :app:checkKotlinGradlePluginConfigurationErrors
-> Task :app:generateDebugResValues
 > Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugResValues
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
 > Task :app:mergeDebugResources
@@ -31,13 +31,13 @@ Daemon will be stopped at the end of the build
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
-> Task :app:processDebugManifestForPackage
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
+> Task :app:processDebugManifestForPackage
+> Task :app:checkDebugDuplicateClasses
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:checkDebugDuplicateClasses
 > Task :app:processDebugResources
 > Task :app:desugarDebugFileDependencies
 > Task :app:mergeDebugStartupProfile
@@ -56,16 +56,18 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:dataBindingMergeDependencyArtifactsRelease
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
-> Task :app:generateReleaseBuildConfig
 > Task :app:parseReleaseLocalResources
+> Task :app:generateReleaseBuildConfig
+> Task :app:checkReleaseAarMetadata
 > Task :app:mapReleaseSourceSetPaths
 > Task :app:createReleaseCompatibleScreenManifests
 > Task :app:extractDeepLinksRelease
-> Task :app:checkReleaseAarMetadata
+> Task :app:mergeReleaseResources
 > Task :app:processReleaseMainManifest
+> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:processReleaseManifest
-> Task :app:processReleaseManifestForPackage
 > Task :app:javaPreCompileRelease
+> Task :app:processReleaseManifestForPackage
 > Task :app:extractProguardFiles
 > Task :app:mergeReleaseJniLibFolders
 > Task :app:mergeReleaseNativeLibs NO-SOURCE
@@ -73,13 +75,11 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
 > Task :app:desugarReleaseFileDependencies
-> Task :app:mergeReleaseResources
 > Task :app:mergeReleaseStartupProfile
 > Task :app:checkReleaseDuplicateClasses
-> Task :app:dataBindingGenBaseClassesRelease
+> Task :app:mergeReleaseArtProfile
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:processReleaseResources
 
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
@@ -140,15 +140,15 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:112:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:289:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:365:31 Unnecessary non-null assertion (!!) on a non-null receiver of type MediaPageFragment.DateHeader
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:59 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:63 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:60 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:64 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:601:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:59 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:60 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:602:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:163:13 Variable 'dayFmt' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:165:13 Variable 'now' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:225:55 'getColor(Int): Int' is deprecated. Deprecated in Java
@@ -192,17 +192,17 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:72:52 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:346:16 'setAudioStreamType(Int): Unit' is deprecated. Deprecated in Java
 
+> Task :app:processReleaseResources
 > Task :app:mergeExtDexRelease
 > Task :app:compileDebugJavaWithJavac
 > Task :app:processDebugJavaRes
 > Task :app:mergeDebugJavaResource
 > Task :app:dexBuilderDebug
 > Task :app:mergeReleaseShaders
-> Task :app:mergeReleaseArtProfile
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
-> Task :app:mergeProjectDexDebug
 > Task :app:mergeReleaseAssets
+> Task :app:mergeProjectDexDebug
 > Task :app:compressReleaseAssets
 > Task :app:extractReleaseVersionControlInfo
 > Task :app:collectReleaseDependencies
@@ -274,15 +274,15 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:112:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:289:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:365:31 Unnecessary non-null assertion (!!) on a non-null receiver of type MediaPageFragment.DateHeader
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:59 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:583:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:63 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:585:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:60 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:588:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:64 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:590:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:601:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:59 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:60 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:602:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:163:13 Variable 'dayFmt' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:165:13 Variable 'now' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:225:55 'getColor(Int): Int' is deprecated. Deprecated in Java
@@ -340,11 +340,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789808126061.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789836479025.json
 
-BUILD SUCCESSFUL in 3m 50s
+BUILD SUCCESSFUL in 3m 49s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8253957
-APK_SIZE_RELEASE=6735811
+APK_SIZE_DEBUG=8254128
+APK_SIZE_RELEASE=6735836
