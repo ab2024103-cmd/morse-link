@@ -562,10 +562,10 @@ class FilesPageFragment : Fragment(), PageWithItems {
                 val path = entry.path
                 if (path != null) bmp = decodeSampledFile(path, 128)
             }
-            if (bmp != null) {
-                synchronized(fileThumbCache) { fileThumbCache[key] = bmp }
+            val result: Bitmap? = bmp
+            if (result != null) {
+                synchronized(fileThumbCache) { fileThumbCache[key] = result }
             }
-            val result = bmp
             withContext(Dispatchers.Main) {
                 if (target.tag == key && result != null) target.setImageBitmap(result)
             }

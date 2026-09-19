@@ -276,11 +276,11 @@ class ViewerActivity : Activity() {
                 }
             }
 
-            override fun onStartTracking(sb: SeekBar?) {
+            override fun onStartTrackingTouch(sb: SeekBar?) {
                 seekDragging = true
             }
 
-            override fun onStopTracking(sb: SeekBar?) {
+            override fun onStopTrackingTouch(sb: SeekBar?) {
                 seekDragging = false
             }
         })
