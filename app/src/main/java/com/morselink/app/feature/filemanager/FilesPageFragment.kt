@@ -525,8 +525,10 @@ class FilesPageFragment : Fragment(), PageWithItems {
             target.setImageBitmap(it)
             return
         }
+        val resolver = requireContext().contentResolver
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             var bmp: Bitmap? = null
+            var contentUri: Uri? = null
             // 1) MediaStore thumbnail via the id looked up from the path.
             try {
                 val collection = if (isVideo) {
@@ -534,7 +536,7 @@ class FilesPageFragment : Fragment(), PageWithItems {
                 } else {
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                 }
-                requireContext().contentResolver.query(
+                resolver.query(
                     collection,
                     arrayOf(android.provider.MediaStore.MediaColumns._ID),
                     "${android.provider.MediaStore.MediaColumns.DATA} = ?",
@@ -542,14 +544,15 @@ class FilesPageFragment : Fragment(), PageWithItems {
                 )?.use { c ->
                     if (c.moveToFirst()) {
                         val id = c.getLong(0)
+                        contentUri = android.content.ContentUris.withAppendedId(collection, id)
                         bmp = if (isVideo) {
                             android.provider.MediaStore.Video.Thumbnails.getThumbnail(
-                                requireContext().contentResolver, id,
+                                resolver, id,
                                 android.provider.MediaStore.Video.Thumbnails.MINI_KIND, null
                             )
                         } else {
                             android.provider.MediaStore.Images.Thumbnails.getThumbnail(
-                                requireContext().contentResolver, id,
+                                resolver, id,
                                 android.provider.MediaStore.Images.Thumbnails.MINI_KIND, null
                             )
                         }
@@ -557,7 +560,16 @@ class FilesPageFragment : Fragment(), PageWithItems {
                 }
             } catch (_: Exception) {
             }
-            // 2) Direct sampled decode (images only; videos have no cheap frame read).
+            // 2) Content-resolver stream decode — works wherever the file path
+            // is not directly readable (removable storage).
+            if (bmp == null && contentUri != null) {
+                bmp = if (isVideo) {
+                    videoFrame(contentUri!!, resolver)
+                } else {
+                    streamSampled(contentUri!!, 128, resolver)
+                }
+            }
+            // 3) Direct sampled decode of the file path (images only).
             if (bmp == null && !isVideo) {
                 val path = entry.path
                 if (path != null) bmp = decodeSampledFile(path, 128)
@@ -568,6 +580,47 @@ class FilesPageFragment : Fragment(), PageWithItems {
             }
             withContext(Dispatchers.Main) {
                 if (target.tag == key && result != null) target.setImageBitmap(result)
+            }
+        }
+    }
+
+    /** Sampled decode via a ContentResolver stream. */
+    private fun streamSampled(uri: Uri, targetSize: Int, resolver: android.content.ContentResolver): Bitmap? {
+        return try {
+            val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            resolver.openInputStream(uri)?.use { android.graphics.BitmapFactory.decodeStream(it, null, bounds) }
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return null
+            var sample = 1
+            while (bounds.outWidth / (sample * 2) >= targetSize &&
+                bounds.outHeight / (sample * 2) >= targetSize
+            ) {
+                sample *= 2
+            }
+            resolver.openInputStream(uri)?.use {
+                android.graphics.BitmapFactory.decodeStream(
+                    it, null,
+                    android.graphics.BitmapFactory.Options().apply { inSampleSize = sample }
+                )
+            }
+        } catch (_: OutOfMemoryError) {
+            null
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** A frame near the start of a video. */
+    private fun videoFrame(uri: Uri, resolver: android.content.ContentResolver): Bitmap? {
+        val retriever = android.media.MediaMetadataRetriever()
+        return try {
+            retriever.setDataSource(com.morselink.app.core.util.MorselinkServices.appContext, uri)
+            retriever.getFrameAtTime(1_000_000)
+        } catch (_: Exception) {
+            null
+        } finally {
+            try {
+                retriever.release()
+            } catch (_: Exception) {
             }
         }
     }

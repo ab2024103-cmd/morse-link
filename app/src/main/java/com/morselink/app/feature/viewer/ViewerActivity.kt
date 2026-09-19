@@ -130,14 +130,6 @@ class ViewerActivity : Activity() {
     private fun buildImageView(uri: String, title: String): View {
         val root = FrameLayout(this)
         val zoom = ZoomableImageView(this)
-        try {
-            zoom.setImageURI(Uri.parse(uri))
-        } catch (_: Exception) {
-        }
-        if (zoom.drawable == null) {
-            Toast.makeText(this, R.string.history_file_missing, Toast.LENGTH_SHORT).show()
-            finish()
-        }
         root.addView(
             zoom,
             FrameLayout.LayoutParams(
@@ -145,7 +137,49 @@ class ViewerActivity : Activity() {
             )
         )
         topBar(title, root)
+        Thread {
+            // Sampled stream decode (memory-safe, handles any storage).
+            val bmp = decodeSampledUri(uri, 2048)
+            runOnUiThread {
+                if (isFinishing) return@runOnUiThread
+                if (bmp != null) {
+                    zoom.setImageBitmap(bmp)
+                } else {
+                    Toast.makeText(this, R.string.history_file_missing, Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+        }.start()
         return root
+    }
+
+    /** Bounds-first sampled decode via a ContentResolver stream. */
+    private fun decodeSampledUri(uriString: String, target: Int): android.graphics.Bitmap? {
+        return try {
+            val uri = Uri.parse(uriString)
+            val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            contentResolver.openInputStream(uri)?.use {
+                android.graphics.BitmapFactory.decodeStream(it, null, bounds)
+            }
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return null
+            var sample = 1
+            while (bounds.outWidth / (sample * 2) >= target &&
+                bounds.outHeight / (sample * 2) >= target
+            ) {
+                sample *= 2
+            }
+            contentResolver.openInputStream(uri)?.use {
+                android.graphics.BitmapFactory.decodeStream(
+                    it, null,
+                    android.graphics.BitmapFactory.Options().apply { inSampleSize = sample }
+                )
+            }
+        } catch (_: OutOfMemoryError) {
+            // Retry smaller before giving up.
+            if (target > 256) decodeSampledUri(uriString, target / 2) else null
+        } catch (_: Exception) {
+            null
+        }
     }
 
     // ---------------- video ----------------
@@ -156,7 +190,8 @@ class ViewerActivity : Activity() {
         root.addView(
             video,
             FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER
             )
         )
         topBar(title, root)
@@ -167,6 +202,17 @@ class ViewerActivity : Activity() {
         video.setVideoURI(Uri.parse(uri))
         video.setOnPreparedListener { mp ->
             mp.isLooping = false
+            // Size the view to the video's aspect ratio ourselves — VideoView's
+            // own measure misplaces wide/tall videos on some devices (mlogs3).
+            val vw = mp.videoWidth
+            val vh = mp.videoHeight
+            if (vw > 0 && vh > 0 && root.width > 0 && root.height > 0) {
+                val scale = minOf(root.width.toFloat() / vw, root.height.toFloat() / vh)
+                val lp = video.layoutParams
+                lp.width = (vw * scale).toInt()
+                lp.height = (vh * scale).toInt()
+                video.layoutParams = lp
+            }
             video.start()
             controller.show(4000)
         }
@@ -386,8 +432,11 @@ class ViewerActivity : Activity() {
                     val old = zoom
                     zoom = (zoom * detector.scaleFactor).coerceIn(1f, 10f)
                     val ratio = zoom / old
-                    tx = detector.focusX - (detector.focusX - tx) * ratio
-                    ty = detector.focusY - (detector.focusY - ty) * ratio
+                    // Keep the content point under the fingers still: with the
+                    // content centered at (view center + t), the pan update is
+                    // t' = (focus - center) * (1 - ratio) + t * ratio.
+                    tx = (detector.focusX - width / 2f) * (1 - ratio) + tx * ratio
+                    ty = (detector.focusY - height / 2f) * (1 - ratio) + ty * ratio
                     apply()
                     return true
                 }
@@ -401,9 +450,10 @@ class ViewerActivity : Activity() {
                     if (zoom > 1.05f) {
                         fit()
                     } else {
+                        val ratio = 2.5f / 1f
                         zoom = 2.5f
-                        tx = e.x - width / 2f
-                        ty = e.y - height / 2f
+                        tx = (e.x - width / 2f) * (1 - ratio)
+                        ty = (e.y - height / 2f) * (1 - ratio)
                         clamp()
                         apply()
                     }
@@ -416,8 +466,11 @@ class ViewerActivity : Activity() {
             scaleType = ScaleType.MATRIX
         }
 
-        override fun setImageURI(uri: Uri?) {
-            super.setImageURI(uri)
+        override fun setImageDrawable(d: android.graphics.drawable.Drawable?) {
+            super.setImageDrawable(d)
+            // The drawable can arrive long after layout (async decode) — without
+            // this, the matrix stays identity and the photo draws at 1:1 from
+            // the top-left corner, cropped off-screen (mlogs3).
             fit()
         }
 
@@ -440,10 +493,14 @@ class ViewerActivity : Activity() {
             if (bw <= 0 || bh <= 0 || width <= 0 || height <= 0) return
             baseScale = minOf(width.toFloat() / bw, height.toFloat() / bh)
             val s = baseScale * zoom
-            val cx = width / 2f + tx
-            val cy = height / 2f + ty
             matrix.reset()
-            matrix.postScale(s, s, cx, cy)
+            matrix.postScale(s, s)
+            // Center the scaled content at (view center + pan offset) — the
+            // content can never end up anchored to a corner.
+            matrix.postTranslate(
+                width / 2f + tx - bw * s / 2f,
+                height / 2f + ty - bh * s / 2f
+            )
             imageMatrix = matrix
         }
 

@@ -564,44 +564,105 @@ class MediaPageFragment : Fragment(), PageWithItems {
             target.setImageBitmap(cached)
             return
         }
-        target.setImageResource(if (categoryKey == "videos") R.drawable.ic_cat_videos else R.drawable.ic_cat_photos)
+        val placeholder =
+            if (categoryKey == "videos") R.drawable.ic_cat_videos else R.drawable.ic_cat_photos
+        target.setImageResource(placeholder)
+        val resolver = requireContext().contentResolver
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val bmp: Bitmap? = try {
-                if (categoryKey == "videos") {
-                    android.provider.MediaStore.Video.Thumbnails.getThumbnail(
-                        requireContext().contentResolver, item.id,
-                        android.provider.MediaStore.Video.Thumbnails.MINI_KIND, null
-                    )
-                } else {
-                    android.provider.MediaStore.Images.Thumbnails.getThumbnail(
-                        requireContext().contentResolver, item.id,
-                        android.provider.MediaStore.Images.Thumbnails.MINI_KIND, null
-                    )
-                }
-            } catch (_: Exception) {
-                null
+            // Decoding through the ContentResolver stream is the one path that
+            // works on every device (it is what the viewer uses); the
+            // MediaStore thumbnail table and direct file paths both fail on
+            // some Android 6 units (mlogs3 v1/v2).
+            var result: Bitmap? = null
+            if (categoryKey != "videos") {
+                result = streamSampled(item.uri, 256, resolver)
             }
-            var result = bmp
+            if (result == null) {
+                result = try {
+                    if (categoryKey == "videos") {
+                        android.provider.MediaStore.Video.Thumbnails.getThumbnail(
+                            resolver, item.id,
+                            android.provider.MediaStore.Video.Thumbnails.MINI_KIND, null
+                        )
+                    } else {
+                        android.provider.MediaStore.Images.Thumbnails.getThumbnail(
+                            resolver, item.id,
+                            android.provider.MediaStore.Images.Thumbnails.MINI_KIND, null
+                        )
+                    }
+                } catch (_: Exception) {
+                    null
+                }
+            }
+            if (result == null && categoryKey == "videos") {
+                result = videoFrame(item.uri)
+            }
             if (result == null && item.path != null) {
-                // Direct sampled decode of the file — needs nothing beyond the
-                // READ permission already granted, no thumbnail table, no Glide.
                 result = decodeSampled(item.path!!, 256)
             }
             if (result != null) {
                 synchronized(thumbCache) { thumbCache[item.id.toInt()] = result }
-            }
-            withContext(Dispatchers.Main) {
-                if (target.tag != item.id) return@withContext
-                if (result != null) {
-                    target.setImageBitmap(result)
-                } else {
-                    // Last resort: a decode through Glide.
-                    Glide.with(target)
-                        .load(Uri.parse(item.uri))
-                        .centerCrop()
-                        .placeholder(R.drawable.ic_cat_photos)
-                        .into(target)
+                withContext(Dispatchers.Main) {
+                    if (target.tag == item.id) target.setImageBitmap(result)
                 }
+            } else {
+                // True last resort — the error drawable keeps the tile from
+                // ever rendering blank.
+                withContext(Dispatchers.Main) {
+                    if (target.tag == item.id) {
+                        Glide.with(target)
+                            .load(Uri.parse(item.uri))
+                            .centerCrop()
+                            .placeholder(placeholder)
+                            .error(placeholder)
+                            .into(target)
+                    }
+                }
+            }
+        }
+    }
+
+    /** Sampled decode via a ContentResolver stream (works for any storage). */
+    private fun streamSampled(uriString: String, targetSize: Int, resolver: android.content.ContentResolver? = null): Bitmap? {
+        return try {
+            val uri = Uri.parse(uriString)
+            val cr = resolver ?: requireContext().contentResolver
+            val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            cr.openInputStream(uri)?.use { android.graphics.BitmapFactory.decodeStream(it, null, bounds) }
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return null
+            var sample = 1
+            while (bounds.outWidth / (sample * 2) >= targetSize &&
+                bounds.outHeight / (sample * 2) >= targetSize
+            ) {
+                sample *= 2
+            }
+            cr.openInputStream(uri)?.use {
+                android.graphics.BitmapFactory.decodeStream(
+                    it, null,
+                    android.graphics.BitmapFactory.Options().apply { inSampleSize = sample }
+                )
+            }
+        } catch (_: OutOfMemoryError) {
+            null
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** A frame near the start of a video, via the content uri. */
+    private fun videoFrame(uriString: String): Bitmap? {
+        val retriever = android.media.MediaMetadataRetriever()
+        return try {
+            retriever.setDataSource(
+                com.morselink.app.core.util.MorselinkServices.appContext, Uri.parse(uriString)
+            )
+            retriever.getFrameAtTime(1_000_000)
+        } catch (_: Exception) {
+            null
+        } finally {
+            try {
+                retriever.release()
+            } catch (_: Exception) {
             }
         }
     }

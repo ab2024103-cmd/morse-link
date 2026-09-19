@@ -335,10 +335,15 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         json.put("items", items)
         if (page.size == pageSize) json.put("nextCursor", cursor + page.size)
         if (cursor == 0 && (mediaCategory == MediaCategory.PHOTOS || mediaCategory == MediaCategory.VIDEOS)) {
-            // Folder sidebar with counts (reference a2/a3) — full list, not just this page.
+            // Folder sidebar with counts + newest-item cover (reference a2/a3).
             val folders = JSONArray()
-            for (f in MediaLibrary.folderCounts(mediaCategory)) {
-                folders.put(JSONObject().put("name", f.first).put("count", f.second))
+            for (f in MediaLibrary.folderInfo(mediaCategory)) {
+                folders.put(
+                    JSONObject()
+                        .put("name", f.first)
+                        .put("count", f.second)
+                        .put("recent", f.third)
+                )
             }
             json.put("folders", folders)
         }
@@ -457,6 +462,9 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
     // ---------------- thumbnails ----------------
 
     private fun thumbnail(session: IHTTPSession): Response {
+        // Filesystem paths (Files tab rows) carry ?path= instead of kind/id.
+        val pathRaw = session.parameters["path"]?.firstOrNull()
+        if (pathRaw != null) return pathThumbnail(pathRaw)
         val kind = session.parameters["kind"]?.firstOrNull() ?: "photos"
         val idRaw = session.parameters["id"]?.firstOrNull() ?: return notFound()
         val cacheDir = File(MorselinkServices.appContext.filesDir, "webthumbs").apply { mkdirs() }
@@ -520,6 +528,68 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             FileOutputStream(cacheFile).use { out -> bmp.compress(Bitmap.CompressFormat.PNG, 100, out) }
             bmp.recycle()
             cacheFile
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** Thumbnail for a browsed filesystem path (Files tab rows). */
+    private fun pathThumbnail(pathRaw: String): Response {
+        val file = safeFsPath(pathRaw) ?: return notFound()
+        if (!file.isFile || !file.exists()) return notFound()
+        val mime = mimeFor(file.name)
+        val isVideo = mime.startsWith("video/")
+        val isImage = mime.startsWith("image/")
+        if (!isVideo && !isImage) return notFound()
+        val cacheDir = File(MorselinkServices.appContext.filesDir, "webthumbs").apply { mkdirs() }
+        val cacheFile = File(
+            cacheDir,
+            "p_" + Integer.toHexString(file.absolutePath.hashCode()) + "_" + file.lastModified() + ".jpg"
+        )
+        if (cacheFile.exists() && cacheFile.length() > 0) {
+            return serveFile(cacheFile, "image/jpeg").also { it.addHeader("Cache-Control", "max-age=3600") }
+        }
+        val bmp = mediaStoreThumbByPath(file.absolutePath, isVideo)
+            ?: if (isImage) decodeSampled(Uri.fromFile(file), 320) else videoFrame(Uri.fromFile(file))
+            ?: return notFound()
+        try {
+            FileOutputStream(cacheFile).use { out -> bmp.compress(Bitmap.CompressFormat.JPEG, 82, out) }
+        } catch (_: Exception) {
+        }
+        bmp.recycle()
+        return serveFile(cacheFile, "image/jpeg").also { it.addHeader("Cache-Control", "max-age=3600") }
+    }
+
+    /** MediaStore mini thumbnail, resolving the id from the file path. */
+    private fun mediaStoreThumbByPath(path: String, video: Boolean): Bitmap? {
+        return try {
+            val context = MorselinkServices.appContext
+            val collection = if (video) {
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            } else {
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            }
+            context.contentResolver.query(
+                collection,
+                arrayOf(MediaStore.MediaColumns._ID),
+                "${MediaStore.MediaColumns.DATA} = ?",
+                arrayOf(path), null
+            )?.use { c ->
+                if (c.moveToFirst()) {
+                    val id = c.getLong(0)
+                    if (video) {
+                        MediaStore.Video.Thumbnails.getThumbnail(
+                            context.contentResolver, id,
+                            MediaStore.Video.Thumbnails.MINI_KIND, null
+                        )
+                    } else {
+                        MediaStore.Images.Thumbnails.getThumbnail(
+                            context.contentResolver, id,
+                            MediaStore.Images.Thumbnails.MINI_KIND, null
+                        )
+                    }
+                } else null
+            }
         } catch (_: Exception) {
             null
         }

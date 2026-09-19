@@ -271,30 +271,43 @@ object MediaLibrary {
         return out
     }
 
-    /** Folder (parent directory) counts for a category, largest first. */
-    fun folderCounts(category: MediaCategory): List<Pair<String, Int>> {
+    private class FolderAgg(var count: Int, val recentId: Long)
+
+    /** Folder (parent dir) info: name, item count and most-recent item id. */
+    fun folderInfo(category: MediaCategory): List<Triple<String, Int, Long>> {
         val context = MorselinkServices.appContext
         val selection = selectionFor(category).first
         val args = selectionFor(category).second.toTypedArray()
-        val counts = HashMap<String, Int>()
+        // Newest rows arrive first, so the first row seen per folder carries
+        // its cover id.
+        val info = LinkedHashMap<String, FolderAgg>()
         try {
             context.contentResolver.query(
-                baseUri(category), arrayOf(MediaStore.MediaColumns.DATA), selection, args, null
+                baseUri(category),
+                arrayOf(
+                    MediaStore.MediaColumns._ID,
+                    MediaStore.MediaColumns.DATA,
+                    MediaStore.MediaColumns.DATE_MODIFIED
+                ),
+                selection, args,
+                MediaStore.MediaColumns.DATE_MODIFIED + " DESC"
             )?.use { cursor ->
                 while (cursor.moveToNext()) {
-                    val p = cursor.getString(0) ?: continue
+                    val id = cursor.getLong(0)
+                    val p = cursor.getString(1) ?: continue
                     val label = p.trimEnd('/').substringBeforeLast('/').substringAfterLast('/')
                     if (label.isEmpty()) continue
-                    counts[label] = (counts[label] ?: 0) + 1
+                    val agg = info.getOrPut(label) { FolderAgg(0, id) }
+                    agg.count++
                 }
             }
         } catch (e: Exception) {
-            com.morselink.app.core.logging.LogStore.e("Media folderCounts failed (${category.key})", e)
+            com.morselink.app.core.logging.LogStore.e("Media folderInfo failed (${category.key})", e)
         }
-        return counts.entries
-            .sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key })
+        return info.entries
+            .sortedWith(compareByDescending<Map.Entry<String, FolderAgg>> { it.value.count }.thenBy { it.key })
             .take(300)
-            .map { it.key to it.value }
+            .map { e -> Triple(e.key, e.value.count, e.value.recentId) }
     }
 
     fun count(category: MediaCategory, query: String? = null): Int {

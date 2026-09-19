@@ -83,6 +83,10 @@
   .catSide .sf.active { color: #fff; border-color: var(--green); background: var(--green-soft); }
   .catSide .sf .fn { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .catSide .sf .n { font-size: 11px; opacity: .7; }
+  .catSide .sf .fcov { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; position: relative;
+                       background: #3a3028; display: grid; place-items: center; flex: none; }
+  .catSide .sf .fcov .fi { font-size: 20px; line-height: 1; }
+  .catSide .sf .fcov img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .catMain { flex: 1; min-width: 0; }
   @media (max-width: 760px) {
     .catLayout { flex-direction: column; }
@@ -162,7 +166,9 @@
   .row:hover { background: var(--row-hover); }
   .row.selected { background: var(--green-soft); border-color: var(--green-bright); }
   .row .ic { width: 42px; height: 42px; border-radius: 10px; flex: none; display: grid;
-             place-items: center; font-size: 19px; background: #2d2d33; }
+             place-items: center; font-size: 19px; background: #2d2d33; position: relative; overflow: hidden; }
+  .row .ic img.icimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+                       border-radius: 10px; }
   .row .ic.warm { background: #3a3028; }
   .row .meta { flex: 1; min-width: 0; }
   .row .nm { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -643,6 +649,9 @@ function load() {
   if (state.folder) params.folder = state.folder;
   api("/api/files", params).then(function (data) {
     if (state.cursor === 0) state.items = [];
+    if (!state.folder && (data.items || []).length) {
+      state.foldersRecent = data.items[0].id; // newest = first row of page 0
+    }
     (data.items || []).forEach(function (it) { state.items.push(it); });
     state.nextCursor = data.nextCursor;
     if (data.folders) state.folders = data.folders;
@@ -797,10 +806,17 @@ function renderFolderSide(el) {
   var folders = state.folders || [];
   var total = 0;
   folders.forEach(function (f) { total += f.count; });
-  function item(label, key, count) {
+  function cover(recentId) {
+    if (recentId == null) return '<span class="fi">&#128193;</span>';
+    return '<span class="fi">&#128193;</span>' +
+      '<img loading="lazy" alt="" src="' + apiUrl("/thumbnail", {
+        kind: state.tab, id: recentId }) + '" onerror="this.remove()">';
+  }
+  function item(label, key, count, recentId) {
     var b = document.createElement("button");
     b.className = "sf" + ((state.folder || "All") === key ? " active" : "");
-    b.innerHTML = '<span class="fn">' + esc(label) + '</span>' +
+    b.innerHTML = '<span class="fcov">' + cover(recentId) + '</span>' +
+      '<span class="fn">' + esc(label) + '</span>' +
       (count != null ? '<span class="n">' + count + '</span>' : "");
     b.onclick = function () {
       if ((state.folder || "All") === key) return;
@@ -810,8 +826,11 @@ function renderFolderSide(el) {
     };
     el.appendChild(b);
   }
-  item(state.tab === "photos" ? "All photos" : "All videos", "All", total || null);
-  folders.forEach(function (f) { item(f.name, f.name, f.count); });
+  item(
+    state.tab === "photos" ? "All photos" : "All videos", "All", total || null,
+    state.foldersRecent != null ? state.foldersRecent : (folders[0] && folders[0].recent)
+  );
+  folders.forEach(function (f) { item(f.name, f.name, f.count, f.recent); });
   if (!folders.length && state.folder) {
     item(state.folder, state.folder, null);
   }
@@ -1113,15 +1132,23 @@ function fsRow(f, isDir) {
   var row = document.createElement("div");
   row.className = "row" + (selected ? " selected" : "");
   var mime = f.mime || "";
+  var isImage = mime.indexOf("image/") === 0;
+  var isVideo = mime.indexOf("video/") === 0;
   var icon = isDir ? "&#128193;" :
-    mime.indexOf("image/") === 0 ? "&#128444;" :
-    mime.indexOf("video/") === 0 ? "&#127916;" :
+    isImage ? "&#128444;" :
+    isVideo ? "&#127916;" :
     mime.indexOf("audio/") === 0 ? "&#127925;" :
     mime.indexOf("pdf") >= 0 ? "&#128196;" : "&#128196;";
+  // Real thumbnails for image/video rows; the emoji icon stays beneath as a
+  // fallback if the thumbnail request fails.
+  var thumb = (!isDir && (isImage || isVideo))
+    ? '<img class="icimg" loading="lazy" alt="" src="' +
+        apiUrl("/thumbnail", { path: f.path }) + '" onerror="this.remove()">'
+    : "";
   var sub = isDir ? "folder" :
     fmt(f.size) + (f.modified ? " · " + esc(fmtDate(f.modified * 1000)) : "");
   row.innerHTML =
-    '<div class="ic' + (isDir ? " warm" : "") + '">' + icon + '</div>' +
+    '<div class="ic' + (isDir ? " warm" : "") + '">' + icon + thumb + '</div>' +
     '<div class="meta"><div class="nm">' + esc(f.name) + '</div>' +
     '<div class="sub">' + sub + '</div></div>' +
     '<div class="act">' +
