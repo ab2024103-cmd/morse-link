@@ -72,6 +72,15 @@ class Prefs(context: Context) {
         get() = sp.getBoolean(KEY_BATTERY_PROMPT, false)
         set(value) = sp.edit().putBoolean(KEY_BATTERY_PROMPT, value).apply()
 
+    /** Original hotspot config to restore after a temporary link (TempLink). */
+    var tempLinkRestoreSsid: String?
+        get() = sp.getString(KEY_TEMP_SSID, null)
+        set(value) = sp.edit().putString(KEY_TEMP_SSID, value).apply()
+
+    var tempLinkRestoreKey: String?
+        get() = sp.getString(KEY_TEMP_KEY, null)
+        set(value) = sp.edit().putString(KEY_TEMP_KEY, value).apply()
+
     /** Grid (true) or list (false) view for media tabs, persisted. */
     var mediaViewGrid: Boolean
         get() = sp.getBoolean(KEY_MEDIA_GRID, true)
@@ -148,5 +157,7 @@ class Prefs(context: Context) {
         private const val KEY_BATTERY_PROMPT = "battery_prompt_shown"
         private const val KEY_MEDIA_GRID = "media_view_grid"
         private const val KEY_RECENT = "recent_devices"
+        private const val KEY_TEMP_SSID = "temp_link_restore_ssid"
+        private const val KEY_TEMP_KEY = "temp_link_restore_key"
     }
 }

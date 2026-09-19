@@ -245,8 +245,16 @@ object WebShareController {
                 val interactive = pm?.isInteractive ?: true
                 val idleMs = System.currentTimeMillis() - s.lastClientActivity
                 val engineBusy = TransferEngine.anyWorkActive() && !TransferEngine.sessionState.value.active.not()
-                if (!interactive && idleMs > 180000 && s.activeOperations == 0) {
-                    LogStore.i("WebShare: auto-teardown (screen off, no client for 3 minutes)")
+                // A paired browser means a live session: only tear down after a
+                // long idle (mlogs log 1789836543546: active PC sessions were
+                // killed after 3 minutes). With no client ever paired, a
+                // shorter window still protects a forgotten server.
+                val anyApproved = clientStates.values.any { it == "allowed" }
+                val idleLimitMs = if (anyApproved) 30L * 60 * 1000 else 10L * 60 * 1000
+                if (!interactive && idleMs > idleLimitMs && s.activeOperations == 0 && !engineBusy) {
+                    LogStore.i(
+                        "WebShare: auto-teardown (screen off, client idle for ${idleLimitMs / 60000} minutes)"
+                    )
                     stop()
                     break
                 }

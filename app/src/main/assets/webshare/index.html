@@ -1442,6 +1442,10 @@ function bindDropzone(dz) {
     dz.addEventListener(ev, function (e) { e.preventDefault(); dz.className = ""; });
   });
   dz.addEventListener("drop", function (e) {
+    // Do not let the window-level drop handler see this event too — it
+    // bubbled there before, uploading every dropped file twice (two progress
+    // bars, s7).
+    e.stopPropagation();
     if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files);
   });
   dz.addEventListener("click", function () { $("fileInput").click(); });
