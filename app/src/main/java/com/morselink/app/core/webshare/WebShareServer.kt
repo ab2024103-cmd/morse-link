@@ -549,8 +549,8 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
         if (cacheFile.exists() && cacheFile.length() > 0) {
             return serveFile(cacheFile, "image/jpeg").also { it.addHeader("Cache-Control", "max-age=3600") }
         }
-        val bmp = mediaStoreThumbByPath(file.absolutePath, isVideo)
-            ?: if (isImage) decodeSampled(Uri.fromFile(file), 320) else videoFrame(Uri.fromFile(file))
+        val bmp: Bitmap = mediaStoreThumbByPath(file.absolutePath, isVideo)
+            ?: (if (isImage) decodeSampled(Uri.fromFile(file), 320) else videoFrame(Uri.fromFile(file)))
             ?: return notFound()
         try {
             FileOutputStream(cacheFile).use { out -> bmp.compress(Bitmap.CompressFormat.JPEG, 82, out) }
