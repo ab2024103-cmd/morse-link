@@ -195,10 +195,14 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
                 WebShareController.respondApproval(clientId, true)
             }
             status = "allowed"
-        } else if (provided != null && WebShareController.knowsClient(provided)) {
+        } else if (provided != null &&
+            (WebShareController.isClientAllowed(provided) || WebShareController.isClientDenied(provided))
+        ) {
             clientId = provided
             status = if (WebShareController.isClientAllowed(provided)) "allowed" else "denied"
         } else {
+            // Unknown OR still-pending client: (re)emit the approval request so
+            // the popup reappears on the phone (page refresh / repeated polls).
             status = WebShareController.requestApproval(clientId, ip)
         }
         val json = JSONObject()
@@ -501,8 +505,14 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             val intent = Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_LAUNCHER)
             intent.setPackage(packageName)
             val resolve = pm.queryIntentActivities(intent, 0)
-            if (resolve.isEmpty()) return null
-            val drawable: Drawable = resolve[0].loadIcon(pm)
+            val drawable: Drawable? =
+                if (resolve.isNotEmpty()) resolve[0].loadIcon(pm) else null
+                    ?: try {
+                        pm.getApplicationIcon(packageName)
+                    } catch (_: Exception) {
+                        null
+                    }
+            if (drawable == null) return null
             val bmp = Bitmap.createBitmap(96, 96, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bmp)
             drawable.setBounds(0, 0, 96, 96)

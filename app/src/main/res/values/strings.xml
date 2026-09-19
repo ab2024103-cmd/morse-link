@@ -172,6 +172,8 @@
     <string name="history_delete_record">Remove from history</string>
     <string name="history_delete_file">Delete file from device</string>
     <string name="history_file_missing">File no longer available</string>
+    <string name="viewer_title">Viewer</string>
+    <string name="viewer_now_playing">Now playing</string>
     <string name="history_filter_all">All</string>
     <string name="history_filter_completed">Completed</string>
     <string name="history_filter_failed">Failed</string>

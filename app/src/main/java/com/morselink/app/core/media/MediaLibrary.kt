@@ -185,8 +185,12 @@ object MediaLibrary {
             args.add("%/" + esc + "/%")
         }
         if (!query.isNullOrBlank()) {
+            // Match DISPLAY_NAME or the data path: older MediaStore rows often
+            // have a null DISPLAY_NAME, which made search return nothing.
             val like = "%" + query.replace("%", "").replace("_", "") + "%"
-            selection = (selection?.plus(" AND ") ?: "") + "${MediaStore.MediaColumns.DISPLAY_NAME} LIKE ?"
+            selection = (selection?.plus(" AND ") ?: "") +
+                "(${MediaStore.MediaColumns.DISPLAY_NAME} LIKE ? OR ${MediaStore.MediaColumns.DATA} LIKE ?)"
+            args.add(like)
             args.add(like)
         }
 
@@ -299,8 +303,12 @@ object MediaLibrary {
         var selection = selectionFor(category).first
         var args = selectionFor(category).second.toMutableList()
         if (!query.isNullOrBlank()) {
+            // Match DISPLAY_NAME or the data path: older MediaStore rows often
+            // have a null DISPLAY_NAME, which made search return nothing.
             val like = "%" + query.replace("%", "").replace("_", "") + "%"
-            selection = (selection?.plus(" AND ") ?: "") + "${MediaStore.MediaColumns.DISPLAY_NAME} LIKE ?"
+            selection = (selection?.plus(" AND ") ?: "") +
+                "(${MediaStore.MediaColumns.DISPLAY_NAME} LIKE ? OR ${MediaStore.MediaColumns.DATA} LIKE ?)"
+            args.add(like)
             args.add(like)
         }
         return try {

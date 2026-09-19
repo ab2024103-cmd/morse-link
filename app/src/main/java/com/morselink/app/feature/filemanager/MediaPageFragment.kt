@@ -476,7 +476,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 }
                 bindSelection(holder.itemView, holder.check, item.uri, mediaSelectable(item), showCircle = true)
                 holder.itemView.setOnLongClickListener { v ->
-                    openUri(v, Uri.parse(item.uri), item.mime)
+                    openMedia(v, item.name, item.uri, item.mime)
                     true
                 }
             } else if (holder is RowHolder) {
@@ -500,7 +500,7 @@ class MediaPageFragment : Fragment(), PageWithItems {
                 }
                 bindSelection(holder.itemView, holder.check, item.uri, mediaSelectable(item))
                 holder.itemView.setOnLongClickListener { v ->
-                    openUri(v, Uri.parse(item.uri), item.mime)
+                    openMedia(v, item.name, item.uri, item.mime)
                     true
                 }
             }
@@ -581,15 +581,21 @@ class MediaPageFragment : Fragment(), PageWithItems {
             } catch (_: Exception) {
                 null
             }
-            if (bmp != null) {
-                synchronized(thumbCache) { thumbCache[item.id.toInt()] = bmp }
+            var result = bmp
+            if (result == null && item.path != null) {
+                // Direct sampled decode of the file — needs nothing beyond the
+                // READ permission already granted, no thumbnail table, no Glide.
+                result = decodeSampled(item.path!!, 256)
+            }
+            if (result != null) {
+                synchronized(thumbCache) { thumbCache[item.id.toInt()] = result }
             }
             withContext(Dispatchers.Main) {
                 if (target.tag != item.id) return@withContext
-                if (bmp != null) {
-                    target.setImageBitmap(bmp)
+                if (result != null) {
+                    target.setImageBitmap(result)
                 } else {
-                    // Fall back to a full decode through Glide.
+                    // Last resort: a decode through Glide.
                     Glide.with(target)
                         .load(Uri.parse(item.uri))
                         .centerCrop()
@@ -597,6 +603,29 @@ class MediaPageFragment : Fragment(), PageWithItems {
                         .into(target)
                 }
             }
+        }
+    }
+
+    /** Downscaled bitmap decode (bounds first, then inSampleSize). */
+    private fun decodeSampled(path: String, targetSize: Int): Bitmap? {
+        return try {
+            val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            android.graphics.BitmapFactory.decodeFile(path, bounds)
+            if (bounds.outWidth <= 0 || bounds.outHeight <= 0) return null
+            var sample = 1
+            var w = bounds.outWidth
+            var h = bounds.outHeight
+            while (w / 2 >= targetSize && h / 2 >= targetSize) {
+                w /= 2
+                h /= 2
+                sample *= 2
+            }
+            val opts = android.graphics.BitmapFactory.Options().apply { inSampleSize = sample }
+            android.graphics.BitmapFactory.decodeFile(path, opts)
+        } catch (_: OutOfMemoryError) {
+            null
+        } catch (_: Exception) {
+            null
         }
     }
 
@@ -619,6 +648,16 @@ class MediaPageFragment : Fragment(), PageWithItems {
             }
         }
         target.tag = app.packageName
+    }
+
+    /** Media files open in the built-in viewer; anything else goes external. */
+    private fun openMedia(view: View, name: String, uri: String, mime: String) {
+        val m = mime.ifBlank { MediaLibrary.guessMime(name) }
+        if (m.startsWith("image/") || m.startsWith("video/") || m.startsWith("audio/")) {
+            com.morselink.app.feature.viewer.ViewerActivity.start(view.context, uri, m, name)
+        } else {
+            openUri(view, Uri.parse(uri), m)
+        }
     }
 
     private fun openUri(view: View, uri: Uri, mime: String) {

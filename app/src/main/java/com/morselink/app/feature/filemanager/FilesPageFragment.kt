@@ -1,6 +1,7 @@
 package com.morselink.app.feature.filemanager
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -86,6 +87,12 @@ class FilesPageFragment : Fragment(), PageWithItems {
         binding.recycler.adapter = FilesAdapter(emptyList())
 
         binding.buttonNewFolder.setOnClickListener { createFolder() }
+
+        // Selected rows must show their tick right away, not only after a
+        // scroll away and back (mlogs3).
+        viewLifecycleOwner.lifecycleScope.launch {
+            SelectionState.selected.collect { binding.recycler.adapter?.notifyDataSetChanged() }
+        }
 
         // Direct path entry: long-press the address bar (spec Section 10.6).
         binding.addressBar.setOnLongClickListener {
@@ -500,6 +507,92 @@ class FilesPageFragment : Fragment(), PageWithItems {
         _binding = null
     }
 
+    // ---------------- media file thumbnails ----------------
+
+    private val fileThumbCache = object : LinkedHashMap<String, Bitmap>(48, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Bitmap>): Boolean = size > 48
+    }
+
+    /**
+     * Thumbnails for files browsed by path (internal storage, categories like
+     * Large files): resolve the MediaStore id by path when possible, else
+     * decode the image directly at a small sample size.
+     */
+    private fun loadFileThumb(target: ImageView, entry: FileEntry, isVideo: Boolean) {
+        val key = entry.path ?: entry.uri
+        target.tag = key
+        synchronized(fileThumbCache) { fileThumbCache[key] }?.let {
+            target.setImageBitmap(it)
+            return
+        }
+        viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+            var bmp: Bitmap? = null
+            // 1) MediaStore thumbnail via the id looked up from the path.
+            try {
+                val collection = if (isVideo) {
+                    android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                } else {
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                }
+                requireContext().contentResolver.query(
+                    collection,
+                    arrayOf(android.provider.MediaStore.MediaColumns._ID),
+                    "${android.provider.MediaStore.MediaColumns.DATA} = ?",
+                    arrayOf(key), null
+                )?.use { c ->
+                    if (c.moveToFirst()) {
+                        val id = c.getLong(0)
+                        bmp = if (isVideo) {
+                            android.provider.MediaStore.Video.Thumbnails.getThumbnail(
+                                requireContext().contentResolver, id,
+                                android.provider.MediaStore.Video.Thumbnails.MINI_KIND, null
+                            )
+                        } else {
+                            android.provider.MediaStore.Images.Thumbnails.getThumbnail(
+                                requireContext().contentResolver, id,
+                                android.provider.MediaStore.Images.Thumbnails.MINI_KIND, null
+                            )
+                        }
+                    }
+                }
+            } catch (_: Exception) {
+            }
+            // 2) Direct sampled decode (images only; videos have no cheap frame read).
+            if (bmp == null && !isVideo) {
+                val path = entry.path
+                if (path != null) bmp = decodeSampledFile(path, 128)
+            }
+            if (bmp != null) {
+                synchronized(fileThumbCache) { fileThumbCache[key] = bmp }
+            }
+            val result = bmp
+            withContext(Dispatchers.Main) {
+                if (target.tag == key && result != null) target.setImageBitmap(result)
+            }
+        }
+    }
+
+    private fun decodeSampledFile(path: String, targetSize: Int): Bitmap? {
+        return try {
+            val bounds = android.graphics.BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            android.graphics.BitmapFactory.decodeFile(path, bounds)
+            if (bounds.outWidth <= 0) return null
+            var sample = 1
+            while (bounds.outWidth / (sample * 2) >= targetSize &&
+                bounds.outHeight / (sample * 2) >= targetSize
+            ) {
+                sample *= 2
+            }
+            android.graphics.BitmapFactory.decodeFile(
+                path, android.graphics.BitmapFactory.Options().apply { inSampleSize = sample }
+            )
+        } catch (_: OutOfMemoryError) {
+            null
+        } catch (_: Exception) {
+            null
+        }
+    }
+
     // ---------------- apk icons ----------------
 
     private val apkIconCache = HashMap<String, android.graphics.drawable.Drawable?>()
@@ -638,12 +731,20 @@ class FilesPageFragment : Fragment(), PageWithItems {
                     h.title.text = row.name
                     h.subtitle.text = row.mime
                     h.meta.text = Fmt.bytes(row.size)
+                    val isImage = row.mime.startsWith("image/")
+                    val isVideo = row.mime.startsWith("video/")
                     if (row.mime == "application/vnd.android.package-archive" ||
                         row.name.endsWith(".apk", true)
                     ) {
                         // Show the app's own launcher icon when the apk is readable.
                         h.thumb.setImageResource(R.drawable.ic_file_apk)
                         loadApkIcon(h.thumb, row)
+                    } else if (isImage || isVideo) {
+                        // Real thumbnails for pictures and videos (mlogs3).
+                        h.thumb.setImageResource(
+                            if (isImage) R.drawable.ic_cat_photos else R.drawable.ic_cat_videos
+                        )
+                        loadFileThumb(h.thumb, row, isVideo)
                     } else {
                         h.thumb.setImageResource(Ui.iconForFile(row.name, row.mime))
                     }
@@ -686,6 +787,11 @@ class FilesPageFragment : Fragment(), PageWithItems {
         }
 
         private fun openFile(row: FileEntry) {
+            val mime = row.mime.ifBlank { MediaLibrary.guessMime(row.name) }
+            if (mime.startsWith("image/") || mime.startsWith("video/") || mime.startsWith("audio/")) {
+                com.morselink.app.feature.viewer.ViewerActivity.start(requireContext(), row.uri, mime, row.name)
+                return
+            }
             try {
                 val uri = Uri.parse(row.uri)
                 val resolved = if (uri.scheme == "file") {

@@ -228,9 +228,22 @@ class MainActivity : AppCompatActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     com.morselink.app.core.webshare.WebShareController.approvalRequests.collect { req ->
-                        AlertDialog.Builder(this@MainActivity)
+                        // Pending browsers re-emit every poll; only ever show one
+                        // dialog, and never for a client already decided.
+                        if (com.morselink.app.core.webshare.WebShareController.isClientAllowed(req.first) ||
+                            com.morselink.app.core.webshare.WebShareController.isClientDenied(req.first)
+                        ) {
+                            return@collect
+                        }
+                        if (approvalDialog != null && approvalDialog!!.isShowing && approvalClient == req.first) {
+                            return@collect
+                        }
+                        approvalDialog?.dismiss()
+                        approvalClient = req.first
+                        approvalDialog = AlertDialog.Builder(this@MainActivity)
                             .setTitle(R.string.webshare_request_title)
                             .setMessage(getString(R.string.webshare_request_message, req.second))
+                            .setCancelable(false)
                             .setPositiveButton(R.string.webshare_request_allow) { d, _ ->
                                 d.dismiss()
                                 com.morselink.app.core.webshare.WebShareController.respondApproval(req.first, true)
@@ -239,15 +252,15 @@ class MainActivity : AppCompatActivity() {
                                 d.dismiss()
                                 com.morselink.app.core.webshare.WebShareController.respondApproval(req.first, false)
                             }
-                            .setOnCancelListener {
-                                com.morselink.app.core.webshare.WebShareController.respondApproval(req.first, false)
-                            }
                             .show()
                     }
                 }
             }
         }
     }
+
+    private var approvalDialog: AlertDialog? = null
+    private var approvalClient: String? = null
 
     private fun observeEngineEvents() {
         lifecycleScope.launch {
