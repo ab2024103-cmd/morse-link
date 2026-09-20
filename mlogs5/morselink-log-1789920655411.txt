@@ -1,0 +1,1222 @@
+MorseLink 1.4.2 (13)
+Device: TECNO TECNO KL4 (Android 14, SDK 34)
+Exported: 2026-09-20 17:10:55.411
+
+===== APP LOG =====
+2026-09-19 21:10:00.976 I MorseLink 1.4.1 (12) started
+2026-09-19 21:10:00.978 I LAN: server listening on 33456
+2026-09-19 21:10:00.978 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-19 21:11:02.428 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:17.219 I Nearby: discovery started
+2026-09-19 21:11:17.221 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:11:32.714 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=true
+2026-09-19 21:11:32.718 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-19 21:11:34.210 I Consent for MYA-AL10: true
+2026-09-19 21:11:34.233 I Nearby: connected to OX6P
+2026-09-19 21:11:34.238 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:11:34.249 I Outgoing worker started
+2026-09-19 21:11:38.248 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:38.252 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:38.260 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:11:45.205 I Queued 3 outgoing file(s)
+2026-09-19 21:11:45.265 I Nearby: sending Screenshot_20260919-205855.png (90758 bytes)
+2026-09-19 21:11:45.286 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:11:46.083 I Nearby: sending Screenshot_20260919-205500.png (101490 bytes)
+2026-09-19 21:11:46.393 I Nearby: sending Screenshot_20260919-204054.png (60887 bytes)
+2026-09-19 21:11:46.540 I Batch 07d0a68e-dd11-4107-a720-5c81de5c58ef done: 3 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:00.113 I Nearby: metadata received for Screenshot_2026-09-19-06-04-02.png (52020 bytes)
+2026-09-19 21:12:00.395 I Verification for Screenshot_2026-09-19-06-04-02.png: size-only (logged)
+2026-09-19 21:12:00.599 I Saved Screenshot_2026-09-19-06-04-02.png -> Screenshot_2026-09-19-06-04-02.png
+2026-09-19 21:12:00.606 I Batch in-dcde3df4-6776-414b-928d-509e712e7115 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:00.832 I Nearby: metadata received for Screenshot_2026-09-19-06-00-35.png (100337 bytes)
+2026-09-19 21:12:00.958 I Verification for Screenshot_2026-09-19-06-00-35.png: size-only (logged)
+2026-09-19 21:12:01.119 I Saved Screenshot_2026-09-19-06-00-35.png -> Screenshot_2026-09-19-06-00-35.png
+2026-09-19 21:12:01.124 I Batch in-62e06693-1215-418b-a342-6c168ac03ea7 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:20.336 I Nearby: metadata received for Screenshot_2026-09-18-19-09-05.png (101761 bytes)
+2026-09-19 21:12:20.501 I Verification for Screenshot_2026-09-18-19-09-05.png: size-only (logged)
+2026-09-19 21:12:20.674 I Saved Screenshot_2026-09-18-19-09-05.png -> Screenshot_2026-09-18-19-09-05.png
+2026-09-19 21:12:20.680 I Batch in-194680d6-7aab-4ab8-9137-64f5dd2602f5 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:20.824 I Nearby: metadata received for Screenshot_2026-09-18-18-56-33.png (90085 bytes)
+2026-09-19 21:12:20.899 I Verification for Screenshot_2026-09-18-18-56-33.png: size-only (logged)
+2026-09-19 21:12:20.983 I Saved Screenshot_2026-09-18-18-56-33.png -> Screenshot_2026-09-18-18-56-33.png
+2026-09-19 21:12:20.986 I Batch in-02197d26-87ee-40b7-8099-74158d9c7730 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:21.080 I Nearby: metadata received for Screenshot_2026-09-18-18-55-39.png (91245 bytes)
+2026-09-19 21:12:21.143 I Verification for Screenshot_2026-09-18-18-55-39.png: size-only (logged)
+2026-09-19 21:12:21.248 I Saved Screenshot_2026-09-18-18-55-39.png -> Screenshot_2026-09-18-18-55-39.png
+2026-09-19 21:12:21.254 I Batch in-5ff06f25-a1b6-4b6e-ae20-b99d2ff9d5fe done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:39.292 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:39.296 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:39.306 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:42.201 I Queued 1 outgoing file(s)
+2026-09-19 21:12:42.253 I Nearby: sending IMG_20260918_080552_933.jpg (7263622 bytes)
+2026-09-19 21:12:42.439 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:12:44.660 I Batch 90029ad9-c919-4ee5-9754-313194a3359f done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:12:52.198 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:52.201 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:52.204 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:52.445 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:12:52.446 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:12:52.447 W Media page empty but count=3559 (photos) — retrying
+2026-09-19 21:12:53.053 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:53.054 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:53.065 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:59.637 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:59.640 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:12:59.651 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:39.780 I Nearby: metadata received for IMG_20260918_080552_933.jpg (7263622 bytes)
+2026-09-19 21:13:41.920 I Queued 1 outgoing file(s)
+2026-09-19 21:13:42.001 I Nearby: sending VID-20260909-WA0000.mp4 (3264060 bytes)
+2026-09-19 21:13:42.150 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:13:42.318 I Verification for IMG_20260918_080552_933.jpg: size-only (logged)
+2026-09-19 21:13:42.499 I Saved IMG_20260918_080552_933.jpg -> IMG_20260918_080552_933.jpg
+2026-09-19 21:13:42.501 I Batch in-6a71b8e8-a88d-4733-9b6a-8484a8d48b67 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:43.486 I Nearby: metadata received for Screenshot_2026-09-18-19-09-05.png (101761 bytes)
+2026-09-19 21:13:43.608 I Verification for Screenshot_2026-09-18-19-09-05.png: size-only (logged)
+2026-09-19 21:13:43.632 I Batch d810b4e7-1051-48af-a5f1-d407f11ac185 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:43.814 I Saved Screenshot_2026-09-18-19-09-05.png -> Screenshot_2026-09-18-19-09-05 (1).png
+2026-09-19 21:13:43.816 I Batch in-cc0c4fa7-d93f-4113-8004-29b4bffe790f done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:13:52.939 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:52.943 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:52.957 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:53.177 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:13:53.179 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:13:53.181 W Media page empty but count=3561 (photos) — retrying
+2026-09-19 21:13:53.785 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:53.786 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:53.790 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:13:55.733 I Queued 2 outgoing file(s)
+2026-09-19 21:13:55.877 I Nearby: sending dc06156adb6e4485ac0051c391b255fa.mp4 (10654454 bytes)
+2026-09-19 21:13:55.974 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:13:57.453 I Nearby: metadata received for Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-19 21:13:58.032 I Verification for Screenshot_2026-09-12-14-55-53.png: size-only (logged)
+2026-09-19 21:13:58.178 I Saved Screenshot_2026-09-12-14-55-53.png -> Screenshot_2026-09-12-14-55-53.png
+2026-09-19 21:13:58.182 I Batch in-36179ec6-45a3-4c25-9bd5-c91b7bd29acd done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:00.181 I Nearby: metadata received for Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-19 21:14:00.421 I Verification for Screenshot_2026-09-12-14-54-59.png: size-only (logged)
+2026-09-19 21:14:00.544 I Saved Screenshot_2026-09-12-14-54-59.png -> Screenshot_2026-09-12-14-54-59.png
+2026-09-19 21:14:00.547 I Batch in-7c6e28f5-22f1-43ac-82fa-02725a10a0ef done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:00.595 I Nearby: sending 5eab68644b5f485ebcbfb21eb53be3c0.mp4 (10650324 bytes)
+2026-09-19 21:14:04.983 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:04.984 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:04.988 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:05.208 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:14:05.210 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:14:05.216 W Media page empty but count=3563 (photos) — retrying
+2026-09-19 21:14:05.593 I Batch 1ee60ca0-09c1-43b3-9b2a-f57e26a4097f done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:05.814 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:05.814 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:05.827 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:27.661 I Queued 4 outgoing file(s)
+2026-09-19 21:14:27.707 I Nearby: sending Screenshot_20260916-173027.png (113792 bytes)
+2026-09-19 21:14:27.855 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:14:32.519 I Nearby: sending IMG_20260915_080438_303.jpg (3325840 bytes)
+2026-09-19 21:14:34.905 I Nearby: sending IMG_20260915_080425_161.jpg (3361453 bytes)
+2026-09-19 21:14:36.060 I Nearby: sending IMG_20260915_080348_527.jpg (3606718 bytes)
+2026-09-19 21:14:37.313 I Batch d6b98c8a-894c-47f3-b75c-6cbb67fcf025 done: 4 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:14:50.539 I Nearby: discovery started
+2026-09-19 21:14:50.540 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:14:50.541 W Session lost (user ended session)
+2026-09-19 21:14:51.038 I Nearby: OX6P disconnected
+2026-09-19 21:14:59.884 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:59.886 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:14:59.890 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:00.118 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:15:00.121 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:15:00.124 W Media page empty but count=3563 (photos) — retrying
+2026-09-19 21:15:00.727 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:00.728 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:00.732 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:02.307 I Nearby: discovery started
+2026-09-19 21:15:02.308 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:15:14.585 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:17.537 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:21.792 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:23.494 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:15:25.048 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:15:25.245 I Nearby: connected to OX6P
+2026-09-19 21:15:25.251 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:15:43.146 I Nearby: metadata received for IMG-20260917-WA0035.jpg (63031 bytes)
+2026-09-19 21:15:43.412 I Verification for IMG-20260917-WA0035.jpg: size-only (logged)
+2026-09-19 21:15:43.607 I Saved IMG-20260917-WA0035.jpg -> IMG-20260917-WA0035.jpg
+2026-09-19 21:15:43.612 I Batch in-f324db20-41c1-4d1e-b4a6-89dfefbe0863 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:15:45.747 I Nearby: metadata received for IMG-20260917-WA0034.jpg (72704 bytes)
+2026-09-19 21:15:45.855 I Verification for IMG-20260917-WA0034.jpg: size-only (logged)
+2026-09-19 21:15:46.020 I Saved IMG-20260917-WA0034.jpg -> IMG-20260917-WA0034.jpg
+2026-09-19 21:15:46.027 I Batch in-291098ef-0b42-4fc6-95b3-8718811407b9 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:15:49.101 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:49.109 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:49.115 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:15:57.510 I Queued 2 outgoing file(s)
+2026-09-19 21:15:57.563 I Nearby: sending IMG_20260914_175745_154.jpg (3966023 bytes)
+2026-09-19 21:15:57.579 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:16:00.171 I Nearby: sending IMG_20260914_175452_312.jpg (3690711 bytes)
+2026-09-19 21:16:01.402 I Batch 4265a36f-21bc-498c-a14a-8e136db9598c done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:16:09.171 I Nearby: discovery started
+2026-09-19 21:16:09.172 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:16:09.173 W Session lost (user ended session)
+2026-09-19 21:16:10.416 I Nearby: OX6P disconnected
+2026-09-19 21:17:41.916 I TempLink: local-only hotspot ready (ssid=AndroidShare_4019)
+2026-09-19 21:17:41.996 I Discovery started on LAN_WIFI
+2026-09-19 21:18:16.761 I TempLink: link ended
+2026-09-19 21:18:28.720 W TempLink: local-only hotspot failed (3)
+2026-09-19 21:18:38.016 W TempLink: local-only hotspot failed (3)
+2026-09-19 21:18:49.668 I TempLink: local-only hotspot ready (ssid=AndroidShare_5795)
+2026-09-19 21:18:49.702 I Discovery started on LAN_WIFI
+2026-09-19 21:20:21.360 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-19 21:20:28.030 I Consent for MYA-AL10: true
+2026-09-19 21:20:28.046 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-19 21:20:28.051 I LAN: session established with MYA-AL10 (192.168.94.136)
+2026-09-19 21:20:28.784 I Incoming offer: Screenshot_2026-09-16-17-48-59.png (88449 bytes)
+2026-09-19 21:20:28.837 I LAN: accepted Screenshot_2026-09-16-17-48-59.png from offset 0
+2026-09-19 21:20:29.241 E LAN: data connection for 63871dd6-eddf-467b-8732-5b9b9674529e failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:21:30.206 I Revived incoming row for Screenshot_2026-09-16-17-48-59.png
+2026-09-19 21:21:30.217 I Incoming offer: Screenshot_2026-09-16-17-48-59.png (88449 bytes)
+2026-09-19 21:21:30.251 I LAN: accepted Screenshot_2026-09-16-17-48-59.png from offset 0
+2026-09-19 21:21:30.663 E LAN: data connection for 63871dd6-eddf-467b-8732-5b9b9674529e failed :: EOFException: null
+2026-09-19 21:21:30.696 I Batch in-52e8bd11-e330-47b0-ae15-32addff7c8b7 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:21:30.701 I Batch in-52e8bd11-e330-47b0-ae15-32addff7c8b7 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:21:42.711 I Incoming offer: Screenshot_20260912-150454.png (79545 bytes)
+2026-09-19 21:21:42.741 I LAN: accepted Screenshot_20260912-150454.png from offset 0
+2026-09-19 21:21:42.772 E LAN: data connection for 1152e500-1ad7-443b-8152-353cc42871ef failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:21:51.324 I Batch in-4a9d0444-3c24-49ef-9de0-48ed66e53798 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:21:57.756 I Batch in-4a9d0444-3c24-49ef-9de0-48ed66e53798 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-19 21:22:42.137 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:42.142 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:42.149 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:43.608 I Revived incoming row for Screenshot_20260912-150454.png
+2026-09-19 21:22:43.617 I Incoming offer: Screenshot_20260912-150454.png (79545 bytes)
+2026-09-19 21:22:43.644 I LAN: accepted Screenshot_20260912-150454.png from offset 0
+2026-09-19 21:22:43.951 E LAN: data connection for 1152e500-1ad7-443b-8152-353cc42871ef failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-19 21:22:47.013 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:47.018 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:47.027 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:22:51.347 I Queued 2 outgoing file(s)
+2026-09-19 21:22:51.379 I LAN: offering Screenshot_20260912-071057.png (119964 bytes) to MYA-AL10
+2026-09-19 21:22:51.531 I Nearby: discovery started
+2026-09-19 21:22:51.531 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:23:21.436 E LAN: direct connect to 192.168.94.136 failed :: ConnectException: failed to connect to /192.168.94.136 (port 33456) from /:: (port 0) after 8000ms: connect failed: ENETUNREACH (Network is unreachable)
+2026-09-19 21:23:33.212 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:33.214 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:33.216 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:33.450 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:23:33.451 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:23:33.452 W Media page empty but count=3567 (photos) — retrying
+2026-09-19 21:23:34.057 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:34.059 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:34.060 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:23:51.741 W Auto-retry 1 for Screenshot_20260912-071057.png: peer did not confirm completion
+2026-09-19 21:23:52.562 I LAN: offering Screenshot_20260912-071057.png (119964 bytes) to MYA-AL10
+2026-09-19 21:23:52.580 I LAN: session closed (control write failure: Software caused connection abort)
+2026-09-19 21:23:52.583 W Session lost (control write failure: Software caused connection abort)
+2026-09-19 21:26:03.903 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=true
+2026-09-19 21:26:03.925 I Nearby: connected to OX6P
+2026-09-19 21:26:03.932 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:26:03.979 I Nearby: sending Screenshot_20260912-071057.png (119964 bytes)
+2026-09-19 21:26:04.394 I Nearby: metadata received for Screenshot_2026-09-16-17-48-16.png (88675 bytes)
+2026-09-19 21:26:11.754 I Verification for Screenshot_2026-09-16-17-48-16.png: size-only (logged)
+2026-09-19 21:26:11.948 I Saved Screenshot_2026-09-16-17-48-16.png -> Screenshot_2026-09-16-17-48-16.png
+2026-09-19 21:26:11.951 I Batch in-3c15f2dc-9aaa-4ae8-8391-9d2877070ddb done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:26:12.130 I Nearby: sending Screenshot_20260912-071011.png (119749 bytes)
+2026-09-19 21:26:12.180 W Nearby: file payload without metadata; dropping
+2026-09-19 21:26:12.188 I Nearby: metadata received for Screenshot_2026-09-16-17-46-23.png (84445 bytes)
+2026-09-19 21:26:18.285 I Batch b5b3eae3-78c4-4ba6-8a7a-90233fb659fb done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:26:47.043 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:26:55.200 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:26:55.203 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:26:55.208 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:07.701 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:07.705 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:07.706 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:27:23.920 I Queued 6 outgoing file(s)
+2026-09-19 21:27:23.965 I Nearby: sending Screenshot_20260919-204054.png (60887 bytes)
+2026-09-19 21:27:24.140 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:27:48.934 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:28:24.227 W Nearby: completed without receiver ACK for 2132222f-0c1f-4696-8bfa-ffb628a90380
+2026-09-19 21:29:06.459 I Nearby: discovery started
+2026-09-19 21:29:06.460 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:29:06.461 W Session lost (user ended session)
+2026-09-19 21:29:07.001 I Nearby: OX6P disconnected
+2026-09-19 21:29:07.877 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:07.879 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:07.882 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:08.094 W Media page empty but count=311 (music) — retrying
+2026-09-19 21:29:08.095 W Media page empty but count=1462 (videos) — retrying
+2026-09-19 21:29:08.096 W Media page empty but count=3568 (photos) — retrying
+2026-09-19 21:29:08.701 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:08.702 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:08.703 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:29:24.592 W TempLink: local-only hotspot failed (2)
+2026-09-19 21:29:34.175 I TempLink: local-only hotspot ready (ssid=AndroidShare_9282)
+2026-09-19 21:29:34.205 I Discovery started on LAN_WIFI
+2026-09-19 21:30:07.833 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-19 21:30:09.119 I Consent for MYA-AL10: true
+2026-09-19 21:30:09.121 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-19 21:30:09.129 I LAN: session established with MYA-AL10 (192.168.94.136)
+2026-09-19 21:30:17.598 I Nearby: discovery started
+2026-09-19 21:30:17.599 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:30:19.392 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:30:31.866 I LAN: session closed (user ended session)
+2026-09-19 21:30:31.870 W Session lost (user ended session)
+2026-09-19 21:31:05.927 I Nearby: discovery started
+2026-09-19 21:31:05.927 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:31:20.884 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:31:24.350 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:31:24.643 I Nearby: connected to OX6P
+2026-09-19 21:31:24.648 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:31:58.555 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:31:58.557 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:31:58.563 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:04.618 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:04.620 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:04.623 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:32:11.395 I Queued 4 outgoing file(s)
+2026-09-19 21:32:11.457 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:32:50.641 I Nearby: OX6P disconnected
+2026-09-19 21:32:50.642 I Nearby: session closed (peer disconnected)
+2026-09-19 21:32:50.644 I Nearby: discovery started
+2026-09-19 21:32:50.644 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:32:50.645 W Session lost (peer disconnected)
+2026-09-19 21:33:00.464 I Nearby: discovery started
+2026-09-19 21:33:00.464 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:08.223 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:33:10.848 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:33:11.049 I Nearby: connected to OX6P
+2026-09-19 21:33:11.052 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:33:15.999 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:33:16.003 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:33:16.009 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:33:20.370 I Queued 6 outgoing file(s)
+2026-09-19 21:33:20.430 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:46.210 I Nearby: OX6P disconnected
+2026-09-19 21:33:46.211 I Nearby: session closed (peer disconnected)
+2026-09-19 21:33:46.215 I Nearby: discovery started
+2026-09-19 21:33:46.216 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:33:46.217 W Session lost (peer disconnected)
+2026-09-19 21:33:51.046 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:33:54.150 I Nearby: connection initiated by OX6P (MYA-AL10), incoming=false
+2026-09-19 21:33:54.341 I Nearby: connected to OX6P
+2026-09-19 21:33:54.345 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-19 21:34:14.491 I Nearby: OX6P disconnected
+2026-09-19 21:34:14.493 I Nearby: session closed (peer disconnected)
+2026-09-19 21:34:14.496 I Nearby: discovery started
+2026-09-19 21:34:14.498 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:14.498 W Session lost (peer disconnected)
+2026-09-19 21:34:16.938 I Nearby: discovery started
+2026-09-19 21:34:16.938 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:34:33.895 I Nearby: requested connection to MYA-AL10 (OX6P)
+2026-09-19 21:35:18.825 I Nearby: discovery started
+2026-09-19 21:35:18.826 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:23.654 I MorseLink 1.4.1 (12) started
+2026-09-19 21:35:23.655 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-19 21:35:23.656 I LAN: server listening on 33456
+2026-09-19 21:35:28.725 I Nearby: discovery started
+2026-09-19 21:35:28.726 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:41.992 I Nearby: connection initiated by Q2CQ (MYA-AL10), incoming=true
+2026-09-19 21:35:41.995 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-19 21:35:43.360 I Consent for MYA-AL10: true
+2026-09-19 21:35:43.369 I Nearby: connected to Q2CQ
+2026-09-19 21:35:43.387 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:35:43.396 I Outgoing worker started
+2026-09-19 21:35:45.704 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:35:45.708 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:35:45.716 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:35:52.082 I Queued 6 outgoing file(s)
+2026-09-19 21:35:52.129 I Nearby: sending Screenshot_2026-09-16-17-48-16.png (88675 bytes)
+2026-09-19 21:35:52.166 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:35:52.492 I Nearby: sending Screenshot_20260919-211730.png (85535 bytes)
+2026-09-19 21:35:52.814 I Nearby: sending Screenshot_20260919-212311.png (103750 bytes)
+2026-09-19 21:35:53.001 I Nearby: sending Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-19 21:35:53.256 I Nearby: sending Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-19 21:35:53.452 I Nearby: sending Screenshot_2026-09-18-19-09-05 (1).png (101761 bytes)
+2026-09-19 21:35:53.576 I Batch a3c1a8f3-c615-4455-953a-565480eea309 done: 6 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:36:12.350 I Nearby: Q2CQ disconnected
+2026-09-19 21:36:12.351 I Nearby: session closed (peer disconnected)
+2026-09-19 21:36:12.356 I Nearby: discovery started
+2026-09-19 21:36:12.358 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:12.359 W Session lost (peer disconnected)
+2026-09-19 21:36:16.828 I Nearby: discovery started
+2026-09-19 21:36:16.829 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:41.590 I Nearby: connection initiated by Q2CQ (MYA-AL10), incoming=true
+2026-09-19 21:36:41.592 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-19 21:36:43.081 I Consent for MYA-AL10: true
+2026-09-19 21:36:43.089 I Nearby: connected to Q2CQ
+2026-09-19 21:36:43.093 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-19 21:36:46.681 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:46.687 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:46.701 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:52.210 W Media query with LIMIT failed (large_files): Invalid token LIMIT; retrying without LIMIT
+2026-09-19 21:36:57.535 I Queued 1 outgoing file(s)
+2026-09-19 21:36:57.609 I Nearby: sending VID-20260913-WA0005.mp4 (1751655 bytes)
+2026-09-19 21:36:57.624 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:36:58.483 I Batch ebfba36c-d4ba-492f-9467-8c4b53ac53c7 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:37:13.706 I Queued 1 outgoing file(s)
+2026-09-19 21:37:13.741 I Nearby: sending morselink-log-1789850229521.txt (30321 bytes)
+2026-09-19 21:37:13.842 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:37:13.992 I Batch ec60fa2b-26b2-49cd-99b5-6009305bc9a1 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-19 21:37:20.418 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:37:29.388 I Discovery started on NEARBY_CONNECTIONS
+2026-09-19 21:39:09.794 I Nearby: Q2CQ disconnected
+2026-09-19 21:39:09.797 I Nearby: session closed (peer disconnected)
+2026-09-19 21:39:09.798 W Session lost (peer disconnected)
+2026-09-20 09:57:53.998 I MorseLink 1.4.1 (12) started
+2026-09-20 09:57:53.999 I LAN: server listening on 33456
+2026-09-20 09:57:54.000 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 09:59:10.917 I Nearby: discovery started
+2026-09-20 09:59:10.917 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 09:59:44.022 I Nearby: requested connection to MYA-AL10 (FXBG)
+2026-09-20 09:59:50.119 I Nearby: requested connection to MYA-AL10 (FXBG)
+2026-09-20 09:59:51.500 I Nearby: connection initiated by FXBG (MYA-AL10), incoming=false
+2026-09-20 09:59:54.184 I Nearby: connected to FXBG
+2026-09-20 09:59:54.192 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 09:59:54.209 I Outgoing worker started
+2026-09-20 09:59:54.593 W Nearby: file payload without metadata; dropping
+2026-09-20 09:59:54.594 I Nearby: metadata received for MorseLink.apk (6767216 bytes)
+2026-09-20 10:00:17.603 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:00:17.604 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:00:17.604 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:00:39.153 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:00:39.161 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:00:39.170 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:01:42.514 I MorseLink 1.4.1 (12) started
+2026-09-20 10:01:42.518 I LAN: server listening on 33456
+2026-09-20 10:01:42.519 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 10:01:53.183 I Nearby: discovery started
+2026-09-20 10:01:53.183 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:02:09.570 I Nearby: requested connection to MYA-AL10 (PFSW)
+2026-09-20 10:02:45.485 I Nearby: discovery started
+2026-09-20 10:02:45.486 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:02:47.141 I Discovery started on LAN_WIFI
+2026-09-20 10:03:45.346 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-20 10:03:48.966 I Consent for MYA-AL10: true
+2026-09-20 10:03:48.984 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-20 10:03:48.987 I Outgoing worker started
+2026-09-20 10:03:48.991 I LAN: session established with MYA-AL10 (192.168.239.136)
+2026-09-20 10:04:15.987 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:04:15.988 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:04:15.989 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:04:18.661 I Nearby: discovery started
+2026-09-20 10:04:18.661 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:04:21.996 I LAN: session closed (peer said goodbye)
+2026-09-20 10:04:22.000 W Session lost (peer said goodbye)
+2026-09-20 10:04:23.164 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-20 10:04:23.173 I LAN: connected directly to MYA-AL10 at 192.168.239.136
+2026-09-20 10:04:30.957 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:04:30.963 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:04:30.971 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:04:33.640 I Queued 1 outgoing file(s)
+2026-09-20 10:04:33.694 I LAN: offering IMG-20260917-WA0035.jpg (63031 bytes) to MYA-AL10
+2026-09-20 10:04:33.710 I Nearby: discovery started
+2026-09-20 10:04:33.711 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:05:21.460 I Nearby: discovery started
+2026-09-20 10:05:21.460 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:05:34.232 W Auto-retry 1 for IMG-20260917-WA0035.jpg: peer did not confirm completion
+2026-09-20 10:05:35.091 I LAN: offering IMG-20260917-WA0035.jpg (63031 bytes) to MYA-AL10
+2026-09-20 10:05:44.003 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:05:44.010 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:05:44.017 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:05:49.252 I Queued 1 outgoing file(s)
+2026-09-20 10:05:49.317 I Nearby: discovery started
+2026-09-20 10:05:49.317 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:06:13.701 I LAN: session closed (cancelled from notification)
+2026-09-20 10:06:13.704 W Session lost (cancelled from notification)
+2026-09-20 10:08:16.567 I MorseLink 1.4.2 (13) started
+2026-09-20 10:08:16.568 I LAN: server listening on 33456
+2026-09-20 10:08:16.569 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 10:08:30.823 I TempLink: local-only hotspot ready (ssid=AndroidShare_7814)
+2026-09-20 10:08:30.892 I Discovery started on LAN_WIFI
+2026-09-20 10:08:44.112 I Nearby: discovery started
+2026-09-20 10:08:44.112 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:09:43.162 I Nearby: connection initiated by GLAS (MYA-AL10), incoming=true
+2026-09-20 10:09:43.168 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 10:09:44.324 I Consent for MYA-AL10: true
+2026-09-20 10:09:44.348 I Nearby: connected to GLAS
+2026-09-20 10:09:44.353 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 10:09:44.363 I Outgoing worker started
+2026-09-20 10:10:17.043 I Nearby: metadata received for Screenshot_2026-09-18-19-09-05 (1).png (101761 bytes)
+2026-09-20 10:10:17.204 I Verification for Screenshot_2026-09-18-19-09-05 (1).png: size-only (logged)
+2026-09-20 10:10:17.469 I Saved Screenshot_2026-09-18-19-09-05 (1).png -> Screenshot_2026-09-18-19-09-05 (1) (1).png
+2026-09-20 10:10:17.474 I Batch in-7c08e79c-f1ca-4352-a6d6-bdf5d779bd77 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 10:10:17.632 I Nearby: metadata received for Screenshot_2026-09-12-14-55-53.png (88133 bytes)
+2026-09-20 10:10:17.663 I Verification for Screenshot_2026-09-12-14-55-53.png: size-only (logged)
+2026-09-20 10:10:17.808 I Saved Screenshot_2026-09-12-14-55-53.png -> Screenshot_2026-09-12-14-55-53 (1).png
+2026-09-20 10:10:17.814 I Batch in-be0600ab-bd91-40a4-b1aa-b0478de16a53 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 10:10:18.080 I Nearby: metadata received for 5eab68644b5f485ebcbfb21eb53be3c0.mp4 (10650324 bytes)
+2026-09-20 10:10:23.620 I Verification for 5eab68644b5f485ebcbfb21eb53be3c0.mp4: size-only (logged)
+2026-09-20 10:10:23.958 I Saved 5eab68644b5f485ebcbfb21eb53be3c0.mp4 -> 5eab68644b5f485ebcbfb21eb53be3c0.mp4
+2026-09-20 10:10:23.963 I Batch in-1138cc19-a45d-406d-8fa0-e7c6e9bc8cce done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 10:10:24.245 I Nearby: metadata received for DeepSeek.apk (8026836 bytes)
+2026-09-20 10:10:26.200 I Verification for DeepSeek.apk: size-only (logged)
+2026-09-20 10:10:26.409 I Saved DeepSeek.apk -> DeepSeek.apk
+2026-09-20 10:10:26.412 I Batch in-47d5b2b9-916b-4743-878e-2083ea9ae9d8 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 10:10:48.607 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:10:48.607 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:10:48.614 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:11:13.077 I Queued 5 outgoing file(s)
+2026-09-20 10:11:13.132 I Nearby: sending IMG-20260917-WA0034.jpg (72704 bytes)
+2026-09-20 10:11:13.146 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:11:13.410 I Nearby: sending IMG-20260917-WA0035.jpg (63031 bytes)
+2026-09-20 10:11:13.596 I Nearby: sending Screenshot_2026-09-12-14-54-59.png (74864 bytes)
+2026-09-20 10:12:13.614 W Nearby: completed without receiver ACK for 7b7b3050-85d3-420c-88db-7dc3241f8969
+2026-09-20 10:14:23.868 I Nearby: GLAS disconnected
+2026-09-20 10:14:23.869 I Nearby: session closed (peer disconnected)
+2026-09-20 10:14:23.870 W Session lost (peer disconnected)
+2026-09-20 10:14:33.441 I Nearby: discovery started
+2026-09-20 10:14:33.442 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:16:36.643 I TempLink: host sockets bound to wlan0
+2026-09-20 10:16:36.649 W LAN: server socket fd unreachable for network bind
+2026-09-20 10:16:36.650 W LAN: server socket fd unreachable for network bind
+2026-09-20 10:16:36.651 W LAN: server socket fd unreachable for network bind
+2026-09-20 10:16:36.652 E LAN: failed to start server :: BindException: bind failed: EADDRINUSE (Address already in use)
+2026-09-20 10:16:36.653 I LAN: server listening on 33456
+2026-09-20 10:16:53.597 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:16:54.804 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:16:56.010 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:16:57.216 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:16:58.424 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:16:59.632 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:00.841 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:02.048 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:03.256 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:04.466 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:05.674 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:06.882 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:08.090 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:09.297 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:10.504 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:11.713 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:12.920 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:14.128 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:15.335 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:16.541 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:17.746 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:18.954 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:20.160 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:21.367 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:22.575 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:23.781 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:24.988 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:26.194 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:27.400 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:28.608 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:29.814 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:31.020 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:32.227 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:33.435 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:34.642 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:35.849 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:37.056 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:38.263 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:39.472 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:40.679 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:41.887 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:43.095 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:44.304 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:45.513 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:46.721 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:47.930 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:49.137 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:50.342 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:51.547 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:52.754 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:53.960 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:55.168 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:56.375 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:57.582 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:58.788 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:17:59.996 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:01.203 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:02.408 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:03.615 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:03.916 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:18:04.823 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:06.031 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:06.956 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:18:07.238 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:08.446 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:09.654 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:10.864 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:12.069 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:13.274 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:14.478 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:15.686 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:16.893 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:18.098 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:19.306 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:19.554 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:18:20.514 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:21.722 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:22.595 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:18:22.931 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:24.137 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:25.343 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:26.549 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:27.756 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:28.961 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:30.167 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:30.968 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:18:31.375 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:32.583 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:33.792 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:34.009 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:18:34.999 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:36.207 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:37.415 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:38.621 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:39.830 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:41.037 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:42.244 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:43.449 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:44.655 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:45.862 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:47.068 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:48.276 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:49.481 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:50.686 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:51.893 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:53.099 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:54.305 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:55.512 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:56.718 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:57.925 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:18:59.130 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:00.338 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:01.544 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:02.751 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:03.955 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:05.162 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:06.366 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:07.570 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:08.775 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:09.982 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:10.331 I Discovery started on LAN_WIFI
+2026-09-20 10:19:11.190 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:12.396 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:13.601 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:14.806 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:16.012 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:17.218 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:18.424 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:19.631 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:20.839 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:22.046 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:23.252 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:24.460 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:25.667 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:26.874 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:28.082 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:29.289 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:30.497 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:31.704 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:32.912 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:34.122 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:35.329 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:36.535 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:37.743 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:38.951 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:40.160 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:41.368 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:42.576 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:43.784 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:44.993 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:45.426 I Discovery started on LAN_WIFI
+2026-09-20 10:19:46.200 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:47.406 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:48.615 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:49.062 I Discovery started on LAN_WIFI
+2026-09-20 10:19:49.821 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:50.282 I Discovery started on LAN_WIFI
+2026-09-20 10:19:51.031 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:51.775 I Discovery started on LAN_WIFI
+2026-09-20 10:19:52.237 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:53.444 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:54.261 I Discovery started on LAN_WIFI
+2026-09-20 10:19:54.651 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:55.192 I Discovery started on LAN_WIFI
+2026-09-20 10:19:55.718 I Discovery started on LAN_WIFI
+2026-09-20 10:19:55.856 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:56.136 I Discovery started on LAN_WIFI
+2026-09-20 10:19:56.418 I Discovery started on LAN_WIFI
+2026-09-20 10:19:57.062 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:58.268 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:19:59.477 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:00.684 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:01.891 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:02.062 I Discovery started on LAN_WIFI
+2026-09-20 10:20:03.098 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:03.394 I Discovery started on LAN_WIFI
+2026-09-20 10:20:04.305 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:04.530 I Discovery started on LAN_WIFI
+2026-09-20 10:20:05.511 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:06.032 I Discovery started on LAN_WIFI
+2026-09-20 10:20:06.263 I Discovery started on LAN_WIFI
+2026-09-20 10:20:06.464 I Discovery started on LAN_WIFI
+2026-09-20 10:20:06.719 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:06.748 I Discovery started on LAN_WIFI
+2026-09-20 10:20:07.925 W LAN: udp network bind failed: Binding socket to network 128 failed: EPERM (Operation not permitted)
+2026-09-20 10:20:26.324 I MorseLink 1.4.2 (13) started
+2026-09-20 10:20:26.326 I LAN: server listening on 33456
+2026-09-20 10:20:26.326 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 10:20:39.407 I Nearby: discovery started
+2026-09-20 10:20:39.408 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:20:51.277 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:20:54.316 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:20:58.725 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:21:01.768 W TempLink: local-only hotspot failed (2)
+2026-09-20 10:21:09.464 I Nearby: discovery started
+2026-09-20 10:21:09.464 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:21:24.837 I Nearby: connection initiated by GLAS (MYA-AL10), incoming=true
+2026-09-20 10:21:24.841 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 10:21:28.080 I Consent for MYA-AL10: true
+2026-09-20 10:21:28.102 I Nearby: connected to GLAS
+2026-09-20 10:21:28.106 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 10:21:28.116 I Outgoing worker started
+2026-09-20 10:21:38.163 I Nearby: metadata received for IMG-20260917-WA0035.jpg (63031 bytes)
+2026-09-20 10:21:40.379 I Verification for IMG-20260917-WA0035.jpg: size-only (logged)
+2026-09-20 10:21:40.891 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:21:40.892 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:21:40.892 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:21:40.965 I Saved IMG-20260917-WA0035.jpg -> IMG-20260917-WA0035 (1).jpg
+2026-09-20 10:21:40.970 I Batch in-39fc1f2f-07d1-47a4-9473-5c300f8197f0 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 10:21:49.576 I Queued 1 outgoing file(s)
+2026-09-20 10:21:49.630 I Nearby: sending IMG_20260918_080649_722.jpg (7597454 bytes)
+2026-09-20 10:21:49.647 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:22:16.794 W Nearby: file payload without metadata; dropping
+2026-09-20 10:22:16.915 I Nearby: metadata received for Screenshot_2026-09-20-06-53-47.png (527170 bytes)
+2026-09-20 10:22:56.013 I Discovery started on LAN_WIFI
+2026-09-20 10:22:58.278 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:23:11.124 I Batch 039e6614-d6d6-4436-a2e0-1562b95016c6 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 10:23:18.171 I Nearby: discovery started
+2026-09-20 10:23:18.171 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:23:18.172 W Session lost (user ended session)
+2026-09-20 10:23:35.061 I Nearby: requested connection to MYA-AL10 (GLAS)
+2026-09-20 10:23:41.602 I Nearby: requested connection to MYA-AL10 (GLAS)
+2026-09-20 10:23:43.223 I Nearby: GLAS disconnected
+2026-09-20 10:24:10.190 I MorseLink 1.4.2 (13) started
+2026-09-20 10:24:10.191 I LAN: server listening on 33456
+2026-09-20 10:24:10.192 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 10:24:11.772 I Nearby: discovery started
+2026-09-20 10:24:11.773 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:24:22.732 I Nearby: connection initiated by 9IYO (MYA-AL10), incoming=true
+2026-09-20 10:24:22.735 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 10:24:23.757 I Consent for MYA-AL10: true
+2026-09-20 10:24:23.767 I Nearby: connected to 9IYO
+2026-09-20 10:24:23.773 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 10:24:23.784 I Outgoing worker started
+2026-09-20 10:24:26.217 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:24:26.219 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:24:26.229 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:24:28.511 I Queued 1 outgoing file(s)
+2026-09-20 10:24:28.563 I Nearby: sending Screenshot_20260919-212311.png (103750 bytes)
+2026-09-20 10:24:28.586 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:24:51.925 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:24:51.930 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:24:51.936 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:24:56.182 I Queued 1 outgoing file(s)
+2026-09-20 10:24:56.260 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:25:20.216 I Nearby: 9IYO disconnected
+2026-09-20 10:25:20.217 I Nearby: session closed (peer disconnected)
+2026-09-20 10:25:20.220 W Session lost (peer disconnected)
+2026-09-20 10:28:15.151 I Nearby: discovery started
+2026-09-20 10:28:15.152 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:28:56.079 I Nearby: discovery started
+2026-09-20 10:28:56.079 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:29:34.727 I Nearby: connection initiated by 6W3G (MYA-AL10), incoming=true
+2026-09-20 10:29:34.731 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 10:29:35.934 I Consent for MYA-AL10: true
+2026-09-20 10:29:35.942 I Nearby: connected to 6W3G
+2026-09-20 10:29:35.944 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 10:29:53.573 I Nearby: metadata received for IMG-20260917-WA0035.jpg (63031 bytes)
+2026-09-20 10:29:58.277 I Verification for IMG-20260917-WA0035.jpg: size-only (logged)
+2026-09-20 10:29:58.445 I Saved IMG-20260917-WA0035.jpg -> IMG-20260917-WA0035 (2).jpg
+2026-09-20 10:29:58.452 I Batch in-d74f9dcb-b83e-4729-9b34-39baa1262272 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 10:30:10.791 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:30:10.795 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:30:10.808 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:30:12.915 I Queued 1 outgoing file(s)
+2026-09-20 10:30:12.986 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:30:41.890 I Nearby: 6W3G disconnected
+2026-09-20 10:30:41.891 I Nearby: session closed (peer disconnected)
+2026-09-20 10:30:41.893 I Nearby: discovery started
+2026-09-20 10:30:41.893 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:30:41.894 W Session lost (peer disconnected)
+2026-09-20 10:31:24.104 I Nearby: requested connection to MYA-AL10 (6W3G)
+2026-09-20 10:31:33.442 I Nearby: connection initiated by 6W3G (MYA-AL10), incoming=false
+2026-09-20 10:31:33.587 I Nearby: connected to 6W3G
+2026-09-20 10:31:33.592 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 10:31:38.499 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:31:38.505 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:31:38.512 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:31:40.539 I Skipped 1 duplicate queue entry (already queued or in progress)
+2026-09-20 10:31:40.540 I Queued 1 outgoing file(s)
+2026-09-20 10:31:40.609 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:31:44.607 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:31:44.616 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:31:44.632 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 10:31:46.694 I Queued 20 outgoing file(s)
+2026-09-20 10:31:46.760 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 10:31:55.294 W Nearby: file payload without metadata; dropping
+2026-09-20 10:31:55.296 I Nearby: metadata received for Screenshot_2026-09-20-06-53-47.png (527170 bytes)
+2026-09-20 10:33:03.543 W Session lost (cancelled from notification)
+2026-09-20 10:34:36.325 I Nearby: 6W3G disconnected
+2026-09-20 16:07:37.201 I MorseLink 1.4.2 (13) started
+2026-09-20 16:07:37.203 I LAN: server listening on 33456
+2026-09-20 16:07:37.203 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 16:08:16.648 I Nearby: discovery started
+2026-09-20 16:08:16.648 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:08:26.550 I Nearby: requested connection to MYA-AL10 (06FX)
+2026-09-20 16:08:29.644 I Nearby: connection initiated by 06FX (MYA-AL10), incoming=false
+2026-09-20 16:08:31.243 I Nearby: connected to 06FX
+2026-09-20 16:08:31.252 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:08:31.272 I Outgoing worker started
+2026-09-20 16:08:38.282 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:08:38.283 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:08:38.284 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:08:43.864 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:08:43.867 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:08:43.871 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:08:48.687 I Queued 1 outgoing file(s)
+2026-09-20 16:08:48.779 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:08:48.823 I Nearby: sending 1739794860323.jpg (12371199 bytes)
+2026-09-20 16:09:30.634 I Batch 8c569e06-5528-40fe-a5e6-cde0ef646c84 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 16:09:40.983 I Nearby: 06FX disconnected
+2026-09-20 16:09:40.983 I Nearby: session closed (peer disconnected)
+2026-09-20 16:09:40.984 I Nearby: discovery started
+2026-09-20 16:09:40.985 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:09:40.986 W Session lost (peer disconnected)
+2026-09-20 16:10:16.247 I Nearby: connection initiated by 06FX (MYA-AL10), incoming=true
+2026-09-20 16:10:16.259 I Nearby: connected to 06FX
+2026-09-20 16:10:16.263 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:10:21.368 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:10:21.377 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:10:21.385 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:10:39.100 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:10:39.102 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:10:39.105 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:10:43.007 I Queued 1 outgoing file(s)
+2026-09-20 16:10:43.096 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:10:43.119 I Nearby: sending 20260104_140109 (1).jpg (8788254 bytes)
+2026-09-20 16:10:48.025 I Batch f342b9bf-bbea-45af-b9b2-bf2984366fdb done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:11:25.343 I Nearby: metadata received for IMG_20260915_080335_110.jpg (4217362 bytes)
+2026-09-20 16:11:26.855 I Verification for IMG_20260915_080335_110.jpg: size-only (logged)
+2026-09-20 16:11:27.057 I Saved IMG_20260915_080335_110.jpg -> IMG_20260915_080335_110.jpg
+2026-09-20 16:11:27.062 I Batch in-a241650a-e7c5-48b7-af3d-1b5ecf079c8b done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:11:27.208 I Nearby: metadata received for IMG_20260915_080332_661.jpg (4189831 bytes)
+2026-09-20 16:11:28.595 I Verification for IMG_20260915_080332_661.jpg: size-only (logged)
+2026-09-20 16:11:28.780 I Saved IMG_20260915_080332_661.jpg -> IMG_20260915_080332_661.jpg
+2026-09-20 16:11:28.785 I Batch in-fa6cb202-8ed7-4eda-bc0a-478f6a90e490 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:12:03.676 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:03.680 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:03.690 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:07.255 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:07.259 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:07.263 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:13.633 I Queued 1 outgoing file(s)
+2026-09-20 16:12:13.708 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:12:13.734 I Nearby: sending 1687980843773.jpg (7566077 bytes)
+2026-09-20 16:12:17.502 I Batch 920d168c-9c24-44b8-a39a-70fabdf73461 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:12:41.974 I Nearby: metadata received for IMG_20260915_080327_020.jpg (3805023 bytes)
+2026-09-20 16:12:43.502 I Verification for IMG_20260915_080327_020.jpg: size-only (logged)
+2026-09-20 16:12:43.682 I Saved IMG_20260915_080327_020.jpg -> IMG_20260915_080327_020.jpg
+2026-09-20 16:12:43.688 I Batch in-dcfa6a08-6c02-436a-94a4-ceb55a436ce2 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:12:43.827 I Nearby: metadata received for IMG_20260914_175452_312.jpg (3690711 bytes)
+2026-09-20 16:12:45.050 I Verification for IMG_20260914_175452_312.jpg: size-only (logged)
+2026-09-20 16:12:45.235 I Saved IMG_20260914_175452_312.jpg -> IMG_20260914_175452_312.jpg
+2026-09-20 16:12:45.240 I Batch in-27eb8f4d-279e-42f7-91c6-f05309a753b0 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:12:51.335 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:51.339 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:51.349 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:12:59.333 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:13:36.842 I Nearby: 06FX disconnected
+2026-09-20 16:13:36.842 I Nearby: session closed (peer disconnected)
+2026-09-20 16:13:36.845 I Nearby: discovery started
+2026-09-20 16:13:36.846 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:13:36.847 W Session lost (peer disconnected)
+2026-09-20 16:13:42.306 I Nearby: discovery started
+2026-09-20 16:13:42.306 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:13:53.574 I Nearby: requested connection to MYA-AL10 (06FX)
+2026-09-20 16:13:55.040 I Nearby: connection initiated by 06FX (MYA-AL10), incoming=false
+2026-09-20 16:13:55.334 I Nearby: connected to 06FX
+2026-09-20 16:13:55.339 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:14:00.774 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:14:00.782 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:14:00.787 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:14:04.617 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:14:04.620 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:14:04.624 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:14:16.269 I Queued 2 outgoing file(s)
+2026-09-20 16:14:16.337 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:14:16.347 I Nearby: sending 1687980843114.jpg (5217148 bytes)
+2026-09-20 16:14:21.371 I Nearby: sending IMG_20250529_172054_946.jpg (4825084 bytes)
+2026-09-20 16:14:24.021 I Batch 724e59e1-b9a1-4cf0-bff2-395cf3efad59 done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:14:38.163 I Nearby: metadata received for IMG_20260915_080348_527.jpg (3606718 bytes)
+2026-09-20 16:14:39.729 I Verification for IMG_20260915_080348_527.jpg: size-only (logged)
+2026-09-20 16:14:39.862 I Saved IMG_20260915_080348_527.jpg -> IMG_20260915_080348_527.jpg
+2026-09-20 16:14:39.873 I Batch in-b05d6ca3-6648-471b-86f9-2eeaf92a8d57 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:14:40.009 I Nearby: metadata received for IMG_20260915_080223_453.jpg (3587348 bytes)
+2026-09-20 16:14:41.760 I Verification for IMG_20260915_080223_453.jpg: size-only (logged)
+2026-09-20 16:14:41.953 I Saved IMG_20260915_080223_453.jpg -> IMG_20260915_080223_453.jpg
+2026-09-20 16:14:41.962 I Batch in-c2fdc855-2a3b-40c5-bee6-189253ffaab8 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:14:42.108 I Nearby: metadata received for IMG_20260905_172233_505.jpg (3582594 bytes)
+2026-09-20 16:14:43.757 I Verification for IMG_20260905_172233_505.jpg: size-only (logged)
+2026-09-20 16:14:43.946 I Saved IMG_20260905_172233_505.jpg -> IMG_20260905_172233_505.jpg
+2026-09-20 16:14:43.956 I Batch in-8beea057-ca77-4590-8e44-9322c0ab922a done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:15:03.459 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:15:03.461 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:15:03.469 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:15:05.826 I Queued 1 outgoing file(s)
+2026-09-20 16:15:05.866 I Nearby: sending Screenshot_20260920-161456.png (119019 bytes)
+2026-09-20 16:15:05.885 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:15:06.218 I Batch ffbeb40f-84f4-4063-9815-e409d8d48774 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:15:20.676 I Nearby: discovery started
+2026-09-20 16:15:20.676 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:15:20.677 W Session lost (user ended session)
+2026-09-20 16:15:21.151 I Nearby: 06FX disconnected
+2026-09-20 16:16:08.127 I Nearby: discovery started
+2026-09-20 16:16:08.127 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:16:16.030 I Nearby: connection initiated by 06FX (MYA-AL10), incoming=true
+2026-09-20 16:16:16.040 I Nearby: connected to 06FX
+2026-09-20 16:16:16.045 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:16:23.882 I Nearby: discovery started
+2026-09-20 16:16:23.883 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:16:23.885 W Session lost (user ended session)
+2026-09-20 16:16:24.327 I Nearby: 06FX disconnected
+2026-09-20 16:17:47.235 I Nearby: discovery started
+2026-09-20 16:17:47.235 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:18:01.914 I MorseLink 1.4.2 (13) started
+2026-09-20 16:18:01.915 I LAN: server listening on 33456
+2026-09-20 16:18:01.915 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 16:18:06.857 I Nearby: discovery started
+2026-09-20 16:18:06.858 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:18:35.991 I Nearby: requested connection to MYA-AL10 (F61H)
+2026-09-20 16:18:45.620 I Nearby: connection initiated by F61H (MYA-AL10), incoming=false
+2026-09-20 16:18:47.170 I Nearby: connected to F61H
+2026-09-20 16:18:47.179 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:18:47.196 I Outgoing worker started
+2026-09-20 16:18:51.647 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:18:51.652 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:18:51.661 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:18:57.865 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:18:57.873 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:18:57.875 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:19:09.434 I Queued 3 outgoing file(s)
+2026-09-20 16:19:09.501 I Nearby: sending IMG_20260905_172253_696.jpg (5415002 bytes)
+2026-09-20 16:19:09.503 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:19:11.999 I Nearby: sending IMG_20260905_172014_457.jpg (5583577 bytes)
+2026-09-20 16:19:18.351 I Nearby: sending 1687980843132.jpg (5794943 bytes)
+2026-09-20 16:19:20.237 I Batch 9cfb57a6-c3da-43b4-a19e-0cad3e7b5d1e done: 3 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:27:26.405 I Nearby: F61H disconnected
+2026-09-20 16:27:26.406 I Nearby: session closed (peer disconnected)
+2026-09-20 16:27:26.410 I Nearby: discovery started
+2026-09-20 16:27:26.410 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:27:26.411 W Session lost (peer disconnected)
+2026-09-20 16:37:28.328 I MorseLink 1.4.2 (13) started
+2026-09-20 16:37:28.330 I LAN: server listening on 33456
+2026-09-20 16:37:28.330 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 16:37:30.841 I Nearby: discovery started
+2026-09-20 16:37:30.842 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:37:51.718 I Discovery started on LAN_WIFI
+2026-09-20 16:37:56.447 I Nearby: discovery started
+2026-09-20 16:37:56.448 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:38:01.859 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-20 16:38:03.806 I Consent for MYA-AL10: true
+2026-09-20 16:38:03.810 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-20 16:38:03.815 I Outgoing worker started
+2026-09-20 16:38:03.820 I LAN: session established with MYA-AL10 (192.168.239.136)
+2026-09-20 16:38:21.374 I Incoming offer: Screenshot_2026-09-20-16-35-01.png (200698 bytes)
+2026-09-20 16:38:21.719 I LAN: accepted Screenshot_2026-09-20-16-35-01.png from offset 0
+2026-09-20 16:38:22.756 E LAN: data connection for 032e1957-09ef-44a2-bcf9-19c8f6bf1428 failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-20 16:38:34.169 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:38:34.171 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:38:34.173 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:38:39.735 I Queued 3 outgoing file(s)
+2026-09-20 16:38:39.775 I LAN: offering IMG_20260915_080223_453.jpg (3587348 bytes) to MYA-AL10
+2026-09-20 16:38:39.805 I Nearby: discovery started
+2026-09-20 16:38:39.806 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:38:40.259 I LAN: offering IMG_20260915_080348_527.jpg (3606718 bytes) to MYA-AL10
+2026-09-20 16:38:40.453 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:40.689 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:40.695 W Auto-retry 1 for IMG_20260914_175452_312.jpg: Connection reset
+2026-09-20 16:38:41.501 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:42.905 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:42.907 W Auto-retry 2 for IMG_20260914_175452_312.jpg: Connection reset
+2026-09-20 16:38:43.727 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:44.345 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:44.348 W Auto-retry 3 for IMG_20260914_175452_312.jpg: Connection reset
+2026-09-20 16:38:45.154 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:45.742 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:45.756 I Batch 81741fe4-9216-4307-91f5-8edfffc3b0c8 done: 0 ok, 1 failed, 2 skipped, 0 cancelled
+2026-09-20 16:38:48.466 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:49.360 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:49.362 W Auto-retry 1 for IMG_20260914_175452_312.jpg: Connection reset
+2026-09-20 16:38:50.168 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:51.258 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:51.261 W Auto-retry 2 for IMG_20260914_175452_312.jpg: Connection reset
+2026-09-20 16:38:52.067 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:52.294 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:52.296 W Auto-retry 3 for IMG_20260914_175452_312.jpg: Connection reset
+2026-09-20 16:38:53.102 I LAN: offering IMG_20260914_175452_312.jpg (3690711 bytes) to MYA-AL10
+2026-09-20 16:38:53.573 E LAN: send IMG_20260914_175452_312.jpg failed :: ConnectionResetException: Connection reset
+2026-09-20 16:38:53.585 I Batch 81741fe4-9216-4307-91f5-8edfffc3b0c8 done: 0 ok, 1 failed, 2 skipped, 0 cancelled
+2026-09-20 16:39:13.426 I Batch in-7515b644-cff6-4791-93dc-9945d111f162 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 16:39:15.865 I Batch in-7515b644-cff6-4791-93dc-9945d111f162 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 16:39:23.628 I Revived incoming row for Screenshot_2026-09-20-16-35-01.png
+2026-09-20 16:39:23.640 I Incoming offer: Screenshot_2026-09-20-16-35-01.png (200698 bytes)
+2026-09-20 16:39:23.677 I LAN: accepted Screenshot_2026-09-20-16-35-01.png from offset 0
+2026-09-20 16:39:24.980 I Batch in-7515b644-cff6-4791-93dc-9945d111f162 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 16:39:25.169 I Batch in-7515b644-cff6-4791-93dc-9945d111f162 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 16:39:25.227 I Batch in-7515b644-cff6-4791-93dc-9945d111f162 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-20 16:39:34.445 I LAN: session closed (peer said goodbye)
+2026-09-20 16:39:34.448 W Session lost (peer said goodbye)
+2026-09-20 16:39:45.614 I Nearby: discovery started
+2026-09-20 16:39:45.614 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:40:09.985 I Nearby: discovery started
+2026-09-20 16:40:09.986 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:40:35.742 I Nearby: discovery started
+2026-09-20 16:40:35.743 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:40:50.799 I Nearby: discovery started
+2026-09-20 16:40:50.799 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:40:58.567 I Nearby: connection initiated by U92H (MYA-AL10), incoming=true
+2026-09-20 16:40:58.571 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 16:41:01.028 I Consent for MYA-AL10: true
+2026-09-20 16:41:01.039 I Nearby: connected to U92H
+2026-09-20 16:41:01.043 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-20 16:41:08.121 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:41:08.127 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:41:08.137 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:41:15.194 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:41:15.195 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:41:15.198 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:41:20.633 I Queued 2 outgoing file(s)
+2026-09-20 16:41:20.671 I Nearby: sending IMG_20260915_080348_527.jpg (3606718 bytes)
+2026-09-20 16:41:20.695 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:41:25.913 I Nearby: sending IMG_20250331_122750_027.jpg (4206832 bytes)
+2026-09-20 16:41:27.548 I Batch 36e6780b-22a0-4783-a2ea-d77a4d6fc6b3 done: 2 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:42:47.569 I Nearby: discovery started
+2026-09-20 16:42:47.571 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:42:47.571 W Session lost (user ended session)
+2026-09-20 16:42:48.039 I Nearby: U92H disconnected
+2026-09-20 16:42:52.776 I Nearby: discovery started
+2026-09-20 16:42:52.777 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:43:36.643 I Nearby: connection initiated by U92H (MYA-AL10), incoming=true
+2026-09-20 16:43:36.646 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 16:43:41.034 I Consent for MYA-AL10: true
+2026-09-20 16:43:41.042 I Nearby: connected to U92H
+2026-09-20 16:43:41.045 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-20 16:43:59.625 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:44:07.698 I Nearby: metadata received for VID_20260617_095957.mp4 (16706731 bytes)
+2026-09-20 16:44:14.051 I Verification for VID_20260617_095957.mp4: size-only (logged)
+2026-09-20 16:44:14.509 I Saved VID_20260617_095957.mp4 -> VID_20260617_095957.mp4
+2026-09-20 16:44:14.514 I Batch in-12b328a8-99ad-4ec9-842e-3e7e4cf49f52 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:44:16.391 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:44:16.395 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:44:16.403 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:44:19.660 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:44:19.663 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:44:19.666 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:44:47.827 I Queued 1 outgoing file(s)
+2026-09-20 16:44:47.896 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:44:48.025 I Nearby: sending VID_20250606_071626.mp4 (19569427 bytes)
+2026-09-20 16:44:57.383 I Batch 53464d98-b8a7-4014-8dbe-309f22898e10 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:45:22.067 I Nearby: U92H disconnected
+2026-09-20 16:45:22.068 I Nearby: session closed (peer disconnected)
+2026-09-20 16:45:22.073 I Nearby: discovery started
+2026-09-20 16:45:22.074 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:45:22.075 W Session lost (peer disconnected)
+2026-09-20 16:45:35.515 I Nearby: discovery started
+2026-09-20 16:45:35.516 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:45:48.424 I Nearby: requested connection to MYA-AL10 (06FX)
+2026-09-20 16:45:58.476 I Nearby: requested connection to MYA-AL10 (06FX)
+2026-09-20 16:45:58.862 I Nearby: requested connection to MYA-AL10 (06FX)
+2026-09-20 16:46:54.365 I Nearby: requested connection to MYA-AL10 (06FX)
+2026-09-20 16:47:04.588 I MorseLink 1.4.2 (13) started
+2026-09-20 16:47:04.590 I LAN: server listening on 33456
+2026-09-20 16:47:04.590 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 16:47:06.700 I Nearby: discovery started
+2026-09-20 16:47:06.701 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:48:15.444 I Nearby: connection initiated by H8CO (MYA-AL10), incoming=true
+2026-09-20 16:48:15.448 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 16:48:19.310 I Consent for MYA-AL10: true
+2026-09-20 16:48:19.319 I Nearby: connected to H8CO
+2026-09-20 16:48:19.325 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:48:19.335 I Outgoing worker started
+2026-09-20 16:48:42.777 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:42.780 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:42.786 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:46.208 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:46.212 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:46.215 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:48.280 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:48.281 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:48:48.285 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:49:07.238 I Queued 1 outgoing file(s)
+2026-09-20 16:49:07.310 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:49:07.316 I Nearby: sending 0deaf8ea2293464b827e6d1980c60b47.mp4 (605048 bytes)
+2026-09-20 16:49:07.898 I Batch 2299440a-08c0-44f4-a71b-cdf33ba5c8f0 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:49:20.924 I Nearby: H8CO disconnected
+2026-09-20 16:49:20.925 I Nearby: session closed (peer disconnected)
+2026-09-20 16:49:20.930 I Nearby: discovery started
+2026-09-20 16:49:20.932 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:49:20.933 W Session lost (peer disconnected)
+2026-09-20 16:49:33.434 I Nearby: discovery started
+2026-09-20 16:49:33.434 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:49:42.247 I Nearby: connection initiated by H8CO (MYA-AL10), incoming=true
+2026-09-20 16:49:42.251 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 16:49:43.628 I Consent for MYA-AL10: true
+2026-09-20 16:49:43.635 I Nearby: connected to H8CO
+2026-09-20 16:49:43.638 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:49:48.731 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:49:48.732 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:49:48.739 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:49:52.505 I Queued 3 outgoing file(s)
+2026-09-20 16:49:52.563 I Nearby: sending IMG_20260905_172233_505.jpg (3582594 bytes)
+2026-09-20 16:49:52.570 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:49:57.616 I Nearby: sending IMG_20260915_080223_453.jpg (3587348 bytes)
+2026-09-20 16:49:59.798 I Nearby: sending IMG_20260915_080348_527.jpg (3606718 bytes)
+2026-09-20 16:50:01.087 I Batch 0ad31780-2013-45fb-a147-319b942940ed done: 3 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 16:50:37.762 I Nearby: H8CO disconnected
+2026-09-20 16:50:37.763 I Nearby: session closed (peer disconnected)
+2026-09-20 16:50:37.765 W Session lost (peer disconnected)
+2026-09-20 16:50:38.771 I Nearby: discovery started
+2026-09-20 16:50:38.772 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:50:48.309 I Nearby: discovery started
+2026-09-20 16:50:48.310 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:50:58.938 I Nearby: discovery started
+2026-09-20 16:50:58.939 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:51:10.973 I Nearby: discovery started
+2026-09-20 16:51:10.974 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:51:50.400 I Nearby: connection initiated by H8CO (MYA-AL10), incoming=true
+2026-09-20 16:51:50.404 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 16:51:52.349 I Consent for MYA-AL10: true
+2026-09-20 16:51:52.357 I Nearby: connected to H8CO
+2026-09-20 16:51:52.360 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 16:52:09.073 I Nearby: discovery started
+2026-09-20 16:52:09.074 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:52:09.075 W Session lost (user ended session)
+2026-09-20 16:52:09.489 I Nearby: H8CO disconnected
+2026-09-20 16:52:55.222 I MorseLink 1.4.2 (13) started
+2026-09-20 16:52:55.225 I LAN: server listening on 33456
+2026-09-20 16:52:55.225 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 16:52:58.252 I Nearby: discovery started
+2026-09-20 16:52:58.252 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:53:10.523 I Discovery started on LAN_WIFI
+2026-09-20 16:53:15.370 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-20 16:53:17.178 I Consent for MYA-AL10: true
+2026-09-20 16:53:17.182 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-20 16:53:17.187 I Outgoing worker started
+2026-09-20 16:53:17.191 I LAN: session established with MYA-AL10 (192.168.43.1)
+2026-09-20 16:53:19.426 I Nearby: discovery started
+2026-09-20 16:53:19.428 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:53:32.051 I Discovery started on LAN_WIFI
+2026-09-20 16:53:41.799 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:41.802 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:41.810 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:44.168 I Queued 2 outgoing file(s)
+2026-09-20 16:53:44.206 I LAN: offering IMG_20260915_080348_527.jpg (3606718 bytes) to MYA-AL10
+2026-09-20 16:53:44.259 I Nearby: discovery started
+2026-09-20 16:53:44.259 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:53:44.868 I LAN: offering IMG_20260915_080223_453.jpg (3587348 bytes) to MYA-AL10
+2026-09-20 16:53:45.032 I Batch ea31e8b2-5bfb-4b16-aac4-1c2d8490d79d done: 0 ok, 0 failed, 2 skipped, 0 cancelled
+2026-09-20 16:53:47.825 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:47.832 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:47.843 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:51.901 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:51.903 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:51.908 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 16:53:55.908 I Queued 4 outgoing file(s)
+2026-09-20 16:53:55.936 I LAN: offering IMG-20220721-WA0045.jpg (35146 bytes) to MYA-AL10
+2026-09-20 16:53:55.970 I Nearby: discovery started
+2026-09-20 16:53:55.971 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 16:54:31.142 I Incoming offer: IMG-20260614-WA0011.jpg (325140 bytes)
+2026-09-20 16:54:31.195 I LAN: accepted IMG-20260614-WA0011.jpg from offset 0
+2026-09-20 16:54:31.345 E LAN: data connection for 94026d83-52ad-4fce-a3c9-e0e6f2ad25c5 failed :: IOException: chunk magic mismatch — framing slipped
+2026-09-20 16:54:56.040 W Auto-retry 1 for IMG-20220721-WA0045.jpg: peer did not confirm completion
+2026-09-20 16:54:56.883 I LAN: offering IMG-20220721-WA0045.jpg (35146 bytes) to MYA-AL10
+2026-09-20 16:55:21.986 I LAN: session closed (user ended session)
+2026-09-20 16:55:22.003 W Session lost (user ended session)
+2026-09-20 16:56:00.307 I TempLink: local-only hotspot ready (ssid=AndroidShare_4166)
+2026-09-20 16:56:00.440 I Discovery started on LAN_WIFI
+2026-09-20 16:58:56.452 I TempLink: link ended
+2026-09-20 16:58:59.800 I TempLink: local-only hotspot ready (ssid=AndroidShare_9364)
+2026-09-20 16:58:59.838 I Discovery started on LAN_WIFI
+2026-09-20 16:58:59.839 I LAN: server listening on 33456
+2026-09-20 16:59:50.036 I TempLink: link ended
+2026-09-20 17:01:13.618 I TempLink: local-only hotspot ready (ssid=AndroidShare_7670)
+2026-09-20 17:01:13.653 I Discovery started on LAN_WIFI
+2026-09-20 17:01:13.654 I LAN: server listening on 33456
+2026-09-20 17:02:12.820 I TempLink: link ended
+2026-09-20 17:02:56.736 I Nearby: discovery started
+2026-09-20 17:02:56.737 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:03:13.415 I Nearby: requested connection to MYA-AL10 (6JPU)
+2026-09-20 17:03:26.348 I Nearby: connection initiated by 6JPU (MYA-AL10), incoming=false
+2026-09-20 17:03:27.782 I Nearby: connected to 6JPU
+2026-09-20 17:03:27.789 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 17:03:29.459 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:03:29.464 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:03:29.475 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:03:31.734 I Queued 1 outgoing file(s)
+2026-09-20 17:03:31.779 I Nearby: sending IMG_20260905_172233_505.jpg (3582594 bytes)
+2026-09-20 17:03:31.797 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:04:19.744 I Nearby: metadata received for Screenshot_2026-09-20-16-34-41.png (256242 bytes)
+2026-09-20 17:04:20.609 I Verification for Screenshot_2026-09-20-16-34-41.png: size-only (logged)
+2026-09-20 17:04:20.825 I Saved Screenshot_2026-09-20-16-34-41.png -> Screenshot_2026-09-20-16-34-41.png
+2026-09-20 17:04:20.827 I Batch in-bfae61e6-e174-4688-aded-b8caef7dd383 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 17:05:19.650 W Nearby: completed without receiver ACK for 631edb04-6fa8-40d4-a335-e92171765014
+2026-09-20 17:05:57.225 I Nearby: 6JPU disconnected
+2026-09-20 17:05:57.226 I Nearby: session closed (peer disconnected)
+2026-09-20 17:05:57.231 I Nearby: discovery started
+2026-09-20 17:05:57.231 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:05:57.232 W Session lost (peer disconnected)
+2026-09-20 17:06:07.098 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:06:07.101 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:06:07.108 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:07:15.481 I Nearby: discovery started
+2026-09-20 17:07:15.483 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:07:31.769 I Nearby: connection initiated by WH0V (MYA-AL10), incoming=true
+2026-09-20 17:07:31.771 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-20 17:07:32.967 I Consent for MYA-AL10: true
+2026-09-20 17:07:32.975 I Nearby: connected to WH0V
+2026-09-20 17:07:32.978 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-20 17:08:06.392 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:08:06.397 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:08:06.404 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:08:12.249 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:08:12.254 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:08:12.258 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:08:16.191 I Queued 2 outgoing file(s)
+2026-09-20 17:08:16.256 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:08:37.213 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:08:51.197 I Nearby: metadata received for Screenshot_2026-09-20-16-41-35.png (81586 bytes)
+2026-09-20 17:08:51.375 I Verification for Screenshot_2026-09-20-16-41-35.png: size-only (logged)
+2026-09-20 17:08:51.632 I Saved Screenshot_2026-09-20-16-41-35.png -> Screenshot_2026-09-20-16-41-35.png
+2026-09-20 17:08:51.640 I Batch in-e19fe47e-5c81-4973-866c-534992d05cb7 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 17:08:56.352 I Nearby: requested connection to MYA-AL10 (WH0V)
+2026-09-20 17:09:06.999 I Nearby: metadata received for Screenshot_2026-09-20-16-41-35.png (81586 bytes)
+2026-09-20 17:09:07.154 I Verification for Screenshot_2026-09-20-16-41-35.png: size-only (logged)
+2026-09-20 17:09:07.341 I Saved Screenshot_2026-09-20-16-41-35.png -> Screenshot_2026-09-20-16-41-35 (1).png
+2026-09-20 17:09:07.343 I Batch in-374c83d7-f77f-4ae5-8c7d-a370b7e2b5f0 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-20 17:09:14.687 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:09:14.690 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:09:14.702 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:09:16.707 I Queued 1 outgoing file(s)
+2026-09-20 17:09:16.795 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:09:21.686 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:09:21.692 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:09:21.697 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-20 17:09:23.546 I Queued 1 outgoing file(s)
+2026-09-20 17:09:23.612 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:09:29.238 I Nearby: discovery started
+2026-09-20 17:09:29.239 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:09:29.239 W Session lost (user ended session)
+2026-09-20 17:09:29.727 I Nearby: WH0V disconnected
+2026-09-20 17:10:10.814 I MorseLink 1.4.2 (13) started
+2026-09-20 17:10:10.815 I LAN: server listening on 33456
+2026-09-20 17:10:10.816 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-20 17:10:17.206 I Nearby: discovery started
+2026-09-20 17:10:17.206 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:10:34.403 I Nearby: discovery started
+2026-09-20 17:10:34.403 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:10:36.338 I Discovery started on LAN_WIFI
+2026-09-20 17:10:38.253 I Nearby: discovery started
+2026-09-20 17:10:38.254 I Discovery started on NEARBY_CONNECTIONS
+2026-09-20 17:10:45.060 I Nearby: discovery started
+2026-09-20 17:10:45.061 I Discovery started on NEARBY_CONNECTIONS
