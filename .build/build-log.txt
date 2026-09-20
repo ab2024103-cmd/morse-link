@@ -33,20 +33,21 @@ Daemon will be stopped at the end of the build
 > Task :app:compileDebugShaders NO-SOURCE
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
-> Task :app:compressDebugAssets
-> Task :app:checkDebugDuplicateClasses
-> Task :app:desugarDebugFileDependencies
-> Task :app:mergeDebugStartupProfile
 > Task :app:processDebugManifestForPackage
-> Task :app:mergeLibDexDebug
-> Task :app:mergeDebugJniLibFolders
-> Task :app:mergeDebugNativeLibs NO-SOURCE
-> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:compressDebugAssets
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
+> Task :app:checkDebugDuplicateClasses
 > Task :app:processDebugResources
-> Task :app:validateSigningDebug
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugStartupProfile
+> Task :app:compileDebugKotlin
 > Task :app:mergeExtDexDebug
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeLibDexDebug
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:buildKotlinToolingMetadata
@@ -55,34 +56,149 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:generateReleaseResValues
 > Task :app:generateReleaseResources
 > Task :app:packageReleaseResources
+> Task :app:parseReleaseLocalResources
 > Task :app:generateReleaseBuildConfig
-> Task :app:checkReleaseAarMetadata
 > Task :app:mapReleaseSourceSetPaths
 > Task :app:createReleaseCompatibleScreenManifests
-> Task :app:parseReleaseLocalResources
 > Task :app:extractDeepLinksRelease
+> Task :app:checkReleaseAarMetadata
 > Task :app:processReleaseMainManifest
 > Task :app:processReleaseManifest
-> Task :app:processReleaseManifestForPackage
 > Task :app:javaPreCompileRelease
+> Task :app:processReleaseManifestForPackage
 > Task :app:extractProguardFiles
 > Task :app:mergeReleaseJniLibFolders
-> Task :app:mergeReleaseResources
 > Task :app:mergeReleaseNativeLibs NO-SOURCE
-> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
 > Task :app:desugarReleaseFileDependencies
-> Task :app:mergeReleaseStartupProfile
 > Task :app:checkReleaseDuplicateClasses
+> Task :app:mergeReleaseResources
+> Task :app:mergeReleaseStartupProfile
+> Task :app:dataBindingGenBaseClassesRelease
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:mergeReleaseArtProfile
 > Task :app:processReleaseResources
+
 > Task :app:compileDebugKotlin
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:164:31 'getParcelableArrayListExtra(String!): ArrayList<T!>?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:414:61 Unnecessary safe call on a non-null receiver of type CharSequence
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:414:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:618:48 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:639:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:640:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:641:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:661:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:663:41 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:665:29 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:668:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:792:65 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:792:94 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:85:40 'getter for ssid: String?' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:90:41 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:91:45 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:211:71 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:226:46 'WifiConfiguration' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:228:21 'SSID: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:229:21 'preSharedKey: String!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:585:42 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:585:53 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:587:46 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:587:57 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:590:43 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:590:54 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:592:47 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:592:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:127:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:74 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:67 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:78 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:75 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:68 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:79 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:613:38 Parameter 'resolver' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:112:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:289:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:365:31 Unnecessary non-null assertion (!!) on a non-null receiver of type MediaPageFragment.DateHeader
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:59 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:63 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:60 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:64 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:602:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:163:13 Variable 'dayFmt' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:165:13 Variable 'now' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:225:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:229:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:233:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:237:55 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/settings/ConnectionDoctorFragment.kt:130:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:8:25 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:40:25 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:26 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:33 'open(): Camera!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:98:34 'getter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:100:28 'setPreviewSize(Int, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:101:21 'setter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:102:21 'setDisplayOrientation(Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:103:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:104:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:108:25 'setPreviewDisplay(SurfaceHolder!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:109:25 'startPreview(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:46 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:53 'Parameters' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:28 'getter for supportedPreviewSizes: (Mutable)List<Camera.Size!>!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:63 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:70 'Size' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:16 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:41 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:28 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:39 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:27 'equals(Any?): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:48 'width: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:62 'height: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:129:76 'Camera' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:131:17 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:147:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:214:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:215:21 'stopPreview(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:216:21 'release(): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferFragment.kt:184:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:72:52 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:346:16 'setAudioStreamType(Int): Unit' is deprecated. Deprecated in Java
+
 > Task :app:mergeExtDexRelease
+> Task :app:compileDebugJavaWithJavac
+> Task :app:processDebugJavaRes
+> Task :app:mergeDebugJavaResource
+> Task :app:dexBuilderDebug
+> Task :app:mergeReleaseArtProfile
 > Task :app:mergeReleaseShaders
+> Task :app:mergeProjectDexDebug
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
 > Task :app:mergeReleaseAssets
@@ -94,255 +210,35 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:writeReleaseAppMetadata
 > Task :app:writeReleaseSigningConfigVersions
 > Task :app:optimizeReleaseResources
-
-> Task :app:compileDebugKotlin
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:164:31 'getParcelableArrayListExtra(String!): ArrayList<T!>?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:52:44 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:52:44 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:53:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:54:43 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:63 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:81 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:89 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:59:38 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:61 Unnecessary safe call on a non-null receiver of type CharSequence
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:705:48 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:726:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:727:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:728:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:748:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:750:41 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:752:29 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:755:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:65 Unnecessary safe call on a non-null receiver of type JSONObject?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:94 Unnecessary safe call on a non-null receiver of type JSONObject?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:5:25 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:63:30 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:108:60 'getter for ssid: String?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:113:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:114:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:165:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:180:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:181:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:205:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:206:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:207:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:237:29 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:262:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:265:45 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:266:44 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:287:17 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:288:39 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:17 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:60 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:68 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:291:50 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:389:35 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:393:17 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:478:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:479:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:482:34 'addNetwork(WifiConfiguration!): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:488:25 'enableNetwork(Int, Boolean): Boolean' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:491:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:493:46 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:64 'formatIpAddress(Int): String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:85 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:534:21 'removeNetwork(Int): Boolean' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:289:13 Variable 'transport' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:410:38 Parameter 'files' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:821:61 Parameter 'total' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:858:29 Variable 'identical' initializer is redundant
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1210:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:85:40 'getter for ssid: String?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:90:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:91:45 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:211:71 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:226:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:228:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:229:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:42 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:53 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:46 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:57 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:43 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:54 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:47 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:145:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:285:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:74 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:67 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:551:78 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:64 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:554:75 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:68 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:556:79 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:613:38 Parameter 'resolver' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:112:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:289:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:365:31 Unnecessary non-null assertion (!!) on a non-null receiver of type MediaPageFragment.DateHeader
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:59 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:584:70 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:63 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:586:74 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:60 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:589:71 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:64 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:591:75 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/MediaPageFragment.kt:602:49 Unnecessary non-null assertion (!!) on a non-null receiver of type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:163:13 Variable 'dayFmt' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:165:13 Variable 'now' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:225:55 'getColor(Int): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:229:55 'getColor(Int): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:233:55 'getColor(Int): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/history/HistoryFragment.kt:237:55 'getColor(Int): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/settings/ConnectionDoctorFragment.kt:130:25 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:8:25 'Camera' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:40:25 'Camera' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:26 'Camera' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:97:33 'open(): Camera!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:98:34 'getter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:100:28 'setPreviewSize(Int, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:101:21 'setter for parameters: Camera.Parameters!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:102:21 'setDisplayOrientation(Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:103:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:104:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:108:25 'setPreviewDisplay(SurfaceHolder!): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:109:25 'startPreview(): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:46 'Camera' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:120:53 'Parameters' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:28 'getter for supportedPreviewSizes: (Mutable)List<Camera.Size!>!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:63 'Camera' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:121:70 'Size' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:16 'width: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:123:41 'height: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:28 'width: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:124:39 'height: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:27 'equals(Any?): Boolean' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:48 'width: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:126:62 'height: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:129:76 'Camera' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:131:17 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:147:21 'addCallbackBuffer(ByteArray!): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:214:21 'setPreviewCallbackWithBuffer(Camera.PreviewCallback!): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:215:21 'stopPreview(): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/QrScanActivity.kt:216:21 'release(): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferFragment.kt:184:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:130:35 'getColor(Int): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/transfer/TransferItemsAdapter.kt:132:35 'getColor(Int): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:72:52 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:346:16 'setAudioStreamType(Int): Unit' is deprecated. Deprecated in Java
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
 
 > Task :app:compileReleaseKotlin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:159:30 'getParcelableExtra(String!): T?' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MainActivity.kt:164:31 'getParcelableArrayListExtra(String!): ArrayList<T!>?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:52:44 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:52:44 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:53:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:54:43 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:63 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:81 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:55:89 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/MorselinkApp.kt:59:38 'WifiConfiguration' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/logging/LogStore.kt:120:15 Parameter 'context' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:61 Unnecessary safe call on a non-null receiver of type CharSequence
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:409:74 Elvis operator (?:) always returns the left operand of non-nullable type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:705:48 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:726:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:727:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:728:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:748:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:750:41 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:752:29 Unnecessary safe call on a non-null receiver of type File?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:755:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:65 Unnecessary safe call on a non-null receiver of type JSONObject?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:880:94 Unnecessary safe call on a non-null receiver of type JSONObject?
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:5:25 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:63:30 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:108:60 'getter for ssid: String?' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:113:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:114:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:165:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:179:28 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:180:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:181:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:182:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:205:68 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:206:41 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:207:41 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:237:29 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:262:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:265:45 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:266:44 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:286:23 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:287:17 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:288:39 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:17 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:42 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:60 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:289:68 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:291:50 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:389:35 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:393:17 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'constructor WifiConfiguration()' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:477:27 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:478:21 'SSID: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:479:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:21 'allowedKeyManagement: BitSet' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:46 'WifiConfiguration' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:64 'KeyMgmt' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:480:72 'WPA_PSK: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:482:34 'addNetwork(WifiConfiguration!): Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:488:25 'enableNetwork(Int, Boolean): Boolean' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:491:40 'getter for connectionInfo: WifiInfo!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:493:46 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:64 'formatIpAddress(Int): String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:496:85 'getter for ipAddress: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/TempLink.kt:534:21 'removeNetwork(Int): Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:414:61 Unnecessary safe call on a non-null receiver of type CharSequence
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/media/MediaLibrary.kt:414:74 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:618:48 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:639:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:640:29 Unnecessary non-null assertion (!!) on a non-null receiver of type FileOutputStream
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:641:48 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:661:21 Unnecessary safe call on a non-null receiver of type FileOutputStream?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:663:41 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:665:29 Unnecessary safe call on a non-null receiver of type File?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:668:89 Unnecessary non-null assertion (!!) on a non-null receiver of type File
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:792:65 Unnecessary safe call on a non-null receiver of type JSONObject?
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/network/LanTransport.kt:792:94 Unnecessary safe call on a non-null receiver of type JSONObject?
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:104:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:289:13 Variable 'transport' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:410:38 Parameter 'files' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:821:61 Parameter 'total' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:858:29 Variable 'identical' initializer is redundant
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1210:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
@@ -353,16 +249,15 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:226:46 'WifiConfiguration' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:228:21 'SSID: String!' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:229:21 'preSharedKey: String!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:42 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:581:53 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:46 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:583:57 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:43 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:586:54 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:47 'Thumbnails' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:588:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:145:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:285:17 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:585:42 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:585:53 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:587:46 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:587:57 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:590:43 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:590:54 'getThumbnail(ContentResolver!, Long, Int, BitmapFactory.Options!): Bitmap!' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:592:47 'Thumbnails' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/WebShareServer.kt:592:58 'MINI_KIND: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/dashboard/DashboardFragment.kt:127:61 Unnecessary non-null assertion (!!) on a non-null receiver of type String
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FileManagerFragment.kt:414:9 'requestPermissions(Array<(out) String!>, Int): Unit' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:447:25 Variable 'folder' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/filemanager/FilesPageFragment.kt:549:63 'Thumbnails' is deprecated. Deprecated in Java
@@ -429,16 +324,8 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:72:52 'FLAG_FULLSCREEN: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/feature/viewer/ViewerActivity.kt:346:16 'setAudioStreamType(Int): Unit' is deprecated. Deprecated in Java
 
-> Task :app:compileDebugJavaWithJavac
-> Task :app:processDebugJavaRes
-> Task :app:mergeDebugJavaResource
-> Task :app:dexBuilderDebug
-> Task :app:mergeProjectDexDebug
 > Task :app:compileReleaseJavaWithJavac
 > Task :app:generateReleaseLintVitalReportModel
-> Task :app:packageDebug
-> Task :app:createDebugApkListingFileRedirect
-> Task :app:assembleDebug
 > Task :app:dexBuilderRelease
 > Task :app:mergeReleaseGlobalSynthetics
 > Task :app:processReleaseJavaRes
@@ -451,11 +338,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789926955056.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1789929982999.json
 
-BUILD SUCCESSFUL in 3m 26s
+BUILD SUCCESSFUL in 3m 56s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8293379
-APK_SIZE_RELEASE=6767215
+APK_SIZE_DEBUG=8255267
+APK_SIZE_RELEASE=6736858
