@@ -364,7 +364,38 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
+    /**
+     * Files often arrive as several small batches (one per pick), and a dialog
+     * per batch meant a popup per file (mlogs5). Completed batches are now
+     * accumulated and ONE summary shows ~2.5s after the last completion.
+     */
+    private val summaryHandler = android.os.Handler(android.os.Looper.getMainLooper())
+    private var pendingSummary: BatchSummary? = null
+    private val summaryShower = Runnable { showPendingSummaryNow() }
+
     private fun showBatchSummary(summary: BatchSummary) {
+        val cur = pendingSummary
+        pendingSummary = if (cur == null) {
+            summary
+        } else {
+            BatchSummary(
+                batchId = summary.batchId,
+                peerName = summary.peerName ?: cur.peerName,
+                succeeded = cur.succeeded + summary.succeeded,
+                failed = cur.failed + summary.failed,
+                skipped = cur.skipped + summary.skipped,
+                cancelled = cur.cancelled + summary.cancelled,
+                totalBytes = cur.totalBytes + summary.totalBytes,
+                elapsedMs = cur.elapsedMs + summary.elapsedMs
+            )
+        }
+        summaryHandler.removeCallbacks(summaryShower)
+        summaryHandler.postDelayed(summaryShower, 2500)
+    }
+
+    private fun showPendingSummaryNow() {
+        val summary = pendingSummary ?: return
+        pendingSummary = null
         val avg = if (summary.elapsedMs > 0) {
             Fmt.speed((summary.totalBytes / (summary.elapsedMs / 1000.0)).toLong())
         } else ""

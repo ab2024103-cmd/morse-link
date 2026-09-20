@@ -68,101 +68,6 @@ object LanTransport {
     private var serverSocket: ServerSocket? = null
     private var announceJob: Job? = null
 
-    /**
-     * App-scoped network from WifiNetworkSpecifier (TempLink on API 29+).
-     * When set, every LAN socket is bound to it, because the system does not
-     * route traffic on such networks without an explicit bind. Null on older
-     * Androids and for normal Wi-Fi/hotspot use.
-     */
-    @Volatile
-    private var appNetwork: android.net.Network? = null
-
-    @Volatile
-    private var udpSocket: DatagramSocket? = null
-
-    /**
-     * bindSocket(ServerSocket) is not part of the public SDK anymore, so the
-     * listening socket's file descriptor is marked directly — exactly what
-     * the hidden framework method does. Accepted sockets inherit the network
-     * from a marked listener. Returns true when the mark was applied.
-     */
-    internal fun bindToNetwork(socket: ServerSocket): Boolean {
-        val n = appNetwork ?: return true
-        try {
-            val fd = serverSocketFd(socket)
-            if (fd != null) {
-                n.bindSocket(fd)
-                return true
-            }
-            LogStore.w("LAN: server socket fd unreachable for network bind")
-        } catch (e: Exception) {
-            LogStore.w("LAN: server network bind failed: ${e.message}")
-        }
-        return false
-    }
-
-    private fun serverSocketFd(socket: ServerSocket): java.io.FileDescriptor? {
-        // libcore's hidden accessor used by the framework itself.
-        try {
-            val m = ServerSocket::class.java.getMethod("getFileDescriptor\$")
-            m.isAccessible = true
-            (m.invoke(socket) as? java.io.FileDescriptor)?.let { return it }
-        } catch (_: Exception) {
-        }
-        // Classic SocketImpl reflection fallback.
-        return try {
-            val getImpl = ServerSocket::class.java.getDeclaredMethod("getImpl")
-            getImpl.isAccessible = true
-            val impl = getImpl.invoke(socket) ?: return null
-            val getFd = impl.javaClass.getMethod("getFileDescriptor")
-            getFd.isAccessible = true
-            getFd.invoke(impl) as? java.io.FileDescriptor
-        } catch (_: Exception) {
-            null
-        }
-    }
-
-    internal fun bindToNetwork(socket: DatagramSocket) {
-        val n = appNetwork ?: return
-        try {
-            n.bindSocket(socket)
-        } catch (e: Exception) {
-            LogStore.w("LAN: udp network bind failed: ${e.message}")
-        }
-    }
-
-    internal fun bindToNetwork(socket: Socket) {
-        val n = appNetwork ?: return
-        try {
-            n.bindSocket(socket)
-        } catch (e: Exception) {
-            LogStore.w("LAN: socket network bind failed: ${e.message}")
-        }
-    }
-
-    /** True while a temporary-link (app-scoped) network is active. */
-    fun hasAppNetwork(): Boolean = appNetwork != null
-
-    /** Re-creates all LAN sockets bound to [network] (or the default when null). */
-    fun restartWithAppNetwork(network: android.net.Network?) {
-        appNetwork = network
-        stopDiscovery()
-        try {
-            serverSocket?.close()
-        } catch (_: Exception) {
-        }
-        serverSocket = null
-        try {
-            udpSocket?.close()
-        } catch (_: Exception) {
-        }
-        udpSocket = null
-        if (network != null) {
-            start()
-            startDiscovery()
-        }
-    }
-
     @Volatile
     private var announcing = false
 
@@ -179,9 +84,7 @@ object LanTransport {
             try {
                 val server = ServerSocket()
                 server.reuseAddress = true
-                val marked = bindToNetwork(server)
                 server.bind(InetSocketAddress(TCP_PORT))
-                if (!marked) bindToNetwork(server)
                 serverSocket = server
                 LogStore.i("LAN: server listening on $TCP_PORT")
                 while (isActive) {
@@ -243,8 +146,7 @@ object LanTransport {
                 .put("port", TCP_PORT)
                 .toString()
                 .toByteArray(Charsets.UTF_8)
-            val socket = DatagramSocket(null as java.net.SocketAddress?)
-            bindToNetwork(socket)
+            val socket = DatagramSocket()
             socket.broadcast = true
             try {
                 val targets = HashSet<String>()
@@ -268,12 +170,8 @@ object LanTransport {
 
     private fun udpListenLoop() {
         try {
-            val socket = DatagramSocket(null as java.net.SocketAddress?)
-            socket.reuseAddress = true
-            bindToNetwork(socket)
-            socket.bind(InetSocketAddress(UDP_PORT))
+            val socket = DatagramSocket(UDP_PORT)
             socket.broadcast = true
-            udpSocket = socket
             val buf = ByteArray(2048)
             while (true) {
                 try {
@@ -292,8 +190,7 @@ object LanTransport {
                         port = json.optInt("port", TCP_PORT)
                     )
                     TransferEngine.addPeer(peer)
-                } catch (e: Exception) {
-                    if (socket.isClosed) break
+                } catch (_: Exception) {
                 }
             }
         } catch (e: Exception) {
@@ -341,12 +238,29 @@ object LanTransport {
         try {
             socket.tcpNoDelay = true
             socket.soTimeout = 10000
-            val reader = BufferedReader(InputStreamReader(socket.getInputStream(), Charsets.UTF_8))
-            val firstLine = reader.readLine() ?: run { socket.close(); return }
+            // The first line MUST be read byte-by-byte: a BufferedReader
+            // pre-buffers up to 8 KB and would swallow the first chunk frame
+            // of a DATA connection when header and chunks arrive in one TCP
+            // burst — the receiver then started reading mid-frame and died
+            // with "chunk magic mismatch" (mlogs5 wifi-lan failures).
+            val raw = socket.getInputStream()
+            val headerBytes = java.io.ByteArrayOutputStream()
+            while (true) {
+                val b = raw.read()
+                if (b < 0) {
+                    socket.close()
+                    return
+                }
+                if (b == '\n'.code) break
+                headerBytes.write(b)
+            }
             socket.soTimeout = 0
-            val json = JSONObject(firstLine)
+            val json = JSONObject(headerBytes.toString("UTF-8").trim())
             when (json.optString("type")) {
-                "HELLO" -> handleHello(socket, reader, json)
+                "HELLO" -> {
+                    val reader = BufferedReader(InputStreamReader(socket.getInputStream(), Charsets.UTF_8))
+                    handleHello(socket, reader, json)
+                }
                 "DATA" -> {
                     val fileId = json.optString("fileId")
                     val session = activeSession
@@ -433,7 +347,6 @@ object LanTransport {
             try {
                 val socket = Socket()
                 socket.tcpNoDelay = true
-                bindToNetwork(socket)
                 socket.connect(InetSocketAddress(host, port), 8000)
                 socket.soTimeout = 60000
                 val hello = JSONObject()
@@ -826,7 +739,6 @@ class LanSession(
             }
             dataSocket = Socket()
             dataSocket.tcpNoDelay = true
-            LanTransport.bindToNetwork(dataSocket)
             dataSocket.connect(InetSocketAddress(peerHost, peerTcpPort), 8000)
             val out = DataOutputStream(BufferedOutputStream(dataSocket.getOutputStream(), LanTransport.CHUNK_SIZE + 64))
             val header = JSONObject().put("type", "DATA").put("fileId", meta.fileId).toString() + "\n"

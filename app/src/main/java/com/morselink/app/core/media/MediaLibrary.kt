@@ -127,7 +127,19 @@ object MediaLibrary {
         return Pair("${MediaStore.Files.FileColumns.MIME_TYPE} IN ($placeholders)", mimes)
     }
 
-    private fun orderBy(sortKey: SortKey, descending: Boolean): String {
+    private fun orderBy(sortKey: SortKey, descending: Boolean, category: MediaCategory? = null): String {
+        if (category == MediaCategory.PHOTOS && sortKey == SortKey.DATE) {
+            // Gallery semantics: photos group by the day they were TAKEN, but
+            // plain DATE_MODIFIED ordering scatters a day's photos whenever a
+            // file was re-saved later (mlogs5 g2-g29: several "Today" and
+            // "Yesterday" headers interleaved). Order by date-taken with a
+            // modified-time fallback so group and order always agree.
+            val dir = if (descending) "DESC" else "ASC"
+            val taken = MediaStore.Images.Media.DATE_TAKEN
+            return "CASE WHEN $taken IS NOT NULL AND $taken > 0 THEN $taken " +
+                "ELSE ${MediaStore.MediaColumns.DATE_MODIFIED} * 1000 END $dir, " +
+                "${MediaStore.MediaColumns._ID} DESC"
+        }
         val col = when (sortKey) {
             SortKey.DATE -> MediaStore.MediaColumns.DATE_MODIFIED
             SortKey.NAME -> MediaStore.MediaColumns.DISPLAY_NAME
@@ -197,28 +209,16 @@ object MediaLibrary {
         val out = ArrayList<MediaItem>()
         var cursorQuery: android.database.Cursor? = null
         try {
+            // Android 14's MediaProvider rejects "LIMIT x OFFSET y" in the
+            // sort order ("Invalid token LIMIT"), which silently killed every
+            // page after the first (mlogs5). One plain query, windowed here.
             try {
                 cursorQuery = context.contentResolver.query(
                     uri, projection.toTypedArray(), selection, args.toTypedArray(),
-                    orderBy(sortKey, descending) + " LIMIT $limit OFFSET $offset"
+                    orderBy(sortKey, descending, category)
                 )
             } catch (e: Exception) {
-                // Some OEM MediaProvider builds reject LIMIT in sortOrder —
-                // fall back to an unbounded query and window it here.
-                com.morselink.app.core.logging.LogStore.w(
-                    "Media query with LIMIT failed (${category.key}): ${e.message}; retrying without LIMIT"
-                )
-                cursorQuery = null
-            }
-            if (cursorQuery == null && offset == 0) {
-                try {
-                    cursorQuery = context.contentResolver.query(
-                        uri, projection.toTypedArray(), selection, args.toTypedArray(),
-                        orderBy(sortKey, descending)
-                    )
-                } catch (e: Exception) {
-                    com.morselink.app.core.logging.LogStore.e("Media query failed (${category.key})", e)
-                }
+                com.morselink.app.core.logging.LogStore.e("Media query failed (${category.key})", e)
             }
             cursorQuery?.use { cursor ->
                 val idCol = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
@@ -233,31 +233,36 @@ object MediaLibrary {
                 } else -1
                 val artistCol = if (category == MediaCategory.MUSIC) cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST) else -1
 
-                while (cursor.moveToNext()) {
-                    val id = cursor.getLong(idCol)
-                    val contentUri = ContentUris.withAppendedId(baseUri(category), id)
-                    val dataPath = if (dataCol >= 0) cursor.getString(dataCol) else null
-                    // DISPLAY_NAME is often null on older MediaStore rows (Android 6
-                    // Files collection) — fall back to the file's real name from DATA,
-                    // never a generic "file".
-                    val name = cursor.getString(nameCol)
-                        ?: dataPath?.trimEnd('/')?.substringAfterLast('/')
-                        ?: "file"
-                    val mime = cursor.getString(mimeCol) ?: guessMime(name)
-                    out.add(
-                        MediaItem(
-                            id = id,
-                            uri = contentUri.toString(),
-                            name = name,
-                            size = cursor.getLong(sizeCol),
-                            mime = mime,
-                            dateModifiedSec = cursor.getLong(dateCol),
-                            dateTakenMs = if (takenCol >= 0 && !cursor.isNull(takenCol)) cursor.getLong(takenCol) else 0L,
-                            durationMs = if (durCol >= 0 && !cursor.isNull(durCol)) cursor.getLong(durCol) else 0L,
-                            artist = if (artistCol >= 0 && !cursor.isNull(artistCol)) cursor.getString(artistCol) else null,
-                            path = dataPath
+                var read = 0
+                if (cursor.moveToPosition(offset)) {
+                    do {
+                        if (read >= limit) break
+                        read++
+                        val id = cursor.getLong(idCol)
+                        val contentUri = ContentUris.withAppendedId(baseUri(category), id)
+                        val dataPath = if (dataCol >= 0) cursor.getString(dataCol) else null
+                        // DISPLAY_NAME is often null on older MediaStore rows (Android 6
+                        // Files collection) — fall back to the file's real name from DATA,
+                        // never a generic "file".
+                        val name = cursor.getString(nameCol)
+                            ?: dataPath?.trimEnd('/')?.substringAfterLast('/')
+                            ?: "file"
+                        val mime = cursor.getString(mimeCol) ?: guessMime(name)
+                        out.add(
+                            MediaItem(
+                                id = id,
+                                uri = contentUri.toString(),
+                                name = name,
+                                size = cursor.getLong(sizeCol),
+                                mime = mime,
+                                dateModifiedSec = cursor.getLong(dateCol),
+                                dateTakenMs = if (takenCol >= 0 && !cursor.isNull(takenCol)) cursor.getLong(takenCol) else 0L,
+                                durationMs = if (durCol >= 0 && !cursor.isNull(durCol)) cursor.getLong(durCol) else 0L,
+                                artist = if (artistCol >= 0 && !cursor.isNull(artistCol)) cursor.getString(artistCol) else null,
+                                path = dataPath
+                            )
                         )
-                    )
+                    } while (cursor.moveToNext())
                 }
             }
         } catch (e: Exception) {

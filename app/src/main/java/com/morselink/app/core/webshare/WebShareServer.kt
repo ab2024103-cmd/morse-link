@@ -356,7 +356,11 @@ class WebShareServer(private val token: String) : NanoHTTPD("0.0.0.0", PORT) {
             .put("name", m.name)
             .put("size", m.size)
             .put("mime", m.mime)
-            .put("date", m.dateModifiedSec * 1000L)
+            // Gallery grouping: the day a photo was taken, not last modified.
+            .put(
+                "date",
+                if (m.dateTakenMs > 0) m.dateTakenMs else m.dateModifiedSec * 1000L
+            )
             .put("duration", m.durationMs)
             .put("artist", m.artist ?: "")
             .put("folder", folderLabel(m))

@@ -25,46 +25,6 @@ class MorselinkApp : Application() {
         if (LogStore.hasCrashReports()) {
             LogStore.w("Previous run ended in a crash — see the crash-reports section in the log viewer")
         }
-        restoreTempLinkConfig()
-    }
-
-    /**
-     * If a temporary link was interrupted (app killed) the phone's hotspot
-     * configuration may still hold the one-time credentials — put the user's
-     * own back as soon as the hotspot is off (TempLink).
-     */
-    private fun restoreTempLinkConfig() {
-        Thread {
-            try {
-                val prefs = AppServices.prefs
-                val ssid = prefs.tempLinkRestoreSsid ?: return@Thread
-                if (ssid.isBlank()) return@Thread
-                val key = prefs.tempLinkRestoreKey ?: ""
-                val wm = applicationContext.getSystemService(WIFI_SERVICE) as? android.net.wifi.WifiManager
-                    ?: return@Thread
-                val active = try {
-                    val m = wm.javaClass.getMethod("isWifiApEnabled")
-                    (m.invoke(wm) as? Boolean) == true
-                } catch (_: Exception) {
-                    true // unknown state: do not touch it now
-                }
-                if (active) return@Thread
-                val cfg = android.net.wifi.WifiConfiguration().apply {
-                    SSID = "\"$ssid\""
-                    if (key.isNotBlank()) preSharedKey = "\"$key\""
-                    allowedKeyManagement.set(android.net.wifi.WifiConfiguration.KeyMgmt.WPA_PSK)
-                }
-                val m = wm.javaClass.getMethod(
-                    "setWifiApConfiguration",
-                    android.net.wifi.WifiConfiguration::class.java
-                )
-                m.invoke(wm, cfg)
-                prefs.tempLinkRestoreSsid = null
-                prefs.tempLinkRestoreKey = null
-                LogStore.i("TempLink: hotspot configuration restored after restart")
-            } catch (_: Exception) {
-            }
-        }.apply { isDaemon = true }.start()
     }
 
     companion object {
