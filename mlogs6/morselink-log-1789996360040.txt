@@ -1,0 +1,260 @@
+MorseLink 1.5.0 (14)
+Device: HUAWEI MYA-AL10 (Android 6.0, SDK 23)
+Exported: 2026-09-21 14:12:40.040
+
+===== APP LOG =====
+2026-09-21 13:37:07.557 I Log and crash reports cleared by user
+2026-09-21 13:37:44.897 I Nearby: discovery started
+2026-09-21 13:37:44.897 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:38:13.635 I Nearby: connection initiated by DEX7 (TECNO KL4), incoming=true
+2026-09-21 13:38:13.648 I Consent requested for incoming connection from TECNO KL4 (NEARBY_CONNECTIONS)
+2026-09-21 13:38:15.306 I Consent for TECNO KL4: true
+2026-09-21 13:38:15.343 I Nearby: connected to DEX7
+2026-09-21 13:38:15.352 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 13:38:15.375 I Outgoing worker started
+2026-09-21 13:38:27.136 I Queued 1 outgoing file(s)
+2026-09-21 13:38:27.222 I Nearby: sending MorseLink.apk (6736858 bytes)
+2026-09-21 13:38:27.294 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:38:44.525 I Batch cece7afb-1d3f-4f1d-8acb-5cc97e357a26 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:38:54.746 I Nearby: DEX7 disconnected
+2026-09-21 13:38:54.747 I Nearby: session closed (peer disconnected)
+2026-09-21 13:38:54.747 W Session lost (peer disconnected)
+2026-09-21 13:40:47.609 I Nearby: discovery started
+2026-09-21 13:40:47.611 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:40:53.877 I Nearby: requested connection to TECNO KL4 (DEX7)
+2026-09-21 13:41:41.151 I Nearby: connection initiated by YDJO (TECNO KL4), incoming=true
+2026-09-21 13:41:41.175 I Consent requested for incoming connection from TECNO KL4 (NEARBY_CONNECTIONS)
+2026-09-21 13:41:44.250 I Consent for TECNO KL4: true
+2026-09-21 13:41:44.493 I Nearby: connected to YDJO
+2026-09-21 13:41:44.510 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 13:41:56.175 I Nearby: YDJO disconnected
+2026-09-21 13:41:56.176 I Nearby: session closed (peer disconnected)
+2026-09-21 13:41:56.240 I Nearby: discovery started
+2026-09-21 13:41:56.241 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:41:56.241 W Session lost (peer disconnected)
+2026-09-21 13:42:14.913 I MorseLink 1.5.0 (14) started
+2026-09-21 13:42:14.964 I LAN: server listening on 33456
+2026-09-21 13:42:14.965 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-21 13:42:19.525 I Nearby: discovery started
+2026-09-21 13:42:19.525 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:42:36.752 I Discovery started on LAN_WIFI
+2026-09-21 13:42:45.702 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:42:47.337 I Consent for TECNO KL4: true
+2026-09-21 13:42:47.341 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 13:42:47.349 I Outgoing worker started
+2026-09-21 13:42:47.354 I LAN: session established with TECNO KL4 (192.168.99.235)
+2026-09-21 13:43:25.687 I Incoming offer: VID_20250917_075317.mp4 (144196649 bytes)
+2026-09-21 13:43:25.718 I LAN: accepted VID_20250917_075317.mp4 from offset 0
+2026-09-21 13:44:08.094 I Saved VID_20250917_075317.mp4 -> /storage/emulated/0/Download/MorseLink/VID_20250917_075317.mp4
+2026-09-21 13:44:08.714 I Batch in-60ef01e8-eac4-4870-bdb5-4128340d3ff9 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:44:32.395 I Queued 1 outgoing file(s)
+2026-09-21 13:44:32.550 I Nearby: discovery started
+2026-09-21 13:44:32.551 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:44:32.900 I LAN: offering IMG_20260908_205716_243.mp4 (33996837 bytes) to TECNO KL4
+2026-09-21 13:45:38.087 I Batch 04166b1c-ef0e-459d-8be7-704d1433bcff done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:46:30.076 I Incoming offer: VID_20260617_095957.mp4 (16706731 bytes)
+2026-09-21 13:46:30.081 I LAN: accepted VID_20260617_095957.mp4 from offset 0
+2026-09-21 13:46:39.753 I Saved VID_20260617_095957.mp4 -> /storage/emulated/0/Download/MorseLink/VID_20260617_095957.mp4
+2026-09-21 13:46:39.756 I Batch in-178d66c7-578d-41e6-a9e0-6c5a6c3cc13e done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:46:47.875 I Queued 1 outgoing file(s)
+2026-09-21 13:46:47.939 I LAN: offering VID-20260909-WA0000.mp4 (3264060 bytes) to TECNO KL4
+2026-09-21 13:46:48.032 I Nearby: discovery started
+2026-09-21 13:46:48.032 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:46:52.679 I Batch 574ca155-bd80-4f9c-8826-e4429ddc15ed done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:47:02.425 I LAN: session closed (user ended session)
+2026-09-21 13:47:02.428 W Session lost (user ended session)
+2026-09-21 13:47:06.597 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:47:08.604 I Consent for TECNO KL4: false
+2026-09-21 13:47:08.605 I LAN: connection from TECNO KL4 rejected by user
+2026-09-21 13:47:12.152 I Discovery started on LAN_WIFI
+2026-09-21 13:47:24.917 I Nearby: discovery started
+2026-09-21 13:47:24.918 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:47:26.825 I Discovery started on LAN_WIFI
+2026-09-21 13:47:34.027 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:47:36.390 I Consent for TECNO KL4: false
+2026-09-21 13:47:36.391 I LAN: connection from TECNO KL4 rejected by user
+2026-09-21 13:47:53.120 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:47:54.599 I Consent for TECNO KL4: true
+2026-09-21 13:47:54.601 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 13:47:54.606 I LAN: session established with TECNO KL4 (192.168.99.235)
+2026-09-21 13:48:17.531 I Nearby: discovery started
+2026-09-21 13:48:17.532 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:48:20.782 I Nearby: discovery started
+2026-09-21 13:48:20.783 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:48:33.421 I LAN: session closed (user ended session)
+2026-09-21 13:48:33.424 W Session lost (user ended session)
+2026-09-21 13:49:10.890 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:12.467 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:20.959 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:21.661 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:22.067 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:22.455 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:22.897 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:23.303 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:23.568 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:26.163 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:26.604 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:26.869 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:27.134 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:27.365 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:27.612 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:27.859 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:37.005 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:37.907 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:38.495 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:43.195 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:49:44.437 I Consent for TECNO KL4: false
+2026-09-21 13:49:44.438 I LAN: connection from TECNO KL4 rejected by user
+2026-09-21 13:49:45.877 I Nearby: requested connection to TECNO KL4 (OYP0)
+2026-09-21 13:49:48.497 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:49:49.492 I Consent for TECNO KL4: true
+2026-09-21 13:49:49.494 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 13:49:49.499 I LAN: session established with TECNO KL4 (192.168.99.235)
+2026-09-21 13:49:52.873 I Nearby: discovery started
+2026-09-21 13:49:52.874 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:49:54.817 I Nearby: discovery started
+2026-09-21 13:49:54.817 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:50:38.273 I LAN: session closed (user ended session)
+2026-09-21 13:50:38.277 W Session lost (user ended session)
+2026-09-21 13:50:53.363 I MorseLink 1.5.0 (14) started
+2026-09-21 13:50:53.364 I LAN: server listening on 33456
+2026-09-21 13:50:53.364 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-21 13:50:56.531 I Nearby: discovery started
+2026-09-21 13:50:56.531 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:51:01.092 I Nearby: requested connection to TECNO KL4 (LC6Z)
+2026-09-21 13:51:14.546 I Nearby: connection initiated by LC6Z (TECNO KL4), incoming=false
+2026-09-21 13:51:19.336 I Nearby: connected to LC6Z
+2026-09-21 13:51:19.347 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 13:51:19.371 I Outgoing worker started
+2026-09-21 13:51:22.180 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:51:29.581 I Nearby: metadata received for Screenshot_20260921-135031.png (111115 bytes)
+2026-09-21 13:51:29.861 I Saved Screenshot_20260921-135031.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260921-135031.png
+2026-09-21 13:51:29.864 I Batch in-9bb28e00-31a8-46ca-89cd-65e0e25c280c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:51:41.071 I Nearby: discovery started
+2026-09-21 13:51:41.072 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:51:41.072 W Session lost (user ended session)
+2026-09-21 13:51:41.405 I Nearby: LC6Z disconnected
+2026-09-21 13:51:53.616 I Discovery started on LAN_WIFI
+2026-09-21 13:51:56.767 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:51:58.789 I Consent for TECNO KL4: true
+2026-09-21 13:51:58.802 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 13:51:58.809 I LAN: session established with TECNO KL4 (192.168.99.235)
+2026-09-21 13:52:11.298 I Nearby: discovery started
+2026-09-21 13:52:11.298 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:52:13.159 I Discovery started on LAN_WIFI
+2026-09-21 13:52:44.646 I LAN: session closed (user ended session)
+2026-09-21 13:52:44.648 W Session lost (user ended session)
+2026-09-21 13:52:51.068 I Nearby: discovery started
+2026-09-21 13:52:51.068 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:54:37.761 I Discovery started on LAN_WIFI
+2026-09-21 13:54:39.657 I Nearby: discovery started
+2026-09-21 13:54:39.658 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:54:41.343 I Discovery started on LAN_WIFI
+2026-09-21 13:54:46.082 I Nearby: discovery started
+2026-09-21 13:54:46.082 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:55:15.131 I Nearby: discovery started
+2026-09-21 13:55:15.131 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:55:28.024 I Nearby: connection initiated by LC6Z (TECNO KL4), incoming=true
+2026-09-21 13:55:28.080 I Nearby: connected to LC6Z
+2026-09-21 13:55:28.085 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 13:55:36.568 I Nearby: discovery started
+2026-09-21 13:55:36.569 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:55:36.571 W Session lost (user ended session)
+2026-09-21 13:55:36.876 I Nearby: LC6Z disconnected
+2026-09-21 13:55:42.540 I Discovery started on LAN_WIFI
+2026-09-21 13:55:44.243 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 13:55:46.668 I Consent for TECNO KL4: true
+2026-09-21 13:55:46.670 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 13:55:46.682 I LAN: session established with TECNO KL4 (192.168.99.235)
+2026-09-21 13:56:09.023 I LAN: session closed (user ended session)
+2026-09-21 13:56:09.026 W Session lost (user ended session)
+2026-09-21 13:56:11.006 I Nearby: discovery started
+2026-09-21 13:56:11.006 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:56:45.741 I Nearby: requested connection to TECNO KL4 (LC6Z)
+2026-09-21 13:57:17.956 I Nearby: connection initiated by LC6Z (TECNO KL4), incoming=false
+2026-09-21 13:57:18.818 I Nearby: connected to LC6Z
+2026-09-21 13:57:18.820 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 13:57:51.747 I Nearby: discovery started
+2026-09-21 13:57:51.750 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:57:51.751 W Session lost (user ended session)
+2026-09-21 13:57:52.095 I Nearby: LC6Z disconnected
+2026-09-21 13:58:11.149 I Nearby: discovery started
+2026-09-21 13:58:11.150 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:58:22.578 I Nearby: requested connection to TECNO KL4 (LC6Z)
+2026-09-21 13:58:51.602 I Nearby: connection initiated by LC6Z (TECNO KL4), incoming=false
+2026-09-21 13:58:51.670 I Nearby: connected to LC6Z
+2026-09-21 13:58:51.672 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 13:59:18.567 I Queued 2 outgoing file(s)
+2026-09-21 13:59:18.887 I Nearby: sending 14c7dc73babfdbf5c88459ae082fcbfb_1789989063480.mp4 (8370283 bytes)
+2026-09-21 13:59:18.888 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:59:29.496 I Nearby: sending VID_20250917_075317.mp4 (144196649 bytes)
+2026-09-21 14:03:49.871 I Nearby: discovery started
+2026-09-21 14:03:49.872 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:03:49.873 W Session lost (user ended session)
+2026-09-21 14:03:50.361 I Nearby: LC6Z disconnected
+2026-09-21 14:03:54.870 I Discovery started on LAN_WIFI
+2026-09-21 14:03:56.149 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 14:03:57.071 I Consent for TECNO KL4: true
+2026-09-21 14:03:57.075 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 14:03:57.079 I LAN: session established with TECNO KL4 (192.168.99.235)
+2026-09-21 14:04:24.378 I Queued 1 outgoing file(s)
+2026-09-21 14:04:24.538 I Nearby: discovery started
+2026-09-21 14:04:24.538 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:04:27.169 I Paused (queued) VID_20250917_075317.mp4
+2026-09-21 14:04:37.957 I Incoming offer: Screenshot_20260920-161456.png (119019 bytes)
+2026-09-21 14:04:38.011 I LAN: skipped Screenshot_20260920-161456.png — identical file already present
+2026-09-21 14:04:53.264 I Incoming offer: IMG-20220817-WA0015.jpg (40196 bytes)
+2026-09-21 14:04:53.289 I LAN: accepted IMG-20220817-WA0015.jpg from offset 0
+2026-09-21 14:04:53.537 I Saved IMG-20220817-WA0015.jpg -> /storage/emulated/0/Download/MorseLink/IMG-20220817-WA0015.jpg
+2026-09-21 14:04:53.547 I Batch in-5b7b5de4-72cc-4b26-aa54-195349f98c3b done: 1 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-21 14:05:13.810 I LAN: session closed (user ended session)
+2026-09-21 14:05:13.812 W Session lost (user ended session)
+2026-09-21 14:05:16.017 I Discovery started on LAN_WIFI
+2026-09-21 14:05:18.377 I Nearby: discovery started
+2026-09-21 14:05:18.378 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:05:22.796 I Nearby: requested connection to TECNO KL4 (LC6Z)
+2026-09-21 14:05:32.020 I Nearby: connection initiated by LC6Z (TECNO KL4), incoming=false
+2026-09-21 14:05:32.210 I Nearby: connected to LC6Z
+2026-09-21 14:05:32.217 I Session established with TECNO KL4 via NEARBY_CONNECTIONS
+2026-09-21 14:06:29.224 I Queued 1 outgoing file(s)
+2026-09-21 14:06:29.356 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:06:54.896 I Queued 1 outgoing file(s)
+2026-09-21 14:06:55.027 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:07:19.131 I Nearby: metadata received for IMG-20260917-WA0035 (2).jpg (63031 bytes)
+2026-09-21 14:07:19.308 I Saved IMG-20260917-WA0035 (2).jpg -> /storage/emulated/0/Download/MorseLink/IMG-20260917-WA0035 (2).jpg
+2026-09-21 14:07:19.310 I Batch in-f1b8f70d-c2be-4a12-81ae-b1d0ae30af06 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 14:07:26.122 I Queued 1 outgoing file(s)
+2026-09-21 14:07:26.252 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:09:41.139 I Nearby: LC6Z disconnected
+2026-09-21 14:09:41.141 I Nearby: session closed (peer disconnected)
+2026-09-21 14:09:41.157 I Nearby: discovery started
+2026-09-21 14:09:41.159 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:09:41.161 W Session lost (peer disconnected)
+2026-09-21 14:10:57.582 I MorseLink 1.5.0 (14) started
+2026-09-21 14:10:57.602 I Device: HUAWEI MYA-AL10, Android 6.0 (SDK 23)
+2026-09-21 14:10:57.771 I LAN: server listening on 33456
+2026-09-21 14:11:06.787 I Nearby: discovery started
+2026-09-21 14:11:06.788 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:11:11.983 I Discovery started on LAN_WIFI
+2026-09-21 14:11:12.750 I Nearby: discovery started
+2026-09-21 14:11:12.751 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:11:18.522 I Discovery started on LAN_WIFI
+2026-09-21 14:11:22.774 I Consent requested for incoming connection from TECNO KL4 (LAN_WIFI)
+2026-09-21 14:11:26.906 I Consent for TECNO KL4: true
+2026-09-21 14:11:26.918 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 14:11:26.967 I Outgoing worker started
+2026-09-21 14:11:26.992 I LAN: session established with TECNO KL4 (192.168.43.173)
+2026-09-21 14:11:28.412 I Session established with TECNO KL4 via LAN_WIFI
+2026-09-21 14:11:28.422 I LAN: connected directly to TECNO KL4 at 192.168.43.173
+2026-09-21 14:12:05.989 I Incoming offer: Screenshot_20260921-140558.png (116215 bytes)
+2026-09-21 14:12:06.020 I LAN: accepted Screenshot_20260921-140558.png from offset 0
+2026-09-21 14:12:06.905 I Saved Screenshot_20260921-140558.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260921-140558.png
+2026-09-21 14:12:06.909 I Batch in-c715b430-ce1e-4a33-93b2-f13557c6c143 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 14:12:07.267 I Incoming offer: Screenshot_20260921-135951.png (108037 bytes)
+2026-09-21 14:12:07.272 I LAN: accepted Screenshot_20260921-135951.png from offset 0
+2026-09-21 14:12:07.419 I Saved Screenshot_20260921-135951.png -> /storage/emulated/0/Download/MorseLink/Screenshot_20260921-135951.png
+2026-09-21 14:12:07.422 I Batch in-a013c2c4-ad17-41b1-a13a-c03bb44478cd done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 14:12:08.833 I Incoming offer: Screenshot_20260921-135031.png (111115 bytes)
+2026-09-21 14:12:08.864 I LAN: skipped Screenshot_20260921-135031.png — identical file already present
+2026-09-21 14:12:25.170 I LAN: session closed (user ended session)
+2026-09-21 14:12:25.175 W Session lost (user ended session)

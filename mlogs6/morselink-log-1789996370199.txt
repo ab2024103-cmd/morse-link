@@ -1,0 +1,208 @@
+MorseLink 1.5.0 (14)
+Device: TECNO TECNO KL4 (Android 14, SDK 34)
+Exported: 2026-09-21 14:12:50.199
+
+===== APP LOG =====
+2026-09-21 13:37:21.163 I Log and crash reports cleared by user
+2026-09-21 13:37:31.871 W Media query with LIMIT failed (photos): Invalid token LIMIT; retrying without LIMIT
+2026-09-21 13:37:31.873 W Media query with LIMIT failed (music): Invalid token LIMIT; retrying without LIMIT
+2026-09-21 13:37:31.876 W Media query with LIMIT failed (videos): Invalid token LIMIT; retrying without LIMIT
+2026-09-21 13:37:43.102 I MorseLink 1.4.2 (13) started
+2026-09-21 13:37:43.103 I LAN: server listening on 33456
+2026-09-21 13:37:43.104 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-21 13:38:05.461 I Nearby: discovery started
+2026-09-21 13:38:05.462 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:38:13.154 I Nearby: requested connection to MYA-AL10 (JGG5)
+2026-09-21 13:38:15.166 I Nearby: connection initiated by JGG5 (MYA-AL10), incoming=false
+2026-09-21 13:38:17.008 I Nearby: connected to JGG5
+2026-09-21 13:38:17.014 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-21 13:38:17.031 I Outgoing worker started
+2026-09-21 13:38:28.902 I Nearby: metadata received for MorseLink.apk (6736858 bytes)
+2026-09-21 13:38:45.752 I Verification for MorseLink.apk: size-only (logged)
+2026-09-21 13:38:46.087 I Saved MorseLink.apk -> MorseLink.apk
+2026-09-21 13:38:46.099 I Batch in-aa5a1cbe-d886-4be0-86c0-9e9d88e2c255 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:38:55.536 I Nearby: discovery started
+2026-09-21 13:38:55.537 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:38:55.538 W Session lost (user ended session)
+2026-09-21 13:38:55.912 I Nearby: JGG5 disconnected
+2026-09-21 13:39:07.136 I MorseLink 1.5.0 (14) started
+2026-09-21 13:39:07.150 I LAN: server listening on 33456
+2026-09-21 13:39:07.150 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-21 13:40:50.278 I Nearby: discovery started
+2026-09-21 13:40:50.279 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:41:33.705 I Nearby: requested connection to MYA-AL10 (JGG5)
+2026-09-21 13:41:41.703 I Nearby: connection initiated by JGG5 (MYA-AL10), incoming=false
+2026-09-21 13:41:45.443 I Nearby: connected to JGG5
+2026-09-21 13:41:45.450 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-21 13:41:45.486 I Outgoing worker started
+2026-09-21 13:41:56.443 I Nearby: discovery started
+2026-09-21 13:41:56.444 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:41:56.445 W Session lost (user ended session)
+2026-09-21 13:41:56.786 I Nearby: JGG5 disconnected
+2026-09-21 13:42:17.285 I MorseLink 1.5.0 (14) started
+2026-09-21 13:42:17.286 I LAN: server listening on 33456
+2026-09-21 13:42:17.287 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-21 13:42:19.814 I Nearby: discovery started
+2026-09-21 13:42:19.815 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:42:48.272 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 13:42:48.276 I Outgoing worker started
+2026-09-21 13:42:48.284 I LAN: connected directly to MYA-AL10 at 192.168.99.136
+2026-09-21 13:43:25.432 I Queued 1 outgoing file(s)
+2026-09-21 13:43:25.507 I Nearby: discovery started
+2026-09-21 13:43:25.507 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:43:26.498 I LAN: offering VID_20250917_075317.mp4 (144196649 bytes) to MYA-AL10
+2026-09-21 13:44:09.786 I Batch 47ef206c-0ab4-4637-b9dd-cc531560cfaf done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:44:33.931 I Incoming offer: IMG_20260908_205716_243.mp4 (33996837 bytes)
+2026-09-21 13:44:33.976 I LAN: accepted IMG_20260908_205716_243.mp4 from offset 0
+2026-09-21 13:45:38.484 I Verification for IMG_20260908_205716_243.mp4: size-only (logged)
+2026-09-21 13:45:38.827 I Saved IMG_20260908_205716_243.mp4 -> IMG_20260908_205716_243.mp4
+2026-09-21 13:45:38.832 I Batch in-634f5715-2f60-46aa-9c42-8d7c8063c273 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:46:21.107 I Nearby: discovery started
+2026-09-21 13:46:21.108 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:46:30.785 I Queued 1 outgoing file(s)
+2026-09-21 13:46:30.854 I Nearby: discovery started
+2026-09-21 13:46:30.855 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:46:30.920 I LAN: offering VID_20260617_095957.mp4 (16706731 bytes) to MYA-AL10
+2026-09-21 13:46:40.800 I Batch 30b17dc3-83e1-41ea-b53d-4cc12a61dce5 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:46:49.037 I Incoming offer: VID-20260909-WA0000.mp4 (3264060 bytes)
+2026-09-21 13:46:49.065 I LAN: accepted VID-20260909-WA0000.mp4 from offset 0
+2026-09-21 13:46:53.183 I Verification for VID-20260909-WA0000.mp4: size-only (logged)
+2026-09-21 13:46:53.428 I Saved VID-20260909-WA0000.mp4 -> VID-20260909-WA0000.mp4
+2026-09-21 13:46:53.433 I Batch in-f54a8f6d-361f-4e4b-a8d4-c830d27958ad done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:47:03.684 I LAN: session closed (peer said goodbye)
+2026-09-21 13:47:03.687 W Session lost (peer said goodbye)
+2026-09-21 13:47:09.558 I LAN: peer rejected manual connection
+2026-09-21 13:47:37.328 I LAN: peer rejected manual connection
+2026-09-21 13:47:55.535 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 13:47:55.545 I LAN: connected directly to MYA-AL10 at 192.168.99.136
+2026-09-21 13:48:16.633 I LAN: session closed (user ended session)
+2026-09-21 13:48:16.636 W Session lost (user ended session)
+2026-09-21 13:49:45.757 I LAN: peer rejected manual connection
+2026-09-21 13:49:50.453 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 13:49:50.462 I LAN: connected directly to MYA-AL10 at 192.168.99.136
+2026-09-21 13:50:18.612 I LAN: session closed (user ended session)
+2026-09-21 13:50:18.614 W Session lost (user ended session)
+2026-09-21 13:50:54.782 I MorseLink 1.5.0 (14) started
+2026-09-21 13:50:54.783 I LAN: server listening on 33456
+2026-09-21 13:50:54.783 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-21 13:50:56.811 I Nearby: discovery started
+2026-09-21 13:50:56.811 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:51:15.710 I Nearby: connection initiated by 9SKV (MYA-AL10), incoming=true
+2026-09-21 13:51:15.714 I Consent requested for incoming connection from MYA-AL10 (NEARBY_CONNECTIONS)
+2026-09-21 13:51:20.147 I Consent for MYA-AL10: true
+2026-09-21 13:51:20.157 I Nearby: connected to 9SKV
+2026-09-21 13:51:20.163 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-21 13:51:20.173 I Outgoing worker started
+2026-09-21 13:51:30.339 I Queued 1 outgoing file(s)
+2026-09-21 13:51:30.390 I Nearby: sending Screenshot_20260921-135031.png (111115 bytes)
+2026-09-21 13:51:30.415 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:51:30.824 I Batch a55e62c0-af40-4993-8f51-b939d71ebf7c done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 13:51:46.060 I Nearby: 9SKV disconnected
+2026-09-21 13:51:46.062 I Nearby: session closed (peer disconnected)
+2026-09-21 13:51:46.067 I Nearby: discovery started
+2026-09-21 13:51:46.068 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:51:46.069 W Session lost (peer disconnected)
+2026-09-21 13:51:59.787 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 13:51:59.798 I LAN: connected directly to MYA-AL10 at 192.168.99.136
+2026-09-21 13:52:03.784 I LAN: session closed (user ended session)
+2026-09-21 13:52:03.788 W Session lost (user ended session)
+2026-09-21 13:52:20.675 I Discovery started on LAN_WIFI
+2026-09-21 13:52:22.153 I Nearby: discovery started
+2026-09-21 13:52:22.154 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:53:40.247 I Nearby: discovery started
+2026-09-21 13:53:40.262 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:54:08.615 I Discovery started on LAN_WIFI
+2026-09-21 13:54:48.352 I Nearby: discovery started
+2026-09-21 13:54:48.354 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:55:19.147 I Nearby: requested connection to MYA-AL10 (9SKV)
+2026-09-21 13:55:28.922 I Nearby: connection initiated by 9SKV (MYA-AL10), incoming=false
+2026-09-21 13:55:29.015 I Nearby: connected to 9SKV
+2026-09-21 13:55:29.020 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-21 13:55:39.249 I Nearby: 9SKV disconnected
+2026-09-21 13:55:39.250 I Nearby: session closed (peer disconnected)
+2026-09-21 13:55:39.255 I Nearby: discovery started
+2026-09-21 13:55:39.256 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:55:39.258 W Session lost (peer disconnected)
+2026-09-21 13:55:42.291 I Discovery started on LAN_WIFI
+2026-09-21 13:55:47.633 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 13:55:47.644 I LAN: connected directly to MYA-AL10 at 192.168.99.136
+2026-09-21 13:55:54.476 I LAN: session closed (user ended session)
+2026-09-21 13:55:54.479 W Session lost (user ended session)
+2026-09-21 13:56:12.378 I Nearby: discovery started
+2026-09-21 13:56:12.380 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:56:37.808 I Nearby: discovery started
+2026-09-21 13:56:37.809 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:57:07.614 I Nearby: discovery started
+2026-09-21 13:57:07.614 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:57:19.515 I Nearby: connection initiated by 9SKV (MYA-AL10), incoming=true
+2026-09-21 13:57:19.634 I Nearby: connected to 9SKV
+2026-09-21 13:57:19.639 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-21 13:57:54.882 I Nearby: 9SKV disconnected
+2026-09-21 13:57:54.883 I Nearby: session closed (peer disconnected)
+2026-09-21 13:57:54.888 I Nearby: discovery started
+2026-09-21 13:57:54.889 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:57:54.890 W Session lost (peer disconnected)
+2026-09-21 13:58:13.044 I Nearby: discovery started
+2026-09-21 13:58:13.044 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 13:58:52.553 I Nearby: connection initiated by 9SKV (MYA-AL10), incoming=true
+2026-09-21 13:58:52.589 I Nearby: connected to 9SKV
+2026-09-21 13:58:52.593 I Session established with MYA-AL10 via NEARBY_CONNECTIONS
+2026-09-21 13:59:19.895 I Nearby: metadata received for 14c7dc73babfdbf5c88459ae082fcbfb_1789989063480.mp4 (8370283 bytes)
+2026-09-21 13:59:27.775 I Batch in-70d4538a-f3d9-4ca5-a15e-234e432cf5e2 done: 0 ok, 0 failed, 0 skipped, 1 cancelled
+2026-09-21 13:59:30.488 I Nearby: metadata received for VID_20250917_075317.mp4 (144196649 bytes)
+2026-09-21 14:03:18.995 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:03:51.653 I Nearby: 9SKV disconnected
+2026-09-21 14:03:51.654 I Nearby: session closed (peer disconnected)
+2026-09-21 14:03:51.657 I Nearby: discovery started
+2026-09-21 14:03:51.658 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:03:51.659 W Session lost (peer disconnected)
+2026-09-21 14:03:54.635 I Discovery started on LAN_WIFI
+2026-09-21 14:03:58.086 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 14:03:58.095 I LAN: connected directly to MYA-AL10 at 192.168.99.136
+2026-09-21 14:04:38.778 I Queued 1 outgoing file(s)
+2026-09-21 14:04:38.811 I LAN: offering Screenshot_20260920-161456.png (119019 bytes) to MYA-AL10
+2026-09-21 14:04:38.851 I Nearby: discovery started
+2026-09-21 14:04:38.852 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:04:39.108 I Batch aca8d9af-90c6-4108-ba25-fb7265c8765c done: 0 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-21 14:04:54.141 I Queued 1 outgoing file(s)
+2026-09-21 14:04:54.156 I LAN: offering IMG-20220817-WA0015.jpg (40196 bytes) to MYA-AL10
+2026-09-21 14:04:54.190 I Nearby: discovery started
+2026-09-21 14:04:54.190 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:04:54.621 I Batch 0bc5b037-f4bf-4d7c-adda-c9c205ad800f done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 14:05:04.987 I Nearby: discovery started
+2026-09-21 14:05:04.987 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:05:14.825 I LAN: session closed (peer said goodbye)
+2026-09-21 14:05:14.827 W Session lost (peer said goodbye)
+2026-09-21 14:05:33.079 I Nearby: connection initiated by 9SKV (MYA-AL10), incoming=true
+2026-09-21 14:05:33.133 I Nearby: connected to 9SKV
+2026-09-21 14:05:33.138 I Session established with Android via NEARBY_CONNECTIONS
+2026-09-21 14:07:19.980 I Queued 1 outgoing file(s)
+2026-09-21 14:07:20.014 I Nearby: sending IMG-20260917-WA0035 (2).jpg (63031 bytes)
+2026-09-21 14:07:20.061 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:07:20.300 I Batch fc1cbd8a-025b-41d3-9535-c3db2c6681f1 done: 1 ok, 0 failed, 0 skipped, 0 cancelled
+2026-09-21 14:09:41.291 I Nearby: discovery started
+2026-09-21 14:09:41.292 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:09:41.293 W Session lost (user ended session)
+2026-09-21 14:09:41.642 I Nearby: 9SKV disconnected
+2026-09-21 14:10:51.149 I MorseLink 1.5.0 (14) started
+2026-09-21 14:10:51.153 I LAN: server listening on 33456
+2026-09-21 14:10:51.154 I Device: TECNO TECNO KL4, Android 14 (SDK 34)
+2026-09-21 14:11:19.099 I Nearby: discovery started
+2026-09-21 14:11:19.101 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:11:21.229 I Discovery started on LAN_WIFI
+2026-09-21 14:11:26.678 I Consent requested for incoming connection from MYA-AL10 (LAN_WIFI)
+2026-09-21 14:11:27.876 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 14:11:27.922 I Outgoing worker started
+2026-09-21 14:11:27.966 I LAN: connected directly to MYA-AL10 at 192.168.43.1
+2026-09-21 14:11:28.801 I Consent for MYA-AL10: true
+2026-09-21 14:11:28.804 I Session established with MYA-AL10 via LAN_WIFI
+2026-09-21 14:11:28.833 I LAN: session established with MYA-AL10 (192.168.43.1)
+2026-09-21 14:12:06.599 I Queued 3 outgoing file(s)
+2026-09-21 14:12:06.818 I LAN: offering Screenshot_20260921-140558.png (116215 bytes) to MYA-AL10
+2026-09-21 14:12:06.865 I Nearby: discovery started
+2026-09-21 14:12:06.865 I Discovery started on NEARBY_CONNECTIONS
+2026-09-21 14:12:08.097 I LAN: offering Screenshot_20260921-135951.png (108037 bytes) to MYA-AL10
+2026-09-21 14:12:08.846 I LAN: offering Screenshot_20260921-135031.png (111115 bytes) to MYA-AL10
+2026-09-21 14:12:09.864 I Batch 597e56ad-0865-4bf0-afd2-884acf6ae8c2 done: 2 ok, 0 failed, 1 skipped, 0 cancelled
+2026-09-21 14:12:15.436 I LAN: session closed (user ended session)
+2026-09-21 14:12:15.458 W Session lost (user ended session)
