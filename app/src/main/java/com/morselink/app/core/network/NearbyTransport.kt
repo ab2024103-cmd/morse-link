@@ -355,6 +355,7 @@ class NearbySession(
                     } catch (_: Exception) {
                     }
                 }
+                scheduleTerminalFallback(fileId, "PAUSED")
                 TransferEngine.onPeerPausedOurSend(fileId)
             }
             "RESUME_REQ" -> TransferEngine.onPeerResumedOurSend(json.optString("fileId"))
@@ -368,6 +369,7 @@ class NearbySession(
                     } catch (_: Exception) {
                     }
                 }
+                scheduleTerminalFallback(fileId, "CANCELLED")
                 TransferEngine.onPeerCancelled(fileId)
             }
         }
@@ -428,6 +430,38 @@ class NearbySession(
                     )
                     if (!ok) TransferEngine.markIncoming(incomingFileId, com.morselink.app.core.model.TransferItemState.FAILED)
                 }
+            }
+        }
+    }
+
+    /**
+     * A sender's await must NEVER outlive its session: the engine's single
+     * outgoing worker was hanging forever on a waiter nobody completes
+     * (mlogs6), freezing every later file on "Queued" until both apps were
+     * restarted. Called on disconnect/close.
+     */
+    private fun failAllOutgoing(reason: String) {
+        val ids = ArrayList(outgoingWaiters.keys)
+        for (id in ids) {
+            outgoingPayloadFor.remove(id)
+            outgoingWaiters.remove(id)?.complete("FAIL:$reason")
+        }
+        fileIdForPayload.clear()
+        pauseRequested.clear()
+        cancelRequested.clear()
+    }
+
+    /**
+     * cancelPayload does not always produce a terminal transfer update (OEM
+     * stacks); if none arrives within 3s the waiter is completed here so the
+     * queue keeps moving.
+     */
+    private fun scheduleTerminalFallback(fileId: String, result: String) {
+        scope.launch {
+            kotlinx.coroutines.delay(3000)
+            if (outgoingWaiters.containsKey(fileId)) {
+                LogStore.w("Nearby: no terminal update for $fileId — completing as $result")
+                completeOutgoing(fileId, result)
             }
         }
     }
@@ -503,6 +537,7 @@ class NearbySession(
             } catch (_: Exception) {
             }
         }
+        scheduleTerminalFallback(fileId, "PAUSED")
     }
 
     override fun requestPeerPause(fileId: String) {
@@ -528,6 +563,7 @@ class NearbySession(
                     } catch (_: Exception) {
                     }
                 }
+                scheduleTerminalFallback(fileId, "CANCELLED")
                 // Tell the peer (b6/b7): the receiver otherwise stays "idle".
                 scope.launch {
                     sendControl(JSONObject().put("type", "CANCEL").put("fileId", fileId))
@@ -553,6 +589,7 @@ class NearbySession(
     fun onTransportDisconnected(reason: String?) {
         if (!isActive) return
         isActive = false
+        failAllOutgoing(reason ?: "session closed")
         LogStore.i("Nearby: session closed (${reason ?: "no reason"})")
         NearbyTransport.clearSession(this)
         TransferEngine.onSessionLost(this, reason)
@@ -565,6 +602,7 @@ class NearbySession(
     override fun close(reason: String?) {
         if (!isActive) return
         isActive = false
+        failAllOutgoing(reason ?: "session closed")
         try {
             NearbyTransport.client().disconnectFromEndpoint(endpointId)
         } catch (_: Exception) {

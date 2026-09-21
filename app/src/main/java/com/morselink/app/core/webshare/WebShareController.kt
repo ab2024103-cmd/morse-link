@@ -12,7 +12,6 @@ import com.morselink.app.core.transfer.TransferService
 import com.morselink.app.core.util.MorselinkServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -35,7 +34,7 @@ data class WebShareState(
 
 /**
  * Owns the WebShare HTTP server, hotspot lifecycle, mDNS advertisement and
- * idle teardown (spec Section 7.5).
+ * user-initiated stop (mlogs6: the server must stay on until stopped).
  */
 object WebShareController {
 
@@ -81,7 +80,6 @@ object WebShareController {
     private var hotspot: HotspotController? = null
     private var multicastLock: WifiManager.MulticastLock? = null
     private var nsdRegistration: NsdManager.RegistrationListener? = null
-    private var teardownJob: Job? = null
     private var lastToken: String? = null
 
     fun start(hotspotMode: Boolean): Boolean {
@@ -149,7 +147,6 @@ object WebShareController {
         registerMdns()
         TransferEngine.webShareActive = true
         TransferService.ensureStarted(MorselinkServices.appContext)
-        startTeardownWatcher()
         return true
     }
 
@@ -234,38 +231,8 @@ object WebShareController {
         }
     }
 
-    private fun startTeardownWatcher() {
-        teardownJob?.cancel()
-        teardownJob = scope.launch {
-            while (isActive && _isRunning.value) {
-                delay(20000)
-                val s = server ?: break
-                val context = MorselinkServices.appContext
-                val pm = context.getSystemService(Context.POWER_SERVICE) as? PowerManager
-                val interactive = pm?.isInteractive ?: true
-                val idleMs = System.currentTimeMillis() - s.lastClientActivity
-                val engineBusy = TransferEngine.anyWorkActive() && !TransferEngine.sessionState.value.active.not()
-                // A paired browser means a live session: only tear down after a
-                // long idle (mlogs log 1789836543546: active PC sessions were
-                // killed after 3 minutes). With no client ever paired, a
-                // shorter window still protects a forgotten server.
-                val anyApproved = clientStates.values.any { it == "allowed" }
-                val idleLimitMs = if (anyApproved) 30L * 60 * 1000 else 10L * 60 * 1000
-                if (!interactive && idleMs > idleLimitMs && s.activeOperations == 0 && !engineBusy) {
-                    LogStore.i(
-                        "WebShare: auto-teardown (screen off, client idle for ${idleLimitMs / 60000} minutes)"
-                    )
-                    stop()
-                    break
-                }
-            }
-        }
-    }
-
     fun stop() {
         clientStates.clear()
-        teardownJob?.cancel()
-        teardownJob = null
         try {
             nsdRegistration?.let {
                 val nsd = MorselinkServices.appContext.getSystemService(Context.NSD_SERVICE) as? NsdManager

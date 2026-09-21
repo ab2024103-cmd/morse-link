@@ -176,7 +176,14 @@ object TransferEngine {
 
     /** Starts discovery on the primary transport (Nearby on GMS, else LAN). */
     fun startDiscovery(prefer: TransportType? = null) {
-        val transport = prefer ?: if (NearbyTransport.isAvailable() && hasDiscoveryPermission()) {
+        val transport = if (prefer != null) {
+            prefer
+        } else if (LanTransport.isOnNetwork()) {
+            // Both phones on the same router/hotspot: the LAN transport is
+            // far faster. Nearby never uses the shared network — on these
+            // devices it negotiates Bluetooth and crawls (mlogs6 r2/r3/r7/r8).
+            TransportType.LAN_WIFI
+        } else if (NearbyTransport.isAvailable() && hasDiscoveryPermission()) {
             TransportType.NEARBY_CONNECTIONS
         } else {
             TransportType.LAN_WIFI
