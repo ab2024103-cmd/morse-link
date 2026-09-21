@@ -18,15 +18,15 @@ Daemon will be stopped at the end of the build
 > Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
-> Task :app:mergeDebugResources
 > Task :app:generateDebugBuildConfig
 > Task :app:parseDebugLocalResources
 > Task :app:mapDebugSourceSetPaths
-> Task :app:checkDebugAarMetadata
-> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
+> Task :app:checkDebugAarMetadata
+> Task :app:mergeDebugResources
 > Task :app:processDebugMainManifest
+> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:processDebugManifest
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
@@ -58,30 +58,30 @@ note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round ico
 > Task :app:generateReleaseBuildConfig
 > Task :app:checkReleaseAarMetadata
 > Task :app:mapReleaseSourceSetPaths
+> Task :app:parseReleaseLocalResources
 > Task :app:createReleaseCompatibleScreenManifests
 > Task :app:extractDeepLinksRelease
-> Task :app:parseReleaseLocalResources
 > Task :app:processReleaseMainManifest
 > Task :app:processReleaseManifest
-> Task :app:javaPreCompileRelease
 > Task :app:processReleaseManifestForPackage
+> Task :app:javaPreCompileRelease
 > Task :app:extractProguardFiles
 > Task :app:mergeReleaseJniLibFolders
 > Task :app:mergeReleaseNativeLibs NO-SOURCE
-> Task :app:mergeReleaseResources
 > Task :app:stripReleaseDebugSymbols NO-SOURCE
-> Task :app:dataBindingGenBaseClassesRelease
 > Task :app:extractReleaseNativeSymbolTables NO-SOURCE
 > Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
 > Task :app:desugarReleaseFileDependencies
-> Task :app:mergeReleaseStartupProfile
 > Task :app:checkReleaseDuplicateClasses
-> Task :app:mergeReleaseArtProfile
+> Task :app:mergeReleaseResources
+> Task :app:mergeReleaseStartupProfile
+> Task :app:dataBindingGenBaseClassesRelease
 note: generating mipmap/ic_launcher_round with config "anydpi-v26" for round icon compatibility.
 
-> Task :app:processReleaseResources
 > Task :app:compileDebugKotlin
+> Task :app:processReleaseResources
 > Task :app:mergeExtDexRelease
+> Task :app:mergeReleaseArtProfile
 > Task :app:mergeReleaseShaders
 > Task :app:compileReleaseShaders NO-SOURCE
 > Task :app:generateReleaseAssets UP-TO-DATE
@@ -116,11 +116,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:291:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:412:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:823:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:860:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1212:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
@@ -226,11 +226,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:158:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:203:21 'when' is exhaustive so 'else' is redundant here
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/storage/Destinations.kt:297:77 Right operand of elvis operator (?:) is useless if it is null
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:284:13 Variable 'transport' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:405:38 Parameter 'files' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:816:61 Parameter 'total' is never used
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:853:29 Variable 'identical' initializer is redundant
-w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1205:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:291:13 Variable 'transport' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:412:38 Parameter 'files' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:823:61 Parameter 'total' is never used
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:860:29 Variable 'identical' initializer is redundant
+w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferEngine.kt:1212:63 'WIFI_MODE_FULL_HIGH_PERF: Int' is deprecated. Deprecated in Java
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/transfer/TransferService.kt:165:17 Variable 'done' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/util/Permissions.kt:110:27 Parameter 'context' is never used
 w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselink/app/core/webshare/HotspotController.kt:6:25 'WifiConfiguration' is deprecated. Deprecated in Java
@@ -338,11 +338,11 @@ w: file:///home/runner/work/morse-link/morse-link/app/src/main/java/com/morselin
 > Task :app:lintVitalReportRelease
 > Task :app:lintVitalRelease
 > Task :app:assembleRelease
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1790006837778.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_2-1790007493401.json
 
-BUILD SUCCESSFUL in 3m 57s
+BUILD SUCCESSFUL in 3m 55s
 87 actionable tasks: 87 executed
 
 === JOB CONCLUSION: success ===
-APK_SIZE_DEBUG=8255345
-APK_SIZE_RELEASE=6736864
+APK_SIZE_DEBUG=8254665
+APK_SIZE_RELEASE=6736523
